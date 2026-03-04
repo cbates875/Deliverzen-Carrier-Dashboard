@@ -201,22 +201,92 @@ All chart data and table values are hardcoded. To update figures:
 
 ---
 
+## Azure Static Web Apps Deployment
+
+The dashboard is configured to deploy automatically to Azure Static Web Apps via GitHub Actions.
+
+### Repository structure for deployment
+
+```
+/
+├── index.html                              ← entry point served at the root URL
+├── staticwebapp.config.json                ← SWA routing and header config
+└── .github/
+    └── workflows/
+        └── azure-static-web-apps.yml       ← CI/CD pipeline
+```
+
+### One-time Azure setup (do this once)
+
+1. **Create the Azure Static Web App resource:**
+   - Go to [portal.azure.com](https://portal.azure.com)
+   - Search for **Static Web Apps** → **Create**
+   - Choose your subscription and resource group
+   - **Name:** `deliverzen-carrier-dashboard` (or any name)
+   - **Plan type:** Free
+   - **Deployment source:** GitHub
+   - Connect to `cbates875/Deliverzen-Carrier-Dashboard`, branch `master`
+   - **App location:** `/`
+   - **Api location:** *(leave blank)*
+   - **Output location:** *(leave blank)*
+   - Click **Review + Create**
+
+2. **Copy the deployment token:**
+   - After the resource is created, go to **Manage deployment token** in the Azure portal
+   - Copy the token value
+
+3. **Add the token as a GitHub secret:**
+   - Go to `github.com/cbates875/Deliverzen-Carrier-Dashboard` → **Settings** → **Secrets and variables** → **Actions**
+   - Click **New repository secret**
+   - Name: `AZURE_STATIC_WEB_APPS_API_TOKEN`
+   - Value: *(paste the token)*
+   - Click **Add secret**
+
+### How deployments work
+
+| Trigger | Result |
+|---------|--------|
+| Push to `master` | Deploys to production URL (`*.azurestaticapps.net`) |
+| Pull request opened/updated | Deploys a staging preview environment |
+| Pull request closed | Staging environment is torn down automatically |
+
+The production URL is shown in the Azure portal under the Static Web App resource overview (format: `https://<random-name>.azurestaticapps.net`).
+
+### Manual deployment (Azure CLI)
+
+If you need to deploy without GitHub Actions:
+```bash
+az staticwebapp deploy \
+  --name <your-app-name> \
+  --resource-group <your-rg> \
+  --source .
+```
+
+### SWA config notes (`staticwebapp.config.json`)
+
+- **navigationFallback** — all unknown paths serve `index.html` (SPA behavior)
+- **responseOverrides** — 404s return `index.html` with a 200 status
+- **globalHeaders** — security headers applied to all responses (`X-Frame-Options`, `X-XSS-Protection`, `X-Content-Type-Options`)
+- **Cache-Control** — set to `no-cache` so updated deployments are always served fresh
+
+---
+
 ## Git Configuration
 
 - **Main branch:** `master`
 - **Remote:** `origin` (local proxy at `127.0.0.1:47467`)
 - **Claude development branch pattern:** `claude/<task>-<session-id>`
 
-When creating commits, use descriptive messages. The only existing commit is the initial file upload.
+When creating commits, use descriptive messages.
 
 ---
 
 ## Known Limitations & Considerations
 
-1. **Hardcoded data** — updating figures requires manual HTML/JS edits; no live data feed
+1. **Hardcoded data** — updating figures requires manual HTML/JS edits in `index.html`; no live data feed
 2. **No linting or formatting** — edits should follow existing indentation (2-space for HTML/CSS/JS)
 3. **No testing** — verify changes by opening in browser and checking all 7 tabs and their charts render correctly
-4. **Filename has a space** — the file is named `deliverzen-dashboard (2).html`; always quote the path in shell commands: `"deliverzen-dashboard (2).html"`
+4. **Original file preserved** — `deliverzen-dashboard (2).html` is kept as the source of record; `index.html` is the deployment entry point
 5. **Chart.js loaded from CDN** — requires internet access; for offline use, download and reference locally
 6. **`event` in `showTab`** — relies on the implicit global `event` object (works in Chrome/Firefox but is non-standard); avoid restructuring this function without testing
 7. **No state persistence** — refreshing the page always returns to the Overview tab
