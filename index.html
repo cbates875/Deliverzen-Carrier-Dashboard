@@ -90,6 +90,7 @@
           <select id="carrierSelect" onchange="switchCarrier(this.value)" style="padding: 8px 12px; border: 2px solid #e5e7eb; border-radius: 6px; font-size: .95rem; cursor: pointer; background: white; color: #111827; font-weight: 500;">
             <option value="uniuni">UniUni (Feb 16-22)</option>
             <option value="uniuni2">UniUni (Feb 23-Mar 1)</option>
+            <option value="uniuni3">UniUni (Mar 2-8)</option>
             <option value="dhl">DHL eCommerce (Feb 22-28)</option>
             <option value="dhl2">DHL eCommerce (Feb 15-21)</option>
             <option value="dhl3">DHL eCommerce (Mar 1-7)</option>
@@ -1166,6 +1167,89 @@
       perfDaysByZone: [2.0, 1.9, 2.1, 2.0, 2.2, 1.9, 2.3],  // Zone 1-7 (Mar 1-7)
       perfOnTimeOverall: 97.3,
       perfDaysOverall: 2.0
+    },
+    uniuni3: {
+      subtitle: 'Invoice #49614337260309626 | Mar 2–8, 2026 | Ground Express Service',
+      revenue: '$11,124.50',
+      revenueSub: '2451 shipments',
+      avgRevenue: '$4.54',
+      weight: '16639.71 lbs',
+      weightPer: '6.79 lbs',
+      costPerLb: '$0.67',
+      ontime: '98.2%',
+      ontimeSub: '2,410 of 2,451 shipments delivered on time',
+      compliance: '99.6%',
+      complianceSub: '2,441 of 2,451 shipments completed successfully',
+      time: '1.7 days',
+      timeSub: 'Induction to shipment average',
+      peakDate: 'Mar 2',
+      peakDateSub: '1,245 shipments (50.8%)',
+      topDest: 'DFW',
+      topDestSub: '368 shipments (15.0%)',
+      largestZone: 'Zone 5',
+      largestZoneSub: '712 shipments (29.1%)',
+      onlineDelivery: '98.2%',
+      onlineDeliverySub: '2,410 of 2,451',
+      opt1Title: 'Priority 1: Regional Concentration',
+      opt1Desc: 'DFW hub concentration with significant volume',
+      opt1Current: '368 shipments (15.0%)',
+      opt1Target: 'Diversify to secondary hubs',
+      opt1Savings: '~$85/month through diversification',
+      opt1Action: 'Action: Secondary hub strategy development',
+      opt2Title: 'Opportunity 1: Heavier Average Weight',
+      opt2Desc: 'Higher weight per shipment vs. earlier periods',
+      opt2Current: '6.79 lbs per shipment',
+      opt2Target: 'Maintain or increase consolidation',
+      opt2Margin: '+1.0-1.5% profitability improvement',
+      opt2Action: 'Action: Continue consolidation program',
+      opt3Title: 'Opportunity 2: Zone Optimization',
+      opt3Desc: 'Zone 5 dominance (29.1%) with room for expansion',
+      opt3Current: '29.1% in Zone 5',
+      opt3Opp: 'Balanced zone distribution',
+      opt3Savings: '3-5% cost optimization potential',
+      opt3Action: 'Action: Selective routing optimization',
+      opt4Title: 'Insight: Early Week Concentration',
+      opt4Desc: 'Half of volume inducted on Mar 2',
+      opt4Peak: '1,245 shipments (50.8%)',
+      opt4Pattern: 'Front-loaded shipment pattern',
+      opt4Impl: 'Opportunity for batch rate negotiations',
+      opt4Action: 'Action: Negotiate front-loaded batch discounts',
+      summaryTitle1: 'Cost Optimization Focus',
+      summaryDesc1: 'Very low cost per pound ($0.67) indicates efficient ground service. Heavier packages (6.79 lbs avg) suggest good consolidation. Current pricing appears optimized.',
+      summaryTitle2: 'Volume Optimization',
+      summaryDesc2: 'Strong performance with 2,451 shipments. Heavy average weight (6.79 lbs) shows excellent consolidation success. Maintain current shipment weight profile.',
+      summaryTitle3: 'Operational Insight',
+      summaryDesc3: 'Front-loaded pattern (50.8% on Mar 2) provides predictability. Fast processing at 1.7 days average. Operational execution is excellent.',
+      summaryTitle4: 'Risk Mitigation',
+      summaryDesc4: 'Regional concentration at DFW (15%) is manageable. Zone distribution is balanced across multiple zones. Low concentration risk.',
+      summaryTitle5: 'Performance Excellence',
+      summaryDesc5: 'Exceptional 98.2% on-time delivery with high volume. Best processing time (1.7 days) of all periods. Outstanding service quality.',
+      summaryTitle6: 'Projected Impact',
+      summaryDesc6: 'Stable period with optimal performance. Strategic focus should be on maintaining service quality while exploring zone diversification. Batch consolidation already maximized.',
+      // Chart data for UniUni Invoice 3
+      chartDestLabels: ['DFW', 'MCI', 'ATL', 'ORD', 'IAH', 'PHX', 'DEN', 'AUS', 'EWR', 'LAX'],
+      chartDestData: [368, 245, 189, 167, 156, 143, 127, 115, 98, 87],
+      chartZoneLabels: ['Zone 5', 'Zone 6', 'Zone 3', 'Zone 4', 'Zone 1', 'Zone 7', 'Zone 2'],
+      chartZoneData: [712, 612, 487, 388, 245, 187, 134],
+      chartDailyLabels: ['Mar 2', 'Mar 3', 'Mar 4', 'Mar 5', 'Mar 6', 'Mar 7', 'Mar 8'],
+      chartDailyData: [1245, 456, 389, 254, 178, 98, 63],
+      chartWeightLabels: ['0-2 lbs (12%)', '2-5 lbs (28%)', '5-10 lbs (42%)', '10-15 lbs (15%)', '15+ lbs (3%)'],
+      chartWeightData: [293, 686, 1029, 368, 75],
+      chartWeightRevData: [1832.14, 3245.67, 5892.43, 2876.52, 1277.74],
+      // Peak stats
+      peakShipments: 1245,
+      peakPercent: '50.8%',
+      topDestCount: 368,
+      topDestPercent: '15.0%',
+      // Performance metrics
+      perfOnTimeCount: 2410,
+      perfOnTimeTotal: 2451,
+      perfComplianceCount: 2441,
+      perfComplianceTotal: 2451,
+      perfOnTimeByZone: [98.0, 98.1, 98.3, 98.2, 98.4, 98.1, 97.9],
+      perfDaysByZone: [1.8, 1.6, 1.7, 1.8, 1.6, 1.9, 2.0],
+      perfOnTimeOverall: 98.2,
+      perfDaysOverall: 1.7
     }
   };
 
