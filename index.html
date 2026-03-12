@@ -66,6 +66,16 @@
     .perf-value { font-size: 2rem; font-weight: 700; color: #111827; margin: 8px 0; }
     .perf-sub { font-size: .75rem; color: #6b7280; }
 
+    .timeline { margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px; }
+    .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; position: relative; padding-left: 40px; }
+    .timeline-item:not(:last-child)::before { content: ''; position: absolute; left: 14px; top: 32px; bottom: -20px; width: 2px; background: #e5e7eb; }
+    .timeline-marker { position: absolute; left: 0; top: 4px; width: 28px; height: 28px; background: #2563eb; border: 3px solid white; border-radius: 50%; }
+    .timeline-marker.completed { background: #10b981; }
+    .timeline-content h4 { font-size: .95rem; font-weight: 700; color: #111827; margin-bottom: 4px; }
+    .timeline-content .phase { font-size: .8rem; font-weight: 600; color: #6b7280; text-transform: uppercase; }
+    .timeline-content p { font-size: .875rem; color: #6b7280; margin-top: 6px; }
+    .timeline-content .actions { margin-top: 8px; font-size: .8rem; color: #059669; font-weight: 600; }
+
     @media (max-width: 768px) {
       .charts-grid { grid-template-columns: 1fr; }
       .kpi-grid { grid-template-columns: 1fr; }
@@ -929,7 +939,50 @@
           avgRevenue: '$6.60',
           weight: '24399.00 lbs',
           weightPer: '$4.72',
-          costPerLb: '$4.72'
+          costPerLb: '$4.72',
+          ontime: '96.8%',
+          ontimeSub: '16,890 of 17,448 shipments delivered on time',
+          compliance: '99.8%',
+          complianceSub: '17,413 of 17,448 shipments completed successfully',
+          time: '2.3 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [96.5, 96.8, 96.9, 96.7, 97.0, 96.8, 96.6],
+          perfDaysByZone: [2.2, 2.3, 2.4, 2.3, 2.2, 2.4, 2.5],
+          perfZoneLabels: ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'],
+          perfTableData: [
+            {zone: 'USPS Zone 3', ontime: '96.8%', compliance: '99.8%', days: 2.3, status: '✓ Good'},
+            {zone: 'USPS Zone 4', ontime: '96.7%', compliance: '99.8%', days: 2.3, status: '✓ Good'},
+            {zone: 'USPS Zone 5', ontime: '97.0%', compliance: '99.8%', days: 2.2, status: '✓ Excellent'},
+            {zone: 'USPS Zone 6', ontime: '96.8%', compliance: '99.8%', days: 2.4, status: '✓ Good'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: '6,840', pct: '39.2%', weight: '18,562.30', avg: '2.71', rev: '$45,820.56', cpp: '$2.47'},
+            {dest: 'USPS Zone 6', shipments: '6,285', pct: '36.0%', weight: '16,421.80', avg: '2.61', rev: '$42,308.90', cpp: '$2.58'},
+            {dest: 'USPS Zone 4', shipments: '2,150', pct: '12.3%', weight: '5,890.23', avg: '2.74', rev: '$18,925.30', cpp: '$3.21'},
+            {dest: 'USPS Zone 3', shipments: '1,193', pct: '6.8%', weight: '3,524.09', avg: '2.95', rev: '$7,078.67', cpp: '$2.01'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: 5842, pct: '33.5%', weight: 8945.50, avg: 1.53, revenue: '$38,624.81', cpp: '$4.32'},
+            {dest: 'USPS Zone 6', shipments: 5128, pct: '29.4%', weight: 7842.30, avg: 1.53, revenue: '$35,487.42', cpp: '$4.51'},
+            {dest: 'USPS Zone 4', shipments: 3124, pct: '17.9%', weight: 4589.20, avg: 1.47, revenue: '$19,284.56', cpp: '$4.20'},
+            {dest: 'USPS Zone 3', shipments: 2254, pct: '12.9%', weight: 2922.00, avg: 1.30, revenue: '$12,430.18', cpp: '$4.25'},
+            {dest: 'USPS Zone 7', shipments: 1100, pct: '6.3%', weight: 1100.00, avg: 1.00, revenue: '$4,300.46', cpp: '$3.91'}
+          ],
+          zoneTableData: [
+            {zone: 'USPS Zone 5', shipments: '5,842', pct: '33.5%', weight: '8,945.50', avg: '1.53', revenue: '$38,624.81', cpp: '$4.32'},
+            {zone: 'USPS Zone 6', shipments: '5,128', pct: '29.4%', weight: '7,842.30', avg: '1.53', revenue: '$35,487.42', cpp: '$4.51'},
+            {zone: 'USPS Zone 4', shipments: '3,124', pct: '17.9%', weight: '4,589.20', avg: '1.47', revenue: '$19,284.56', cpp: '$4.20'},
+            {zone: 'USPS Zone 3', shipments: '2,254', pct: '12.9%', weight: '2,922.00', avg: '1.30', revenue: '$12,430.18', cpp: '$4.25'},
+            {zone: 'USPS Zone 7', shipments: '1,100', pct: '6.3%', weight: '1,100.00', avg: '1.00', revenue: '$4,300.46', cpp: '$3.91'}
+          ],
+          peakDate: 'Feb 23',
+          peakDateSub: '3,258 shipments (18.7%)',
+          topDest: 'USPS Zone 5',
+          topDestSub: '5,842 shipments (33.5%)',
+          largestZone: 'USPS Zone 5',
+          largestZoneSub: '5,842 shipments (33.5%)',
+          onlineDelivery: '96.8%',
+          onlineDeliverySub: '16,890 of 17,448'
         },
         expedited: {
           revenue: '$45,405.82',
@@ -937,7 +990,50 @@
           avgRevenue: '$8.53',
           weight: '12729.00 lbs',
           weightPer: '$3.57',
-          costPerLb: '$3.57'
+          costPerLb: '$3.57',
+          ontime: '97.2%',
+          ontimeSub: '5,170 of 5,321 shipments delivered on time',
+          compliance: '100%',
+          complianceSub: '5,321 of 5,321 shipments completed successfully',
+          time: '1.9 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [97.4, 97.3, 97.2, 96.9, 97.5, 97.1, 97.3],
+          perfDaysByZone: [1.8, 1.9, 2.0, 1.9, 1.8, 2.0, 1.9],
+          perfZoneLabels: ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'],
+          perfTableData: [
+            {zone: 'USPS Zone 3', ontime: '97.2%', compliance: '100%', days: 2.0, status: '✓ Excellent'},
+            {zone: 'USPS Zone 4', ontime: '96.9%', compliance: '100%', days: 1.9, status: '✓ Excellent'},
+            {zone: 'USPS Zone 5', ontime: '97.5%', compliance: '100%', days: 1.8, status: '✓ Excellent'},
+            {zone: 'USPS Zone 6', ontime: '97.1%', compliance: '100%', days: 2.0, status: '✓ Excellent'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: '1,854', pct: '34.8%', weight: '4,285.60', avg: '2.31', rev: '$15,748.20', cpp: '$3.68'},
+            {dest: 'USPS Zone 6', shipments: '1,625', pct: '30.5%', weight: '3,892.40', avg: '2.40', rev: '$13,845.75', cpp: '$3.56'},
+            {dest: 'USPS Zone 4', shipments: '892', pct: '16.8%', weight: '2,134.50', avg: '2.39', rev: '$7,562.30', cpp: '$3.54'},
+            {dest: 'USPS Zone 3', shipments: '750', pct: '14.1%', weight: '1,816.50', avg: '2.42', rev: '$6,849.57', cpp: '$3.77'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: 1842, pct: '34.6%', weight: 4582.10, avg: 2.49, revenue: '$16,285.42', cpp: '$3.55'},
+            {dest: 'USPS Zone 6', shipments: 1456, pct: '27.4%', weight: 3821.50, avg: 2.62, revenue: '$13,894.27', cpp: '$3.63'},
+            {dest: 'USPS Zone 4', shipments: 892, pct: '16.8%', weight: 2148.30, avg: 2.41, revenue: '$7,842.56', cpp: '$3.65'},
+            {dest: 'USPS Zone 3', shipments: 654, pct: '12.3%', weight: 1575.10, avg: 2.41, revenue: '$5,987.23', cpp: '$3.79'},
+            {dest: 'USPS Zone 7', shipments: 477, pct: '8.9%', weight: 600.00, avg: 1.26, revenue: '$3,396.34', cpp: '$5.66'}
+          ],
+          zoneTableData: [
+            {zone: 'USPS Zone 5', shipments: '1,842', pct: '34.6%', weight: '4,582.10', avg: '2.49', revenue: '$16,285.42', cpp: '$3.55'},
+            {zone: 'USPS Zone 6', shipments: '1,456', pct: '27.4%', weight: '3,821.50', avg: '2.62', revenue: '$13,894.27', cpp: '$3.63'},
+            {zone: 'USPS Zone 4', shipments: '892', pct: '16.8%', weight: '2,148.30', avg: '2.41', revenue: '$7,842.56', cpp: '$3.65'},
+            {zone: 'USPS Zone 3', shipments: '654', pct: '12.3%', weight: '1,575.10', avg: '2.41', revenue: '$5,987.23', cpp: '$3.79'},
+            {zone: 'USPS Zone 7', shipments: '477', pct: '8.9%', weight: '600.00', avg: '1.26', revenue: '$3,396.34', cpp: '$5.66'}
+          ],
+          peakDate: 'Feb 24',
+          peakDateSub: '1,240 shipments (23.3%)',
+          topDest: 'USPS Zone 5',
+          topDestSub: '1,842 shipments (34.6%)',
+          largestZone: 'USPS Zone 5',
+          largestZoneSub: '1,842 shipments (34.6%)',
+          onlineDelivery: '97.2%',
+          onlineDeliverySub: '5,170 of 5,321'
         },
         international: {
           revenue: '$992.05',
@@ -945,7 +1041,47 @@
           avgRevenue: '$12.10',
           weight: '371.40 lbs',
           weightPer: '$2.67',
-          costPerLb: '$2.67'
+          costPerLb: '$2.67',
+          ontime: '95.1%',
+          ontimeSub: '78 of 82 shipments delivered on time',
+          compliance: '98.8%',
+          complianceSub: '81 of 82 shipments completed successfully',
+          time: '2.8 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [94.2, 94.8, 95.1, 94.5, 95.3, 95.2, 94.9],
+          perfDaysByZone: [2.9, 3.0, 2.8, 3.1, 2.9, 3.0, 2.7],
+          perfZoneLabels: ['Intl 1', 'Intl 2', 'Intl 3', 'Intl 4', 'Intl 5', 'Intl 6', 'Intl 7'],
+          perfTableData: [
+            {zone: 'Canada', ontime: '95.1%', compliance: '98.8%', days: 2.8, status: '✓ Good'},
+            {zone: 'Int\'l Zone 1', ontime: '94.8%', compliance: '98.5%', days: 2.9, status: '✓ Good'},
+            {zone: 'Int\'l Zone 2', ontime: '95.3%', compliance: '99.0%', days: 2.7, status: '✓ Good'}
+          ],
+          destTableData: [
+            {dest: 'Canada', shipments: '35', pct: '42.7%', weight: '168.40', avg: '4.81', rev: '$423.56', cpp: '$2.51'},
+            {dest: 'Mexico', shipments: '18', pct: '22.0%', weight: '89.20', avg: '4.96', rev: '$218.32', cpp: '$2.45'},
+            {dest: 'UK', shipments: '12', pct: '14.6%', weight: '68.50', avg: '5.71', rev: '$145.28', cpp: '$2.12'},
+            {dest: 'Other Intl', shipments: '17', pct: '20.7%', weight: '45.30', avg: '2.66', rev: '$204.89', cpp: '$4.52'}
+          ],
+          destTableData: [
+            {dest: 'Canada', shipments: 32, pct: '39.0%', weight: 142.50, avg: 4.45, revenue: '$412.80', cpp: '$2.90'},
+            {dest: 'Mexico', shipments: 28, pct: '34.1%', weight: 138.60, avg: 4.95, revenue: '$361.92', cpp: '$2.61'},
+            {dest: 'UK', shipments: 12, pct: '14.6%', weight: 56.80, avg: 4.73, revenue: '$139.20', cpp: '$2.45'},
+            {dest: 'EU', shipments: 10, pct: '12.2%', weight: 33.50, avg: 3.35, revenue: '$78.13', cpp: '$2.33'}
+          ],
+          zoneTableData: [
+            {zone: 'Canada', shipments: '32', pct: '39.0%', weight: '142.50', avg: '4.45', revenue: '$412.80', cpp: '$2.90'},
+            {zone: 'Mexico', shipments: '28', pct: '34.1%', weight: '138.60', avg: '4.95', revenue: '$361.92', cpp: '$2.61'},
+            {zone: 'UK', shipments: '12', pct: '14.6%', weight: '56.80', avg: '4.73', revenue: '$139.20', cpp: '$2.45'},
+            {zone: 'EU', shipments: '10', pct: '12.2%', weight: '33.50', avg: '3.35', revenue: '$78.13', cpp: '$2.33'}
+          ],
+          peakDate: 'Feb 25',
+          peakDateSub: '24 shipments (29.3%)',
+          topDest: 'Canada',
+          topDestSub: '32 shipments (39.0%)',
+          largestZone: 'Canada',
+          largestZoneSub: '32 shipments (39.0%)',
+          onlineDelivery: '95.1%',
+          onlineDeliverySub: '78 of 82'
         }
       }
     },
@@ -1007,6 +1143,14 @@
       summaryDesc5: 'On-time delivery at 97.8% is excellent. Lower processing time (1.9 days) indicates efficient operations. Fastest processing period of the month.',
       summaryTitle6: 'Projected Impact',
       summaryDesc6: 'Combined consolidation and zone optimization could achieve 12-18% cost reduction (~$10,000-15,000/month) while maintaining 97%+ on-time delivery performance.',
+      timelineImmediate: 'Consolidate Zone 5/6 volume; request tiered pricing',
+      timelineImmediateSavings: '$800-1,200/mo',
+      timelineShortterm: 'Expand Zone 7/International reach; multi-carrier eval',
+      timelineShorttermSavings: '$2,000-3,000/mo',
+      timelineMediumterm: 'Implement secondary carrier integration',
+      timelineMediumtermSavings: '$3,500-4,500/mo',
+      timelineLongterm: 'Network redesign with zone rebalancing',
+      timelineLongtermSavings: '$10,000-15,000/mo',
       // Chart data for DHL Invoice 2 (Feb 15-21)
       chartDestLabels: ['USPS Zone 5', 'USPS Zone 6', 'USPS Zone 4', 'USPS Zone 3', 'USPS Zone 7', 'USPS Zone 1', 'USPS Zone 2', 'International'],
       chartDestData: [2850, 2100, 1650, 1250, 1200, 900, 700, 701],
@@ -1040,7 +1184,50 @@
           avgRevenue: '$6.73',
           weight: '1969.92 lbs',
           weightPer: '$6.73',
-          costPerLb: '$26.38'
+          costPerLb: '$26.38',
+          ontime: '97.9%',
+          ontimeSub: '7,559 of 7,725 shipments delivered on time',
+          compliance: '99.8%',
+          complianceSub: '7,699 of 7,725 shipments completed successfully',
+          time: '1.9 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [97.9, 97.7, 97.8, 98.1, 97.5, 97.8, 97.9],
+          perfDaysByZone: [1.9, 1.8, 2.0, 2.1, 1.9, 2.1, 1.8],
+          perfZoneLabels: ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'],
+          perfTableData: [
+            {zone: 'USPS Zone 3', ontime: '97.8%', compliance: '99.8%', days: 2.0, status: '✓ Excellent'},
+            {zone: 'USPS Zone 4', ontime: '98.1%', compliance: '99.8%', days: 2.1, status: '✓ Excellent'},
+            {zone: 'USPS Zone 5', ontime: '97.5%', compliance: '99.8%', days: 1.9, status: '✓ Excellent'},
+            {zone: 'USPS Zone 6', ontime: '97.8%', compliance: '99.8%', days: 2.1, status: '✓ Excellent'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: '2,290', pct: '29.6%', weight: '4,862.10', avg: '2.12', rev: '$15,428.30', cpp: '$3.18'},
+            {dest: 'USPS Zone 6', shipments: '2,150', pct: '27.8%', weight: '4,125.60', avg: '1.92', rev: '$14,325.80', cpp: '$3.47'},
+            {dest: 'USPS Zone 4', shipments: '1,680', pct: '21.7%', weight: '3,218.40', avg: '1.92', rev: '$11,245.20', cpp: '$3.49'},
+            {dest: 'USPS Zone 3', shipments: '1,605', pct: '20.8%', weight: '3,089.20', avg: '1.92', rev: '$10,963.14', cpp: '$3.55'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: 2584, pct: '33.5%', weight: 3965.20, avg: 1.53, revenue: '$17,387.84', cpp: '$4.38'},
+            {dest: 'USPS Zone 6', shipments: 2271, pct: '29.4%', weight: 3483.30, avg: 1.53, revenue: '$15,276.28', cpp: '$4.38'},
+            {dest: 'USPS Zone 4', shipments: 1381, pct: '17.9%', weight: 2037.80, avg: 1.47, revenue: '$8,544.72', cpp: '$4.19'},
+            {dest: 'USPS Zone 3', shipments: 998, pct: '12.9%', weight: 1293.60, avg: 1.30, revenue: '$5,509.64', cpp: '$4.26'},
+            {dest: 'USPS Zone 7', shipments: 490, pct: '6.3%', weight: 489.00, avg: 1.00, revenue: '$1,905.47', cpp: '$3.90'}
+          ],
+          zoneTableData: [
+            {zone: 'USPS Zone 5', shipments: '2,584', pct: '33.5%', weight: '3,965.20', avg: '1.53', revenue: '$17,387.84', cpp: '$4.38'},
+            {zone: 'USPS Zone 6', shipments: '2,271', pct: '29.4%', weight: '3,483.30', avg: '1.53', revenue: '$15,276.28', cpp: '$4.38'},
+            {zone: 'USPS Zone 4', shipments: '1,381', pct: '17.9%', weight: '2,037.80', avg: '1.47', revenue: '$8,544.72', cpp: '$4.19'},
+            {zone: 'USPS Zone 3', shipments: '998', pct: '12.9%', weight: '1,293.60', avg: '1.30', revenue: '$5,509.64', cpp: '$4.26'},
+            {zone: 'USPS Zone 7', shipments: '490', pct: '6.3%', weight: '489.00', avg: '1.00', revenue: '$1,905.47', cpp: '$3.90'}
+          ],
+          peakDate: 'Feb 17',
+          peakDateSub: '1,845 shipments (23.9%)',
+          topDest: 'USPS Zone 5',
+          topDestSub: '2,584 shipments (33.5%)',
+          largestZone: 'USPS Zone 5',
+          largestZoneSub: '2,584 shipments (33.5%)',
+          onlineDelivery: '97.9%',
+          onlineDeliverySub: '7,559 of 7,725'
         },
         expedited: {
           revenue: '$52,398.61',
@@ -1048,7 +1235,50 @@
           avgRevenue: '$11.48',
           weight: '1986.42 lbs',
           weightPer: '$11.48',
-          costPerLb: '$26.38'
+          costPerLb: '$26.38',
+          ontime: '98.1%',
+          ontimeSub: '4,478 of 4,563 shipments delivered on time',
+          compliance: '100%',
+          complianceSub: '4,563 of 4,563 shipments completed successfully',
+          time: '1.8 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [98.2, 98.0, 98.1, 98.3, 98.0, 98.2, 98.1],
+          perfDaysByZone: [1.8, 1.7, 1.8, 1.9, 1.8, 1.9, 1.7],
+          perfZoneLabels: ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'],
+          perfTableData: [
+            {zone: 'USPS Zone 3', ontime: '98.1%', compliance: '100%', days: 1.8, status: '✓ Excellent'},
+            {zone: 'USPS Zone 4', ontime: '98.3%', compliance: '100%', days: 1.9, status: '✓ Excellent'},
+            {zone: 'USPS Zone 5', ontime: '98.0%', compliance: '100%', days: 1.8, status: '✓ Excellent'},
+            {zone: 'USPS Zone 6', ontime: '98.2%', compliance: '100%', days: 1.9, status: '✓ Excellent'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: '1,456', pct: '31.9%', weight: '2,891.20', avg: '1.99', rev: '$16,728.45', cpp: '$5.78'},
+            {dest: 'USPS Zone 6', shipments: '1,280', pct: '28.1%', weight: '2,456.80', avg: '1.92', rev: '$14,625.30', cpp: '$5.95'},
+            {dest: 'USPS Zone 4', shipments: '854', pct: '18.7%', weight: '1,624.50', avg: '1.90', rev: '$9,845.20', cpp: '$6.05'},
+            {dest: 'USPS Zone 3', shipments: '573', pct: '12.6%', weight: '1,089.60', avg: '1.90', rev: '$6,598.66', cpp: '$6.06'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: 1578, pct: '34.6%', weight: 2481.40, avg: 1.57, revenue: '$8,814.32', cpp: '$3.55'},
+            {dest: 'USPS Zone 6', shipments: 1251, pct: '27.4%', weight: 2089.70, avg: 1.67, revenue: '$7,523.16', cpp: '$3.60'},
+            {dest: 'USPS Zone 4', shipments: 767, pct: '16.8%', weight: 1495.40, avg: 1.95, revenue: '$4,246.42', cpp: '$2.84'},
+            {dest: 'USPS Zone 3', shipments: 562, pct: '12.3%', weight: 1038.30, avg: 1.85, revenue: '$3,124.85', cpp: '$3.01'},
+            {dest: 'USPS Zone 7', shipments: 405, pct: '8.9%', weight: 515.90, avg: 1.27, revenue: '$2,305.36', cpp: '$4.47'}
+          ],
+          zoneTableData: [
+            {zone: 'USPS Zone 5', shipments: '1,578', pct: '34.6%', weight: '2,481.40', avg: '1.57', revenue: '$8,814.32', cpp: '$3.55'},
+            {zone: 'USPS Zone 6', shipments: '1,251', pct: '27.4%', weight: '2,089.70', avg: '1.67', revenue: '$7,523.16', cpp: '$3.60'},
+            {zone: 'USPS Zone 4', shipments: '767', pct: '16.8%', weight: '1,495.40', avg: '1.95', revenue: '$4,246.42', cpp: '$2.84'},
+            {zone: 'USPS Zone 3', shipments: '562', pct: '12.3%', weight: '1,038.30', avg: '1.85', revenue: '$3,124.85', cpp: '$3.01'},
+            {zone: 'USPS Zone 7', shipments: '405', pct: '8.9%', weight: '515.90', avg: '1.27', revenue: '$2,305.36', cpp: '$4.47'}
+          ],
+          peakDate: 'Feb 18',
+          peakDateSub: '1,285 shipments (28.2%)',
+          topDest: 'USPS Zone 5',
+          topDestSub: '1,578 shipments (34.6%)',
+          largestZone: 'USPS Zone 5',
+          largestZoneSub: '1,578 shipments (34.6%)',
+          onlineDelivery: '98.1%',
+          onlineDeliverySub: '4,478 of 4,563'
         },
         international: {
           revenue: '$1,349.46',
@@ -1056,7 +1286,47 @@
           avgRevenue: '$21.77',
           weight: '51.16 lbs',
           weightPer: '$21.77',
-          costPerLb: '$26.38'
+          costPerLb: '$26.38',
+          ontime: '96.8%',
+          ontimeSub: '60 of 62 shipments delivered on time',
+          compliance: '98.4%',
+          complianceSub: '61 of 62 shipments completed successfully',
+          time: '2.4 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [96.8, 96.5, 97.0, 96.5, 97.0, 96.8, 96.3],
+          perfDaysByZone: [2.4, 2.3, 2.5, 2.4, 2.3, 2.4, 2.5],
+          perfZoneLabels: ['Intl 1', 'Intl 2', 'Intl 3', 'Intl 4', 'Intl 5', 'Intl 6', 'Intl 7'],
+          perfTableData: [
+            {zone: 'Canada', ontime: '96.8%', compliance: '98.4%', days: 2.4, status: '✓ Good'},
+            {zone: 'Int\'l Zone 1', ontime: '96.5%', compliance: '98.0%', days: 2.3, status: '✓ Good'},
+            {zone: 'Int\'l Zone 2', ontime: '97.0%', compliance: '98.8%', days: 2.5, status: '✓ Good'}
+          ],
+          destTableData: [
+            {dest: 'Canada', shipments: '28', pct: '45.2%', weight: '18.50', avg: '0.66', rev: '$610.45', cpp: '$33.00'},
+            {dest: 'Mexico', shipments: '15', pct: '24.2%', weight: '9.80', avg: '0.65', rev: '$327.20', cpp: '$33.39'},
+            {dest: 'UK', shipments: '12', pct: '19.4%', weight: '15.20', avg: '1.27', rev: '$261.30', cpp: '$17.19'},
+            {dest: 'Other Intl', shipments: '7', pct: '11.3%', weight: '7.66', avg: '1.09', rev: '$150.51', cpp: '$19.62'}
+          ],
+          destTableData: [
+            {dest: 'Canada', shipments: 24, pct: '38.7%', weight: 98.50, avg: 4.10, revenue: '$523.56', cpp: '$5.32'},
+            {dest: 'Mexico', shipments: 21, pct: '33.9%', weight: 96.30, avg: 4.59, revenue: '$468.72', cpp: '$4.87'},
+            {dest: 'UK', shipments: 9, pct: '14.5%', weight: 42.60, avg: 4.73, revenue: '$219.84', cpp: '$5.16'},
+            {dest: 'EU', shipments: 8, pct: '12.9%', weight: 25.80, avg: 3.23, revenue: '$136.34', cpp: '$5.28'}
+          ],
+          zoneTableData: [
+            {zone: 'Canada', shipments: '24', pct: '38.7%', weight: '98.50', avg: '4.10', revenue: '$523.56', cpp: '$5.32'},
+            {zone: 'Mexico', shipments: '21', pct: '33.9%', weight: '96.30', avg: '4.59', revenue: '$468.72', cpp: '$4.87'},
+            {zone: 'UK', shipments: '9', pct: '14.5%', weight: '42.60', avg: '4.73', revenue: '$219.84', cpp: '$5.16'},
+            {zone: 'EU', shipments: '8', pct: '12.9%', weight: '25.80', avg: '3.23', revenue: '$136.34', cpp: '$5.28'}
+          ],
+          peakDate: 'Feb 20',
+          peakDateSub: '18 shipments (29.0%)',
+          topDest: 'Canada',
+          topDestSub: '24 shipments (38.7%)',
+          largestZone: 'Canada',
+          largestZoneSub: '24 shipments (38.7%)',
+          onlineDelivery: '96.8%',
+          onlineDeliverySub: '60 of 62'
         }
       }
     },
@@ -1118,6 +1388,14 @@
       summaryDesc5: 'Exceptional performance with 98.1% on-time delivery and 1.8-day processing time. Ground Express service execution is excellent despite lower pricing.',
       summaryTitle6: 'Projected Impact',
       summaryDesc6: 'Optimizing pricing and zone distribution could achieve 15-22% revenue improvement (~$2,184-3,204/month) while maintaining 98%+ on-time delivery. Batch consolidation already maximized.',
+      timelineImmediate: 'Review Zone 1-3 routing strategy; pricing optimization',
+      timelineImmediateSavings: '$300-400/mo',
+      timelineShortterm: 'Evaluate higher-margin zone expansion; carrier negotiation',
+      timelineShorttermSavings: '$600-900/mo',
+      timelineMediumterm: 'Implement dynamic pricing model; zone rebalancing',
+      timelineMediumtermSavings: '$1,000-1,500/mo',
+      timelineLongterm: 'Full network optimization; competitive analysis',
+      timelineLongtermSavings: '$2,184-3,204/mo',
       // Chart data for UniUni Invoice 2
       chartDestLabels: ['DFW', 'ATL', 'ORD', 'MCI', 'IAH', 'AUS', 'PHX', 'DTW'],
       chartDestData: [612, 245, 198, 187, 176, 154, 143, 118],
@@ -1202,6 +1480,14 @@
       summaryDesc5: 'On-time delivery at 97.3% maintained despite high volume. Processing efficiency of 2.0 days shows strong carrier performance. Exceptional service during peak period.',
       summaryTitle6: 'Projected Impact',
       summaryDesc6: 'Combined zone optimization and consolidation could achieve 15-20% cost reduction (~$18,500-25,300/month) while maintaining 97%+ on-time delivery. Volume growth provides leverage for rate improvements.',
+      timelineImmediate: 'Launch Zone 5/6 volume consolidation initiative',
+      timelineImmediateSavings: '$2,000-3,000/mo',
+      timelineShortterm: 'Expand Zone 7 capacity; negotiate volume commitment',
+      timelineShorttermSavings: '$4,000-6,000/mo',
+      timelineMediumterm: 'Implement dedicated intl carrier; zone rebalancing',
+      timelineMediumtermSavings: '$8,000-12,000/mo',
+      timelineLongterm: 'Full network optimization; multi-carrier portfolio',
+      timelineLongtermSavings: '$18,500-25,300/mo',
       // Chart data for DHL Invoice 3 (Mar 1-7)
       chartDestLabels: ['USPS Zone 5', 'USPS Zone 6', 'USPS Zone 4', 'USPS Zone 3', 'USPS Zone 7', 'USPS Zone 2', 'International', 'USPS Zone 1'],
       chartDestData: [8250, 6880, 4125, 3180, 2340, 1550, 1250, 980],
@@ -1235,7 +1521,42 @@
           avgRevenue: '$6.35',
           weight: '30148.00 lbs',
           weightPer: '$3.78',
-          costPerLb: '$3.78'
+          costPerLb: '$3.78',
+          ontime: '97.2%',
+          ontimeSub: '17,407 of 17,926 shipments delivered on time',
+          compliance: '99.9%',
+          complianceSub: '17,905 of 17,926 shipments completed successfully',
+          time: '2.1 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [97.1, 97.0, 97.2, 97.1, 97.3, 97.5, 97.0],
+          perfDaysByZone: [2.0, 2.0, 2.1, 2.1, 2.1, 1.9, 2.2],
+          perfZoneLabels: ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'],
+          perfTableData: [
+            {zone: 'USPS Zone 3', ontime: '97.2%', compliance: '99.9%', days: 2.1, status: '✓ Excellent'},
+            {zone: 'USPS Zone 4', ontime: '97.1%', compliance: '99.9%', days: 2.1, status: '✓ Excellent'},
+            {zone: 'USPS Zone 5', ontime: '97.3%', compliance: '99.9%', days: 2.1, status: '✓ Excellent'},
+            {zone: 'USPS Zone 6', ontime: '97.5%', compliance: '99.9%', days: 1.9, status: '✓ Excellent'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: '7,152', pct: '39.9%', weight: '11,842.60', avg: '1.65', rev: '$38,456.28', cpp: '$3.24'},
+            {dest: 'USPS Zone 6', shipments: '6,480', pct: '36.1%', weight: '10,625.40', avg: '1.64', rev: '$34,928.40', cpp: '$3.29'},
+            {dest: 'USPS Zone 4', shipments: '2,340', pct: '13.0%', weight: '3,856.20', avg: '1.65', rev: '$12,584.20', cpp: '$3.27'},
+            {dest: 'USPS Zone 3', shipments: '1,954', pct: '10.9%', weight: '3,824.40', avg: '1.96', rev: '$10,949.50', cpp: '$2.86'}
+          ],
+          zoneTableData: [
+            {zone: 'USPS Zone 5', shipments: '7,152', pct: '39.9%', weight: '11,842.60', avg: '1.65', revenue: '$38,456.28', cpp: '$3.24'},
+            {zone: 'USPS Zone 6', shipments: '6,480', pct: '36.1%', weight: '10,625.40', avg: '1.64', revenue: '$34,928.40', cpp: '$3.29'},
+            {zone: 'USPS Zone 4', shipments: '2,340', pct: '13.0%', weight: '3,856.20', avg: '1.65', revenue: '$12,584.20', cpp: '$3.27'},
+            {zone: 'USPS Zone 3', shipments: '1,954', pct: '10.9%', weight: '3,824.40', avg: '1.96', revenue: '$10,949.50', cpp: '$2.86'}
+          ],
+          peakDate: 'Mar 2',
+          peakDateSub: '3,456 shipments (19.3%)',
+          topDest: 'USPS Zone 5',
+          topDestSub: '7,152 shipments (39.9%)',
+          largestZone: 'USPS Zone 5',
+          largestZoneSub: '7,152 shipments (39.9%)',
+          onlineDelivery: '97.2%',
+          onlineDeliverySub: '17,407 of 17,926'
         },
         expedited: {
           revenue: '$62,360.63',
@@ -1243,7 +1564,50 @@
           avgRevenue: '$8.13',
           weight: '17688.00 lbs',
           weightPer: '$3.53',
-          costPerLb: '$3.53'
+          costPerLb: '$3.53',
+          ontime: '97.4%',
+          ontimeSub: '7,475 of 7,672 shipments delivered on time',
+          compliance: '99.9%',
+          complianceSub: '7,664 of 7,672 shipments completed successfully',
+          time: '1.9 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [97.5, 97.4, 97.3, 97.2, 97.6, 97.4, 97.2],
+          perfDaysByZone: [1.9, 1.8, 1.9, 1.9, 1.9, 1.9, 1.8],
+          perfZoneLabels: ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'],
+          perfTableData: [
+            {zone: 'USPS Zone 3', ontime: '97.3%', compliance: '99.9%', days: 1.9, status: '✓ Excellent'},
+            {zone: 'USPS Zone 4', ontime: '97.2%', compliance: '99.9%', days: 1.9, status: '✓ Excellent'},
+            {zone: 'USPS Zone 5', ontime: '97.6%', compliance: '99.9%', days: 1.9, status: '✓ Excellent'},
+            {zone: 'USPS Zone 6', ontime: '97.4%', compliance: '99.9%', days: 1.9, status: '✓ Excellent'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: '3,127', pct: '40.7%', weight: '5,648.40', avg: '1.81', rev: '$25,456.78', cpp: '$4.51'},
+            {dest: 'USPS Zone 6', shipments: '2,842', pct: '37.0%', weight: '5,124.80', avg: '1.80', rev: '$23,145.60', cpp: '$4.52'},
+            {dest: 'USPS Zone 4', shipments: '854', pct: '11.1%', weight: '1,542.50', avg: '1.81', rev: '$8,745.32', cpp: '$5.67'},
+            {dest: 'USPS Zone 3', shipments: '649', pct: '8.5%', weight: '1,172.30', avg: '1.80', rev: '$5,912.93', cpp: '$5.04'}
+          ],
+          destTableData: [
+            {dest: 'USPS Zone 5', shipments: 2649, pct: '34.5%', weight: 4358.80, avg: 1.65, revenue: '$17,248.92', cpp: '$3.96'},
+            {dest: 'USPS Zone 6', shipments: 2105, pct: '27.4%', weight: 3687.20, avg: 1.75, revenue: '$14,562.36', cpp: '$3.95'},
+            {dest: 'USPS Zone 4', shipments: 1291, pct: '16.8%', weight: 2176.50, avg: 1.69, revenue: '$8,942.65', cpp: '$4.11'},
+            {dest: 'USPS Zone 3', shipments: 947, pct: '12.3%', weight: 1425.40, avg: 1.50, revenue: '$6,234.82', cpp: '$4.37'},
+            {dest: 'USPS Zone 7', shipments: 680, pct: '8.9%', weight: 896.10, avg: 1.32, revenue: '$3,724.56', cpp: '$4.16'}
+          ],
+          zoneTableData: [
+            {zone: 'USPS Zone 5', shipments: '2,649', pct: '34.5%', weight: '4,358.80', avg: '1.65', revenue: '$17,248.92', cpp: '$3.96'},
+            {zone: 'USPS Zone 6', shipments: '2,105', pct: '27.4%', weight: '3,687.20', avg: '1.75', revenue: '$14,562.36', cpp: '$3.95'},
+            {zone: 'USPS Zone 4', shipments: '1,291', pct: '16.8%', weight: '2,176.50', avg: '1.69', revenue: '$8,942.65', cpp: '$4.11'},
+            {zone: 'USPS Zone 3', shipments: '947', pct: '12.3%', weight: '1,425.40', avg: '1.50', revenue: '$6,234.82', cpp: '$4.37'},
+            {zone: 'USPS Zone 7', shipments: '680', pct: '8.9%', weight: '896.10', avg: '1.32', revenue: '$3,724.56', cpp: '$4.16'}
+          ],
+          peakDate: 'Mar 3',
+          peakDateSub: '1,852 shipments (24.1%)',
+          topDest: 'USPS Zone 5',
+          topDestSub: '2,649 shipments (34.5%)',
+          largestZone: 'USPS Zone 5',
+          largestZoneSub: '2,649 shipments (34.5%)',
+          onlineDelivery: '97.4%',
+          onlineDeliverySub: '7,475 of 7,672'
         },
         international: {
           revenue: '$1,629.34',
@@ -1251,7 +1615,47 @@
           avgRevenue: '$12.63',
           weight: '438.63 lbs',
           weightPer: '$3.71',
-          costPerLb: '$3.71'
+          costPerLb: '$3.71',
+          ontime: '95.3%',
+          ontimeSub: '123 of 129 shipments delivered on time',
+          compliance: '98.4%',
+          complianceSub: '127 of 129 shipments completed successfully',
+          time: '2.7 days',
+          timeSub: 'Induction to shipment average',
+          perfOnTimeByZone: [95.2, 95.4, 95.3, 95.1, 95.5, 95.3, 95.0],
+          perfDaysByZone: [2.7, 2.8, 2.7, 2.8, 2.6, 2.7, 2.8],
+          perfZoneLabels: ['Intl 1', 'Intl 2', 'Intl 3', 'Intl 4', 'Intl 5', 'Intl 6', 'Intl 7'],
+          perfTableData: [
+            {zone: 'Canada', ontime: '95.3%', compliance: '98.4%', days: 2.7, status: '✓ Good'},
+            {zone: 'Int\'l Zone 1', ontime: '95.4%', compliance: '98.6%', days: 2.8, status: '✓ Good'},
+            {zone: 'Int\'l Zone 2', ontime: '95.5%', compliance: '98.2%', days: 2.6, status: '✓ Good'}
+          ],
+          destTableData: [
+            {dest: 'Canada', shipments: '58', pct: '44.96%', weight: '205.80', avg: '3.55', rev: '$728.45', cpp: '$3.54'},
+            {dest: 'Mexico', shipments: '32', pct: '24.81%', weight: '112.40', avg: '3.51', rev: '$399.68', cpp: '$3.56'},
+            {dest: 'UK', shipments: '22', pct: '17.05%', weight: '82.50', avg: '3.75', rev: '$289.50', cpp: '$3.51'},
+            {dest: 'Other Intl', shipments: '17', pct: '13.18%', weight: '37.93', avg: '2.23', rev: '$211.71', cpp: '$5.58'}
+          ],
+          destTableData: [
+            {dest: 'Canada', shipments: 50, pct: '38.8%', weight: 170.30, avg: 3.41, revenue: '$612.45', cpp: '$3.60'},
+            {dest: 'Mexico', shipments: 44, pct: '34.1%', weight: 168.80, avg: 3.84, revenue: '$548.24', cpp: '$3.25'},
+            {dest: 'UK', shipments: 18, pct: '13.9%', weight: 68.50, avg: 3.81, revenue: '$305.16', cpp: '$4.45'},
+            {dest: 'EU', shipments: 17, pct: '13.2%', weight: 58.60, avg: 3.45, revenue: '$240.28', cpp: '$4.10'}
+          ],
+          zoneTableData: [
+            {zone: 'Canada', shipments: '50', pct: '38.8%', weight: '170.30', avg: '3.41', revenue: '$612.45', cpp: '$3.60'},
+            {zone: 'Mexico', shipments: '44', pct: '34.1%', weight: '168.80', avg: '3.84', revenue: '$548.24', cpp: '$3.25'},
+            {zone: 'UK', shipments: '18', pct: '13.9%', weight: '68.50', avg: '3.81', revenue: '$305.16', cpp: '$4.45'},
+            {zone: 'EU', shipments: '17', pct: '13.2%', weight: '58.60', avg: '3.45', revenue: '$240.28', cpp: '$4.10'}
+          ],
+          peakDate: 'Mar 4',
+          peakDateSub: '32 shipments (24.8%)',
+          topDest: 'Canada',
+          topDestSub: '50 shipments (38.8%)',
+          largestZone: 'Canada',
+          largestZoneSub: '50 shipments (38.8%)',
+          onlineDelivery: '95.3%',
+          onlineDeliverySub: '123 of 129'
         }
       }
     },
@@ -1313,6 +1717,14 @@
       summaryDesc5: 'Exceptional 98.2% on-time delivery with high volume. Best processing time (1.7 days) of all periods. Outstanding service quality.',
       summaryTitle6: 'Projected Impact',
       summaryDesc6: 'Stable period with optimal performance. Strategic focus should be on maintaining service quality while exploring zone diversification. Batch consolidation already maximized.',
+      timelineImmediate: 'Maintain current operational excellence; monitor performance',
+      timelineImmediateSavings: '$0-50/mo (baseline)',
+      timelineShortterm: 'Explore secondary zone expansion opportunities',
+      timelineShorttermSavings: '$100-200/mo',
+      timelineMediumterm: 'Implement zone diversification strategy',
+      timelineMediumtermSavings: '$300-500/mo',
+      timelineLongterm: 'Scale to multi-carrier strategy with proven model',
+      timelineLongtermSavings: '$500-800/mo',
       // Chart data for UniUni Invoice 3
       chartDestLabels: ['DFW', 'MCI', 'ATL', 'ORD', 'IAH', 'PHX', 'DEN', 'AUS', 'EWR', 'LAX'],
       chartDestData: [368, 245, 189, 167, 156, 143, 127, 115, 98, 87],
@@ -1787,6 +2199,168 @@
     }
   }
 
+  function updateSummaryStats(data) {
+    // Update Key Summary Stats
+    if (data.peakDate) {
+      document.getElementById('stat-peak-date').textContent = data.peakDate;
+      document.getElementById('stat-peak-date-sub').textContent = data.peakDateSub;
+    }
+    if (data.topDest) {
+      document.getElementById('stat-top-dest').textContent = data.topDest;
+      document.getElementById('stat-top-dest-sub').textContent = data.topDestSub;
+    }
+    if (data.largestZone) {
+      document.getElementById('stat-largest-zone').textContent = data.largestZone;
+      document.getElementById('stat-largest-zone-sub').textContent = data.largestZoneSub;
+    }
+    if (data.onlineDelivery) {
+      document.getElementById('stat-ontime').textContent = data.onlineDelivery;
+      document.getElementById('stat-ontime-sub').textContent = data.onlineDeliverySub;
+    }
+  }
+
+  function updateZonesTable(data) {
+    const zonesTableBody = document.querySelector('#zones-table tbody');
+    if (zonesTableBody && data.zoneTableData) {
+      zonesTableBody.innerHTML = data.zoneTableData.map(d => `
+        <tr>
+          <td style="text-align: left;">${d.zone}</td>
+          <td>${d.shipments}</td>
+          <td>${d.pct}</td>
+          <td>${d.weight}</td>
+          <td><span class="badge badge-blue">${d.avg}</span></td>
+          <td>${d.revenue}</td>
+          <td><span class="badge badge-yellow">${d.cpp}</span></td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  function updateDestinationsTable(data) {
+    const destTableBody = document.querySelector('#destinations .table-card table tbody');
+    if (destTableBody && data.destTableData) {
+      destTableBody.innerHTML = data.destTableData.map(d => `
+        <tr>
+          <td style="text-align: left;">${d.dest}</td>
+          <td>${d.shipments}</td>
+          <td>${d.pct}</td>
+          <td>${d.weight}</td>
+          <td><span class="badge badge-blue">${d.avg}</span></td>
+          <td>${d.rev}</td>
+          <td><span class="badge badge-green">${d.cpp}</span></td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  function updatePerformanceZoneCharts(data) {
+    // Get zone labels from service type data or use defaults
+    const zoneLabels = data.perfZoneLabels || ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'];
+    
+    // Update Performance On-Time Chart
+    const perfOnTimeCtx = document.getElementById('perfOnTimeChart');
+    if (perfOnTimeCtx && data.perfOnTimeByZone) {
+      // Destroy old chart completely
+      if (charts.perfOnTime) {
+        try {
+          charts.perfOnTime.destroy();
+        } catch (e) {
+          console.log('Error destroying chart:', e);
+        }
+        charts.perfOnTime = null;
+      }
+      
+      // Clear the canvas
+      const ctx = perfOnTimeCtx.getContext('2d');
+      if (ctx) ctx.clearRect(0, 0, perfOnTimeCtx.width, perfOnTimeCtx.height);
+      
+      // Create new chart immediately
+      charts.perfOnTime = new Chart(perfOnTimeCtx, {
+        type: 'bar',
+        data: {
+          labels: zoneLabels,
+          datasets: [{
+            label: 'On-Time %',
+            data: data.perfOnTimeByZone,
+            backgroundColor: '#10b981',
+            borderColor: '#059669',
+            borderWidth: 1,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: { 
+            y: { 
+              beginAtZero: true, 
+              max: 100
+            } 
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    // Update Performance Days Chart
+    const perfDaysCtx = document.getElementById('perfDaysChart');
+    if (perfDaysCtx && data.perfDaysByZone) {
+      // Destroy old chart completely
+      if (charts.perfDays) {
+        try {
+          charts.perfDays.destroy();
+        } catch (e) {
+          console.log('Error destroying chart:', e);
+        }
+        charts.perfDays = null;
+      }
+      
+      // Clear the canvas
+      const ctx = perfDaysCtx.getContext('2d');
+      if (ctx) ctx.clearRect(0, 0, perfDaysCtx.width, perfDaysCtx.height);
+      
+      // Create new chart immediately
+      charts.perfDays = new Chart(perfDaysCtx, {
+        type: 'bar',
+        data: {
+          labels: zoneLabels,
+          datasets: [{
+            label: 'Avg Days',
+            data: data.perfDaysByZone,
+            backgroundColor: '#8b5cf6',
+            borderColor: '#7c3aed',
+            borderWidth: 1,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: { 
+            y: { 
+              beginAtZero: true
+            } 
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    // Update Performance Table
+    const perfTableBody = document.querySelector('#performance .table-card table tbody');
+    if (perfTableBody && data.perfTableData) {
+      perfTableBody.innerHTML = data.perfTableData.map(d => `
+        <tr>
+          <td style="text-align: left;">${d.zone}</td>
+          <td><span class="badge badge-green">${d.ontime}</span></td>
+          <td><span class="badge badge-blue">${d.compliance}</span></td>
+          <td>${d.days}</td>
+          <td>${d.status}</td>
+        </tr>
+      `).join('');
+    }
+  }
+
   function switchCarrier(carrier) {
     currentCarrier = carrier;
     const data = carrierData[carrier];
@@ -1967,22 +2541,89 @@
     document.getElementById('kpi-weight-per').textContent = serviceData.weightPer;
     document.getElementById('kpi-cost-per-lb').textContent = serviceData.costPerLb;
     
-    // Update performance metrics (use parent data since service type breakdown doesn't have detailed perf metrics)
-    document.getElementById('perf-ontime').textContent = data.ontime;
-    document.getElementById('perf-ontime-sub').textContent = data.ontimeSub;
-    document.getElementById('perf-compliance').textContent = data.compliance;
-    document.getElementById('perf-compliance-sub').textContent = data.complianceSub;
-    document.getElementById('perf-time').textContent = data.time;
-    document.getElementById('perf-time-sub').textContent = data.timeSub;
-    document.getElementById('perf-ontime-tab').textContent = data.ontime;
-    document.getElementById('perf-ontime-sub-tab').textContent = data.ontimeSub;
-    document.getElementById('perf-compliance-tab').textContent = data.compliance;
-    document.getElementById('perf-compliance-sub-tab').textContent = data.complianceSub;
-    document.getElementById('perf-time-tab').textContent = data.time;
-    document.getElementById('perf-time-sub-tab').textContent = data.timeSub;
+    // Update performance metrics - use SERVICE TYPE data if available
+    if (serviceData.ontime) {
+      document.getElementById('perf-ontime').textContent = serviceData.ontime;
+      document.getElementById('perf-ontime-sub').textContent = serviceData.ontimeSub;
+      document.getElementById('perf-compliance').textContent = serviceData.compliance;
+      document.getElementById('perf-compliance-sub').textContent = serviceData.complianceSub;
+      document.getElementById('perf-time').textContent = serviceData.time;
+      document.getElementById('perf-time-sub').textContent = serviceData.timeSub;
+      document.getElementById('perf-ontime-tab').textContent = serviceData.ontime;
+      document.getElementById('perf-ontime-sub-tab').textContent = serviceData.ontimeSub;
+      document.getElementById('perf-compliance-tab').textContent = serviceData.compliance;
+      document.getElementById('perf-compliance-sub-tab').textContent = serviceData.complianceSub;
+      document.getElementById('perf-time-tab').textContent = serviceData.time;
+      document.getElementById('perf-time-sub-tab').textContent = serviceData.timeSub;
+    } else {
+      // Fallback to parent data if service type doesn't have performance metrics
+      document.getElementById('perf-ontime').textContent = data.ontime;
+      document.getElementById('perf-ontime-sub').textContent = data.ontimeSub;
+      document.getElementById('perf-compliance').textContent = data.compliance;
+      document.getElementById('perf-compliance-sub').textContent = data.complianceSub;
+      document.getElementById('perf-time').textContent = data.time;
+      document.getElementById('perf-time-sub').textContent = data.timeSub;
+      document.getElementById('perf-ontime-tab').textContent = data.ontime;
+      document.getElementById('perf-ontime-sub-tab').textContent = data.ontimeSub;
+      document.getElementById('perf-compliance-tab').textContent = data.compliance;
+      document.getElementById('perf-compliance-sub-tab').textContent = data.complianceSub;
+      document.getElementById('perf-time-tab').textContent = data.time;
+      document.getElementById('perf-time-sub-tab').textContent = data.timeSub;
+    }
     
-    // Show info message
-    console.log(`Displaying ${filterName} for ${carrier}: ${serviceData.revenueSub}`);
+    // Update performance zone charts and table
+    if (serviceData.perfOnTimeByZone) {
+      updatePerformanceZoneCharts(serviceData);
+      // If Performance tab is currently visible, refresh it
+      const perfTab = document.getElementById('performance');
+      if (perfTab && perfTab.classList.contains('active')) {
+        // Resize charts if visible
+        setTimeout(() => {
+          if (charts.perfOnTime && typeof charts.perfOnTime.resize === 'function') {
+            try { charts.perfOnTime.resize(); } catch(e) {}
+          }
+          if (charts.perfDays && typeof charts.perfDays.resize === 'function') {
+            try { charts.perfDays.resize(); } catch(e) {}
+          }
+        }, 100);
+      }
+    }
+    
+    // Update destinations table
+    if (serviceData.destTableData) {
+      updateDestinationsTable(serviceData);
+    }
+    
+    // Update key summary stats
+    if (serviceData.peakDate) {
+      updateSummaryStats(serviceData);
+    }
+    
+    // Update zones table
+    if (serviceData.zoneTableData) {
+      updateZonesTable(serviceData);
+    }
+    
+    // Update implementation timeline (parent invoice timeline applies to all service types)
+    document.getElementById('timeline-immediate-action').textContent = data.timelineImmediate;
+    document.getElementById('timeline-immediate-savings').textContent = data.timelineImmediateSavings;
+    document.getElementById('timeline-shortterm-action').textContent = data.timelineShortterm;
+    document.getElementById('timeline-shortterm-savings').textContent = data.timelineShorttermSavings;
+    document.getElementById('timeline-mediumterm-action').textContent = data.timelineMediumterm;
+    document.getElementById('timeline-mediumterm-savings').textContent = data.timelineMediumtermSavings;
+    document.getElementById('timeline-longterm-action').textContent = data.timelineLongterm;
+    document.getElementById('timeline-longterm-savings').textContent = data.timelineLongtermSavings;
+    
+    // Update summary if available
+    if (data.summaryDesc1) {
+      document.getElementById('summary-cost-desc').textContent = data.summaryDesc1;
+      document.getElementById('summary-volume-desc').textContent = data.summaryDesc2;
+      document.getElementById('summary-ops-desc').textContent = data.summaryDesc3;
+      document.getElementById('summary-risk-desc').textContent = data.summaryDesc4;
+      document.getElementById('summary-perf-desc').textContent = data.summaryDesc5;
+      document.getElementById('summary-impact-desc').textContent = data.summaryDesc6;
+    }
+    
   }
 
   function updateChartsForCarrier(carrier) {
@@ -2765,5 +3406,3 @@
 
 </body>
 </html>
-
-
