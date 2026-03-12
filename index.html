@@ -96,6 +96,12 @@
             <option value="dhl3">DHL eCommerce (Mar 1-7)</option>
           </select>
         </div>
+        <div>
+          <label for="serviceTypeSelect" style="font-size: .875rem; font-weight: 600; color: #374151; margin-right: 8px;">Service Type:</label>
+          <select id="serviceTypeSelect" onchange="switchServiceType(this.value)" style="padding: 8px 12px; border: 2px solid #e5e7eb; border-radius: 6px; font-size: .95rem; cursor: pointer; background: white; color: #111827; font-weight: 500;">
+            <option value="all">All Services</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -819,13 +825,13 @@
       perfDaysOverall: 2.1
     },
     dhl: {
-      subtitle: 'Invoice #22171105 | Feb 22–28, 2026 | DHL eCommerce',
-      revenue: '$158,104.86',
+      subtitle: 'Invoices #22171105 + #22169609 | Feb 22–28, 2026 | DHL eCommerce',
+      revenue: '$161,545.13',
       revenueSub: '22852 shipments',
-      avgRevenue: '$6.92',
+      avgRevenue: '$7.07',
       weight: '7976.42 lbs',
       weightPer: '0.35 lbs',
-      costPerLb: '$19.82',
+      costPerLb: '$20.25',
       ontime: '96.8%',
       ontimeSub: '22,116 of 22,852 shipments delivered on time',
       compliance: '99.8%',
@@ -914,7 +920,34 @@
       perfOnTimeByZone: [96.8, 97.1, 96.8, 96.5, 97.1, 96.9, 97.2],  // Zone 1-7 (DHL)
       perfDaysByZone: [2.1, 2.0, 2.2, 2.3, 2.1, 2.3, 1.9],  // Zone 1-7 (DHL)
       perfOnTimeOverall: 96.8,
-      perfDaysOverall: 2.2
+      perfDaysOverall: 2.2,
+      // Service Type Breakdown
+      serviceTypes: {
+        ground: {
+          revenue: '$115,127.43',
+          revenueSub: '17448 shipments',
+          avgRevenue: '$6.60',
+          weight: '24399.00 lbs',
+          weightPer: '$4.72',
+          costPerLb: '$4.72'
+        },
+        expedited: {
+          revenue: '$45,405.82',
+          revenueSub: '5321 shipments',
+          avgRevenue: '$8.53',
+          weight: '12729.00 lbs',
+          weightPer: '$3.57',
+          costPerLb: '$3.57'
+        },
+        international: {
+          revenue: '$992.05',
+          revenueSub: '82 shipments',
+          avgRevenue: '$12.10',
+          weight: '371.40 lbs',
+          weightPer: '$2.67',
+          costPerLb: '$2.67'
+        }
+      }
     },
     dhl2: {
       subtitle: 'Invoice #22164750 | Feb 15–21, 2026 | DHL eCommerce',
@@ -998,7 +1031,34 @@
       perfOnTimeByZone: [97.9, 97.6, 97.8, 98.1, 97.5, 97.8, 97.9],  // Zone 1-7 (Feb 15-21)
       perfDaysByZone: [1.9, 1.8, 2.0, 2.1, 1.9, 2.1, 1.8],  // Zone 1-7 (Feb 15-21)
       perfOnTimeOverall: 97.8,
-      perfDaysOverall: 1.9
+      perfDaysOverall: 1.9,
+      // Service Type Breakdown
+      serviceTypes: {
+        ground: {
+          revenue: '$51,963.44',
+          revenueSub: '7725 shipments',
+          avgRevenue: '$6.73',
+          weight: '1969.92 lbs',
+          weightPer: '$6.73',
+          costPerLb: '$26.38'
+        },
+        expedited: {
+          revenue: '$52,398.61',
+          revenueSub: '4563 shipments',
+          avgRevenue: '$11.48',
+          weight: '1986.42 lbs',
+          weightPer: '$11.48',
+          costPerLb: '$26.38'
+        },
+        international: {
+          revenue: '$1,349.46',
+          revenueSub: '62 shipments',
+          avgRevenue: '$21.77',
+          weight: '51.16 lbs',
+          weightPer: '$21.77',
+          costPerLb: '$26.38'
+        }
+      }
     },
     uniuni2: {
       subtitle: 'Invoice #49613859260302283 | Feb 23-Mar 1, 2026 | Ground Express',
@@ -1166,7 +1226,34 @@
       perfOnTimeByZone: [97.1, 97.4, 97.2, 97.5, 97.3, 97.6, 97.1],  // Zone 1-7 (Mar 1-7)
       perfDaysByZone: [2.0, 1.9, 2.1, 2.0, 2.2, 1.9, 2.3],  // Zone 1-7 (Mar 1-7)
       perfOnTimeOverall: 97.3,
-      perfDaysOverall: 2.0
+      perfDaysOverall: 2.0,
+      // Service Type Breakdown
+      serviceTypes: {
+        ground: {
+          revenue: '$113,818.38',
+          revenueSub: '17926 shipments',
+          avgRevenue: '$6.35',
+          weight: '30148.00 lbs',
+          weightPer: '$3.78',
+          costPerLb: '$3.78'
+        },
+        expedited: {
+          revenue: '$62,360.63',
+          revenueSub: '7672 shipments',
+          avgRevenue: '$8.13',
+          weight: '17688.00 lbs',
+          weightPer: '$3.53',
+          costPerLb: '$3.53'
+        },
+        international: {
+          revenue: '$1,629.34',
+          revenueSub: '129 shipments',
+          avgRevenue: '$12.63',
+          weight: '438.63 lbs',
+          weightPer: '$3.71',
+          costPerLb: '$3.71'
+        }
+      }
     },
     uniuni3: {
       subtitle: 'Invoice #49614337260309626 | Mar 2–8, 2026 | Ground Express Service',
@@ -1803,8 +1890,99 @@
     document.getElementById('stat-top-dest-sub').textContent = Math.round(data.topDestCount * multiplier).toLocaleString() + ' shipments (' + data.topDestPercent + ')';
     document.getElementById('stat-largest-zone-sub').textContent = Math.round(data.topDestCount * multiplier).toLocaleString() + ' shipments (' + data.topDestPercent + ')';
     
+    // Update service type selector
+    populateServiceTypes(carrier);
+    
     // Update tables and charts with date range scaling
     updateAllChartsAndTables(carrier, multiplier);
+  }
+
+  function populateServiceTypes(carrier) {
+    const serviceTypeSelect = document.getElementById('serviceTypeSelect');
+    serviceTypeSelect.innerHTML = ''; // Clear existing options
+    
+    let options = [];
+    const data = carrierData[carrier];
+    const hasServiceTypes = data.serviceTypes && Object.keys(data.serviceTypes).length > 0;
+    
+    if (carrier.includes('dhl') && hasServiceTypes) {
+      options = [
+        { value: 'all', label: 'All Services' },
+        { value: 'ground', label: 'Ground Services' },
+        { value: 'expedited', label: 'Expedited Services' },
+        { value: 'international', label: 'International Services' }
+      ];
+    } else if (carrier.includes('dhl') && !hasServiceTypes) {
+      // DHL without service type data
+      options = [
+        { value: 'all', label: 'All Services (breakdown pending)' }
+      ];
+    } else {
+      // UniUni only has Ground Express
+      options = [
+        { value: 'all', label: 'All Services (Ground Express)' }
+      ];
+    }
+    
+    options.forEach(opt => {
+      const optionElement = document.createElement('option');
+      optionElement.value = opt.value;
+      optionElement.textContent = opt.label;
+      serviceTypeSelect.appendChild(optionElement);
+    });
+  }
+
+  function switchServiceType(serviceType) {
+    const carrier = document.getElementById('carrierSelect').value;
+    const data = carrierData[carrier];
+    
+    if (serviceType === 'all') {
+      // Show all data - re-run switchCarrier with current carrier
+      switchCarrier(carrier);
+      return;
+    }
+    
+    // Check if carrier has service type data
+    if (!data.serviceTypes || !data.serviceTypes[serviceType]) {
+      alert(`Service type data not available for this carrier`);
+      return;
+    }
+    
+    const serviceData = data.serviceTypes[serviceType];
+    const subtitle = document.getElementById('header-subtitle');
+    
+    let filterName = '';
+    if (serviceType === 'ground') filterName = 'Ground Services';
+    if (serviceType === 'expedited') filterName = 'Expedited Services';
+    if (serviceType === 'international') filterName = 'International Services';
+    
+    // Update header
+    subtitle.textContent = `${data.subtitle} → ${filterName}`;
+    
+    // Update KPIs
+    document.getElementById('kpi-revenue').textContent = serviceData.revenue;
+    document.getElementById('kpi-revenue-sub').textContent = serviceData.revenueSub;
+    document.getElementById('kpi-avg-revenue').textContent = serviceData.avgRevenue;
+    document.getElementById('kpi-weight').textContent = serviceData.weight;
+    document.getElementById('kpi-weight-per').textContent = serviceData.weightPer;
+    document.getElementById('kpi-cost-per-lb').textContent = serviceData.costPerLb;
+    
+    // Update performance metrics (use parent data since service type breakdown doesn't have detailed perf metrics)
+    document.getElementById('perf-ontime').textContent = data.ontime;
+    document.getElementById('perf-ontime-sub').textContent = data.ontimeSub;
+    document.getElementById('perf-compliance').textContent = data.compliance;
+    document.getElementById('perf-compliance-sub').textContent = data.complianceSub;
+    document.getElementById('perf-time').textContent = data.time;
+    document.getElementById('perf-time-sub').textContent = data.timeSub;
+    document.getElementById('perf-ontime-tab').textContent = data.ontime;
+    document.getElementById('perf-ontime-sub-tab').textContent = data.ontimeSub;
+    document.getElementById('perf-compliance-tab').textContent = data.compliance;
+    document.getElementById('perf-compliance-sub-tab').textContent = data.complianceSub;
+    document.getElementById('perf-time-tab').textContent = data.time;
+    document.getElementById('perf-time-sub-tab').textContent = data.timeSub;
+    
+    // Show info message
+    console.log(`Displaying ${filterName} for ${carrier}: ${serviceData.revenueSub}`);
   }
 
   function updateChartsForCarrier(carrier) {
