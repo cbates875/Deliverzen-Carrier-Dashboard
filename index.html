@@ -937,8 +937,8 @@
           revenue: '$115,127.43',
           revenueSub: '17448 shipments',
           avgRevenue: '$6.60',
-          weight: '24399.00 lbs',
-          weightPer: '$4.72',
+          weight: '10131.19 lbs',
+          weightPer: '0.58 lbs',
           costPerLb: '$4.72',
           ontime: '96.8%',
           ontimeSub: '16,890 of 17,448 shipments delivered on time',
@@ -997,8 +997,8 @@
           revenue: '$45,405.82',
           revenueSub: '5321 shipments',
           avgRevenue: '$8.53',
-          weight: '12729.00 lbs',
-          weightPer: '$3.57',
+          weight: '5564.62 lbs',
+          weightPer: '1.05 lbs',
           costPerLb: '$3.57',
           ontime: '97.2%',
           ontimeSub: '5,170 of 5,321 shipments delivered on time',
@@ -1055,10 +1055,10 @@
         },
         international: {
           revenue: '$992.05',
-          revenueSub: '82 shipments',
-          avgRevenue: '$12.10',
-          weight: '371.40 lbs',
-          weightPer: '$2.67',
+          revenueSub: '83 shipments',
+          avgRevenue: '$11.95',
+          weight: '258.51 lbs',
+          weightPer: '3.11 lbs',
           costPerLb: '$2.67',
           ontime: '95.1%',
           ontimeSub: '78 of 82 shipments delivered on time',
@@ -1210,7 +1210,7 @@
           revenueSub: '7725 shipments',
           avgRevenue: '$6.73',
           weight: '1969.92 lbs',
-          weightPer: '$6.73',
+          weightPer: '0.25 lbs',
           costPerLb: '$26.38',
           ontime: '97.9%',
           ontimeSub: '7,559 of 7,725 shipments delivered on time',
@@ -1270,7 +1270,7 @@
           revenueSub: '4563 shipments',
           avgRevenue: '$11.48',
           weight: '1986.42 lbs',
-          weightPer: '$11.48',
+          weightPer: '0.44 lbs',
           costPerLb: '$26.38',
           ontime: '98.1%',
           ontimeSub: '4,478 of 4,563 shipments delivered on time',
@@ -1330,7 +1330,7 @@
           revenueSub: '62 shipments',
           avgRevenue: '$21.77',
           weight: '51.16 lbs',
-          weightPer: '$21.77',
+          weightPer: '0.82 lbs',
           costPerLb: '$26.38',
           ontime: '96.8%',
           ontimeSub: '60 of 62 shipments delivered on time',
@@ -1573,8 +1573,8 @@
           revenue: '$113,818.38',
           revenueSub: '17926 shipments',
           avgRevenue: '$6.35',
-          weight: '30148.00 lbs',
-          weightPer: '$3.78',
+          weight: '11985.81 lbs',
+          weightPer: '0.67 lbs',
           costPerLb: '$3.78',
           ontime: '97.2%',
           ontimeSub: '17,407 of 17,926 shipments delivered on time',
@@ -1625,8 +1625,8 @@
           revenue: '$62,360.63',
           revenueSub: '7672 shipments',
           avgRevenue: '$8.13',
-          weight: '17688.00 lbs',
-          weightPer: '$3.53',
+          weight: '7579.88 lbs',
+          weightPer: '0.99 lbs',
           costPerLb: '$3.53',
           ontime: '97.4%',
           ontimeSub: '7,475 of 7,672 shipments delivered on time',
@@ -1685,8 +1685,8 @@
           revenue: '$1,629.34',
           revenueSub: '129 shipments',
           avgRevenue: '$12.63',
-          weight: '438.63 lbs',
-          weightPer: '$3.71',
+          weight: '381.44 lbs',
+          weightPer: '2.96 lbs',
           costPerLb: '$3.71',
           ontime: '95.3%',
           ontimeSub: '123 of 129 shipments delivered on time',
@@ -2315,19 +2315,19 @@
 
   function updateSummaryStats(data) {
     // Update Key Summary Stats
-    if (data.peakDate) {
+    if (data.peakDate && document.getElementById('stat-peak-date')) {
       document.getElementById('stat-peak-date').textContent = data.peakDate;
       document.getElementById('stat-peak-date-sub').textContent = data.peakDateSub;
     }
-    if (data.topDest) {
+    if (data.topDest && document.getElementById('stat-top-dest')) {
       document.getElementById('stat-top-dest').textContent = data.topDest;
       document.getElementById('stat-top-dest-sub').textContent = data.topDestSub;
     }
-    if (data.largestZone) {
+    if (data.largestZone && document.getElementById('stat-largest-zone')) {
       document.getElementById('stat-largest-zone').textContent = data.largestZone;
       document.getElementById('stat-largest-zone-sub').textContent = data.largestZoneSub;
     }
-    if (data.onlineDelivery) {
+    if (data.onlineDelivery && document.getElementById('stat-ontime')) {
       document.getElementById('stat-ontime').textContent = data.onlineDelivery;
       document.getElementById('stat-ontime-sub').textContent = data.onlineDeliverySub;
     }
@@ -2645,18 +2645,22 @@
     if (serviceType === 'international') filterName = 'International Services';
     
     // Update header
-    subtitle.textContent = `${data.subtitle} → ${filterName}`;
+    if (subtitle) {
+      subtitle.textContent = `${data.subtitle} → ${filterName}`;
+    }
     
     // Update KPIs
-    document.getElementById('kpi-revenue').textContent = serviceData.revenue;
-    document.getElementById('kpi-revenue-sub').textContent = serviceData.revenueSub;
-    document.getElementById('kpi-avg-revenue').textContent = serviceData.avgRevenue;
-    document.getElementById('kpi-weight').textContent = serviceData.weight;
-    document.getElementById('kpi-weight-per').textContent = serviceData.weightPer;
-    document.getElementById('kpi-cost-per-lb').textContent = serviceData.costPerLb;
+    if (document.getElementById('kpi-revenue')) {
+      document.getElementById('kpi-revenue').textContent = serviceData.revenue;
+      document.getElementById('kpi-revenue-sub').textContent = serviceData.revenueSub;
+      document.getElementById('kpi-avg-revenue').textContent = serviceData.avgRevenue;
+      document.getElementById('kpi-weight').textContent = serviceData.weight;
+      document.getElementById('kpi-weight-per').textContent = serviceData.weightPer;
+      document.getElementById('kpi-cost-per-lb').textContent = serviceData.costPerLb;
+    }
     
     // Update performance metrics - use SERVICE TYPE data if available
-    if (serviceData.ontime) {
+    if (serviceData.ontime && document.getElementById('perf-ontime')) {
       document.getElementById('perf-ontime').textContent = serviceData.ontime;
       document.getElementById('perf-ontime-sub').textContent = serviceData.ontimeSub;
       document.getElementById('perf-compliance').textContent = serviceData.compliance;
@@ -2669,7 +2673,7 @@
       document.getElementById('perf-compliance-sub-tab').textContent = serviceData.complianceSub;
       document.getElementById('perf-time-tab').textContent = serviceData.time;
       document.getElementById('perf-time-sub-tab').textContent = serviceData.timeSub;
-    } else {
+    } else if (document.getElementById('perf-ontime')) {
       // Fallback to parent data if service type doesn't have performance metrics
       document.getElementById('perf-ontime').textContent = data.ontime;
       document.getElementById('perf-ontime-sub').textContent = data.ontimeSub;
@@ -2724,23 +2728,27 @@
     }
     
     // Update implementation timeline (parent invoice timeline applies to all service types)
-    document.getElementById('timeline-immediate-action').textContent = data.timelineImmediate;
-    document.getElementById('timeline-immediate-savings').textContent = data.timelineImmediateSavings;
-    document.getElementById('timeline-shortterm-action').textContent = data.timelineShortterm;
-    document.getElementById('timeline-shortterm-savings').textContent = data.timelineShorttermSavings;
-    document.getElementById('timeline-mediumterm-action').textContent = data.timelineMediumterm;
-    document.getElementById('timeline-mediumterm-savings').textContent = data.timelineMediumtermSavings;
-    document.getElementById('timeline-longterm-action').textContent = data.timelineLongterm;
-    document.getElementById('timeline-longterm-savings').textContent = data.timelineLongtermSavings;
+    if (document.getElementById('timeline-immediate-action')) {
+      document.getElementById('timeline-immediate-action').textContent = data.timelineImmediate;
+      document.getElementById('timeline-immediate-savings').textContent = data.timelineImmediateSavings;
+      document.getElementById('timeline-shortterm-action').textContent = data.timelineShortterm;
+      document.getElementById('timeline-shortterm-savings').textContent = data.timelineShorttermSavings;
+      document.getElementById('timeline-mediumterm-action').textContent = data.timelineMediumterm;
+      document.getElementById('timeline-mediumterm-savings').textContent = data.timelineMediumtermSavings;
+      document.getElementById('timeline-longterm-action').textContent = data.timelineLongterm;
+      document.getElementById('timeline-longterm-savings').textContent = data.timelineLongtermSavings;
+    }
     
     // Update summary if available
     if (data.summaryDesc1) {
-      document.getElementById('summary-cost-desc').textContent = data.summaryDesc1;
-      document.getElementById('summary-volume-desc').textContent = data.summaryDesc2;
-      document.getElementById('summary-ops-desc').textContent = data.summaryDesc3;
-      document.getElementById('summary-risk-desc').textContent = data.summaryDesc4;
-      document.getElementById('summary-perf-desc').textContent = data.summaryDesc5;
-      document.getElementById('summary-impact-desc').textContent = data.summaryDesc6;
+      if (document.getElementById('summary-cost-desc')) {
+        document.getElementById('summary-cost-desc').textContent = data.summaryDesc1;
+        document.getElementById('summary-volume-desc').textContent = data.summaryDesc2;
+        document.getElementById('summary-ops-desc').textContent = data.summaryDesc3;
+        document.getElementById('summary-risk-desc').textContent = data.summaryDesc4;
+        document.getElementById('summary-perf-desc').textContent = data.summaryDesc5;
+        document.getElementById('summary-impact-desc').textContent = data.summaryDesc6;
+      }
     }
     
   }
