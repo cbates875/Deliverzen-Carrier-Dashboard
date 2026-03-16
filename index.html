@@ -2088,7 +2088,7 @@
     // Update Weight Analysis Table
     const weightTableBody = document.querySelector('#weight table tbody');
     if (weightTableBody) {
-      if (carrier === 'dhl' || carrier === 'dhl2' || carrier === 'dhl3') {
+      if (carrier === 'dhl' || carrier === 'dhl2' || carrier === 'dhl3' || carrier === 'dhl4') {
         const baseData = [
           {pc: 11945, pct: '52.3%', wt: 7850.25, avg: 0.66, rev: 45220.15, cpp: 3.79},
           {pc: 7421, pct: '32.5%', wt: 16845.30, avg: 2.27, rev: 52840.30, cpp: 7.12},
@@ -2137,6 +2137,28 @@
           {zone: 'USPS Zone 4', cpp: '$4.52', badge: 'yellow', badgeText: 'Medium', pc: 3450, pct: '9.9%'},
           {zone: 'USPS Zone 5', cpp: '$4.19', badge: 'yellow', badgeText: 'Medium', pc: 6840, pct: '29.9%'},
           {zone: 'USPS Zone 6', cpp: '$4.37', badge: 'red', badgeText: 'High', pc: 6285, pct: '29.0%'}
+        ];
+        costTableBody.innerHTML = baseData.map(d => `
+          <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
+        `).join('');
+      } else if (carrier === 'dhl3') {
+        const baseData = [
+          {zone: 'USPS Zone 7', cpp: '$2.15', badge: 'green', badgeText: 'Lowest', pc: 1080, pct: '4.2%'},
+          {zone: 'USPS Zone 3', cpp: '$2.96', badge: 'green', badgeText: 'Low', pc: 1420, pct: '5.5%'},
+          {zone: 'USPS Zone 4', cpp: '$4.28', badge: 'yellow', badgeText: 'Medium', pc: 2850, pct: '11.1%'},
+          {zone: 'USPS Zone 5', cpp: '$4.05', badge: 'yellow', badgeText: 'Medium', pc: 9280, pct: '36.0%'},
+          {zone: 'USPS Zone 6', cpp: '$4.42', badge: 'red', badgeText: 'High', pc: 9150, pct: '35.5%'}
+        ];
+        costTableBody.innerHTML = baseData.map(d => `
+          <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
+        `).join('');
+      } else if (carrier === 'dhl4') {
+        const baseData = [
+          {zone: 'USPS Zone 7', cpp: '$2.92', badge: 'green', badgeText: 'Lowest', pc: 682, pct: '3.8%'},
+          {zone: 'USPS Zone 3', cpp: '$3.48', badge: 'green', badgeText: 'Low', pc: 1035, pct: '5.8%'},
+          {zone: 'USPS Zone 4', cpp: '$5.28', badge: 'yellow', badgeText: 'Medium', pc: 2890, pct: '16.1%'},
+          {zone: 'USPS Zone 5', cpp: '$7.15', badge: 'yellow', badgeText: 'Medium-High', pc: 6850, pct: '38.2%'},
+          {zone: 'USPS Zone 6', cpp: '$9.42', badge: 'red', badgeText: 'High', pc: 6250, pct: '34.9%'}
         ];
         costTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
@@ -2190,12 +2212,19 @@
           <tr><td style="text-align: left;">Zone 3</td><td><span class="badge badge-green">97.9%</span></td><td><span class="badge badge-blue">100%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 5</td><td><span class="badge badge-green">98.2%</span></td><td><span class="badge badge-blue">100%</span></td><td>1.8</td><td>✓ Excellent</td></tr>
         `;
-      } else {
+      } else if (carrier === 'dhl3') {
         perfTableBody.innerHTML = `
-          <tr><td style="text-align: left;">Zone 1</td><td><span class="badge badge-green">96.4%</span></td><td><span class="badge badge-blue">100%</span></td><td>2.0</td><td>✓ Good</td></tr>
-          <tr><td style="text-align: left;">Zone 3</td><td><span class="badge badge-green">97.8%</span></td><td><span class="badge badge-blue">100%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
-          <tr><td style="text-align: left;">Zone 5</td><td><span class="badge badge-green">97.5%</span></td><td><span class="badge badge-blue">100%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
-          <tr><td style="text-align: left;">Zone 6</td><td><span class="badge badge-green">97.1%</span></td><td><span class="badge badge-blue">100%</span></td><td>2.4</td><td>✓ Good</td></tr>
+          <tr><td style="text-align: left;">USPS Zone 3</td><td><span class="badge badge-green">97.1%</span></td><td><span class="badge badge-blue">99.7%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
+          <tr><td style="text-align: left;">USPS Zone 4</td><td><span class="badge badge-green">97.2%</span></td><td><span class="badge badge-blue">99.7%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
+          <tr><td style="text-align: left;">USPS Zone 5</td><td><span class="badge badge-green">97.4%</span></td><td><span class="badge badge-blue">99.8%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
+          <tr><td style="text-align: left;">USPS Zone 6</td><td><span class="badge badge-green">97.6%</span></td><td><span class="badge badge-blue">99.7%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
+        `;
+      } else if (carrier === 'dhl4') {
+        perfTableBody.innerHTML = `
+          <tr><td style="text-align: left;">USPS Zone 3</td><td><span class="badge badge-green">97.6%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
+          <tr><td style="text-align: left;">USPS Zone 4</td><td><span class="badge badge-green">97.5%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
+          <tr><td style="text-align: left;">USPS Zone 5</td><td><span class="badge badge-green">97.3%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
+          <tr><td style="text-align: left;">USPS Zone 6</td><td><span class="badge badge-green">97.7%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.8</td><td>✓ Excellent</td></tr>
         `;
       }
     }
@@ -2234,12 +2263,22 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else {
+      } else if (carrier === 'dhl3') {
         const baseData = [
-          {zone: 'Zone 1', pc: 275, pct: '10.9%', wt: 679.50, avg: 2.47, rev: 1149.42, cpp: '$1.69', badge: 'green'},
-          {zone: 'Zone 3', pc: 371, pct: '14.8%', wt: 1101.25, avg: 2.97, rev: 1628.97, cpp: '$1.48', badge: 'green'},
-          {zone: 'Zone 5', pc: 841, pct: '33.5%', wt: 1458.75, avg: 1.73, rev: 4063.18, cpp: '$2.79', badge: 'yellow'},
-          {zone: 'Zone 6', pc: 533, pct: '21.2%', wt: 730.62, avg: 1.37, rev: 2455.93, cpp: '$3.36', badge: 'red'}
+          {zone: 'USPS Zone 5', pc: 9280, pct: '36.0%', wt: 15625.40, avg: 1.68, rev: 65428.75, cpp: '$4.05', badge: 'yellow'},
+          {zone: 'USPS Zone 6', pc: 9150, pct: '35.5%', wt: 17328.50, avg: 1.89, rev: 63892.45, cpp: '$4.42', badge: 'red'},
+          {zone: 'USPS Zone 4', pc: 2850, pct: '11.1%', wt: 3180.25, avg: 1.12, rev: 12185.40, cpp: '$4.28', badge: 'yellow'},
+          {zone: 'USPS Zone 3', pc: 1420, pct: '5.5%', wt: 1285.80, avg: 0.91, rev: 8245.60, cpp: '$2.96', badge: 'green'}
+        ];
+        zonesTableBody.innerHTML = baseData.map(d => `
+          <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
+        `).join('');
+      } else if (carrier === 'dhl4') {
+        const baseData = [
+          {zone: 'USPS Zone 5', pc: 6850, pct: '38.2%', wt: 12285.50, avg: 1.79, rev: 52845.60, cpp: '$7.15', badge: 'yellow'},
+          {zone: 'USPS Zone 6', pc: 6250, pct: '34.9%', wt: 12840.25, avg: 2.05, rev: 48956.80, cpp: '$9.42', badge: 'red'},
+          {zone: 'USPS Zone 4', pc: 2890, pct: '16.1%', wt: 3280.45, avg: 1.14, rev: 13825.40, cpp: '$5.28', badge: 'yellow'},
+          {zone: 'USPS Zone 3', pc: 1035, pct: '5.8%', wt: 824.35, avg: 0.80, rev: 5625.20, cpp: '$3.48', badge: 'green'}
         ];
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
@@ -2284,13 +2323,24 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else {
+      } else if (carrier === 'dhl3') {
         const baseData = [
-          {dest: 'DFW', pc: 401, pct: '15.9%', wt: 972.75, avg: 2.43, rev: 1693.88, cpp: '$1.74', badge: 'green'},
-          {dest: 'ORD', pc: 157, pct: '6.2%', wt: 289.06, avg: 1.84, rev: 766.39, cpp: '$2.65', badge: 'yellow'},
-          {dest: 'IAH', pc: 143, pct: '5.7%', wt: 317.94, avg: 2.22, rev: 609.36, cpp: '$1.92', badge: 'green'},
-          {dest: 'LAX', pc: 107, pct: '4.3%', wt: 122.37, avg: 1.14, rev: 476.47, cpp: '$3.89', badge: 'red'},
-          {dest: 'AUS', pc: 100, pct: '4.0%', wt: 491.50, avg: 4.92, rev: 475.71, cpp: '$0.97', badge: 'green'}
+          {dest: 'USPS Zone 5', pc: 9280, pct: '36.0%', wt: 15625.40, avg: 1.68, rev: 65428.75, cpp: '$4.05', badge: 'yellow'},
+          {dest: 'USPS Zone 6', pc: 9150, pct: '35.5%', wt: 17328.50, avg: 1.89, rev: 63892.45, cpp: '$4.42', badge: 'red'},
+          {dest: 'USPS Zone 4', pc: 2850, pct: '11.1%', wt: 3180.25, avg: 1.12, rev: 12185.40, cpp: '$4.28', badge: 'yellow'},
+          {dest: 'USPS Zone 3', pc: 1420, pct: '5.5%', wt: 1285.80, avg: 0.91, rev: 8245.60, cpp: '$2.96', badge: 'green'},
+          {dest: 'USPS Zone 7', pc: 1080, pct: '4.2%', wt: 985.45, avg: 0.91, rev: 4952.80, cpp: '$2.15', badge: 'green'}
+        ];
+        destTableBody.innerHTML = baseData.map(d => `
+          <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
+        `).join('');
+      } else if (carrier === 'dhl4') {
+        const baseData = [
+          {dest: 'USPS Zone 5', pc: 6850, pct: '38.2%', wt: 12285.50, avg: 1.79, rev: 52845.60, cpp: '$7.15', badge: 'yellow'},
+          {dest: 'USPS Zone 6', pc: 6250, pct: '34.9%', wt: 12840.25, avg: 2.05, rev: 48956.80, cpp: '$9.42', badge: 'red'},
+          {dest: 'USPS Zone 4', pc: 2890, pct: '16.1%', wt: 3280.45, avg: 1.14, rev: 13825.40, cpp: '$5.28', badge: 'yellow'},
+          {dest: 'USPS Zone 3', pc: 1035, pct: '5.8%', wt: 824.35, avg: 0.80, rev: 5625.20, cpp: '$3.48', badge: 'green'},
+          {dest: 'USPS Zone 7', pc: 682, pct: '3.8%', wt: 512.25, avg: 0.75, rev: 3284.15, cpp: '$2.92', badge: 'green'}
         ];
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
@@ -3007,59 +3057,70 @@
   function updateChartsForCarrier(carrier) {
     const isDHL = carrier.includes('dhl');
     const isUniUni = carrier.includes('uniuni');
+    const data = carrierData[carrier];
+    
+    if (!data) return;
     
     if (isDHL) {
-      // DHL eCommerce (both periods)
-      if (charts.dest) {
-        charts.dest.data.labels = ['USPS Zone 5', 'USPS Zone 6', 'USPS Zone 7', 'USPS Zone 4', 'USPS Zone 3', 'USPS Zone 1', 'USPS Zone 2', 'Canada'];
-        charts.dest.data.datasets[0].data = [6840, 6285, 4128, 3450, 1923, 128, 96, 100];
+      // Use data from carrier object for all DHL invoices
+      if (charts.dest && data.chartDestLabels) {
+        charts.dest.data.labels = data.chartDestLabels;
+        charts.dest.data.datasets[0].data = data.chartDestData;
         charts.dest.update();
       }
-      if (charts.zone) {
-        charts.zone.data.labels = ['USPS Zone 5', 'USPS Zone 6', 'USPS Zone 7', 'USPS Zone 4', 'USPS Zone 3'];
-        charts.zone.data.datasets[0].data = [6840, 6285, 4128, 3450, 1923];
+      if (charts.zone && data.chartZoneLabels) {
+        charts.zone.data.labels = data.chartZoneLabels;
+        charts.zone.data.datasets[0].data = data.chartZoneData;
         charts.zone.data.datasets[0].backgroundColor = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6'];
         charts.zone.update();
       }
-      if (charts.daily) {
-        charts.daily.data.labels = ['Feb 22', 'Feb 23', 'Feb 24', 'Feb 25', 'Feb 26', 'Feb 27'];
-        charts.daily.data.datasets[0].data = [4415, 6280, 5421, 3850, 2316, 352];
+      if (charts.daily && data.chartDailyLabels) {
+        charts.daily.data.labels = data.chartDailyLabels;
+        charts.daily.data.datasets[0].data = data.chartDailyData;
         charts.daily.update();
       }
-      if (charts.weightPie) {
-        charts.weightPie.data.labels = ['0-1 lbs (52.3%)', '1-3 lbs (32.5%)', '3-5 lbs (9.2%)', '5-10 lbs (4.8%)', '10+ lbs (1.2%)'];
-        charts.weightPie.data.datasets[0].data = [11945, 7421, 2102, 1095, 289];
+      if (charts.weightPie && data.chartWeightLabels) {
+        charts.weightPie.data.labels = data.chartWeightLabels;
+        charts.weightPie.data.datasets[0].data = data.chartWeightData;
         charts.weightPie.data.datasets[0].backgroundColor = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'];
         charts.weightPie.update();
       }
-      if (charts.perfOnTime) {
-        charts.perfOnTime.data.labels = ['Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'];
-        charts.perfOnTime.data.datasets[0].data = [96.8, 96.5, 97.1, 96.9, 97.2];
+      if (charts.perfOnTime && data.perfOnTimeByZone) {
+        charts.perfOnTime.data.labels = ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'];
+        charts.perfOnTime.data.datasets[0].data = data.perfOnTimeByZone;
         charts.perfOnTime.update();
       }
-      if (charts.perfDays) {
-        charts.perfDays.data.labels = ['Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'];
-        charts.perfDays.data.datasets[0].data = [2.1, 2.2, 2.1, 2.3, 1.9];
+      if (charts.perfDays && data.perfDaysByZone) {
+        charts.perfDays.data.labels = ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6', 'Zone 7'];
+        charts.perfDays.data.datasets[0].data = data.perfDaysByZone;
         charts.perfDays.update();
       }
       if (charts.zoneRev) {
         charts.zoneRev.data.labels = ['USPS Zone 3', 'USPS Zone 4', 'USPS Zone 5', 'USPS Zone 6', 'USPS Zone 7'];
-        charts.zoneRev.data.datasets[0].data = [9714.68, 15587.78, 52182.26, 51976.81, 20645.59];
+        if (carrier === 'dhl4') {
+          charts.zoneRev.data.datasets[0].data = [5625.20, 13825.40, 52845.60, 48956.80, 3284.15];
+        } else {
+          charts.zoneRev.data.datasets[0].data = [9714.68, 15587.78, 52182.26, 51976.81, 20645.59];
+        }
         charts.zoneRev.update();
       }
       if (charts.zoneWeight) {
         charts.zoneWeight.data.labels = ['USPS Zone 3', 'USPS Zone 4', 'USPS Zone 5', 'USPS Zone 6', 'USPS Zone 7'];
-        charts.zoneWeight.data.datasets[0].data = [0.95, 0.71, 1.82, 1.89, 2.02];
+        if (carrier === 'dhl4') {
+          charts.zoneWeight.data.datasets[0].data = [0.80, 1.14, 1.79, 2.05, 0.75];
+        } else {
+          charts.zoneWeight.data.datasets[0].data = [0.95, 0.71, 1.82, 1.89, 2.02];
+        }
         charts.zoneWeight.update();
       }
       if (charts.weightDist) {
-        charts.weightDist.data.labels = ['0-1 lbs', '1-3 lbs', '3-5 lbs', '5-10 lbs', '10+ lbs'];
-        charts.weightDist.data.datasets[0].data = [11945, 7421, 2102, 1095, 289];
+        charts.weightDist.data.labels = data.chartWeightLabels || ['0-1 lbs', '1-3 lbs', '3-5 lbs', '5-10 lbs', '10+ lbs'];
+        charts.weightDist.data.datasets[0].data = data.chartWeightData || [11945, 7421, 2102, 1095, 289];
         charts.weightDist.update();
       }
       if (charts.weightRev) {
-        charts.weightRev.data.labels = ['0-1 lbs', '1-3 lbs', '3-5 lbs', '5-10 lbs', '10+ lbs'];
-        charts.weightRev.data.datasets[0].data = [45220.15, 52840.30, 18645.20, 28890.50, 7608.71];
+        charts.weightRev.data.labels = data.chartWeightLabels || ['0-1 lbs', '1-3 lbs', '3-5 lbs', '5-10 lbs', '10+ lbs'];
+        charts.weightRev.data.datasets[0].data = data.chartWeightRevData || [45220.15, 52840.30, 18645.20, 28890.50, 7608.71];
         charts.weightRev.update();
       }
       
@@ -3067,12 +3128,20 @@
       if (charts.costDest) {
         charts.costDest.destroy();
         const costDestCtx = document.getElementById('costDestChart');
+        let costLabels, costData;
+        if (carrier === 'dhl4') {
+          costLabels = ['USPS Zone 5 ($7.15/lb)', 'USPS Zone 6 ($9.42/lb)', 'USPS Zone 4 ($5.28/lb)', 'USPS Zone 3 ($3.48/lb)', 'USPS Zone 7 ($2.92/lb)'];
+          costData = [38.2, 34.9, 16.1, 5.8, 3.8];
+        } else {
+          costLabels = ['USPS Zone 5 ($4.19/lb)', 'USPS Zone 6 ($4.37/lb)', 'USPS Zone 7 ($2.48/lb)', 'USPS Zone 4 ($4.52/lb)', 'USPS Zone 3 ($3.12/lb)'];
+          costData = [29.9, 29.0, 13.1, 9.9, 6.1];
+        }
         charts.costDest = new Chart(costDestCtx, {
           type: 'doughnut',
           data: {
-            labels: ['USPS Zone 5 ($4.19/lb)', 'USPS Zone 6 ($4.37/lb)', 'USPS Zone 7 ($2.48/lb)', 'USPS Zone 4 ($4.52/lb)', 'USPS Zone 3 ($3.12/lb)'],
+            labels: costLabels,
             datasets: [{
-              data: [29.9, 29.0, 13.1, 9.9, 6.1],
+              data: costData,
               backgroundColor: ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6']
             }]
           },
@@ -3082,12 +3151,20 @@
       if (charts.costZone) {
         charts.costZone.destroy();
         const costZoneCtx = document.getElementById('costZoneChart');
+        let costLabels, costData;
+        if (carrier === 'dhl4') {
+          costLabels = ['Zone 5 ($7.15/lb)', 'Zone 6 ($9.42/lb)', 'Zone 4 ($5.28/lb)', 'Zone 3 ($3.48/lb)', 'Zone 7 ($2.92/lb)'];
+          costData = [38.2, 34.9, 16.1, 5.8, 3.8];
+        } else {
+          costLabels = ['Zone 5 ($4.19/lb)', 'Zone 6 ($4.37/lb)', 'Zone 7 ($2.48/lb)', 'Zone 4 ($4.52/lb)', 'Zone 3 ($3.12/lb)'];
+          costData = [29.9, 29.0, 13.1, 9.9, 6.1];
+        }
         charts.costZone = new Chart(costZoneCtx, {
           type: 'doughnut',
           data: {
-            labels: ['Zone 5 ($4.19/lb)', 'Zone 6 ($4.37/lb)', 'Zone 7 ($2.48/lb)', 'Zone 4 ($4.52/lb)', 'Zone 3 ($3.12/lb)'],
+            labels: costLabels,
             datasets: [{
-              data: [29.9, 29.0, 13.1, 9.9, 6.1],
+              data: costData,
               backgroundColor: ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6']
             }]
           },
