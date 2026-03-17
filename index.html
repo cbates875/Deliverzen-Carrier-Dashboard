@@ -161,6 +161,21 @@
       <div class="kpi-value" id="kpi-cost-per-lb">$2.33</div>
       <div class="kpi-sub">Revenue/lb metric</div>
     </div>
+    <div class="kpi-card" style="border-left-color: #ec4899;">
+      <div class="kpi-label">Accessorial Charges</div>
+      <div class="kpi-value" id="kpi-accessorial-count">0</div>
+      <div class="kpi-sub" id="kpi-accessorial-sub">Charges applied</div>
+    </div>
+    <div class="kpi-card" style="border-left-color: #f97316;">
+      <div class="kpi-label">Total Accessorial Cost</div>
+      <div class="kpi-value" id="kpi-accessorial-total">$0.00</div>
+      <div class="kpi-sub">All charges combined</div>
+    </div>
+    <div class="kpi-card" style="border-left-color: #06b6d4;">
+      <div class="kpi-label">Avg Accessorial Cost</div>
+      <div class="kpi-value" id="kpi-accessorial-avg">$0.00</div>
+      <div class="kpi-sub">Per accessorial charge</div>
+    </div>
   </div>
 
   <h2 class="section-title">Shipping Performance Metrics</h2>
@@ -745,7 +760,9 @@
       weight: '4938.68 lbs',
       weightPer: '1.96 lbs',
       costPerLb: '$2.33',
-      ontime: '97.2%',
+      accessorialCount: 156,
+      accessorialTotal: '$892.45',
+      accessorialAvg: '$5.72',
       ontimeSub: '2,442 of 2,514 shipments delivered on time',
       compliance: '100%',
       complianceSub: 'All shipments completed successfully',
@@ -843,6 +860,9 @@
       weight: '7976.42 lbs',
       weightPer: '0.35 lbs',
       costPerLb: '$20.25',
+      accessorialCount: 412,
+      accessorialTotal: '$3,287.45',
+      accessorialAvg: '$7.98',
       ontime: '96.8%',
       ontimeSub: '22,116 of 22,852 shipments delivered on time',
       compliance: '99.8%',
@@ -1121,6 +1141,9 @@
       weight: '4007.50 lbs',
       weightPer: '0.32 lbs',
       costPerLb: '$26.38',
+      accessorialCount: 289,
+      accessorialTotal: '$2,145.63',
+      accessorialAvg: '$7.42',
       ontime: '97.8%',
       ontimeSub: '12,092 of 12,351 shipments delivered on time',
       compliance: '99.8%',
@@ -1393,6 +1416,9 @@
       weight: '1847.32 lbs',
       weightPer: '0.57 lbs',
       costPerLb: '$7.88',
+      accessorialCount: 198,
+      accessorialTotal: '$1,245.67',
+      accessorialAvg: '$6.29',
       ontime: '98.1%',
       ontimeSub: '3,202 of 3,265 shipments delivered on time',
       compliance: '99.8%',
@@ -1485,6 +1511,9 @@
       weight: '8402.48 lbs',
       weightPer: '0.33 lbs',
       costPerLb: '$21.16',
+      accessorialCount: 356,
+      accessorialTotal: '$2,856.92',
+      accessorialAvg: '$8.03',
       ontime: '97.3%',
       ontimeSub: '25,030 of 25,727 shipments delivered on time',
       compliance: '99.7%',
@@ -1749,6 +1778,9 @@
       weight: '15545.98 lbs',
       weightPer: '0.87 lbs',
       costPerLb: '$8.18',
+      accessorialCount: 487,
+      accessorialTotal: '$4,125.80',
+      accessorialAvg: '$8.47',
       ontime: '97.5%',
       ontimeSub: '17,472 of 17,907 shipments delivered on time',
       compliance: '99.8%',
@@ -1841,6 +1873,9 @@
           weight: '9452.62 lbs',
           weightPer: '0.73 lbs',
           costPerLb: '$8.94',
+          accessorialCount: 198,
+          accessorialTotal: '$1,642.35',
+          accessorialAvg: '$8.29',
           ontime: '97.6%',
           ontimeSub: '12,640 of 12,965 shipments delivered on time',
           compliance: '99.9%',
@@ -1893,6 +1928,9 @@
           weight: '5832.25 lbs',
           weightPer: '1.20 lbs',
           costPerLb: '$7.13',
+          accessorialCount: 215,
+          accessorialTotal: '$1,876.45',
+          accessorialAvg: '$8.73',
           ontime: '97.3%',
           ontimeSub: '4,728 of 4,862 shipments delivered on time',
           compliance: '99.7%',
@@ -1945,6 +1983,9 @@
           weight: '261.10 lbs',
           weightPer: '3.26 lbs',
           costPerLb: '$3.55',
+          accessorialCount: 74,
+          accessorialTotal: '$606.00',
+          accessorialAvg: '$8.19',
           ontime: '96.3%',
           ontimeSub: '77 of 80 shipments delivered on time',
           compliance: '98.8%',
@@ -1999,6 +2040,9 @@
       weight: '16639.71 lbs',
       weightPer: '6.79 lbs',
       costPerLb: '$0.67',
+      accessorialCount: 142,
+      accessorialTotal: '$756.38',
+      accessorialAvg: '$5.33',
       ontime: '98.2%',
       ontimeSub: '2,410 of 2,451 shipments delivered on time',
       compliance: '99.6%',
@@ -2800,6 +2844,15 @@
     document.getElementById('kpi-weight').textContent = finalData.weight;
     document.getElementById('kpi-weight-per').textContent = finalData.weightPer;
     document.getElementById('kpi-cost-per-lb').textContent = finalData.costPerLb;
+    
+    // Update accessorial charges KPIs
+    if (data.accessorialCount) {
+      document.getElementById('kpi-accessorial-count').textContent = data.accessorialCount.toLocaleString();
+      document.getElementById('kpi-accessorial-sub').textContent = 'Charges applied';
+      document.getElementById('kpi-accessorial-total').textContent = data.accessorialTotal;
+      document.getElementById('kpi-accessorial-avg').textContent = data.accessorialAvg;
+    }
+    
     document.getElementById('perf-ontime').textContent = data.perfOnTimeOverall.toFixed(1) + '%';
     document.getElementById('perf-ontime-sub').textContent = Math.round(data.perfOnTimeCount * multiplier).toLocaleString() + ' of ' + Math.round(data.perfOnTimeTotal * multiplier).toLocaleString() + ' shipments delivered on time';
     document.getElementById('perf-compliance').textContent = data.compliance;
@@ -2958,6 +3011,13 @@
       document.getElementById('kpi-weight').textContent = serviceData.weight;
       document.getElementById('kpi-weight-per').textContent = serviceData.weightPer;
       document.getElementById('kpi-cost-per-lb').textContent = serviceData.costPerLb;
+      
+      // Update accessorial charges KPIs if available
+      if (serviceData.accessorialCount) {
+        document.getElementById('kpi-accessorial-count').textContent = serviceData.accessorialCount.toLocaleString();
+        document.getElementById('kpi-accessorial-total').textContent = serviceData.accessorialTotal;
+        document.getElementById('kpi-accessorial-avg').textContent = serviceData.accessorialAvg;
+      }
     }
     
     // Update performance metrics - use SERVICE TYPE data if available
