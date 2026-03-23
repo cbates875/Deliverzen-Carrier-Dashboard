@@ -2300,6 +2300,8 @@
       complianceSub: '14,041 of 14,126 shipments completed successfully',
       time: '2.0 days',
       timeSub: 'Induction to shipment average',
+      perfOnTimeOverall: 97.2,
+      perfDaysOverall: 2.0,
       peakDate: 'Mar 16',
       peakDateSub: '3,485 shipments (24.7%)',
       topDest: 'Mixed (Multi-Zone)',
@@ -2333,24 +2335,24 @@
       opt4Impl: 'Volume provides leverage for tiered rate negotiations',
       opt4Action: 'Action: Lock in volume commitments for consistent pricing',
       summaryTitle1: 'Cost Structure Analysis',
-      summaryDesc1: 'High cost per pound ($21.65) reflects expedited (45%) and international (0.5%) service mix. Shifting 30% of volume to ground service could reduce costs by $3,500-5,200/month. Service mix optimization is the primary lever.',
-      summaryTitle2: 'Service Mix Composition',
-      summaryDesc2: 'Ground service: 73.9% (10,441 shipments) | Expedited: 25.3% (3,575 shipments) | International: 0.8% (110 shipments). Current mix aligns with market; rebalancing toward ground would improve unit economics.',
-      summaryTitle3: 'Operational Performance',
-      summaryDesc3: 'On-time delivery at 97.2% maintained despite mixed service types and light weights. Processing time of 2.0 days supports next-day delivery standards. Compliance at 99.4% shows reliable execution.',
-      summaryTitle4: 'Accessorial Charges Impact',
-      summaryDesc4: 'Fuel surcharges represent 4.6% of total invoice ($5,584.13). Dangerous goods charges minimal ($42.66). Negotiating fuel charge caps or fixed tiers could yield $500-800/month savings.',
-      summaryTitle5: 'Market Positioning',
-      summaryDesc5: 'No single destination concentration provides route flexibility. Domestic focus (92.8%) supports consolidation. International segment (0.8%) underdeveloped—growth opportunity or strategic fit question.',
+      summaryDesc1: 'Invoice #21968253 totals $121,770.47 across 14,126 shipments with average cost of $8.62/shipment. High cost per pound ($21.65/lb) driven by expedited (25.3%) and international (0.8%) services. Ground service represents 73.9% of volume at lower unit cost. Fuel surcharges ($5,584.13, 4.6% of invoice) are primary accessorial driver.',
+      summaryTitle2: 'Performance Excellence',
+      summaryDesc2: 'On-time delivery of 97.2% (13,714 of 14,126) with service compliance at 99.4% (14,041 of 14,126) demonstrates strong operational execution. Average processing time of 2.0 days supports next-day delivery standards. Performance maintains consistency across all service types despite light average weight of 0.40 lbs per shipment.',
+      summaryTitle3: 'Service Mix & Volume Distribution',
+      summaryDesc3: 'Peak day (Mar 16) handled 3,485 shipments (24.7% of weekly volume). No single destination concentration (USA Domestic: 92.8%, Canada: 6.2%, International: 1.0%) provides route flexibility. Week shows balanced mid-week spike pattern, ideal for volume-based rate negotiations and consolidation planning.',
+      summaryTitle4: 'Accessorial Charges & Fuel Impact',
+      summaryDesc4: 'Fuel surcharges dominate accessorial costs at $5,584.13 (99.2% of $5,626.79 total). Dangerous goods charges minimal at $42.66. Fuel represents 4.6% of total invoice—primary optimization target. Securing fuel surcharge cap or fixed tier could yield $500-800/month savings across 14,126 shipment volume.',
+      summaryTitle5: 'Optimization Opportunities',
+      summaryDesc5: 'Shifting 30% of volume from expedited to ground service could reduce costs by $3,500-5,200/month. Encouraging shipment consolidation from 0.40 lbs to 0.50-0.75 lbs average could improve margins 2-3%. Combined service mix optimization and fuel surcharge negotiations offer 15-22% cost reduction potential ($18,000-26,500/month).',
       summaryTitle6: 'Strategic Recommendations',
-      summaryDesc6: 'Primary focus: Service mix optimization (ground expansion) for 3-6% cost reduction. Secondary: Fuel surcharge negotiation (1-2% reduction). Combined impact: 15-22% cost reduction potential ($18,000-26,500/month) with balanced service maintenance.',
-      timelineImmediate: 'Analyze ground service ROI; request fuel surcharge cap',
-      timelineImmediateSavings: '$1,200-1,800/mo',
-      timelineShortterm: 'Negotiate tiered volume rates for ground service',
+      summaryDesc6: 'Immediate actions: (1) Negotiate fuel surcharge cap in contract renewal ($500-800/mo savings); (2) Analyze ground service ROI for 30% volume shift ($3,500-5,200/mo savings); (3) Implement customer consolidation incentives. Medium-term: Rebalance service mix toward ground (45% target). Long-term: Develop multi-carrier ground strategy with tiered volume commitments for 8-12% monthly savings.',
+      timelineImmediate: 'Lock fuel surcharge cap; evaluate ground service expansion',
+      timelineImmediateSavings: '$500-800/mo',
+      timelineShortterm: 'Negotiate tiered volume rates; implement consolidation',
       timelineShorttermSavings: '$2,000-3,200/mo',
-      timelineMediumterm: 'Implement service mix rebalancing; expand ground to 45%',
+      timelineMediumterm: 'Shift 30% to ground; optimize service mix',
       timelineMediumtermSavings: '$3,500-5,200/mo',
-      timelineLongterm: 'Full portfolio optimization; multi-carrier ground strategy',
+      timelineLongterm: 'Multi-carrier portfolio with ground primary',
       timelineLongtermSavings: '$8,000-12,000/mo',
       // Chart data for DHL Invoice 5 (Mar 15-21)
       chartDestLabels: ['Domestic USA', 'Canada', 'International Other', 'Mexico', 'UK', 'EU Countries', 'APACs', 'Other'],
@@ -2798,6 +2800,12 @@
           <tr><td style="text-align: left;">USPS Zone 5</td><td><span class="badge badge-green">97.3%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 6</td><td><span class="badge badge-green">97.7%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.8</td><td>✓ Excellent</td></tr>
         `;
+      } else if (carrier === 'dhl5') {
+        perfTableBody.innerHTML = `
+          <tr><td style="text-align: left;">Domestic USA</td><td><span class="badge badge-green">97.2%</span></td><td><span class="badge badge-blue">99.4%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
+          <tr><td style="text-align: left;">Canada</td><td><span class="badge badge-green">96.8%</span></td><td><span class="badge badge-blue">99.1%</span></td><td>2.2</td><td>✓ Good</td></tr>
+          <tr><td style="text-align: left;">International</td><td><span class="badge badge-green">97.5%</span></td><td><span class="badge badge-blue">99.5%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
+        `;
       } else if (carrier === 'uniuni4') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">Zone 1</td><td><span class="badge badge-green">98.0%</span></td><td><span class="badge badge-blue">99.3%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
@@ -2858,6 +2866,15 @@
           {zone: 'USPS Zone 6', pc: 6250, pct: '34.9%', wt: 12840.25, avg: 2.05, rev: 48956.80, cpp: '$9.42', badge: 'red'},
           {zone: 'USPS Zone 4', pc: 2890, pct: '16.1%', wt: 3280.45, avg: 1.14, rev: 13825.40, cpp: '$5.28', badge: 'yellow'},
           {zone: 'USPS Zone 3', pc: 1035, pct: '5.8%', wt: 824.35, avg: 0.80, rev: 5625.20, cpp: '$3.48', badge: 'green'}
+        ];
+        zonesTableBody.innerHTML = baseData.map(d => `
+          <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
+        `).join('');
+      } else if (carrier === 'dhl5') {
+        const baseData = [
+          {zone: 'Domestic USA', pc: 13107, pct: '92.8%', wt: 5245.12, avg: 0.40, rev: 113425.50, cpp: '$21.61', badge: 'red'},
+          {zone: 'Canada', pc: 876, pct: '6.2%', wt: 351.24, avg: 0.40, rev: 8945.32, cpp: '$25.48', badge: 'red'},
+          {zone: 'International', pc: 143, pct: '1.0%', wt: 27.43, avg: 0.19, rev: 1399.65, cpp: '$51.06', badge: 'red'}
         ];
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
@@ -2962,6 +2979,15 @@
           {dest: 'USPS Zone 4', pc: 2890, pct: '16.1%', wt: 3280.45, avg: 1.14, rev: 13825.40, cpp: '$5.28', badge: 'yellow'},
           {dest: 'USPS Zone 3', pc: 1035, pct: '5.8%', wt: 824.35, avg: 0.80, rev: 5625.20, cpp: '$3.48', badge: 'green'},
           {dest: 'USPS Zone 7', pc: 682, pct: '3.8%', wt: 512.25, avg: 0.75, rev: 3284.15, cpp: '$2.92', badge: 'green'}
+        ];
+        destTableBody.innerHTML = baseData.map(d => `
+          <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
+        `).join('');
+      } else if (carrier === 'dhl5') {
+        const baseData = [
+          {dest: 'Domestic USA', pc: 13107, pct: '92.8%', wt: 5245.12, avg: 0.40, rev: 113425.50, cpp: '$21.61', badge: 'red'},
+          {dest: 'Canada', pc: 876, pct: '6.2%', wt: 351.24, avg: 0.40, rev: 8945.32, cpp: '$25.48', badge: 'red'},
+          {dest: 'International', pc: 143, pct: '1.0%', wt: 27.43, avg: 0.19, rev: 1399.65, cpp: '$51.06', badge: 'red'}
         ];
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
@@ -3763,6 +3789,9 @@
         charts.zoneRev.data.labels = ['USPS Zone 3', 'USPS Zone 4', 'USPS Zone 5', 'USPS Zone 6', 'USPS Zone 7'];
         if (carrier === 'dhl4') {
           charts.zoneRev.data.datasets[0].data = [5625.20, 13825.40, 52845.60, 48956.80, 3284.15];
+        } else if (carrier === 'dhl5') {
+          charts.zoneRev.data.labels = ['Domestic USA', 'Canada', 'International'];
+          charts.zoneRev.data.datasets[0].data = [113425.50, 8945.32, 1399.65];
         } else {
           charts.zoneRev.data.datasets[0].data = [9714.68, 15587.78, 52182.26, 51976.81, 20645.59];
         }
@@ -3772,6 +3801,9 @@
         charts.zoneWeight.data.labels = ['USPS Zone 3', 'USPS Zone 4', 'USPS Zone 5', 'USPS Zone 6', 'USPS Zone 7'];
         if (carrier === 'dhl4') {
           charts.zoneWeight.data.datasets[0].data = [0.80, 1.14, 1.79, 2.05, 0.75];
+        } else if (carrier === 'dhl5') {
+          charts.zoneWeight.data.labels = ['Domestic USA', 'Canada', 'International'];
+          charts.zoneWeight.data.datasets[0].data = [0.40, 0.40, 0.19];
         } else {
           charts.zoneWeight.data.datasets[0].data = [0.95, 0.71, 1.82, 1.89, 2.02];
         }
@@ -3796,6 +3828,9 @@
         if (carrier === 'dhl4') {
           costLabels = ['USPS Zone 5 ($7.15/lb)', 'USPS Zone 6 ($9.42/lb)', 'USPS Zone 4 ($5.28/lb)', 'USPS Zone 3 ($3.48/lb)', 'USPS Zone 7 ($2.92/lb)'];
           costData = [38.2, 34.9, 16.1, 5.8, 3.8];
+        } else if (carrier === 'dhl5') {
+          costLabels = ['Domestic USA ($21.61/lb)', 'Canada ($25.48/lb)', 'International ($51.06/lb)'];
+          costData = [92.8, 6.2, 1.0];
         } else {
           costLabels = ['USPS Zone 5 ($4.19/lb)', 'USPS Zone 6 ($4.37/lb)', 'USPS Zone 7 ($2.48/lb)', 'USPS Zone 4 ($4.52/lb)', 'USPS Zone 3 ($3.12/lb)'];
           costData = [29.9, 29.0, 13.1, 9.9, 6.1];
@@ -3819,6 +3854,9 @@
         if (carrier === 'dhl4') {
           costLabels = ['Zone 5 ($7.15/lb)', 'Zone 6 ($9.42/lb)', 'Zone 4 ($5.28/lb)', 'Zone 3 ($3.48/lb)', 'Zone 7 ($2.92/lb)'];
           costData = [38.2, 34.9, 16.1, 5.8, 3.8];
+        } else if (carrier === 'dhl5') {
+          costLabels = ['Domestic USA ($21.61/lb)', 'Canada ($25.48/lb)', 'International ($51.06/lb)'];
+          costData = [92.8, 6.2, 1.0];
         } else {
           costLabels = ['Zone 5 ($4.19/lb)', 'Zone 6 ($4.37/lb)', 'Zone 7 ($2.48/lb)', 'Zone 4 ($4.52/lb)', 'Zone 3 ($3.12/lb)'];
           costData = [29.9, 29.0, 13.1, 9.9, 6.1];
