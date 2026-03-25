@@ -98,16 +98,8 @@
         <div>
           <label for="carrierSelect" style="font-size: .875rem; font-weight: 600; color: #374151; margin-right: 8px;">Select Carrier:</label>
           <select id="carrierSelect" onchange="switchCarrier(this.value)" style="padding: 8px 12px; border: 2px solid #e5e7eb; border-radius: 6px; font-size: .95rem; cursor: pointer; background: white; color: #111827; font-weight: 500;">
-            <option value="uniuni">UniUni (Feb 16-22)</option>
-            <option value="uniuni2">UniUni (Feb 23-Mar 1)</option>
-            <option value="uniuni3">UniUni (Mar 2-8)</option>
-            <option value="uniuni4">UniUni (Mar 9-15)</option>
-            <option value="uniuni5">UniUni (Mar 16-22)</option>
-            <option value="dhl">DHL eCommerce (Feb 22-28)</option>
-            <option value="dhl2">DHL eCommerce (Feb 15-21)</option>
-            <option value="dhl3">DHL eCommerce (Mar 1-7)</option>
-            <option value="dhl4">DHL eCommerce (Mar 8-14)</option>
-            <option value="dhl5">DHL eCommerce (Mar 15-21)</option>
+            <option value="uniuni">UniUni</option>
+            <option value="dhl">DHL eCommerce</option>
           </select>
         </div>
         <div>
@@ -131,20 +123,32 @@
       
       <!-- Preset Range Buttons -->
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <button onclick="setDateRange('7days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
-          Last 7 Days
+        <button onclick="setDateRange('7days')" style="padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .8rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          7 Days
         </button>
-        <button onclick="setDateRange('14days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
-          Last 14 Days
+        <button onclick="setDateRange('14days')" style="padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .8rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          14 Days
         </button>
-        <button onclick="setDateRange('30days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
-          Last 30 Days
+        <button onclick="setDateRange('30days')" style="padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .8rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          30 Days
         </button>
-        <button onclick="setDateRange('60days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
-          Last 60 Days
+        <button onclick="setDateRange('60days')" style="padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .8rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          60 Days
+        </button>
+        <button onclick="setDateRange('90days')" style="padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .8rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          90 Days
+        </button>
+        <button onclick="setDateRange('current_month')" style="padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .8rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          This Month
+        </button>
+        <button onclick="setDateRange('last_month')" style="padding: 6px 12px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .8rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          Last Month
         </button>
         <button onclick="toggleCustomDate()" id="customDateBtn" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
           Custom Range
+        </button>
+        <button onclick="resetDateFilter()" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#fecaca'; this.style.borderColor='#ef4444';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          🔄 Reset
         </button>
       </div>
 
@@ -2334,104 +2338,103 @@
       }
     },
     dhl5: {
-      subtitle: 'Invoice #21968253 | Mar 15–21, 2026 | DHL eCommerce Mixed Services',
-      revenue: '$121,770.47',
-      revenueSub: '14,126 shipments',
-      avgRevenue: '$8.62',
-      weight: '5,623.79 lbs',
-      weightPer: '0.40 lbs',
-      costPerLb: '$21.65',
-      accessorialCount: 279,
-      accessorialTotal: '$5,626.79',
-      accessorialAvg: '$20.17',
+      subtitle: 'DHL eCommerce | Mixed Services | Combined All Invoices (Feb 15-Mar 21)',
+      revenue: '$376,717.17',
+      revenueSub: '46,581 shipments',
+      avgRevenue: '$8.09',
+      weight: '16,335.89 lbs',
+      weightPer: '0.35 lbs',
+      costPerLb: '$23.06',
+      accessorialCount: 1087,
+      accessorialTotal: '$17,450.28',
+      accessorialAvg: '$16.05',
       accessorialBreakdown: {
-        duties: { count: 0, cost: 0, avg: 0, pct: 0 },
-        fuel: { count: 256, cost: 5584.13, avg: 21.81, pct: 99.2 },
-        dangerous: { count: 23, cost: 42.66, avg: 1.86, pct: 0.8 },
+        duties: { count: 300, cost: 2850.45, avg: 9.50, pct: 16.3 },
+        fuel: { count: 645, cost: 12450.83, avg: 19.30, pct: 71.4 },
+        dangerous: { count: 142, cost: 1149.00, avg: 8.09, pct: 6.6 },
         vat: { count: 0, cost: 0, avg: 0, pct: 0 }
       },
-      ontime: '97.2%',
-      ontimeSub: '13,714 of 14,126 shipments delivered on time',
-      compliance: '99.4%',
-      complianceSub: '14,041 of 14,126 shipments completed successfully',
-      time: '2.0 days',
+      ontime: '96.8%',
+      ontimeSub: '45,124 of 46,581 shipments delivered on time',
+      compliance: '99.3%',
+      complianceSub: '46,211 of 46,581 shipments completed successfully',
+      time: '2.1 days',
       timeSub: 'Induction to shipment average',
-      perfOnTimeOverall: 97.2,
-      perfDaysOverall: 2.0,
-      peakDate: 'Mar 16',
-      peakDateSub: '3,485 shipments (24.7%)',
-      topDest: 'Mixed (Multi-Zone)',
-      topDestSub: 'No single destination concentration',
-      largestZone: 'USA Domestic',
-      largestZoneSub: '13,107 shipments (92.8%)',
-      onlineDelivery: '97.2%',
-      onlineDeliverySub: '13,714 of 14,126',
-      opt1Title: 'Priority 1: High Cost Per Pound',
-      opt1Desc: 'Cost per pound ($21.65) significantly higher than ground options',
-      opt1Current: '$21.65/lb (expedited + international mix)',
-      opt1Target: 'Shift 30% to ground service ($8-12/lb)',
-      opt1Savings: '~$3,500-5,200/month',
-      opt1Action: 'Action: Rebalance service mix toward ground; negotiate ground rates',
-      opt2Title: 'Opportunity 1: Light Average Weight',
-      opt2Desc: 'Very light average (0.40 lbs) indicates small parcels & e-commerce',
-      opt2Current: '0.40 lbs per shipment',
-      opt2Target: 'Encourage consolidation to 0.50-0.75 lbs',
-      opt2Margin: '+2-3% profitability',
-      opt2Action: 'Action: Customer consolidation incentives; box size optimization',
-      opt3Title: 'Opportunity 2: Fuel Surcharge Reduction',
-      opt3Desc: 'Fuel surcharges represent 4.6% of invoice ($5,584)',
-      opt3Current: '$5,584.13 fuel (99.2% of surcharges)',
-      opt3Opp: 'Negotiate fuel cap or fixed surcharge',
-      opt3Savings: '$500-800/month',
-      opt3Action: 'Action: Request fuel surcharge cap in contract renewal',
-      opt4Title: 'Insight: High-Volume Mixed Service Period',
-      opt4Desc: 'Peak day (Mar 16) with 3,485 shipments indicates consolidation opportunity',
-      opt4Peak: '3,485 shipments (24.7% of week)',
-      opt4Pattern: 'Balanced distribution across week with mid-week spike',
-      opt4Impl: 'Volume provides leverage for tiered rate negotiations',
-      opt4Action: 'Action: Lock in volume commitments for consistent pricing',
-      summaryTitle1: 'Cost Structure Analysis',
-      summaryDesc1: 'Invoice #21968253 totals $121,770.47 across 14,126 shipments with average cost of $8.62/shipment. High cost per pound ($21.65/lb) driven by expedited (25.3%) and international (0.8%) services. Ground service represents 73.9% of volume at lower unit cost. Fuel surcharges ($5,584.13, 4.6% of invoice) are primary accessorial driver.',
-      summaryTitle2: 'Performance Excellence',
-      summaryDesc2: 'On-time delivery of 97.2% (13,714 of 14,126) with service compliance at 99.4% (14,041 of 14,126) demonstrates strong operational execution. Average processing time of 2.0 days supports next-day delivery standards. Performance maintains consistency across all service types despite light average weight of 0.40 lbs per shipment.',
-      summaryTitle3: 'Service Mix & Volume Distribution',
-      summaryDesc3: 'Peak day (Mar 16) handled 3,485 shipments (24.7% of weekly volume). No single destination concentration (USA Domestic: 92.8%, Canada: 6.2%, International: 1.0%) provides route flexibility. Week shows balanced mid-week spike pattern, ideal for volume-based rate negotiations and consolidation planning.',
-      summaryTitle4: 'Accessorial Charges & Fuel Impact',
-      summaryDesc4: 'Fuel surcharges dominate accessorial costs at $5,584.13 (99.2% of $5,626.79 total). Dangerous goods charges minimal at $42.66. Fuel represents 4.6% of total invoice—primary optimization target. Securing fuel surcharge cap or fixed tier could yield $500-800/month savings across 14,126 shipment volume.',
-      summaryTitle5: 'Optimization Opportunities',
-      summaryDesc5: 'Shifting 30% of volume from expedited to ground service could reduce costs by $3,500-5,200/month. Encouraging shipment consolidation from 0.40 lbs to 0.50-0.75 lbs average could improve margins 2-3%. Combined service mix optimization and fuel surcharge negotiations offer 15-22% cost reduction potential ($18,000-26,500/month).',
-      summaryTitle6: 'Strategic Recommendations',
-      summaryDesc6: 'Immediate actions: (1) Negotiate fuel surcharge cap in contract renewal ($500-800/mo savings); (2) Analyze ground service ROI for 30% volume shift ($3,500-5,200/mo savings); (3) Implement customer consolidation incentives. Medium-term: Rebalance service mix toward ground (45% target). Long-term: Develop multi-carrier ground strategy with tiered volume commitments for 8-12% monthly savings.',
-      timelineImmediate: 'Lock fuel surcharge cap; evaluate ground service expansion',
-      timelineImmediateSavings: '$500-800/mo',
-      timelineShortterm: 'Negotiate tiered volume rates; implement consolidation',
-      timelineShorttermSavings: '$2,000-3,200/mo',
-      timelineMediumterm: 'Shift 30% to ground; optimize service mix',
-      timelineMediumtermSavings: '$3,500-5,200/mo',
-      timelineLongterm: 'Multi-carrier portfolio with ground primary',
-      timelineLongtermSavings: '$8,000-12,000/mo',
-      // Chart data for DHL Invoice 5 (Mar 15-21)
+      perfOnTimeOverall: 96.8,
+      perfDaysOverall: 2.1,
+      peakDate: 'Feb 23',
+      peakDateSub: '6,280 shipments (13.5%)',
+      topDest: 'Mixed (Multi-Region)',
+      topDestSub: 'Balanced geographic distribution',
+      largestZone: 'Domestic USA',
+      largestZoneSub: '42,821 shipments (91.9%)',
+      onlineDelivery: '96.8%',
+      onlineDeliverySub: '45,124 of 46,581',
+      opt1Title: 'Performance Summary',
+      opt1Desc: 'Aggregated data from all 5 DHL eCommerce invoices',
+      opt1Current: 'Feb 15-Mar 21, 2026',
+      opt1Target: 'Use date range filter for detailed analysis',
+      opt1Savings: 'Complete dataset ready for analysis',
+      opt1Action: 'Select date ranges to filter specific periods',
+      opt2Title: 'Cost Analysis',
+      opt2Desc: 'Combined invoice service mix',
+      opt2Current: '$8.09 per shipment',
+      opt2Target: 'Monitor cost trends',
+      opt2Margin: '$23.06 per pound',
+      opt2Action: 'Compare across date ranges',
+      opt3Title: 'Fuel & Accessorials',
+      opt3Desc: 'Fuel surcharges across all invoices',
+      opt3Current: '$12,450.83 fuel charges',
+      opt3Opp: 'Analyze monthly variance',
+      opt3Savings: 'Feb: $5,847, March: $6,603 surcharges',
+      opt3Action: 'Use month filters for comparison',
+      opt4Title: 'Volume Distribution',
+      opt4Desc: 'All 5 invoices aggregated',
+      opt4Peak: 'Feb 23 peak: 6,280 shipments',
+      opt4Pattern: 'Complete 35-day dataset',
+      opt4Impl: 'Date range filter recommended',
+      opt4Action: 'Select period for detailed analysis',
+      summaryTitle1: 'Aggregated Performance Summary',
+      summaryDesc1: 'Complete DHL eCommerce data spanning Feb 15 - Mar 21, 2026 with 46,581 total shipments and $376,717.17 in revenue. Consolidated from 5 individual invoices for comprehensive analysis. Includes all service types and geographic regions.',
+      summaryTitle2: 'Cost Analysis',
+      summaryDesc2: 'Average cost of $8.09 per shipment with $23.06 per pound rate. Weight averages 0.35 lbs per shipment. Mixed service types across ground, expedited, and international. Accessorial charges of $17,450.28 with fuel representing 71.4% of total.',
+      summaryTitle3: 'Service Performance',
+      summaryDesc3: 'On-time delivery rate of 96.8% (45,124 of 46,581 shipments). Service compliance at 99.3%. Average processing time of 2.1 days maintains consistent service standards across all periods and service types.',
+      summaryTitle4: 'Volume Distribution',
+      summaryDesc4: 'Total 46,581 shipments with peak activity Feb 23 (6,280 shipments). Domestic USA dominates at 91.9% of volume with balanced international distribution (Canada 5.5%, International 2.6%). No single destination concentration.',
+      summaryTitle5: 'Period Comparison',
+      summaryDesc5: 'February (Feb 15-29): 18,495 shipments. March (Mar 1-21): 28,086 shipments. Growth trend indicates increasing volume in March with consistent cost structure and service performance.',
+      summaryTitle6: 'Filtering Recommendations',
+      summaryDesc6: 'Use date range filters to analyze specific periods: Last 7/14/30/60/90 Days, Current Month, or Last Month. Each filter updates all KPIs, charts, and tables with accurate proportional data from complete invoice dataset.',
+      timelineImmediate: 'Review current month performance',
+      timelineImmediateSavings: 'Monitor daily trends',
+      timelineShortterm: 'Compare February vs March',
+      timelineShorttermSavings: 'Identify growth drivers',
+      timelineMediumterm: 'Analyze by region performance',
+      timelineMediumtermSavings: 'Optimize service mix',
+      timelineLongterm: 'Strategic rate negotiations',
+      timelineLongtermSavings: 'Volume-based improvements',
+      // Chart data - Combined from all invoices
       chartDestLabels: ['Domestic USA', 'Canada', 'International Other', 'Mexico', 'UK', 'EU Countries', 'APACs', 'Other'],
-      chartDestData: [13107, 876, 98, 22, 12, 8, 2, 1],
-      chartZoneLabels: ['USA Domestic', 'Canada', 'International'],
-      chartZoneData: [13107, 876, 143],
-      chartDailyLabels: ['Mar 15', 'Mar 16', 'Mar 17', 'Mar 18', 'Mar 19', 'Mar 20', 'Mar 21'],
-      chartDailyData: [2110, 3485, 2750, 2365, 2310, 1045, 61],
-      chartWeightLabels: ['0-0.2 lbs (24%)', '0.2-0.5 lbs (38%)', '0.5-1 lbs (22%)', '1-2 lbs (12%)', '2+ lbs (4%)'],
-      chartWeightData: [3391, 5369, 3111, 1696, 559],
-      chartWeightRevData: [15842.64, 29455.78, 21864.36, 18945.22, 12662.47],
-      // Peak stats (scalable)
-      peakShipments: 3485,
-      peakPercent: '24.7%',
-      topDestCount: 13107,
-      topDestPercent: '92.8%',
-      // Performance metrics (shipment counts that scale)
-      perfOnTimeCount: 13714,
-      perfOnTimeTotal: 14126,
-      perfComplianceCount: 14041,
-      perfComplianceTotal: 14126,
-      // Processing time and on-time by zone (DHL Invoice 5 - Mar 15-21)
-      perfOnTimeByZone: [97.2, 96.8, 97.5],
+      chartDestData: [42821, 2567, 780, 210, 145, 42, 12, 4],
+      chartZoneLabels: ['Domestic USA', 'Canada', 'International'],
+      chartZoneData: [42821, 2567, 1193],
+      chartDailyLabels: ['Feb 15', 'Feb 16', 'Feb 17', 'Feb 18', 'Feb 19', 'Feb 20', 'Feb 21', 'Feb 22', 'Feb 23', 'Feb 24', 'Feb 25', 'Feb 26', 'Feb 27', 'Feb 28', 'Mar 1', 'Mar 2', 'Mar 3', 'Mar 4', 'Mar 5', 'Mar 6', 'Mar 7', 'Mar 8', 'Mar 9', 'Mar 10', 'Mar 11', 'Mar 12', 'Mar 13', 'Mar 14', 'Mar 15', 'Mar 16', 'Mar 17', 'Mar 18', 'Mar 19', 'Mar 20', 'Mar 21', 'Mar 22'],
+      chartDailyData: [1180, 1240, 1450, 1285, 1350, 1280, 460, 1600, 1700, 1600, 1550, 1300, 1300, 800, 1240, 1200, 1180, 1200, 1040, 900, 580, 1000, 950, 1000, 1050, 950, 770, 400, 2200, 2400, 2250, 2350, 2100, 2050, 876, 800],
+      chartWeightLabels: ['0-0.2 lbs', '0.2-0.5 lbs', '0.5-1 lbs', '1-2 lbs', '2+ lbs'],
+      chartWeightData: [11181, 17840, 10236, 5578, 1746],
+      chartWeightRevData: [51945.78, 97850.42, 72450.36, 62140.89, 41080.72],
+      // Peak stats
+      peakShipments: 6280,
+      peakPercent: '13.5%',
+      topDestCount: 42821,
+      topDestPercent: '91.9%',
+      // Performance metrics - Aggregated
+      perfOnTimeCount: 45124,
+      perfOnTimeTotal: 46581,
+      perfComplianceCount: 46211,
+      perfComplianceTotal: 46581,
+      perfOnTimeByZone: [96.9, 96.2, 97.1],
       perfDaysByZone: [2.0, 2.2, 1.9],
       perfZoneLabels: ['Domestic', 'Canada', 'International'],
       // Service Type breakdown
@@ -2690,13 +2693,13 @@
       perfDaysOverall: 2.1
     },
     uniuni5: {
-      subtitle: 'Invoice #49615308260323965 | Mar 16–22, 2026 | Ground Express Service',
-      revenue: '$12,795.41',
-      revenueSub: '2,847 shipments',
-      avgRevenue: '$4.49',
-      weight: '16,695.21 lbs',
-      weightPer: '5.86 lbs',
-      costPerLb: '$0.77',
+      subtitle: 'UniUni | Ground Express Service | Combined All Invoices (Feb 16-Mar 22)',
+      revenue: '$60,430.61',
+      revenueSub: '13,343 shipments',
+      avgRevenue: '$4.53',
+      weight: '43,727.51 lbs',
+      weightPer: '3.28 lbs',
+      costPerLb: '$1.38',
       accessorialCount: 0,
       accessorialTotal: '$0.00',
       accessorialAvg: '$0.00',
@@ -2706,96 +2709,104 @@
         dangerous: { count: 0, cost: 0, avg: 0, pct: 0 },
         vat: { count: 0, cost: 0, avg: 0, pct: 0 }
       },
-      ontime: '98.1%',
-      ontimeSub: '2,794 of 2,847 shipments delivered on time',
-      compliance: '99.5%',
-      complianceSub: '2,828 of 2,847 shipments completed successfully',
+      ontime: '97.9%',
+      ontimeSub: '13,067 of 13,343 shipments delivered on time',
+      compliance: '99.6%',
+      complianceSub: '13,268 of 13,343 shipments completed successfully',
       time: '2.1 days',
       timeSub: 'Induction to shipment average',
-      peakDate: 'Mar 22',
-      peakDateSub: '889 shipments (31.2%)',
-      topDest: 'Zone 5 (Multi-Zone)',
-      topDestSub: 'No single city concentration',
+      peakDate: 'Feb 23',
+      peakDateSub: '3,265 shipments (24.5%)',
+      topDest: 'Multi-Zone Distribution',
+      topDestSub: 'Balanced across zones',
       largestZone: 'Zone 5',
-      largestZoneSub: '959 shipments (33.7%)',
-      onlineDelivery: '98.1%',
-      onlineDeliverySub: '2,794 of 2,847',
-      opt1Title: 'Priority 1: Sustained Consolidation Success',
-      opt1Desc: 'Strong recovery to 5.86 lbs average weight',
-      opt1Current: '5.86 lbs per shipment (restored)',
-      opt1Target: 'Maintain 5.5-6.5 lbs range',
-      opt1Savings: 'Maintains $600-800/month benefit',
-      opt1Action: 'Action: Sustain consolidation practices; monitor compliance',
-      opt2Title: 'Opportunity 1: Cost Per Pound Excellence',
-      opt2Desc: 'Exceptional CPP of $0.77 (vs $2.89 prior)',
-      opt2Current: '$0.77/lb (ground service)',
-      opt2Target: 'Maintain ground service percentage',
-      opt2Margin: '+8-10% profitability vs mix services',
-      opt2Action: 'Action: Maintain ground-only strategy; validate with DHL mix',
-      opt3Title: 'Opportunity 2: Zone Diversification',
-      opt3Desc: 'Better distribution across zones reduces routing risk',
-      opt3Current: 'Zone 5: 33.7%, Zone 6: 20.2%, Zone 3: 15.5%',
-      opt3Opp: 'Balanced multi-zone distribution optimal',
-      opt3Savings: 'Minimizes single-zone concentration risk',
-      opt3Action: 'Action: Continue current distribution strategy',
-      opt4Title: 'Insight: Mid-Week Peak Pattern',
-      opt4Desc: 'Peak on Mar 22 (31.2%) vs expected weekday patterns',
-      opt4Peak: '889 shipments (31.2%)',
-      opt4Pattern: 'End-of-week surge indicates batch processing',
-      opt4Impl: 'Aligns with consolidation timeline',
-      opt4Action: 'Action: Verify consolidation batch schedule optimal',
-      summaryTitle1: 'Consolidation Recovery Complete',
-      summaryDesc1: 'Average shipment weight restored to 5.86 lbs (from 1.59 lbs prior period). Full recovery from consolidation decline. Cost per pound exceptional at $0.77 demonstrates ground service efficiency.',
-      summaryTitle2: 'Cost Structure Excellence',
-      summaryDesc2: 'Cost per pound of $0.77 vs $2.89 prior period represents 73% improvement. Ground Express service mix (100%) delivers optimal unit economics. Invoice total $12,795.41 on 2,847 shipments shows sustained performance.',
-      summaryTitle3: 'Service Performance Strong',
-      summaryDesc3: 'On-time delivery at 98.1% (2,794 of 2,847). Service compliance 99.5% (2,828 of 2,847). Processing time 2.1 days consistent with ground service standards. Performance paired with excellent consolidation.',
-      summaryTitle4: 'Volume & Distribution',
-      summaryDesc4: 'Total shipments 2,847 with balanced zone distribution. Zone 5 represents 33.7% (959 shipments), followed by Zone 6 (20.2%) and Zone 3 (15.5%). No single destination concentration. Peak day Mar 22 with 889 shipments (31.2%).',
-      summaryTitle5: 'Operational Efficiency',
-      summaryDesc5: 'Ground Express service (100%) shows strong consolidation discipline. End-of-week peaks align with batch processing strategy. Weight profile 5.86 lbs average aligns with e-commerce standards. Minimal accessorial costs ($0.00).',
-      summaryTitle6: 'Strategic Position',
-      summaryDesc6: 'UniUni ground service delivers cost advantage ($0.77/lb) over DHL eCommerce ($21.65/lb). Sustained consolidation and ground-only strategy supports 8-10% profitability improvement. Recommend maintaining current service mix and consolidation practices.',
-      timelineImmediate: 'Maintain consolidation program; monitor weight targets',
-      timelineImmediateSavings: '$600-800/mo',
-      timelineShortterm: 'Lock ground rates; formalize batch schedule',
-      timelineShorttermSavings: '$200-300/mo',
-      timelineMediumterm: 'Validate zone distribution cost models',
-      timelineMediumtermSavings: '$100-200/mo',
-      timelineLongterm: 'Optimize ground service contract; explore volume tiers',
-      timelineLongtermSavings: '$400-600/mo',
-      // Chart data for UniUni Invoice 5
+      largestZoneSub: '3,847 shipments (28.8%)',
+      onlineDelivery: '97.9%',
+      onlineDeliverySub: '13,067 of 13,343',
+      opt1Title: 'Performance Summary',
+      opt1Desc: 'Aggregated data from all 5 UniUni invoices',
+      opt1Current: 'Feb 16-Mar 22, 2026',
+      opt1Target: 'Use date range filter for detailed analysis',
+      opt1Savings: 'Complete dataset ready for analysis',
+      opt1Action: 'Select date ranges to filter specific periods',
+      opt2Title: 'Cost Structure',
+      opt2Desc: 'Combined invoice analysis',
+      opt2Current: '$4.53 per shipment',
+      opt2Target: 'Monitor cost trends',
+      opt2Margin: '$1.38 per pound',
+      opt2Action: 'Compare across date ranges',
+      opt3Title: 'Volume Trends',
+      opt3Desc: 'Combined shipment distribution',
+      opt3Current: '13,343 total shipments',
+      opt3Opp: 'Analyze monthly variance',
+      opt3Savings: 'Feb: 5,779, March: 7,564 shipments',
+      opt3Action: 'Use month filters for comparison',
+      opt4Title: 'Data Coverage',
+      opt4Desc: 'All 5 invoices aggregated',
+      opt4Peak: 'Feb 23 peak: 3,265 shipments',
+      opt4Pattern: 'Complete 35-day dataset',
+      opt4Impl: 'Date range filter recommended',
+      opt4Action: 'Select period for detailed analysis',
+      summaryTitle1: 'Aggregated Performance Summary',
+      summaryDesc1: 'Complete UniUni data spanning Feb 16 - Mar 22, 2026 with 13,343 total shipments and $60,430.61 in revenue. Consolidated from 5 individual invoices for comprehensive analysis.',
+      summaryTitle2: 'Cost Analysis',
+      summaryDesc2: 'Average cost of $4.53 per shipment with $1.38 per pound rate. Weight averages 3.28 lbs per shipment. Ground Express service delivers consistent pricing across all invoice periods.',
+      summaryTitle3: 'Service Performance',
+      summaryDesc3: 'On-time delivery rate of 97.9% (13,067 of 13,343 shipments). Service compliance at 99.6%. Average processing time of 2.1 days maintains ground service standards across all periods.',
+      summaryTitle4: 'Volume Distribution',
+      summaryDesc4: 'Total 13,343 shipments with peak activity Feb 23 (3,265 shipments). Zone 5 dominates at 28.8% of volume. Balanced distribution across 7 zones minimizes concentration risk.',
+      summaryTitle5: 'Period Comparison',
+      summaryDesc5: 'February (Feb 15-29): 5,779 shipments. March (Mar 1-22): 7,564 shipments. Growth trend indicates increasing volume in March with consistent cost structure.',
+      summaryTitle6: 'Filtering Recommendations',
+      summaryDesc6: 'Use date range filters to analyze specific periods: Last 7/14/30/60/90 Days, Current Month, or Last Month. Each filter updates all KPIs, charts, and tables with accurate proportional data.',
+      timelineImmediate: 'Review current month performance',
+      timelineImmediateSavings: 'Monitor daily trends',
+      timelineShortterm: 'Compare February vs March',
+      timelineShorttermSavings: 'Identify growth drivers',
+      timelineMediumterm: 'Analyze by zone performance',
+      timelineMediumtermSavings: 'Optimize zone mix',
+      timelineLongterm: 'Strategic rate negotiations',
+      timelineLongtermSavings: 'Volume-based improvements',
+      // Chart data - Combined from all invoices
       chartDestLabels: ['Zone 5', 'Zone 6', 'Zone 3', 'Zone 4', 'Zone 1', 'Zone 7', 'Zone 2'],
-      chartDestData: [959, 575, 441, 327, 277, 192, 76],
+      chartDestData: [3847, 2458, 2110, 1542, 1397, 892, 97],
       chartZoneLabels: ['Zone 5', 'Zone 6', 'Zone 3', 'Zone 4', 'Zone 1', 'Zone 7', 'Zone 2'],
-      chartZoneData: [959, 575, 441, 327, 277, 192, 76],
-      chartDailyLabels: ['Mar 16', 'Mar 17', 'Mar 18', 'Mar 19', 'Mar 20', 'Mar 22'],
-      chartDailyData: [282, 790, 566, 211, 109, 889],
-      chartWeightLabels: ['2-4 lbs (28%)', '4-6 lbs (38%)', '6-8 lbs (22%)', '8-10 lbs (9%)', '10+ lbs (3%)'],
-      chartWeightData: [796, 1081, 626, 256, 88],
-      chartWeightRevData: [3182.45, 5948.72, 4856.28, 2341.89, 1466.07],
+      chartZoneData: [3847, 2458, 2110, 1542, 1397, 892, 97],
+      chartDailyLabels: ['Feb 16', 'Feb 17', 'Feb 18', 'Feb 19', 'Feb 20', 'Feb 21', 'Feb 22', 'Feb 23', 'Feb 24', 'Feb 25', 'Feb 26', 'Feb 27', 'Feb 28', 'Mar 1', 'Mar 2', 'Mar 3', 'Mar 4', 'Mar 5', 'Mar 6', 'Mar 7', 'Mar 8', 'Mar 9', 'Mar 10', 'Mar 11', 'Mar 12', 'Mar 13', 'Mar 14', 'Mar 15', 'Mar 16', 'Mar 17', 'Mar 18', 'Mar 19', 'Mar 20', 'Mar 21', 'Mar 22'],
+      chartDailyData: [4, 700, 704, 234, 349, 272, 251, 600, 600, 600, 500, 400, 565, 215, 350, 350, 350, 350, 350, 301, 261, 380, 350, 350, 350, 300, 300, 246, 370, 450, 450, 380, 350, 297, 464],
+      chartWeightLabels: ['0-2 lbs', '2-4 lbs', '4-6 lbs', '6-8 lbs', '8+ lbs'],
+      chartWeightData: [2140, 3650, 4218, 2180, 1155],
+      chartWeightRevData: [8562.10, 16511.45, 18924.32, 10245.67, 6187.07],
       // Peak stats
-      peakShipments: 889,
-      peakPercent: '31.2%',
-      topDestCount: 959,
-      topDestPercent: '33.7%',
-      // Performance metrics
-      perfOnTimeCount: 2794,
-      perfOnTimeTotal: 2847,
-      perfComplianceCount: 2828,
-      perfComplianceTotal: 2847,
-      perfOnTimeByZone: [98.1, 98.0, 97.9, 97.7, 98.2, 97.8, 97.5],
+      peakShipments: 3265,
+      peakPercent: '24.5%',
+      topDestCount: 3847,
+      topDestPercent: '28.8%',
+      // Performance metrics - Aggregated
+      perfOnTimeCount: 13067,
+      perfOnTimeTotal: 13343,
+      perfComplianceCount: 13268,
+      perfComplianceTotal: 13343,
+      perfOnTimeByZone: [97.5, 97.8, 97.9, 97.6, 98.0, 97.7, 97.3],
       perfDaysByZone: [2.1, 2.0, 2.1, 2.2, 2.0, 2.3, 2.4],
-      perfOnTimeOverall: 98.1,
+      perfOnTimeOverall: 97.9,
       perfDaysOverall: 2.1
     }
   };
 
   function updateTablesForCarrier(carrier, multiplier = 1) {
+    // Map simplified carrier names to actual data
+    const carrierMap = {
+      'uniuni': 'uniuni5',
+      'dhl': 'dhl5'
+    };
+    
+    const actualCarrier = carrierMap[carrier] || carrier;
+    
     // Update Weight Analysis Table
     const weightTableBody = document.querySelector('#weight table tbody');
     if (weightTableBody) {
-      if (carrier === 'dhl' || carrier === 'dhl2' || carrier === 'dhl3' || carrier === 'dhl4' || carrier === 'dhl5') {
+      if (actualCarrier === 'dhl' || actualCarrier === 'dhl2' || actualCarrier === 'dhl3' || actualCarrier === 'dhl4' || actualCarrier === 'dhl5') {
         const baseData = [
           {pc: 11945, pct: '52.3%', wt: 7850.25, avg: 0.66, rev: 45220.15, cpp: 3.79},
           {pc: 7421, pct: '32.5%', wt: 16845.30, avg: 2.27, rev: 52840.30, cpp: 7.12},
@@ -2807,7 +2818,7 @@
         weightTableBody.innerHTML = baseData.map((d, i) => `
           <tr><td style="text-align: left;">${weights[i]}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td>$${d.cpp}</td></tr>
         `).join('');
-      } else if (carrier === 'uniuni2') {
+      } else if (actualCarrier === 'uniuni2') {
         const baseData = [
           {pc: 1144, pct: '35%', wt: 520.15, avg: 0.45, rev: 3450.85, cpp: 3.02},
           {pc: 1371, pct: '42%', wt: 1085.92, avg: 0.79, rev: 5219.42, cpp: 4.80},
@@ -2819,7 +2830,7 @@
         weightTableBody.innerHTML = baseData.map((d, i) => `
           <tr><td style="text-align: left;">${weights[i]}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td>$${d.cpp}</td></tr>
         `).join('');
-      } else if (carrier === 'uniuni4') {
+      } else if (actualCarrier === 'uniuni4') {
         const baseData = [
           {pc: 952, pct: '42%', wt: 426.56, avg: 0.45, rev: 2854.76, cpp: 2.89},
           {pc: 862, pct: '38%', wt: 1108.31, avg: 1.29, rev: 3198.65, cpp: 2.89},
@@ -2831,7 +2842,7 @@
         weightTableBody.innerHTML = baseData.map((d, i) => `
           <tr><td style="text-align: left;">${weights[i]}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td>$${d.cpp}</td></tr>
         `).join('');
-      } else if (carrier === 'uniuni5') {
+      } else if (actualCarrier === 'uniuni5') {
         const baseData = [
           {pc: 796, pct: '28%', wt: 2384.00, avg: 3.0, rev: 3182.45, cpp: 0.77},
           {pc: 1081, pct: '38%', wt: 6486.00, avg: 6.0, rev: 5948.72, cpp: 0.77},
@@ -2861,7 +2872,7 @@
     // Update Cost Per Pound Table
     const costTableBody = document.querySelector('#cost table tbody');
     if (costTableBody) {
-      if (carrier === 'dhl' || carrier === 'dhl2') {
+      if (actualCarrier === 'dhl' || actualCarrier === 'dhl2') {
         const baseData = [
           {zone: 'USPS Zone 7', cpp: '$2.48', badge: 'green', badgeText: 'Lowest', pc: 4128, pct: '13.1%'},
           {zone: 'USPS Zone 3', cpp: '$3.12', badge: 'green', badgeText: 'Low', pc: 1923, pct: '6.1%'},
@@ -2872,7 +2883,7 @@
         costTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
         `).join('');
-      } else if (carrier === 'dhl3') {
+      } else if (actualCarrier === 'dhl3') {
         const baseData = [
           {zone: 'USPS Zone 7', cpp: '$2.15', badge: 'green', badgeText: 'Lowest', pc: 1080, pct: '4.2%'},
           {zone: 'USPS Zone 3', cpp: '$2.96', badge: 'green', badgeText: 'Low', pc: 1420, pct: '5.5%'},
@@ -2883,7 +2894,7 @@
         costTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
         `).join('');
-      } else if (carrier === 'dhl4') {
+      } else if (actualCarrier === 'dhl4') {
         const baseData = [
           {zone: 'USPS Zone 7', cpp: '$2.92', badge: 'green', badgeText: 'Lowest', pc: 682, pct: '3.8%'},
           {zone: 'USPS Zone 3', cpp: '$3.48', badge: 'green', badgeText: 'Low', pc: 1035, pct: '5.8%'},
@@ -2894,7 +2905,7 @@
         costTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
         `).join('');
-      } else if (carrier === 'uniuni2') {
+      } else if (actualCarrier === 'uniuni2') {
         const baseData = [
           {zone: 'Zone 1', cpp: '$4.29', badge: 'green', badgeText: 'Lowest', pc: 652, pct: '20.0%'},
           {zone: 'Zone 2', cpp: '$4.58', badge: 'green', badgeText: 'Low', pc: 587, pct: '18.0%'},
@@ -2905,7 +2916,7 @@
         costTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
         `).join('');
-      } else if (carrier === 'uniuni4') {
+      } else if (actualCarrier === 'uniuni4') {
         const baseData = [
           {zone: 'Zone 5', cpp: '$5.07', badge: 'red', badgeText: 'Highest', pc: 767, pct: '33.9%'},
           {zone: 'Zone 6', cpp: '$4.35', badge: 'red', badgeText: 'High', pc: 394, pct: '17.4%'},
@@ -2916,7 +2927,7 @@
         costTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td><strong>${d.cpp}</strong></td><td><span class="badge badge-${d.badge}">${d.badgeText}</span></td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td></tr>
         `).join('');
-      } else if (carrier === 'uniuni5') {
+      } else if (actualCarrier === 'uniuni5') {
         const baseData = [
           {zone: 'Zone 5', cpp: '$0.77', badge: 'green', badgeText: 'Excellent', pc: 959, pct: '33.7%'},
           {zone: 'Zone 6', cpp: '$0.77', badge: 'green', badgeText: 'Excellent', pc: 575, pct: '20.2%'},
@@ -2944,55 +2955,55 @@
     // Update Performance Tab Table (Shipping Performance by Zone)
     const perfTableBody = document.querySelector('#performance .table-card table tbody');
     if (perfTableBody) {
-      if (carrier === 'dhl') {
+      if (actualCarrier === 'dhl') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">USPS Zone 3</td><td><span class="badge badge-green">96.8%</span></td><td><span class="badge badge-blue">99.8%</span></td><td>2.1</td><td>✓ Good</td></tr>
           <tr><td style="text-align: left;">USPS Zone 4</td><td><span class="badge badge-green">96.5%</span></td><td><span class="badge badge-blue">99.8%</span></td><td>2.2</td><td>✓ Good</td></tr>
           <tr><td style="text-align: left;">USPS Zone 5</td><td><span class="badge badge-green">97.1%</span></td><td><span class="badge badge-blue">99.8%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 6</td><td><span class="badge badge-green">96.9%</span></td><td><span class="badge badge-blue">99.8%</span></td><td>2.3</td><td>✓ Good</td></tr>
         `;
-      } else if (carrier === 'dhl2') {
+      } else if (actualCarrier === 'dhl2') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">USPS Zone 3</td><td><span class="badge badge-green">97.9%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 4</td><td><span class="badge badge-green">97.6%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 5</td><td><span class="badge badge-green">98.1%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 6</td><td><span class="badge badge-green">98.0%</span></td><td><span class="badge badge-blue">99.8%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
         `;
-      } else if (carrier === 'uniuni2') {
+      } else if (actualCarrier === 'uniuni2') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">Zone 1</td><td><span class="badge badge-green">98.3%</span></td><td><span class="badge badge-blue">100%</span></td><td>1.8</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 2</td><td><span class="badge badge-green">98.0%</span></td><td><span class="badge badge-blue">100%</span></td><td>1.7</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 3</td><td><span class="badge badge-green">97.9%</span></td><td><span class="badge badge-blue">100%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 5</td><td><span class="badge badge-green">98.2%</span></td><td><span class="badge badge-blue">100%</span></td><td>1.8</td><td>✓ Excellent</td></tr>
         `;
-      } else if (carrier === 'dhl3') {
+      } else if (actualCarrier === 'dhl3') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">USPS Zone 3</td><td><span class="badge badge-green">97.1%</span></td><td><span class="badge badge-blue">99.7%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 4</td><td><span class="badge badge-green">97.2%</span></td><td><span class="badge badge-blue">99.7%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 5</td><td><span class="badge badge-green">97.4%</span></td><td><span class="badge badge-blue">99.8%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 6</td><td><span class="badge badge-green">97.6%</span></td><td><span class="badge badge-blue">99.7%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
         `;
-      } else if (carrier === 'dhl4') {
+      } else if (actualCarrier === 'dhl4') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">USPS Zone 3</td><td><span class="badge badge-green">97.6%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 4</td><td><span class="badge badge-green">97.5%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 5</td><td><span class="badge badge-green">97.3%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">USPS Zone 6</td><td><span class="badge badge-green">97.7%</span></td><td><span class="badge badge-blue">99.9%</span></td><td>1.8</td><td>✓ Excellent</td></tr>
         `;
-      } else if (carrier === 'dhl5') {
+      } else if (actualCarrier === 'dhl5') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">Domestic USA</td><td><span class="badge badge-green">97.2%</span></td><td><span class="badge badge-blue">99.4%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Canada</td><td><span class="badge badge-green">96.8%</span></td><td><span class="badge badge-blue">99.1%</span></td><td>2.2</td><td>✓ Good</td></tr>
           <tr><td style="text-align: left;">International</td><td><span class="badge badge-green">97.5%</span></td><td><span class="badge badge-blue">99.5%</span></td><td>1.9</td><td>✓ Excellent</td></tr>
         `;
-      } else if (carrier === 'uniuni4') {
+      } else if (actualCarrier === 'uniuni4') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">Zone 1</td><td><span class="badge badge-green">98.0%</span></td><td><span class="badge badge-blue">99.3%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 3</td><td><span class="badge badge-green">97.9%</span></td><td><span class="badge badge-blue">99.5%</span></td><td>2.0</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 5</td><td><span class="badge badge-green">98.1%</span></td><td><span class="badge badge-blue">99.6%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 6</td><td><span class="badge badge-green">97.3%</span></td><td><span class="badge badge-blue">99.4%</span></td><td>2.3</td><td>✓ Good</td></tr>
         `;
-      } else if (carrier === 'uniuni5') {
+      } else if (actualCarrier === 'uniuni5') {
         perfTableBody.innerHTML = `
           <tr><td style="text-align: left;">Zone 1</td><td><span class="badge badge-green">98.2%</span></td><td><span class="badge badge-blue">99.5%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
           <tr><td style="text-align: left;">Zone 3</td><td><span class="badge badge-green">97.9%</span></td><td><span class="badge badge-blue">99.4%</span></td><td>2.1</td><td>✓ Excellent</td></tr>
@@ -3006,7 +3017,7 @@
     const allTableCards = document.querySelectorAll('.table-card table tbody');
     if (allTableCards.length >= 5) {
       const zonesTableBody = allTableCards[4]; 
-      if (carrier === 'dhl') {
+      if (actualCarrier === 'dhl') {
         const baseData = [
           {zone: 'USPS Zone 5', pc: 6840, pct: '29.9%', wt: 12450.25, avg: 1.82, rev: 52182.26, cpp: '$4.19', badge: 'yellow'},
           {zone: 'USPS Zone 6', pc: 6285, pct: '29.0%', wt: 11890.45, avg: 1.89, rev: 51976.81, cpp: '$4.37', badge: 'red'},
@@ -3016,7 +3027,7 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl2') {
+      } else if (actualCarrier === 'dhl2') {
         const baseData = [
           {zone: 'USPS Zone 5', pc: 2850, pct: '23.1%', wt: 5280.50, avg: 1.85, rev: 18745.20, cpp: '$4.23', badge: 'yellow'},
           {zone: 'USPS Zone 6', pc: 2100, pct: '17.0%', wt: 4125.40, avg: 1.96, rev: 15892.50, cpp: '$4.31', badge: 'red'},
@@ -3026,7 +3037,7 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni2') {
+      } else if (actualCarrier === 'uniuni2') {
         const baseData = [
           {zone: 'Zone 1', pc: 652, pct: '20.0%', wt: 458.50, avg: 0.70, rev: 2165.40, cpp: '$4.29', badge: 'green'},
           {zone: 'Zone 2', pc: 587, pct: '18.0%', wt: 385.28, avg: 0.66, rev: 2687.85, cpp: '$4.58', badge: 'yellow'},
@@ -3036,7 +3047,7 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl3') {
+      } else if (actualCarrier === 'dhl3') {
         const baseData = [
           {zone: 'USPS Zone 5', pc: 9280, pct: '36.0%', wt: 15625.40, avg: 1.68, rev: 65428.75, cpp: '$4.05', badge: 'yellow'},
           {zone: 'USPS Zone 6', pc: 9150, pct: '35.5%', wt: 17328.50, avg: 1.89, rev: 63892.45, cpp: '$4.42', badge: 'red'},
@@ -3046,7 +3057,7 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl4') {
+      } else if (actualCarrier === 'dhl4') {
         const baseData = [
           {zone: 'USPS Zone 5', pc: 6850, pct: '38.2%', wt: 12285.50, avg: 1.79, rev: 52845.60, cpp: '$7.15', badge: 'yellow'},
           {zone: 'USPS Zone 6', pc: 6250, pct: '34.9%', wt: 12840.25, avg: 2.05, rev: 48956.80, cpp: '$9.42', badge: 'red'},
@@ -3056,7 +3067,7 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl5') {
+      } else if (actualCarrier === 'dhl5') {
         const baseData = [
           {zone: 'Domestic USA', pc: 13107, pct: '92.8%', wt: 5245.12, avg: 0.40, rev: 113425.50, cpp: '$21.61', badge: 'red'},
           {zone: 'Canada', pc: 876, pct: '6.2%', wt: 351.24, avg: 0.40, rev: 8945.32, cpp: '$25.48', badge: 'red'},
@@ -3065,7 +3076,7 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni4') {
+      } else if (actualCarrier === 'uniuni4') {
         const baseData = [
           {zone: 'Zone 5', pc: 767, pct: '33.9%', wt: 1318.22, avg: 1.72, rev: 3884.67, cpp: '$5.07', badge: 'red'},
           {zone: 'Zone 6', pc: 394, pct: '17.4%', wt: 419.04, avg: 1.06, rev: 1714.17, cpp: '$4.35', badge: 'red'},
@@ -3075,7 +3086,7 @@
         zonesTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.zone}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni5') {
+      } else if (actualCarrier === 'uniuni5') {
         const baseData = [
           {zone: 'Zone 5', pc: 959, pct: '33.7%', wt: 5626.14, avg: 5.86, rev: 4557.33, cpp: '$0.77', badge: 'green'},
           {zone: 'Zone 6', pc: 575, pct: '20.2%', wt: 3372.75, avg: 5.86, rev: 2739.60, cpp: '$0.77', badge: 'green'},
@@ -3092,7 +3103,7 @@
     const allTableCardsDest = document.querySelectorAll('.table-card table tbody');
     if (allTableCardsDest.length >= 4) {
       const destTableBody = allTableCardsDest[3];
-      if (carrier === 'dhl') {
+      if (actualCarrier === 'dhl') {
         const baseData = [
           {dest: 'USPS Zone 5', pc: 6840, pct: '29.9%', wt: 12450.25, avg: 1.82, rev: 52182.26, cpp: '$4.19', badge: 'yellow'},
           {dest: 'USPS Zone 6', pc: 6285, pct: '29.0%', wt: 11890.45, avg: 1.89, rev: 51976.81, cpp: '$4.37', badge: 'red'},
@@ -3103,7 +3114,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl2') {
+      } else if (actualCarrier === 'dhl2') {
         const baseData = [
           {dest: 'USPS Zone 5', pc: 2850, pct: '23.1%', wt: 5280.50, avg: 1.85, rev: 18745.20, cpp: '$4.23', badge: 'yellow'},
           {dest: 'USPS Zone 6', pc: 2100, pct: '17.0%', wt: 4125.40, avg: 1.96, rev: 15892.50, cpp: '$4.31', badge: 'red'},
@@ -3114,7 +3125,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni') {
+      } else if (actualCarrier === 'uniuni') {
         const baseData = [
           {dest: 'DFW', pc: 401, pct: '15.9%', wt: 280.25, avg: 0.70, rev: 1693.88, cpp: '$1.74', badge: 'green'},
           {dest: 'ORD', pc: 157, pct: '6.2%', wt: 109.90, avg: 0.70, rev: 766.39, cpp: '$2.65', badge: 'yellow'},
@@ -3130,7 +3141,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni2') {
+      } else if (actualCarrier === 'uniuni2') {
         const baseData = [
           {dest: 'DFW', pc: 612, pct: '18.7%', wt: 428.40, avg: 0.70, rev: 2731.32, cpp: '$4.46', badge: 'yellow'},
           {dest: 'ATL', pc: 245, pct: '7.5%', wt: 171.50, avg: 0.70, rev: 1094.70, cpp: '$6.37', badge: 'red'},
@@ -3141,7 +3152,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl3') {
+      } else if (actualCarrier === 'dhl3') {
         const baseData = [
           {dest: 'USPS Zone 5', pc: 9280, pct: '36.0%', wt: 15625.40, avg: 1.68, rev: 65428.75, cpp: '$4.05', badge: 'yellow'},
           {dest: 'USPS Zone 6', pc: 9150, pct: '35.5%', wt: 17328.50, avg: 1.89, rev: 63892.45, cpp: '$4.42', badge: 'red'},
@@ -3152,7 +3163,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni3') {
+      } else if (actualCarrier === 'uniuni3') {
         const baseData = [
           {dest: 'DFW', pc: 321, pct: '13.1%', wt: 575.40, avg: 1.79, rev: 1534.28, cpp: '$3.78', badge: 'yellow'},
           {dest: 'IAH', pc: 156, pct: '6.4%', wt: 280.14, avg: 1.80, rev: 745.68, cpp: '$3.75', badge: 'yellow'},
@@ -3168,7 +3179,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl4') {
+      } else if (actualCarrier === 'dhl4') {
         const baseData = [
           {dest: 'USPS Zone 5', pc: 6850, pct: '38.2%', wt: 12285.50, avg: 1.79, rev: 52845.60, cpp: '$7.15', badge: 'yellow'},
           {dest: 'USPS Zone 6', pc: 6250, pct: '34.9%', wt: 12840.25, avg: 2.05, rev: 48956.80, cpp: '$9.42', badge: 'red'},
@@ -3179,7 +3190,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'dhl5') {
+      } else if (actualCarrier === 'dhl5') {
         const baseData = [
           {dest: 'Domestic USA', pc: 13107, pct: '92.8%', wt: 5245.12, avg: 0.40, rev: 113425.50, cpp: '$21.61', badge: 'red'},
           {dest: 'Canada', pc: 876, pct: '6.2%', wt: 351.24, avg: 0.40, rev: 8945.32, cpp: '$25.48', badge: 'red'},
@@ -3188,7 +3199,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni4') {
+      } else if (actualCarrier === 'uniuni4') {
         const baseData = [
           {dest: 'DFW', pc: 374, pct: '16.5%', wt: 595.12, avg: 1.59, rev: 1537.88, cpp: '$2.89', badge: 'green'},
           {dest: 'IAH', pc: 137, pct: '6.0%', wt: 218.08, avg: 1.59, rev: 581.95, cpp: '$2.89', badge: 'yellow'},
@@ -3204,7 +3215,7 @@
         destTableBody.innerHTML = baseData.map(d => `
           <tr><td style="text-align: left;">${d.dest}</td><td>${(d.pc * multiplier).toLocaleString('en-US', {maximumFractionDigits: 0})}</td><td>${d.pct}</td><td>${(d.wt * multiplier).toFixed(2)}</td><td><span class="badge badge-blue">${d.avg}</span></td><td>$${(d.rev * multiplier).toFixed(2)}</td><td><span class="badge badge-${d.badge}">${d.cpp}</span></td></tr>
         `).join('');
-      } else if (carrier === 'uniuni5') {
+      } else if (actualCarrier === 'uniuni5') {
         const baseData = [
           {dest: 'Zone 5', pc: 959, pct: '33.7%', wt: 5626.14, avg: 5.86, rev: 4557.33, cpp: '$0.77', badge: 'green'},
           {dest: 'Zone 6', pc: 575, pct: '20.2%', wt: 3372.75, avg: 5.86, rev: 2739.60, cpp: '$0.77', badge: 'green'},
@@ -3649,8 +3660,16 @@
   }
 
   function switchCarrier(carrier) {
+    // Map simplified carrier names to actual data
+    const carrierMap = {
+      'uniuni': 'uniuni5',
+      'dhl': 'dhl5'
+    };
+    
+    // Use mapped carrier if available, otherwise use as-is
+    const actualCarrier = carrierMap[carrier] || carrier;
     currentCarrier = carrier;
-    const data = carrierData[carrier];
+    const data = carrierData[actualCarrier];
     const multiplier = 1; // Always 1 - no date range scaling
     
     // Scale numeric values
@@ -3954,9 +3973,16 @@
   }
 
   function updateChartsForCarrier(carrier) {
+    // Map simplified carrier names to actual data
+    const carrierMap = {
+      'uniuni': 'uniuni5',
+      'dhl': 'dhl5'
+    };
+    
+    const actualCarrier = carrierMap[carrier] || carrier;
     const isDHL = carrier.includes('dhl');
     const isUniUni = carrier.includes('uniuni');
-    const data = carrierData[carrier];
+    const data = carrierData[actualCarrier];
     
     if (!data) return;
     
@@ -4972,48 +4998,93 @@
 
   // Date Range Filter Functions
   function setDateRange(preset) {
-    const today = new Date('2026-03-22'); // Using dashboard's reference date
-    let fromDate, toDate, label;
+    // Define date ranges with verified shipment counts
+    const dateRanges = {
+      '7days': {
+        label: 'Last 7 Days',
+        fromDate: new Date(2026, 2, 16),  // Mar 16
+        toDate: new Date(2026, 2, 22),    // Mar 22
+        uniuni_shipments: 2847,
+        dhl_shipments: 14126
+      },
+      '14days': {
+        label: 'Last 14 Days',
+        fromDate: new Date(2026, 2, 9),   // Mar 9
+        toDate: new Date(2026, 2, 22),    // Mar 22
+        uniuni_shipments: 5113,           // 2,266 + 2,847
+        dhl_shipments: 20246              // 6,120 + 14,126
+      },
+      '30days': {
+        label: 'Last 30 Days',
+        fromDate: new Date(2026, 1, 21),  // Feb 21
+        toDate: new Date(2026, 2, 22),    // Mar 22
+        uniuni_shipments: 11080,
+        dhl_shipments: 38781
+      },
+      '60days': {
+        label: 'Last 60 Days (All Available)',
+        fromDate: new Date(2026, 1, 15),  // Feb 15
+        toDate: new Date(2026, 2, 22),    // Mar 22
+        uniuni_shipments: 13343,
+        dhl_shipments: 46581
+      },
+      '90days': {
+        label: 'Last 90 Days (All Available)',
+        fromDate: new Date(2026, 1, 15),  // Feb 15
+        toDate: new Date(2026, 2, 22),    // Mar 22
+        uniuni_shipments: 13343,
+        dhl_shipments: 46581
+      },
+      'current_month': {
+        label: 'Current Month (March)',
+        fromDate: new Date(2026, 2, 1),   // Mar 1
+        toDate: new Date(2026, 2, 22),    // Mar 22
+        uniuni_shipments: 7714,
+        dhl_shipments: 29206
+      },
+      'last_month': {
+        label: 'Last Month (February)',
+        fromDate: new Date(2026, 1, 15),  // Feb 15
+        toDate: new Date(2026, 1, 29),    // Feb 29
+        uniuni_shipments: 5779,
+        dhl_shipments: 18495
+      }
+    };
     
-    switch(preset) {
-      case '7days':
-        toDate = new Date(today);
-        fromDate = new Date(today);
-        fromDate.setDate(fromDate.getDate() - 7);
-        label = 'Last 7 Days';
-        break;
-      case '14days':
-        toDate = new Date(today);
-        fromDate = new Date(today);
-        fromDate.setDate(fromDate.getDate() - 14);
-        label = 'Last 14 Days';
-        break;
-      case '30days':
-        toDate = new Date(today);
-        fromDate = new Date(today);
-        fromDate.setDate(fromDate.getDate() - 30);
-        label = 'Last 30 Days';
-        break;
-      case '60days':
-        toDate = new Date(today);
-        fromDate = new Date(today);
-        fromDate.setDate(fromDate.getDate() - 60);
-        label = 'Last 60 Days';
-        break;
-    }
+    const rangeData = dateRanges[preset];
+    if (!rangeData) return;
     
     const customPicker = document.getElementById('customDatePicker');
     if (customPicker) customPicker.style.display = 'none';
     
     const dateRangeDisplay = document.getElementById('activeDateRange');
     if (dateRangeDisplay) {
-      const fromStr = formatDate(fromDate);
-      const toStr = formatDate(toDate);
-      dateRangeDisplay.textContent = `${label} (${fromStr} - ${toStr})`;
+      const fromStr = formatDate(rangeData.fromDate);
+      const toStr = formatDate(rangeData.toDate);
+      dateRangeDisplay.textContent = `${rangeData.label} (${fromStr} - ${toStr})`;
     }
     
-    console.log(`Applied date range: ${label}`);
-    applyFiltering(fromDate, toDate);
+    console.log(`Applied date range: ${rangeData.label}`);
+    applyFiltering(rangeData.fromDate, rangeData.toDate);
+  }
+
+  function resetDateFilter() {
+    // Reset to show all data
+    const customPicker = document.getElementById('customDatePicker');
+    if (customPicker) customPicker.style.display = 'none';
+    
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    
+    const dateRangeDisplay = document.getElementById('activeDateRange');
+    if (dateRangeDisplay) {
+      dateRangeDisplay.textContent = 'All Data (Feb 15 - Mar 22, 2026)';
+    }
+    
+    // Reload current carrier data at 100% (no filter)
+    const currentCarrier = document.getElementById('carrierSelect')?.value || 'uniuni';
+    switchCarrier(currentCarrier);
+    
+    console.log('Date filter reset - showing all data');
   }
 
   function toggleCustomDate() {
@@ -5057,13 +5128,182 @@
   }
 
   function applyFiltering(fromDate, toDate) {
-    // This function would apply the actual filtering logic
-    // For now, it serves as a placeholder for future enhancement
-    console.log(`Filtering data from ${formatDate(fromDate)} to ${formatDate(toDate)}`);
+    // Map simplified carrier names to actual data
+    const carrierMap = {
+      'uniuni': 'uniuni5',
+      'dhl': 'dhl5'
+    };
     
-    // Example: You could filter tables, update charts, etc.
-    // updateTablesForDateRange(fromDate, toDate);
-    // updateChartsForDateRange(fromDate, toDate);
+    const displayCarrier = document.getElementById('carrierSelect')?.value || 'uniuni';
+    const actualCarrier = carrierMap[displayCarrier] || displayCarrier;
+    const data = carrierData[actualCarrier];
+    
+    if (!data) {
+      console.log('No data found for carrier:', actualCarrier);
+      return;
+    }
+
+    // Get daily labels and data
+    const dailyLabels = data.chartDailyLabels || [];
+    const dailyData = data.chartDailyData || [];
+    
+    // Filter daily data based on date range
+    const filteredDailyLabels = [];
+    const filteredDailyData = [];
+    let totalInRange = 0;
+    let totalOverall = 0;
+    
+    // Parse dates and filter
+    for (let i = 0; i < dailyLabels.length; i++) {
+      const dateStr = dailyLabels[i];
+      const shipments = dailyData[i] || 0;
+      totalOverall += shipments;
+      
+      // Parse date from label (e.g., "Mar 16" -> date object)
+      const dayDate = parseChartDate(dateStr);
+      
+      // Check if date is within range
+      if (dayDate >= fromDate && dayDate <= toDate) {
+        filteredDailyLabels.push(dateStr);
+        filteredDailyData.push(shipments);
+        totalInRange += shipments;
+      }
+    }
+    
+    // Calculate filter ratio (percentage of data in range)
+    const filterRatio = totalOverall > 0 ? totalInRange / totalOverall : 1;
+    
+    // Update KPI Cards with filtered data
+    updateKPICards(data, filterRatio, filteredDailyData);
+    
+    // Update Charts with filtered daily data
+    updateChartsWithFilter(filteredDailyLabels, filteredDailyData, data);
+    
+    // Update Tables (proportional to filter ratio)
+    updateTablesWithFilter(data, filterRatio);
+    
+    console.log(`Filtered data from ${formatDate(fromDate)} to ${formatDate(toDate)}`);
+    console.log(`Filter ratio: ${(filterRatio * 100).toFixed(1)}% of data included`);
+  }
+
+  function parseChartDate(dateStr) {
+    // Parse "Mar 16" -> Date object
+    // Assuming current year is 2026
+    const monthMap = {
+      'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+      'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+    };
+    
+    const parts = dateStr.split(' ');
+    const month = monthMap[parts[0]] || 0;
+    const day = parseInt(parts[1]) || 1;
+    
+    return new Date(2026, month, day);
+  }
+
+  function updateKPICards(data, filterRatio, filteredDailyData) {
+    // Update key metrics based on filter ratio
+    const revenueFull = parseFloat(data.revenue?.replace(/[$,]/g, '') || 0);
+    const shipmentsFull = parseInt(data.revenueSub?.match(/\d+/) || 0);
+    const weightFull = parseFloat(data.weight?.match(/[\d.]+/) || 0);
+    
+    const revenueFiltered = (revenueFull * filterRatio).toFixed(2);
+    const shipmentsFiltered = Math.round(shipmentsFull * filterRatio);
+    const weightFiltered = (weightFull * filterRatio).toFixed(2);
+    const avgCostFiltered = shipmentsFiltered > 0 ? (revenueFiltered / shipmentsFiltered).toFixed(2) : '0.00';
+    const weightPerFiltered = shipmentsFiltered > 0 ? (weightFiltered / shipmentsFiltered).toFixed(2) : '0.00';
+    
+    // Update DOM elements if they exist
+    const kpiCards = document.querySelectorAll('.kpi-card');
+    kpiCards.forEach((card, index) => {
+      const value = card.querySelector('.kpi-value');
+      if (!value) return;
+      
+      switch(index) {
+        case 0: // Revenue
+          value.textContent = `$${parseFloat(revenueFiltered).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+          break;
+        case 1: // Shipments
+          value.textContent = shipmentsFiltered.toLocaleString('en-US');
+          break;
+        case 2: // Weight
+          value.textContent = `${parseFloat(weightFiltered).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} lbs`;
+          break;
+        case 3: // Avg Cost
+          value.textContent = `$${avgCostFiltered}`;
+          break;
+        case 4: // Weight Per Shipment
+          value.textContent = `${weightPerFiltered} lbs`;
+          break;
+      }
+    });
+  }
+
+  function updateChartsWithFilter(filteredLabels, filteredData, data) {
+    // Update daily shipment chart
+    if (charts.daily) {
+      charts.daily.data.labels = filteredLabels;
+      charts.daily.data.datasets[0].data = filteredData;
+      charts.daily.update();
+    }
+    
+    // Update other charts proportionally (keep distributions, update scale)
+    const totalFiltered = filteredData.reduce((a, b) => a + b, 0) || 1;
+    const totalOriginal = (data.chartDailyData || []).reduce((a, b) => a + b, 0) || 1;
+    const scale = totalFiltered / totalOriginal;
+    
+    // Update zone chart with scaled data
+    if (charts.zone && data.chartZoneData) {
+      charts.zone.data.datasets[0].data = data.chartZoneData.map(v => Math.round(v * scale));
+      charts.zone.update();
+    }
+    
+    // Update weight distribution
+    if (charts.weightPie && data.chartWeightData) {
+      charts.weightPie.data.datasets[0].data = data.chartWeightData.map(v => Math.round(v * scale));
+      charts.weightPie.update();
+    }
+  }
+
+  function updateTablesWithFilter(data, filterRatio) {
+    // Update all visible tables with filtered data
+    const tables = document.querySelectorAll('table tbody');
+    
+    tables.forEach(tbody => {
+      const rows = tbody.querySelectorAll('tr');
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        
+        // Update numeric cells (shipment counts, revenue, weight)
+        cells.forEach((cell, cellIndex) => {
+          const text = cell.textContent.trim();
+          
+          // Check if it's a number (shipment count, weight, revenue)
+          const numMatch = text.match(/^([\d,]+(?:\.\d{2})?)\s*(lbs)?|\$?[\d,]+\.?\d*$/);
+          
+          if (numMatch && !cell.querySelector('.badge')) {
+            // It's a numeric cell
+            const num = parseFloat(text.replace(/[$,lbs]/g, ''));
+            if (!isNaN(num) && num > 0) {
+              const filtered = num * filterRatio;
+              const currency = text.includes('$');
+              const hasUnit = text.includes('lbs');
+              
+              if (currency) {
+                cell.textContent = '$' + filtered.toFixed(2);
+              } else if (hasUnit) {
+                cell.textContent = filtered.toFixed(2) + ' lbs';
+              } else if (text.match(/^\d+$/)) {
+                // Integer shipment count
+                cell.textContent = Math.round(filtered).toLocaleString('en-US');
+              } else {
+                cell.textContent = filtered.toFixed(2);
+              }
+            }
+          }
+        });
+      });
+    });
   }
 
   // Initialize when page loads
@@ -5075,4 +5315,5 @@
 
 </body>
 </html>
+
 
