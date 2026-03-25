@@ -503,16 +503,27 @@
           <option value="last90">Last 90 Days</option>
           <option value="current_month">Current Month</option>
           <option value="last_month">Last Month</option>
+          <option value="custom">Custom Range</option>
         </select>
       </div>
-      <div style="display: flex; gap: 10px; align-items: flex-end;">
-        <button class="reset-all-btn" onclick="applyFilters()" style="background: #4CAF50; color: white; padding: 10px 25px;">✓ Apply Filters</button>
-        <button class="reset-all-btn" onclick="resetAllFilters()">🔄 Reset</button>
+      <div id="customDateFields" style="display: none; display: flex; gap: 10px; align-items: flex-end;">
+        <div class="filter-group" style="margin-bottom: 0;">
+          <label>Start Date</label>
+          <input type="date" id="customStartDate" style="padding: 10px; border-radius: 6px; border: none; font-size: 13px;">
+        </div>
+        <div class="filter-group" style="margin-bottom: 0;">
+          <label>End Date</label>
+          <input type="date" id="customEndDate" style="padding: 10px; border-radius: 6px; border: none; font-size: 13px;">
+        </div>
       </div>
     </div>
 
-    <!-- Row 2: Quick filters + status -->
-    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+    <!-- Row 2: Buttons and Quick filters -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 15px;">
+      <div style="display: flex; gap: 10px;">
+        <button class="reset-all-btn" onclick="applyFilters()" style="background: #4CAF50; color: white; padding: 10px 25px;">✓ Apply Filters</button>
+        <button class="reset-all-btn" onclick="resetAllFilters()">🔄 Reset</button>
+      </div>
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
         <button class="quick-filter-btn" onclick="setQuickRange('last7')">7D</button>
         <button class="quick-filter-btn" onclick="setQuickRange('last14')">14D</button>
@@ -688,7 +699,23 @@ let displayData = null;
 // ============================================================
 
 function invoiceIsInDateRange(invoice, dateRange) {
-  const range = dateConfig[dateRange];
+  let range;
+  
+  if (dateRange === 'custom') {
+    const startInput = document.getElementById('customStartDate').value;
+    const endInput = document.getElementById('customEndDate').value;
+    
+    if (!startInput || !endInput) {
+      return false; // If custom dates not set, don't include invoice
+    }
+    
+    const customStart = new Date(startInput);
+    const customEnd = new Date(endInput);
+    
+    return invoice.startDate <= customEnd && invoice.endDate >= customStart;
+  }
+  
+  range = dateConfig[dateRange];
   return invoice.startDate <= range.end && invoice.endDate >= range.start;
 }
 
@@ -704,6 +731,29 @@ window.addEventListener('DOMContentLoaded', () => {
   updateDropdowns();
   renderTabs();
   applyFilters();
+  
+  // Handle custom date range toggle
+  document.getElementById('dateRangeSelect').addEventListener('change', function() {
+    const customFields = document.getElementById('customDateFields');
+    if (this.value === 'custom') {
+      customFields.style.display = 'flex';
+    } else {
+      customFields.style.display = 'none';
+    }
+  });
+  
+  // Add event listeners to custom date inputs
+  document.getElementById('customStartDate').addEventListener('change', () => {
+    if (document.getElementById('dateRangeSelect').value === 'custom') {
+      applyFilters();
+    }
+  });
+  
+  document.getElementById('customEndDate').addEventListener('change', () => {
+    if (document.getElementById('dateRangeSelect').value === 'custom') {
+      applyFilters();
+    }
+  });
 });
 
 function updateDropdowns() {
@@ -851,7 +901,15 @@ function applyFilters() {
     currentFilters.carrier === 'uniuni' ? '📦 UniUni - Ground Express' : '📦 DHL - eCommerce';
 
   // Update active range
-  document.getElementById('activeRange').innerHTML = `📍 ${dateConfig[dateRange].label}`;
+  let rangeLabel;
+  if (dateRange === 'custom') {
+    const startInput = document.getElementById('customStartDate').value;
+    const endInput = document.getElementById('customEndDate').value;
+    rangeLabel = startInput && endInput ? `📍 Custom: ${startInput} to ${endInput}` : '📍 Set custom dates';
+  } else {
+    rangeLabel = `📍 ${dateConfig[dateRange].label}`;
+  }
+  document.getElementById('activeRange').innerHTML = rangeLabel;
 
   updateKPICards();
   updateAllTabContent();
@@ -1419,4 +1477,5 @@ function updateInvoicesTab() {
 
 </body>
 </html>
+
 
