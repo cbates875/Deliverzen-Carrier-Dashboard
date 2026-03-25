@@ -121,6 +121,61 @@
   </div>
 </div>
 
+<!-- DATE RANGE FILTER SECTION -->
+<div style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 20px 32px; border-bottom: 2px solid #d1d5db; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+  <div style="max-width: 1400px; margin: 0 auto;">
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: .875rem; font-weight: 600; color: #374151;">📅 Date Range:</span>
+      </div>
+      
+      <!-- Preset Range Buttons -->
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button onclick="setDateRange('7days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          Last 7 Days
+        </button>
+        <button onclick="setDateRange('14days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          Last 14 Days
+        </button>
+        <button onclick="setDateRange('30days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          Last 30 Days
+        </button>
+        <button onclick="setDateRange('60days')" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          Last 60 Days
+        </button>
+        <button onclick="toggleCustomDate()" id="customDateBtn" style="padding: 6px 14px; background: white; border: 2px solid #d1d5db; border-radius: 6px; font-size: .875rem; font-weight: 500; color: #111827; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';" onmouseout="this.style.background='white'; this.style.borderColor='#d1d5db';">
+          Custom Range
+        </button>
+      </div>
+
+      <!-- Custom Date Range Inputs (Hidden by default) -->
+      <div id="customDatePicker" style="display: none; margin-left: 16px; padding: 12px 16px; background: white; border: 2px solid #e5e7eb; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div>
+            <label style="font-size: .75rem; font-weight: 600; color: #6b7280; display: block; margin-bottom: 4px;">From Date</label>
+            <input type="date" id="dateFrom" style="padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: .875rem;" value="2026-02-15">
+          </div>
+          <div>
+            <label style="font-size: .75rem; font-weight: 600; color: #6b7280; display: block; margin-bottom: 4px;">To Date</label>
+            <input type="date" id="dateTo" style="padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: .875rem;" value="2026-03-22">
+          </div>
+          <button onclick="applyCustomDate()" style="padding: 6px 14px; background: #3b82f6; color: white; border: none; border-radius: 4px; font-size: .875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; align-self: flex-end;" onmouseover="this.style.background='#2563eb';" onmouseout="this.style.background='#3b82f6';">
+            Apply
+          </button>
+          <button onclick="toggleCustomDate()" style="padding: 6px 14px; background: #e5e7eb; color: #111827; border: none; border-radius: 4px; font-size: .875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; align-self: flex-end;" onmouseover="this.style.background='#d1d5db';" onmouseout="this.style.background='#e5e7eb';">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Range Display -->
+      <div style="margin-left: auto; padding: 8px 12px; background: #dbeafe; border: 1px solid #93c5fd; border-radius: 6px;">
+        <span style="font-size: .875rem; font-weight: 600; color: #1e40af;">📊 <span id="activeDateRange">All Data (Feb 15 - Mar 22, 2026)</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="tabs">
   <div class="tabs-inner">
     <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
@@ -4913,6 +4968,102 @@
     } catch (error) {
       console.error('Chart initialization error:', error);
     }
+  }
+
+  // Date Range Filter Functions
+  function setDateRange(preset) {
+    const today = new Date('2026-03-22'); // Using dashboard's reference date
+    let fromDate, toDate, label;
+    
+    switch(preset) {
+      case '7days':
+        toDate = new Date(today);
+        fromDate = new Date(today);
+        fromDate.setDate(fromDate.getDate() - 7);
+        label = 'Last 7 Days';
+        break;
+      case '14days':
+        toDate = new Date(today);
+        fromDate = new Date(today);
+        fromDate.setDate(fromDate.getDate() - 14);
+        label = 'Last 14 Days';
+        break;
+      case '30days':
+        toDate = new Date(today);
+        fromDate = new Date(today);
+        fromDate.setDate(fromDate.getDate() - 30);
+        label = 'Last 30 Days';
+        break;
+      case '60days':
+        toDate = new Date(today);
+        fromDate = new Date(today);
+        fromDate.setDate(fromDate.getDate() - 60);
+        label = 'Last 60 Days';
+        break;
+    }
+    
+    const customPicker = document.getElementById('customDatePicker');
+    if (customPicker) customPicker.style.display = 'none';
+    
+    const dateRangeDisplay = document.getElementById('activeDateRange');
+    if (dateRangeDisplay) {
+      const fromStr = formatDate(fromDate);
+      const toStr = formatDate(toDate);
+      dateRangeDisplay.textContent = `${label} (${fromStr} - ${toStr})`;
+    }
+    
+    console.log(`Applied date range: ${label}`);
+    applyFiltering(fromDate, toDate);
+  }
+
+  function toggleCustomDate() {
+    const customPicker = document.getElementById('customDatePicker');
+    if (customPicker) {
+      customPicker.style.display = customPicker.style.display === 'none' ? 'flex' : 'none';
+    }
+  }
+
+  function applyCustomDate() {
+    const fromInput = document.getElementById('dateFrom');
+    const toInput = document.getElementById('dateTo');
+    
+    if (fromInput && toInput) {
+      const fromDate = new Date(fromInput.value);
+      const toDate = new Date(toInput.value);
+      
+      if (fromDate > toDate) {
+        alert('From date cannot be after To date');
+        return;
+      }
+      
+      const customPicker = document.getElementById('customDatePicker');
+      if (customPicker) customPicker.style.display = 'none';
+      
+      const dateRangeDisplay = document.getElementById('activeDateRange');
+      if (dateRangeDisplay) {
+        dateRangeDisplay.textContent = `Custom Range (${formatDate(fromDate)} - ${formatDate(toDate)})`;
+      }
+      
+      console.log(`Applied custom date range: ${formatDate(fromDate)} to ${formatDate(toDate)}`);
+      applyFiltering(fromDate, toDate);
+    }
+  }
+
+  function formatDate(date) {
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  }
+
+  function applyFiltering(fromDate, toDate) {
+    // This function would apply the actual filtering logic
+    // For now, it serves as a placeholder for future enhancement
+    console.log(`Filtering data from ${formatDate(fromDate)} to ${formatDate(toDate)}`);
+    
+    // Example: You could filter tables, update charts, etc.
+    // updateTablesForDateRange(fromDate, toDate);
+    // updateChartsForDateRange(fromDate, toDate);
   }
 
   // Initialize when page loads
