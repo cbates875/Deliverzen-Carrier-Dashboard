@@ -568,7 +568,8 @@
     <!-- TAB 3: INVOICE BREAKDOWN -->
     <div id="tab-invoices" class="tab-pane"></div>
 
-  </div>
+    <!-- TAB 4: ACCESSORIAL CHARGES -->
+    <div id="tab-accessorials" class="tab-pane"></div>
 </div>
 
 <script>
@@ -1119,6 +1120,7 @@ function renderTabs() {
     <button class="tab-nav-btn active" onclick="switchTab('overview')">📊 Overview & Charts</button>
     <button class="tab-nav-btn" onclick="switchTab('performance')">📈 Performance</button>
     <button class="tab-nav-btn" onclick="switchTab('invoices')">📑 Invoice Details</button>
+    <button class="tab-nav-btn" onclick="switchTab('accessorials')">💰 Accessorial Charges</button>
   `;
 }
 
@@ -1133,6 +1135,7 @@ function updateAllTabContent() {
   updateOverviewTab();
   updatePerformanceTab();
   updateInvoicesTab();
+  updateAccessorialsTab();
 }
 
 // ============================================================
@@ -1473,9 +1476,149 @@ function updateInvoicesTab() {
 
   document.getElementById('tab-invoices').innerHTML = html;
 }
+
+// ============================================================
+// TAB 4: ACCESSORIAL CHARGES
+// ============================================================
+
+function updateAccessorialsTab() {
+  const carrier = currentFilters.carrier;
+  const dateRange = currentFilters.dateRange;
+  
+  let filteredInvoices = getInvoicesForDateRange(carrier, dateRange);
+  if (currentFilters.invoice !== 'all') {
+    filteredInvoices = filteredInvoices.filter(inv => inv.id === currentFilters.invoice);
+  }
+
+  if (filteredInvoices.length === 0) {
+    document.getElementById('tab-accessorials').innerHTML = '<div class="section" style="text-align: center; color: #999;">No data available for selected filters</div>';
+    return;
+  }
+
+  // Aggregate accessorial charges by service type
+  const typeAccessorials = {};
+  
+  filteredInvoices.forEach(inv => {
+    if (inv.types) {
+      // Get the invoice-level accessorial amounts
+      const totalShips = inv.totalShipments || inv.shipments;
+      const fuelPerShip = inv.fuel / totalShips;
+      const dutiesPerShip = inv.duties / totalShips;
+      const dangerousPerShip = inv.dangerous / totalShips;
+      
+      // Allocate to each service type
+      Object.entries(inv.types).forEach(([type, data]) => {
+        if (!typeAccessorials[type]) {
+          typeAccessorials[type] = { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 };
+        }
+        typeAccessorials[type].shipments += data.shipments;
+        typeAccessorials[type].fuel += fuelPerShip * data.shipments;
+        typeAccessorials[type].duties += dutiesPerShip * data.shipments;
+        typeAccessorials[type].dangerous += dangerousPerShip * data.shipments;
+        typeAccessorials[type].total = typeAccessorials[type].fuel + typeAccessorials[type].duties + typeAccessorials[type].dangerous;
+      });
+    }
+  });
+
+  // Sort by total accessorials descending
+  const sortedTypes = Object.entries(typeAccessorials)
+    .sort((a, b) => b[1].total - a[1].total);
+
+  const typeRows = sortedTypes.map(([type, data]) => `
+    <tr>
+      <td><strong>${type}</strong></td>
+      <td>${data.shipments.toLocaleString()}</td>
+      <td>$${data.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+      <td>$${data.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+      <td>$${data.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+      <td><strong>$${data.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong></td>
+    </tr>
+  `).join('');
+
+  // Calculate totals
+  const totals = sortedTypes.reduce((acc, [type, data]) => ({
+    shipments: acc.shipments + data.shipments,
+    fuel: acc.fuel + data.fuel,
+    duties: acc.duties + data.duties,
+    dangerous: acc.dangerous + data.dangerous,
+    total: acc.total + data.total
+  }), { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 });
+
+  const html = `
+    <div class="section">
+      <div class="section-title">💰 Accessorial Charges by Service Type (${dateConfig[dateRange].label})</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Service Type</th>
+            <th>Shipments</th>
+            <th>Fuel Charges</th>
+            <th>Duties & Taxes</th>
+            <th>Dangerous Goods</th>
+            <th>Total Accessorials</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${typeRows}
+          <tr style="background: #f0f0f0; font-weight: 700;">
+            <td>TOTAL</td>
+            <td>${totals.shipments.toLocaleString()}</td>
+            <td>$${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td>$${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td>$${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td>$${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📊 Accessorial Breakdown Summary</div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-card-title">Total Fuel Charges</div>
+          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
+            $${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+          </div>
+          <div class="summary-card-content" style="margin-top: 8px;">
+            ${totals.shipments > 0 ? `$${(totals.fuel / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Total Duties & Taxes</div>
+          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
+            $${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+          </div>
+          <div class="summary-card-content" style="margin-top: 8px;">
+            ${totals.shipments > 0 ? `$${(totals.duties / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Total Dangerous Goods Fees</div>
+          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
+            $${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+          </div>
+          <div class="summary-card-content" style="margin-top: 8px;">
+            ${totals.shipments > 0 ? `$${(totals.dangerous / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Total Accessorial Charges</div>
+          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
+            $${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+          </div>
+          <div class="summary-card-content" style="margin-top: 8px;">
+            ${totals.shipments > 0 ? `$${(totals.total / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('tab-accessorials').innerHTML = html;
+}
 </script>
 
 </body>
 </html>
-
 
