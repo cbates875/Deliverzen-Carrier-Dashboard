@@ -506,7 +506,7 @@
           <option value="custom">Custom Range</option>
         </select>
       </div>
-      <div id="customDateFields" style="display: none; display: flex; gap: 10px; align-items: flex-end;">
+      <div id="customDateFields" style="display: none; gap: 10px; align-items: flex-end;">
         <div class="filter-group" style="margin-bottom: 0;">
           <label>Start Date</label>
           <input type="date" id="customStartDate" style="padding: 10px; border-radius: 6px; border: none; font-size: 13px;">
@@ -515,6 +515,7 @@
           <label>End Date</label>
           <input type="date" id="customEndDate" style="padding: 10px; border-radius: 6px; border: none; font-size: 13px;">
         </div>
+        <button onclick="applyCustomDateFilter()" style="padding: 10px 16px; background: #0066cc; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;">Apply Dates</button>
       </div>
     </div>
 
@@ -589,7 +590,8 @@ const dateConfig = {
   last60: { start: new Date(2026, 0, 22), end: new Date(2026, 2, 22), label: 'Last 60 Days (Jan 22-Mar 22)' },
   last90: { start: new Date(2025, 11, 23), end: new Date(2026, 2, 22), label: 'Last 90 Days (Dec 23-Mar 22)' },
   current_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 22), label: 'Current Month (Mar)' },
-  last_month: { start: new Date(2026, 1, 1), end: new Date(2026, 1, 28), label: 'Last Month (Feb)' }
+  last_month: { start: new Date(2026, 1, 1), end: new Date(2026, 1, 28), label: 'Last Month (Feb)' },
+  custom: { start: null, end: null, label: 'Custom Range' }
 };
 
 const invoiceData = {
@@ -722,13 +724,23 @@ function invoiceIsInDateRange(invoice, dateRange) {
       return false; // If custom dates not set, don't include invoice
     }
     
-    const customStart = new Date(startInput);
-    const customEnd = new Date(endInput);
+    // Parse dates from input (format: YYYY-MM-DD) and set to start of day
+    const [startYear, startMonth, startDay] = startInput.split('-').map(Number);
+    const [endYear, endMonth, endDay] = endInput.split('-').map(Number);
     
-    return invoice.startDate <= customEnd && invoice.endDate >= customStart;
+    const customStart = new Date(startYear, startMonth - 1, startDay);
+    const customEnd = new Date(endYear, endMonth - 1, endDay);
+    
+    // Inclusive range: invoice must overlap with custom range
+    const matches = invoice.startDate <= customEnd && invoice.endDate >= customStart;
+    console.log(`Invoice ${invoice.id}: ${invoice.startDate.toDateString()} to ${invoice.endDate.toDateString()} vs ${customStart.toDateString()} to ${customEnd.toDateString()} -> ${matches}`);
+    return matches;
   }
   
   range = dateConfig[dateRange];
+  if (!range) {
+    return false; // If date range not found, return no invoices
+  }
   return invoice.startDate <= range.end && invoice.endDate >= range.start;
 }
 
@@ -750,23 +762,23 @@ window.addEventListener('DOMContentLoaded', () => {
     const customFields = document.getElementById('customDateFields');
     if (this.value === 'custom') {
       customFields.style.display = 'flex';
+      customFields.style.gap = '10px';
+      customFields.style.alignItems = 'flex-end';
     } else {
       customFields.style.display = 'none';
     }
   });
   
   // Add event listeners to custom date inputs
-  document.getElementById('customStartDate').addEventListener('change', () => {
-    if (document.getElementById('dateRangeSelect').value === 'custom') {
-      applyFilters();
-    }
-  });
+  const customStartInput = document.getElementById('customStartDate');
+  const customEndInput = document.getElementById('customEndDate');
   
-  document.getElementById('customEndDate').addEventListener('change', () => {
-    if (document.getElementById('dateRangeSelect').value === 'custom') {
-      applyFilters();
-    }
-  });
+  // Trigger on both 'change' and 'input' events for real-time updates
+  customStartInput.addEventListener('change', applyCustomDateFilter);
+  customStartInput.addEventListener('input', applyCustomDateFilter);
+  
+  customEndInput.addEventListener('change', applyCustomDateFilter);
+  customEndInput.addEventListener('input', applyCustomDateFilter);
 });
 
 function updateDropdowns() {
@@ -846,6 +858,32 @@ function updateDropdowns() {
 // FILTERS & DATA
 // ============================================================
 
+function applyCustomDateFilter() {
+  const isCustom = document.getElementById('dateRangeSelect').value === 'custom';
+  
+  if (!isCustom) {
+    return; // Only apply if custom range is selected
+  }
+  
+  const startInput = document.getElementById('customStartDate').value;
+  const endInput = document.getElementById('customEndDate').value;
+  
+  // Only apply filters if both dates are set
+  if (startInput && endInput) {
+    // Validate that start date is not after end date
+    const startDate = new Date(startInput);
+    const endDate = new Date(endInput);
+    
+    if (startDate > endDate) {
+      // Silently fail if dates are invalid - don't update filters
+      return;
+    }
+    
+    console.log('Applying custom date filter:', startInput, 'to', endInput);
+    applyFilters();
+  }
+}
+
 function applyFilters() {
   const carrier = document.getElementById('carrierSelect').value;
   const invoice = document.getElementById('invoiceSelect').value;
@@ -853,9 +891,12 @@ function applyFilters() {
   const dateRange = document.getElementById('dateRangeSelect').value;
 
   currentFilters = { carrier, invoice, shipmentType, dateRange };
+  
+  console.log('ApplyFilters called with:', currentFilters);
 
   // Get invoices filtered by date range
   let invoices = getInvoicesForDateRange(carrier, dateRange);
+  console.log('Invoices after date filter:', invoices.length);
   
   if (invoice !== 'all') {
     invoices = invoices.filter(inv => inv.id === invoice);
@@ -1192,7 +1233,7 @@ function updateOverviewTab() {
 
   const html = `
     <div class="section">
-      <div class="section-title">📊 Visual Analytics (Date Range: ${dateConfig[currentFilters.dateRange].label})</div>
+      <div class="section-title">📊 Visual Analytics (Date Range: ${dateConfig[currentFilters.dateRange] && dateConfig[currentFilters.dateRange].label ? dateConfig[currentFilters.dateRange].label : 'Custom Range'})</div>
       <div class="charts-grid">
         <div class="chart-container">
           <div class="chart-title">Cost by Shipment Type</div>
@@ -1437,7 +1478,7 @@ function updateInvoicesTab() {
     ${dhlTypesSection}
 
     <div class="section">
-      <div class="section-title">📑 Invoice Performance Details (${dateConfig[dateRange].label})</div>
+      <div class="section-title">📑 Invoice Performance Details (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
       <table>
         <thead>
           <tr>
@@ -1572,7 +1613,7 @@ function updateAccessorialsTab() {
 
   const html = `
     <div class="section">
-      <div class="section-title">💰 Accessorial Charges by Service Type (${dateConfig[dateRange].label})</div>
+      <div class="section-title">💰 Accessorial Charges by Service Type (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
       <table>
         <thead>
           <tr>
