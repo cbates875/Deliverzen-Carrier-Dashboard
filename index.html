@@ -632,55 +632,67 @@ const invoiceData = {
   ],
   dhl: [
     {
-      id: 'd1', period: 'Feb 15-21', startDate: new Date(2026, 1, 15), endDate: new Date(2026, 1, 21), types: {
-        'DHL ECOMMERCE PACKET INTERNATIONAL': {shipments: 2474, revenue: 19527.73, weight: 733.61, onTimeCount: 2388, onTimeTotal: 2474, complianceCount: 2457, complianceTotal: 2474},
-        'DHLECOMMERCE DHL SM PARCEL EXPEDITED': {shipments: 2474, revenue: 19527.73, weight: 733.61, onTimeCount: 2388, onTimeTotal: 2474, complianceCount: 2457, complianceTotal: 2474},
-        'DHLECOMMERCE DHL SM PARCEL GROUND': {shipments: 1644, revenue: 13019.39, weight: 488.90, onTimeCount: 1591, onTimeTotal: 1644, complianceCount: 1637, complianceTotal: 1644},
-        'DHL PARCEL INTERNATIONAL STANDARD': {shipments: 1653, revenue: 13155.30, weight: 489.63, onTimeCount: 1600, onTimeTotal: 1653, complianceCount: 1645, complianceTotal: 1653}
+      id: 'inv1', period: 'Feb 15 - Mar 20', startDate: new Date(2026, 1, 15), endDate: new Date(2026, 2, 20), invoiceNumber: '21968253', types: {
+        'DHL Packet International': {shipments: 1, revenue: 10.43, weight: 1.62, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL Parcel International Direct': {shipments: 46, revenue: 479.62, weight: 197.99, transitDays: 2.5, onTimeCount: 44, onTimeTotal: 46, complianceCount: 46, complianceTotal: 46},
+        'DHL Parcel International Standard': {shipments: 25, revenue: 333.01, weight: 110.23, transitDays: 6.0, onTimeCount: 24, onTimeTotal: 25, complianceCount: 25, complianceTotal: 25},
+        'DHL SmartMail Parcel Expedited': {shipments: 1022, revenue: 5231.89, weight: 5520.00, transitDays: 2.5, onTimeCount: 981, onTimeTotal: 1022, complianceCount: 1012, complianceTotal: 1022},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 2708, revenue: 25063.39, weight: 8499.00, transitDays: 1.5, onTimeCount: 2600, onTimeTotal: 2708, complianceCount: 2681, complianceTotal: 2708},
+        'DHL SmartMail Parcel Ground': {shipments: 3776, revenue: 17952.54, weight: 14783.00, transitDays: 5.5, onTimeCount: 3626, onTimeTotal: 3776, complianceCount: 3738, complianceTotal: 3776},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 1491, revenue: 10328.69, weight: 1679.00, transitDays: 2.5, onTimeCount: 1432, onTimeTotal: 1491, complianceCount: 1476, complianceTotal: 1491},
+        'DHL SmartMail Parcel Plus Ground': {shipments: 8971, revenue: 62370.90, weight: 8301.00, transitDays: 5.5, onTimeCount: 8613, onTimeTotal: 8971, complianceCount: 8882, complianceTotal: 8971}
       },
-      totalShipments: 8245, totalRevenue: 65230.15, totalWeight: 2445.75,
-      onTimeCount: 7967, onTimeTotal: 8245, complianceCount: 8196, complianceTotal: 8245,
-      transitDays: 2.0, fuel: 1850.50, duties: 425.75, dangerous: 120.30, accessorials: 285
+      totalShipments: 18040, totalRevenue: 121770.47, totalWeight: 39091.84,
+      onTimeCount: 17321, onTimeTotal: 18040, complianceCount: 17861, complianceTotal: 18040,
+      transitDays: 2.1, fuel: 4870.82, duties: 1826.56, dangerous: 608.85
     },
     {
-      id: 'd2', period: 'Feb 22-28', startDate: new Date(2026, 1, 22), endDate: new Date(2026, 1, 28), types: {
-        'DHLECOMMERCE DHL SM PARCEL PLUS EXPEDITED': {shipments: 2563, revenue: 19730.13, weight: 781.26, onTimeCount: 2474, onTimeTotal: 2563, complianceCount: 2547, complianceTotal: 2563},
-        'DHLECOMMERCE DHL SM PARCEL PLUS GROUND': {shipments: 2563, revenue: 19730.13, weight: 781.26, onTimeCount: 2474, onTimeTotal: 2563, complianceCount: 2547, complianceTotal: 2563},
-        'DHLECOMMERCE DHL PARCEL INTL. RETURNS - UNPROCESSABLE': {shipments: 2563, revenue: 19730.13, weight: 781.26, onTimeCount: 2474, onTimeTotal: 2563, complianceCount: 2547, complianceTotal: 2563},
-        'DHLECOMMERCE DHL SMARTMAIL BPM EXPEDITED': {shipments: 2561, revenue: 19729.93, weight: 781.48, onTimeCount: 2473, onTimeTotal: 2561, complianceCount: 2546, complianceTotal: 2561}
+      id: 'inv2', period: 'Feb 26 - Mar 06', startDate: new Date(2026, 1, 26), endDate: new Date(2026, 2, 6), invoiceNumber: '22168235', types: {
+        'DHL Packet International': {shipments: 1, revenue: 15.92, weight: 3.58, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL Parcel International Direct': {shipments: 57, revenue: 609.60, weight: 216.21, transitDays: 2.5, onTimeCount: 55, onTimeTotal: 57, complianceCount: 57, complianceTotal: 57},
+        'DHL Parcel International Standard': {shipments: 71, revenue: 1003.20, weight: 218.84, transitDays: 6.0, onTimeCount: 68, onTimeTotal: 71, complianceCount: 71, complianceTotal: 71},
+        'DHL SmartMail Parcel Expedited': {shipments: 733, revenue: 3709.77, weight: 3855.00, transitDays: 2.5, onTimeCount: 704, onTimeTotal: 733, complianceCount: 726, complianceTotal: 733},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 4225, revenue: 40034.53, weight: 11099.00, transitDays: 1.5, onTimeCount: 4056, onTimeTotal: 4225, complianceCount: 4183, complianceTotal: 4225},
+        'DHL SmartMail Parcel Ground': {shipments: 5117, revenue: 24493.24, weight: 19518.00, transitDays: 5.5, onTimeCount: 4912, onTimeTotal: 5117, complianceCount: 5066, complianceTotal: 5117},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 2714, revenue: 18592.79, weight: 2734.00, transitDays: 2.5, onTimeCount: 2606, onTimeTotal: 2714, complianceCount: 2687, complianceTotal: 2714},
+        'DHL SmartMail Parcel Plus Ground': {shipments: 12809, revenue: 89282.18, weight: 10630.00, transitDays: 5.5, onTimeCount: 12297, onTimeTotal: 12809, complianceCount: 12681, complianceTotal: 12809}
       },
-      totalShipments: 10250, totalRevenue: 78920.45, totalWeight: 3125.50,
-      onTimeCount: 9895, onTimeTotal: 10250, complianceCount: 10188, complianceTotal: 10250,
-      transitDays: 2.0, fuel: 2285.75, duties: 525.50, dangerous: 145.80, accessorials: 354
+      totalShipments: 25727, totalRevenue: 177741.23, totalWeight: 48274.63,
+      onTimeCount: 24699, onTimeTotal: 25727, complianceCount: 25472, complianceTotal: 25727,
+      transitDays: 2.1, fuel: 7109.65, duties: 2666.12, dangerous: 888.71
     },
     {
-      id: 'd3', period: 'Mar 1-7', startDate: new Date(2026, 2, 1), endDate: new Date(2026, 2, 7), types: {
-        'DHLECOMMERCE DHL PARCEL INTERNATIONAL DIRECT': {shipments: 3920, revenue: 29325.15, weight: 1445.38, onTimeCount: 3782, onTimeTotal: 3920, complianceCount: 3892, complianceTotal: 3920},
-        'DHL ECOMMERCE PACKET INTERNATIONAL': {shipments: 3920, revenue: 29325.15, weight: 1445.37, onTimeCount: 3782, onTimeTotal: 3920, complianceCount: 3892, complianceTotal: 3920}
+      id: 'inv3', period: 'Mar 02 - Mar 13', startDate: new Date(2026, 2, 2), endDate: new Date(2026, 2, 13), invoiceNumber: '22170123', types: {
+        'DHL Packet International': {shipments: 4, revenue: 51.09, weight: 6.18, transitDays: 7.0, onTimeCount: 4, onTimeTotal: 4, complianceCount: 4, complianceTotal: 4},
+        'DHL Parcel International Direct': {shipments: 57, revenue: 629.50, weight: 312.93, transitDays: 2.5, onTimeCount: 55, onTimeTotal: 57, complianceCount: 56, complianceTotal: 57},
+        'DHL Parcel International Standard': {shipments: 18, revenue: 233.89, weight: 87.23, transitDays: 6.0, onTimeCount: 17, onTimeTotal: 18, complianceCount: 18, complianceTotal: 18},
+        'DHL Parcel Intl. Returns - Unprocessable': {shipments: 1, revenue: 11.84, weight: 1.95, transitDays: 4.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL SmartMail Parcel Expedited': {shipments: 628, revenue: 3202.36, weight: 3770.00, transitDays: 2.5, onTimeCount: 603, onTimeTotal: 628, complianceCount: 622, complianceTotal: 628},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 3228, revenue: 30684.17, weight: 9401.00, transitDays: 1.5, onTimeCount: 3099, onTimeTotal: 3228, complianceCount: 3196, complianceTotal: 3228},
+        'DHL SmartMail Parcel Ground': {shipments: 3164, revenue: 15079.36, weight: 13630.00, transitDays: 5.5, onTimeCount: 3037, onTimeTotal: 3164, complianceCount: 3132, complianceTotal: 3164},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 1006, revenue: 7721.44, weight: 1620.00, transitDays: 2.5, onTimeCount: 966, onTimeTotal: 1006, complianceCount: 996, complianceTotal: 1006},
+        'DHL SmartMail Parcel Plus Ground': {shipments: 9801, revenue: 69509.77, weight: 8507.00, transitDays: 5.5, onTimeCount: 9409, onTimeTotal: 9801, complianceCount: 9703, complianceTotal: 9801}
       },
-      totalShipments: 7840, totalRevenue: 58650.30, totalWeight: 2890.75,
-      onTimeCount: 7564, onTimeTotal: 7840, complianceCount: 7784, complianceTotal: 7840,
-      transitDays: 2.1, fuel: 1754.25, duties: 403.50, dangerous: 115.75, accessorials: 270
+      totalShipments: 17907, totalRevenue: 127123.42, totalWeight: 37336.29,
+      onTimeCount: 17191, onTimeTotal: 17907, complianceCount: 17728, complianceTotal: 17907,
+      transitDays: 2.1, fuel: 5084.94, duties: 1906.85, dangerous: 635.62
     },
     {
-      id: 'd4', period: 'Mar 8-14', startDate: new Date(2026, 2, 8), endDate: new Date(2026, 2, 14), types: {
-        'DHLECOMMERCE DHL SM PARCEL EXPEDITED': {shipments: 2821, revenue: 24039.15, weight: 1036.54, onTimeCount: 2722, onTimeTotal: 2821, complianceCount: 2802, complianceTotal: 2821},
-        'DHLECOMMERCE DHL SM PARCEL GROUND': {shipments: 3299, revenue: 28106.65, weight: 1209.06, onTimeCount: 3187, onTimeTotal: 3299, complianceCount: 3274, complianceTotal: 3299}
+      id: 'inv4', period: 'Feb 16 - Feb 28', startDate: new Date(2026, 1, 16), endDate: new Date(2026, 1, 28), invoiceNumber: '22171105', types: {
+        'DHL Packet International': {shipments: 1, revenue: 5.29, weight: 15.00, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL Parcel International Direct': {shipments: 51, revenue: 533.68, weight: 242.85, transitDays: 2.5, onTimeCount: 49, onTimeTotal: 51, complianceCount: 51, complianceTotal: 51},
+        'DHL Parcel International Standard': {shipments: 30, revenue: 431.95, weight: 113.55, transitDays: 6.0, onTimeCount: 29, onTimeTotal: 30, complianceCount: 30, complianceTotal: 30},
+        'DHL Parcel Intl. Returns - Unprocessable': {shipments: 1, revenue: 19.83, weight: 4.30, transitDays: 4.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL SmartMail BPM Expedited': {shipments: 1, revenue: 13.62, weight: 5.00, transitDays: 1.5, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL SmartMail Parcel Expedited': {shipments: 542, revenue: 2776.41, weight: 3242.00, transitDays: 2.5, onTimeCount: 520, onTimeTotal: 542, complianceCount: 537, complianceTotal: 542},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 2982, revenue: 29025.32, weight: 7674.00, transitDays: 1.5, onTimeCount: 2863, onTimeTotal: 2982, complianceCount: 2953, complianceTotal: 2982},
+        'DHL SmartMail Parcel Ground': {shipments: 4183, revenue: 20071.45, weight: 15331.00, transitDays: 5.5, onTimeCount: 4016, onTimeTotal: 4183, complianceCount: 4141, complianceTotal: 4183},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 1796, revenue: 12623.39, weight: 1808.00, transitDays: 2.5, onTimeCount: 1725, onTimeTotal: 1796, complianceCount: 1779, complianceTotal: 1796},
+        'DHL SmartMail Parcel Plus Ground': {shipments: 12917, revenue: 89984.83, weight: 9058.00, transitDays: 5.5, onTimeCount: 12400, onTimeTotal: 12917, complianceCount: 12788, complianceTotal: 12917}
       },
-      totalShipments: 6120, totalRevenue: 52145.80, totalWeight: 2245.60,
-      onTimeCount: 5909, onTimeTotal: 6120, complianceCount: 6076, complianceTotal: 6120,
-      transitDays: 2.1, fuel: 1368.50, duties: 315.40, dangerous: 90.20, accessorials: 211
-    },
-    {
-      id: 'd5', period: 'Mar 15-21', startDate: new Date(2026, 2, 15), endDate: new Date(2026, 2, 21), types: {
-        'DHL PARCEL INTERNATIONAL STANDARD': {shipments: 3531, revenue: 30442.62, weight: 1405.95, onTimeCount: 3430, onTimeTotal: 3531, complianceCount: 3513, complianceTotal: 3531},
-        'DHLECOMMERCE DHL SM PARCEL EXPEDITED MAX': {shipments: 3531, revenue: 30442.62, weight: 1405.95, onTimeCount: 3430, onTimeTotal: 3531, complianceCount: 3513, complianceTotal: 3531},
-        'DHLECOMMERCE GM DUTIES AND TAXES': {shipments: 3531, revenue: 30442.62, weight: 1405.95, onTimeCount: 3430, onTimeTotal: 3531, complianceCount: 3513, complianceTotal: 3531},
-        'DHLECOMMERCE PRIORITY MAIL': {shipments: 3533, revenue: 30442.61, weight: 1405.94, onTimeCount: 3432, onTimeTotal: 3533, complianceCount: 3515, complianceTotal: 3533}
-      },
-      totalShipments: 14126, totalRevenue: 121770.47, totalWeight: 5623.79,
-      onTimeCount: 13722, onTimeTotal: 14126, complianceCount: 14054, complianceTotal: 14126,
-      transitDays: 2.0, fuel: 3191.98, duties: 735.25, dangerous: 210.55, accessorials: 486
+      totalShipments: 22504, totalRevenue: 155485.77, totalWeight: 37493.70,
+      onTimeCount: 21605, onTimeTotal: 22504, complianceCount: 22282, complianceTotal: 22504,
+      transitDays: 2.1, fuel: 6219.43, duties: 2332.29, dangerous: 777.43
     }
   ]
 };
@@ -775,20 +787,18 @@ function updateDropdowns() {
   shipmentTypeSelect.innerHTML = '<option value="all">All Types</option>';
   
   if (carrier === 'dhl') {
-    // For DHL, add all 12 service types with their shipment counts
+    // For DHL, add all actual service types from invoices
     const dhlTypes = [
-      'DHL ECOMMERCE PACKET INTERNATIONAL',
-      'DHL PARCEL INTERNATIONAL STANDARD',
-      'DHLECOMMERCE DHL PARCEL INTERNATIONAL DIRECT',
-      'DHLECOMMERCE DHL PARCEL INTL. RETURNS - UNPROCESSABLE',
-      'DHLECOMMERCE DHL SM PARCEL EXPEDITED',
-      'DHLECOMMERCE DHL SM PARCEL EXPEDITED MAX',
-      'DHLECOMMERCE DHL SM PARCEL GROUND',
-      'DHLECOMMERCE DHL SM PARCEL PLUS EXPEDITED',
-      'DHLECOMMERCE DHL SM PARCEL PLUS GROUND',
-      'DHLECOMMERCE DHL SMARTMAIL BPM EXPEDITED',
-      'DHLECOMMERCE GM DUTIES AND TAXES',
-      'DHLECOMMERCE PRIORITY MAIL'
+      'DHL Packet International',
+      'DHL Parcel International Direct',
+      'DHL Parcel International Standard',
+      'DHL Parcel Intl. Returns - Unprocessable',
+      'DHL SmartMail BPM Expedited',
+      'DHL SmartMail Parcel Expedited',
+      'DHL SmartMail Parcel Expedited Max',
+      'DHL SmartMail Parcel Ground',
+      'DHL SmartMail Parcel Plus Expedited',
+      'DHL SmartMail Parcel Plus Ground'
     ];
 
     // Calculate total shipments per type across all DHL invoices
@@ -868,11 +878,10 @@ function applyFilters() {
           onTimeTotal: typeData.onTimeTotal,
           complianceCount: typeData.complianceCount,
           complianceTotal: typeData.complianceTotal,
-          transitDays: inv.transitDays,
+          transitDays: typeData.transitDays || 0,
           fuel: inv.fuel * (typeData.shipments / inv.totalShipments),
           duties: inv.duties * (typeData.shipments / inv.totalShipments),
-          dangerous: inv.dangerous * (typeData.shipments / inv.totalShipments),
-          accessorials: inv.accessorials
+          dangerous: inv.dangerous * (typeData.shipments / inv.totalShipments)
         };
       }
     } else {
@@ -889,12 +898,15 @@ function applyFilters() {
         fuel: inv.fuel,
         duties: inv.duties,
         dangerous: inv.dangerous,
-        accessorials: inv.accessorials,
         types: inv.types
       };
     }
   } else {
     displayData = aggregateInvoices(invoices, shipmentType);
+    // Ensure fuel, duties, dangerous are always present
+    if (displayData && !('fuel' in displayData)) displayData.fuel = 0;
+    if (displayData && !('duties' in displayData)) displayData.duties = 0;
+    if (displayData && !('dangerous' in displayData)) displayData.dangerous = 0;
   }
 
   // Update header
@@ -930,7 +942,6 @@ function aggregateInvoices(invoices, shipmentType) {
     fuel: 0,
     duties: 0,
     dangerous: 0,
-    accessorials: 0,
     typeBreakdown: {}
   };
 
@@ -944,6 +955,7 @@ function aggregateInvoices(invoices, shipmentType) {
       agg.onTimeTotal += typeData.onTimeTotal;
       agg.complianceCount += typeData.complianceCount;
       agg.complianceTotal += typeData.complianceTotal;
+      agg.transitDays += (typeData.transitDays || 0) * typeData.shipments;
       agg.fuel += inv.fuel * (typeData.shipments / (inv.totalShipments || inv.shipments));
       agg.duties += inv.duties * (typeData.shipments / (inv.totalShipments || inv.shipments));
       agg.dangerous += inv.dangerous * (typeData.shipments / (inv.totalShipments || inv.shipments));
@@ -959,7 +971,6 @@ function aggregateInvoices(invoices, shipmentType) {
       agg.fuel += inv.fuel;
       agg.duties += inv.duties;
       agg.dangerous += inv.dangerous;
-      agg.accessorials += inv.accessorials;
       
       // Build type breakdown
       if (inv.types) {
@@ -986,7 +997,18 @@ function aggregateInvoices(invoices, shipmentType) {
     }
   });
 
-  agg.transitDays = invoices.length > 0 ? (agg.transitDays / invoices.length).toFixed(2) : 0;
+  // Calculate weighted average transit days
+  if (shipmentType !== 'all' && agg.shipments > 0) {
+    agg.transitDays = (agg.transitDays / agg.shipments).toFixed(2);
+  } else {
+    agg.transitDays = invoices.length > 0 ? (agg.transitDays / invoices.length).toFixed(2) : 0;
+  }
+  
+  // Ensure all accessorial values are properly rounded
+  agg.fuel = Math.round(agg.fuel * 100) / 100;
+  agg.duties = Math.round(agg.duties * 100) / 100;
+  agg.dangerous = Math.round(agg.dangerous * 100) / 100;
+  
   return agg;
 }
 
@@ -1059,7 +1081,7 @@ function updateKPICards() {
   const costPerLb = data.weight ? (data.revenue / data.weight).toFixed(2) : 0;
   const onTimePercent = data.onTimeTotal ? ((data.onTimeCount / data.onTimeTotal) * 100).toFixed(1) : 0;
   const compliancePercent = data.complianceTotal ? ((data.complianceCount / data.complianceTotal) * 100).toFixed(1) : 0;
-  const totalAccessorials = data.fuel + data.duties + data.dangerous;
+  const totalAccessorials = Math.round((data.fuel + data.duties + data.dangerous) * 100) / 100;
 
   const kpiHTML = `
     <div class="kpi-card">
@@ -1107,7 +1129,7 @@ function updateKPICards() {
     <div class="kpi-card">
       <div class="kpi-label">💰 Total Accessorials</div>
       <div class="kpi-value">$${totalAccessorials.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
-      <div class="kpi-detail">Fuel: $${data.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+      <div class="kpi-detail">${data.shipments.toLocaleString()} shipments with charges</div>
     </div>
   `;
 
@@ -1148,7 +1170,7 @@ function updateOverviewTab() {
 
   const avgCost = data.shipments ? (data.revenue / data.shipments).toFixed(2) : 0;
   const onTimePercent = data.onTimeTotal ? ((data.onTimeCount / data.onTimeTotal) * 100).toFixed(1) : 0;
-  const totalAccessorials = data.fuel + data.duties + data.dangerous;
+  const totalAccessorials = Math.round((data.fuel + data.duties + data.dangerous) * 100) / 100;
 
   // Build type breakdown for charts
   let typeBreakdown = data.typeBreakdown || {};
@@ -1256,7 +1278,7 @@ function updateOverviewTab() {
         <div class="metric-box">
           <div class="metric-label">TOTAL ACCESSORIALS</div>
           <div class="metric-value">$${totalAccessorials.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
-          <div class="metric-note">${data.accessorials} charges</div>
+          <div class="metric-note">${data.shipments.toLocaleString()} shipments</div>
         </div>
       </div>
     </div>
@@ -1515,7 +1537,8 @@ function updateAccessorialsTab() {
         typeAccessorials[type].fuel += fuelPerShip * data.shipments;
         typeAccessorials[type].duties += dutiesPerShip * data.shipments;
         typeAccessorials[type].dangerous += dangerousPerShip * data.shipments;
-        typeAccessorials[type].total = typeAccessorials[type].fuel + typeAccessorials[type].duties + typeAccessorials[type].dangerous;
+        // Round to 2 decimal places before summing to avoid floating point precision errors
+        typeAccessorials[type].total = Math.round((typeAccessorials[type].fuel + typeAccessorials[type].duties + typeAccessorials[type].dangerous) * 100) / 100;
       });
     }
   });
@@ -1535,14 +1558,17 @@ function updateAccessorialsTab() {
     </tr>
   `).join('');
 
-  // Calculate totals
-  const totals = sortedTypes.reduce((acc, [type, data]) => ({
-    shipments: acc.shipments + data.shipments,
-    fuel: acc.fuel + data.fuel,
-    duties: acc.duties + data.duties,
-    dangerous: acc.dangerous + data.dangerous,
-    total: acc.total + data.total
-  }), { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 });
+  // Calculate totals - round to 2 decimals to avoid floating point precision errors
+  const totals = sortedTypes.reduce((acc, [type, data]) => {
+    const total = acc.total + data.total;
+    return {
+      shipments: acc.shipments + data.shipments,
+      fuel: Math.round((acc.fuel + data.fuel) * 100) / 100,
+      duties: Math.round((acc.duties + data.duties) * 100) / 100,
+      dangerous: Math.round((acc.dangerous + data.dangerous) * 100) / 100,
+      total: Math.round(total * 100) / 100
+    };
+  }, { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 });
 
   const html = `
     <div class="section">
@@ -1621,4 +1647,3 @@ function updateAccessorialsTab() {
 
 </body>
 </html>
-
