@@ -581,15 +581,15 @@ let chartInstances = {};
 // DATE MAPPING & INVOICE DATA WITH DATE-AWARE SHIPMENT TYPES
 // ============================================================
 
-// Date ranges for reference (Mar 28, 2026 = today)
+// Date ranges for reference (Mar 30, 2026 = today)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 2, 28), label: 'All Data' },
-  last7: { start: new Date(2026, 2, 22), end: new Date(2026, 2, 28), label: 'Last 7 Days (Mar 22-28)' },
-  last14: { start: new Date(2026, 2, 15), end: new Date(2026, 2, 28), label: 'Last 14 Days (Mar 15-28)' },
-  last30: { start: new Date(2026, 1, 27), end: new Date(2026, 2, 28), label: 'Last 30 Days (Feb 27-Mar 28)' },
-  last60: { start: new Date(2026, 0, 28), end: new Date(2026, 2, 28), label: 'Last 60 Days (Jan 28-Mar 28)' },
-  last90: { start: new Date(2025, 11, 29), end: new Date(2026, 2, 28), label: 'Last 90 Days (Dec 29-Mar 28)' },
-  current_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 28), label: 'Current Month (Mar)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 2, 29), label: 'All Data' },
+  last7: { start: new Date(2026, 2, 23), end: new Date(2026, 2, 29), label: 'Last 7 Days (Mar 23-29)' },
+  last14: { start: new Date(2026, 2, 16), end: new Date(2026, 2, 29), label: 'Last 14 Days (Mar 16-29)' },
+  last30: { start: new Date(2026, 1, 28), end: new Date(2026, 2, 29), label: 'Last 30 Days (Feb 28-Mar 29)' },
+  last60: { start: new Date(2026, 0, 29), end: new Date(2026, 2, 29), label: 'Last 60 Days (Jan 29-Mar 29)' },
+  last90: { start: new Date(2025, 11, 30), end: new Date(2026, 2, 29), label: 'Last 90 Days (Dec 30-Mar 29)' },
+  current_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 29), label: 'Current Month (Mar)' },
   last_month: { start: new Date(2026, 1, 1), end: new Date(2026, 1, 28), label: 'Last Month (Feb)' },
   custom: { start: null, end: null, label: 'Custom Range' }
 };
@@ -629,6 +629,13 @@ const invoiceData = {
       shipments: 2847, revenue: 12795.41, weight: 16695.21,
       onTimeCount: 2794, onTimeTotal: 2847,
       complianceCount: 2828, complianceTotal: 2847,
+      transitDays: 2.1, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'u6', period: 'Mar 23-29', startDate: new Date(2026, 2, 23), endDate: new Date(2026, 2, 29), invoiceNumber: '49615824260330911', type: 'Ground Express',
+      shipments: 1870, revenue: 8387.55, weight: 12870.79,
+      onTimeCount: 1776, onTimeTotal: 1870,
+      complianceCount: 1855, complianceTotal: 1870,
       transitDays: 2.1, fuel: 0, duties: 0, dangerous: 0
     }
   ],
