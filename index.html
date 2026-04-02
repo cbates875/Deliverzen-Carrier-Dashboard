@@ -1708,46 +1708,84 @@ function updateInvoicesTab() {
     ${dhlTypesSection}
 
     <div class="section">
-      <div class="section-title">Invoice Performance Details (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
+      <div class="section-title">📈 Invoice Performance Details (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
       <table>
         <thead>
           <tr>
             <th>Period</th>
             <th>Shipments</th>
+            <th>Trend</th>
             <th>Cost</th>
+            <th>Cost Trend</th>
             <th>Avg Cost</th>
             <th>On-Time %</th>
+            <th>OT Trend</th>
             <th>Compliance %</th>
             <th>Transit Days</th>
-            <th>Total Fuel</th>
           </tr>
         </thead>
-        <tbody>
-          ${filteredInvoices.map(inv => {
-            const shipments = inv.totalShipments || inv.shipments;
-            const revenue = inv.totalRevenue || inv.revenue;
-            const avgCost = (revenue / shipments).toFixed(2);
-            const onTimePercent = ((inv.onTimeCount / inv.onTimeTotal) * 100).toFixed(1);
-            const compliancePercent = ((inv.complianceCount / inv.complianceTotal) * 100).toFixed(1);
-            return `
-              <tr>
-                <td><strong>${inv.period}</strong></td>
-                <td>${shipments.toLocaleString()}</td>
-                <td>$${revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                <td>$${avgCost}</td>
-                <td><strong>${onTimePercent}%</strong></td>
-                <td><strong>${compliancePercent}%</strong></td>
-                <td>${inv.transitDays}</td>
-                <td>$${inv.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-              </tr>
-            `;
-          }).join('')}
+        <tbody id="invoiceTableBody">
         </tbody>
       </table>
     </div>
   `;
 
   document.getElementById('tab-invoices').innerHTML = html;
+  
+  // Populate invoice table with trend data
+  populateInvoiceTableWithTrends(filteredInvoices);
+}
+
+function populateInvoiceTableWithTrends(invoices) {
+  let prevRevenue = 0;
+  let prevShipments = 0;
+  let prevOnTime = 0;
+  let html = '';
+  
+  invoices.forEach((inv, idx) => {
+    const shipments = inv.totalShipments || inv.shipments;
+    const revenue = inv.totalRevenue || inv.revenue;
+    const avgCost = (revenue / shipments).toFixed(2);
+    const onTimePercent = ((inv.onTimeCount / inv.onTimeTotal) * 100).toFixed(1);
+    const compliancePercent = ((inv.complianceCount / inv.complianceTotal) * 100).toFixed(1);
+    
+    // Calculate trends
+    const shipmentTrend = idx === 0 ? 0 : ((shipments - prevShipments) / prevShipments * 100).toFixed(1);
+    const revenueTrend = idx === 0 ? 0 : ((revenue - prevRevenue) / prevRevenue * 100).toFixed(1);
+    const onTimeTrend = idx === 0 ? 0 : (parseFloat(onTimePercent) - prevOnTime).toFixed(1);
+    
+    const shipmentTrendColor = shipmentTrend > 0 ? '#22c55e' : shipmentTrend < 0 ? '#ef4444' : '#999';
+    const revenueTrendColor = revenueTrend > 0 ? '#22c55e' : revenueTrend < 0 ? '#ef4444' : '#999';
+    const onTimeTrendColor = onTimeTrend > 0 ? '#22c55e' : onTimeTrend < 0 ? '#ef4444' : '#999';
+    
+    const shipmentArrow = shipmentTrend > 0 ? '↑' : shipmentTrend < 0 ? '↓' : '→';
+    const revenueArrow = revenueTrend > 0 ? '↑' : revenueTrend < 0 ? '↓' : '→';
+    const onTimeArrow = onTimeTrend > 0 ? '↑' : onTimeTrend < 0 ? '↓' : '→';
+    
+    prevRevenue = revenue;
+    prevShipments = shipments;
+    prevOnTime = parseFloat(onTimePercent);
+    
+    html += `
+      <tr>
+        <td><strong>${inv.period}</strong></td>
+        <td>${shipments.toLocaleString()}</td>
+        <td><span style="color: ${shipmentTrendColor}; font-weight: 700;">${shipmentArrow} ${Math.abs(shipmentTrend)}%</span></td>
+        <td>$${revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+        <td><span style="color: ${revenueTrendColor}; font-weight: 700;">${revenueArrow} ${Math.abs(revenueTrend)}%</span></td>
+        <td>$${avgCost}</td>
+        <td><strong>${onTimePercent}%</strong></td>
+        <td><span style="color: ${onTimeTrendColor}; font-weight: 700;">${onTimeArrow} ${Math.abs(onTimeTrend)}%</span></td>
+        <td><strong>${compliancePercent}%</strong></td>
+        <td>${inv.transitDays}</td>
+      </tr>
+    `;
+  });
+  
+  const tableBody = document.getElementById('invoiceTableBody');
+  if (tableBody) {
+    tableBody.innerHTML = html;
+  }
 }
 
 // ============================================================
