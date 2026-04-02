@@ -365,16 +365,16 @@
     }
 
     tbody tr:nth-child(even) {
-      background-color: #f8f9fb;
+      background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%);
     }
 
     tbody tr:nth-child(odd) {
-      background-color: #ffffff;
+      background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%);
     }
 
     tbody tr:hover {
-      background-color: #e8ecf8 !important;
-      transition: background-color 0.2s ease;
+      background: linear-gradient(90deg, #d4dff8 0%, #e8ecf8 100%) !important;
+      transition: background 0.2s ease;
     }
 
     tbody tr:last-child td {
@@ -1335,9 +1335,9 @@ function updateOverviewTab() {
             ${typeLabels.map((t, idx) => {
               const td = typeBreakdown[t];
               const onTimeRate = td.onTimeTotal ? ((td.onTimeCount / td.onTimeTotal) * 100).toFixed(1) : '0';
-              const bgColor = idx % 2 === 0 ? '#f8f9fb' : 'white';
+              const bgColor = idx % 2 === 0 ? 'linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%)' : 'linear-gradient(90deg, #ffffff 0%, #f8fafb 100%)';
               const onTimeStyle = onTimeRate >= 97 ? 'color: #28a745; font-weight: 600;' : 'color: #dc3545; font-weight: 600;';
-              return `<tr style="background-color: ${bgColor}; border-bottom: 1px solid #e8ecf1; transition: background-color 0.2s;">
+              return `<tr style="background: ${bgColor}; border-bottom: 1px solid #e8ecf1; transition: background 0.2s;">
                 <td style="padding: 13px 12px; color: #333; font-weight: 500; border-right: 1px solid #e8ecf1;">${t}</td>
                 <td style="padding: 13px 12px; text-align: right; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1;">${td.shipments.toLocaleString()}</td>
                 <td style="padding: 13px 12px; text-align: right; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1;">$${td.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
@@ -1357,8 +1357,8 @@ function updateOverviewTab() {
             ${typeLabels.map((t, idx) => {
               const td = typeBreakdown[t];
               const percent = data.revenue > 0 ? ((td.revenue / data.revenue) * 100).toFixed(1) : '0';
-              const bgColor = idx % 2 === 0 ? '#f8f9fb' : 'white';
-              return `<tr style="background-color: ${bgColor}; border-bottom: 1px solid #e8ecf1;">
+              const bgColor = idx % 2 === 0 ? 'linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%)' : 'linear-gradient(90deg, #ffffff 0%, #f8fafb 100%)';
+              return `<tr style="background: ${bgColor}; border-bottom: 1px solid #e8ecf1;">
                 <td style="padding: 12px; font-weight: 500; color: #333; border-right: 1px solid #e8ecf1;">${t.substring(0, 35)}${t.length > 35 ? '...' : ''}</td>
                 <td style="text-align: right; padding: 12px; color: #667eea; font-weight: 600;">$${td.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} <span style="color: #999; font-weight: 400;">(${percent}%)</span></td>
               </tr>`;
@@ -1374,8 +1374,8 @@ function updateOverviewTab() {
             ${typeLabels.map((t, idx) => {
               const td = typeBreakdown[t];
               const percent = data.weight > 0 ? ((td.weight / data.weight) * 100).toFixed(1) : '0';
-              const bgColor = idx % 2 === 0 ? '#f8f9fb' : 'white';
-              return `<tr style="background-color: ${bgColor}; border-bottom: 1px solid #e8ecf1;">
+              const bgColor = idx % 2 === 0 ? 'linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%)' : 'linear-gradient(90deg, #ffffff 0%, #f8fafb 100%)';
+              return `<tr style="background: ${bgColor}; border-bottom: 1px solid #e8ecf1;">
                 <td style="padding: 12px; font-weight: 500; color: #333; border-right: 1px solid #e8ecf1;">${t.substring(0, 35)}${t.length > 35 ? '...' : ''}</td>
                 <td style="text-align: right; padding: 12px; color: #667eea; font-weight: 600;">${td.weight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} lbs <span style="color: #999; font-weight: 400;">(${percent}%)</span></td>
               </tr>`;
@@ -1429,31 +1429,31 @@ function updateOverviewTab() {
       <div class="section-title">Key Performance Summary</div>
       <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
         <tbody>
-          <tr style="background-color: #f8f9fb; border-bottom: 1px solid #e8ecf1;">
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Total Shipments</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">${data.shipments.toLocaleString()} shipments</td>
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Total Cost</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; width: 25%;">$${data.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
           </tr>
-          <tr style="background-color: white; border-bottom: 1px solid #e8ecf1;">
+          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Avg Cost/Shipment</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">$${avgCost}</td>
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">On-Time %</td>
             <td style="padding: 15px 12px; color: ${onTimePercent >= 97 ? '#28a745' : '#dc3545'}; font-weight: 600; width: 25%;">${onTimePercent}% ${onTimePercent >= 97 ? '✓' : '✗'}</td>
           </tr>
-          <tr style="background-color: #f8f9fb; border-bottom: 1px solid #e8ecf1;">
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Total Weight</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">${data.weight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} lbs</td>
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Avg Transit Time</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; width: 25%;">${data.transitDays} days</td>
           </tr>
-          <tr style="background-color: white; border-bottom: 1px solid #e8ecf1;">
+          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Avg Box Size</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">${(data.weight / data.shipments).toFixed(2)} lbs</td>
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Avg Package Weight</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; width: 25%;">${(data.weight / data.shipments).toFixed(1)} lbs</td>
           </tr>
-          <tr style="background-color: #f8f9fb;">
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%);">
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Cost per Pound</td>
             <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">$${data.weight ? (data.revenue / data.weight).toFixed(2) : 0}/lb</td>
             <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;"></td>
@@ -1476,25 +1476,25 @@ function updateOverviewTab() {
       <div id="accessorialChargesMetrics">
         <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
           <tbody>
-            <tr style="background-color: white; border-bottom: 1px solid #e8ecf1;">
+            <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
               <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Fuel Surcharge</td>
               <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">$${data.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
               <td style="padding: 15px 12px; color: #999; font-size: 12px; border-right: 1px solid #e8ecf1; width: 25%;">${totalAccessorials > 0 ? ((data.fuel / totalAccessorials) * 100).toFixed(1) : 0}% of total</td>
               <td style="padding: 15px 12px; width: 25%;"></td>
             </tr>
-            <tr style="background-color: #f8f9fb; border-bottom: 1px solid #e8ecf1;">
+            <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
               <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Duties & Fees</td>
               <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">$${data.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
               <td style="padding: 15px 12px; color: #999; font-size: 12px; border-right: 1px solid #e8ecf1; width: 25%;">${totalAccessorials > 0 ? ((data.duties / totalAccessorials) * 100).toFixed(1) : 0}% of total</td>
               <td style="padding: 15px 12px; width: 25%;"></td>
             </tr>
-            <tr style="background-color: white; border-bottom: 1px solid #e8ecf1;">
+            <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
               <td style="padding: 15px 12px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">Dangerous Goods</td>
               <td style="padding: 15px 12px; color: #667eea; font-weight: 600; border-right: 1px solid #e8ecf1; width: 25%;">$${data.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
               <td style="padding: 15px 12px; color: #999; font-size: 12px; border-right: 1px solid #e8ecf1; width: 25%;">${totalAccessorials > 0 ? ((data.dangerous / totalAccessorials) * 100).toFixed(1) : 0}% of total</td>
               <td style="padding: 15px 12px; width: 25%;"></td>
             </tr>
-            <tr style="background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%); font-weight: 700; border-top: 2px solid #667eea;">
+            <tr style="background: linear-gradient(135deg, #d4dff8 0%, #e0ebff 100%); font-weight: 700; border-top: 2px solid #667eea;">
               <td style="padding: 15px 12px; color: #333; border-right: 1px solid #e8ecf1; width: 25%;">TOTAL ACCESSORIALS</td>
               <td style="padding: 15px 12px; color: #667eea; border-right: 1px solid #e8ecf1; width: 25%;">$${totalAccessorials.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
               <td style="padding: 15px 12px; color: #999; font-size: 12px; border-right: 1px solid #e8ecf1; width: 25%;">${data.shipments.toLocaleString()} shipments</td>
@@ -1581,50 +1581,62 @@ function updatePerformanceTab() {
   const html = `
     <div class="section">
       <div class="section-title">Performance Metrics</div>
-      <div class="metric-grid">
-        <div class="metric-box">
-          <div class="metric-label">On-Time Delivery Rate</div>
-          <div class="metric-value ${onTimePercent >= 97 ? 'highlight-positive' : 'highlight-negative'}">${onTimePercent}%</div>
-          <div class="metric-note">${data.onTimeCount.toLocaleString()} of ${data.onTimeTotal.toLocaleString()}</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-label">Service Compliance Rate</div>
-          <div class="metric-value ${compliancePercent >= 99 ? 'highlight-positive' : 'highlight-negative'}">${compliancePercent}%</div>
-          <div class="metric-note">${data.complianceCount.toLocaleString()} completed</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-label">Average Transit Time</div>
-          <div class="metric-value">${data.transitDays}</div>
-          <div class="metric-note">days</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-label">Late Shipments</div>
-          <div class="metric-value highlight-negative">${lateShipments.toLocaleString()}</div>
-          <div class="metric-note">${((lateShipments / data.onTimeTotal) * 100).toFixed(1)}% delayed</div>
-        </div>
-      </div>
+      <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
+        <tbody>
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">On-Time Delivery Rate</td>
+            <td style="padding: 18px 15px; color: ${onTimePercent >= 97 ? '#28a745' : '#dc3545'}; font-weight: 700; font-size: 24px; border-right: 1px solid #e8ecf1; width: 30%;">${onTimePercent}%</td>
+            <td style="padding: 18px 15px; text-align: center; width: 30%;"><span style="background: ${onTimePercent >= 97 ? '#d4edda' : '#f8d7da'}; color: ${onTimePercent >= 97 ? '#155724' : '#721c24'}; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 12px;">${onTimePercent >= 97 ? '✓ ON TARGET' : '✗ BELOW TARGET'}</span></td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Service Compliance Rate</td>
+            <td style="padding: 18px 15px; color: ${compliancePercent >= 99 ? '#28a745' : '#dc3545'}; font-weight: 700; font-size: 24px; border-right: 1px solid #e8ecf1; width: 30%;">${compliancePercent}%</td>
+            <td style="padding: 18px 15px; text-align: center; width: 30%;"><span style="background: ${compliancePercent >= 99 ? '#d4edda' : '#f8d7da'}; color: ${compliancePercent >= 99 ? '#155724' : '#721c24'}; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 12px;">${compliancePercent >= 99 ? '✓ EXCELLENT' : '⚠ NEEDS REVIEW'}</span></td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Average Transit Time</td>
+            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 24px; border-right: 1px solid #e8ecf1; width: 30%;">${data.transitDays} days</td>
+            <td style="padding: 18px 15px; text-align: center; width: 30%;"><span style="background: #e3f2fd; color: #1565c0; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 12px;">→ CONSISTENT</span></td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Late Shipments</td>
+            <td style="padding: 18px 15px; color: ${lateShipments > 0 ? '#dc3545' : '#28a745'}; font-weight: 700; font-size: 24px; border-right: 1px solid #e8ecf1; width: 30%;">${lateShipments.toLocaleString()}</td>
+            <td style="padding: 18px 15px; text-align: center; width: 30%;"><span style="background: ${lateShipments > 0 ? '#ffe5e5' : '#e5ffe5'}; color: ${lateShipments > 0 ? '#c00' : '#0a0'}; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 12px;">${lateShipments > 0 ? '↑ ' + ((lateShipments / data.onTimeTotal) * 100).toFixed(1) + '%' : '✓ 0%'}</span></td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%);">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Performance Status</td>
+            <td colspan="2" style="padding: 18px 15px; text-align: center;">
+              <span style="background: ${onTimePercent >= 97 ? '#d4edda' : '#f8d7da'}; color: ${onTimePercent >= 97 ? '#155724' : '#721c24'}; padding: 12px 24px; border-radius: 6px; font-weight: 700; font-size: 14px; display: inline-block; width: 200px;">${onTimePercent >= 97 ? '🟢 EXCELLENT' : '🔴 FAILING'}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="section">
       <div class="section-title">Performance Summary</div>
-      <div class="summary-grid">
-        <div class="summary-card">
-          <div class="summary-card-title">On-Time Performance</div>
-          <div class="summary-card-content">${onTimePercent}% of shipments delivered on schedule. ${lateShipments.toLocaleString()} shipments delivered late.</div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-card-title">Service Compliance</div>
-          <div class="summary-card-content">${compliancePercent}% compliance rate. ${(data.complianceTotal - data.complianceCount).toLocaleString()} shipments with issues.</div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-card-title">Transit Time</div>
-          <div class="summary-card-content">Average ${data.transitDays} days from induction to delivery. Consistent across all service types.</div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-card-title">Performance Status</div>
-          <div class="summary-card-content"><span style="color: ${onTimePercent >= 97 ? '#28a745' : '#dc3545'}; font-weight: 700;">${onTimePercent >= 97 ? 'EXCELLENT' : 'FAILING'}</span> performance metrics</div>
-        </div>
-      </div>
+      <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
+        <tbody>
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">On-Time Performance</td>
+            <td style="padding: 18px 15px; color: #333; font-weight: 500; border-right: 1px solid #e8ecf1; width: 60%;">${onTimePercent}% on schedule • ${lateShipments.toLocaleString()} late deliveries <span style="color: ${lateShipments > 0 ? '#dc3545' : '#28a745'}; font-weight: 700;"> ${lateShipments > 0 ? '↑' : '✓'}</span></td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Service Compliance</td>
+            <td style="padding: 18px 15px; color: #333; font-weight: 500; border-right: 1px solid #e8ecf1; width: 60%;">${compliancePercent}% compliance • ${(data.complianceTotal - data.complianceCount).toLocaleString()} with issues <span style="color: ${compliancePercent >= 99 ? '#28a745' : '#dc3545'}; font-weight: 700;"> ${compliancePercent >= 99 ? '✓' : '⚠'}</span></td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Transit Time</td>
+            <td style="padding: 18px 15px; color: #333; font-weight: 500; border-right: 1px solid #e8ecf1; width: 60%;">Average ${data.transitDays} days from induction to delivery → <span style="color: #667eea; font-weight: 700;">CONSISTENT</span></td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%);">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Overall Status</td>
+            <td style="padding: 18px 15px; text-align: left; width: 60%;">
+              <span style="background: ${onTimePercent >= 97 ? '#d4edda' : '#f8d7da'}; color: ${onTimePercent >= 97 ? '#155724' : '#721c24'}; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 13px; display: inline-block;">${onTimePercent >= 97 ? '🟢 EXCELLENT PERFORMANCE' : '🔴 FAILING - ACTION REQUIRED'}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   `;
 
@@ -1812,44 +1824,30 @@ function updateAccessorialsTab() {
   const html = `
     <div class="section">
       <div class="section-title">Accessorial Breakdown Summary</div>
-      <div class="summary-grid">
-        <div class="summary-card">
-          <div class="summary-card-title">Total Fuel Charges</div>
-          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
-            $${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
-          </div>
-          <div class="summary-card-content" style="margin-top: 8px;">
-            ${totals.shipments > 0 ? `$${(totals.fuel / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-card-title">Total Duties & Taxes</div>
-          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
-            $${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
-          </div>
-          <div class="summary-card-content" style="margin-top: 8px;">
-            ${totals.shipments > 0 ? `$${(totals.duties / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-card-title">Total Dangerous Goods Fees</div>
-          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
-            $${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
-          </div>
-          <div class="summary-card-content" style="margin-top: 8px;">
-            ${totals.shipments > 0 ? `$${(totals.dangerous / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-card-title">Total Accessorial Charges</div>
-          <div class="summary-card-content" style="font-size: 24px; color: #667eea; font-weight: 700;">
-            $${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
-          </div>
-          <div class="summary-card-content" style="margin-top: 8px;">
-            ${totals.shipments > 0 ? `$${(totals.total / totals.shipments).toFixed(2)} per shipment` : 'N/A'}
-          </div>
-        </div>
-      </div>
+      <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
+        <tbody>
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Fuel Charges</td>
+            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${totals.shipments > 0 ? '↓ $' + (totals.fuel / totals.shipments).toFixed(2) + ' per shipment' : 'N/A'}</td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Duties & Taxes</td>
+            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${totals.shipments > 0 ? '↓ $' + (totals.duties / totals.shipments).toFixed(2) + ' per shipment' : 'N/A'}</td>
+          </tr>
+          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Dangerous Goods Fees</td>
+            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${totals.shipments > 0 ? '↓ $' + (totals.dangerous / totals.shipments).toFixed(2) + ' per shipment' : 'N/A'}</td>
+          </tr>
+          <tr style="background: linear-gradient(135deg, #d4dff8 0%, #e0ebff 100%); font-weight: 700; border-top: 2px solid #667eea;">
+            <td style="padding: 18px 15px; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">TOTAL ACCESSORIAL CHARGES</td>
+            <td style="padding: 18px 15px; color: #667eea; font-size: 24px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td style="padding: 18px 15px; color: #333; font-size: 12px; font-weight: 600; width: 25%;">↓ $${totals.shipments > 0 ? (totals.total / totals.shipments).toFixed(2) : 'N/A'}/ship</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="section">
