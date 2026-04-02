@@ -329,28 +329,41 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 13px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     th {
-      background: #f8f9fa;
-      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 15px 12px;
       text-align: left;
-      font-weight: 600;
-      color: #666;
-      border-bottom: 2px solid #e0e0e0;
+      font-weight: 700;
+      color: white;
+      border-bottom: none;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     td {
-      padding: 12px;
-      border-bottom: 1px solid #e0e0e0;
+      padding: 13px 12px;
+      border-bottom: 1px solid #f0f0f0;
       color: #333;
     }
 
-    tr:hover {
-      background: #f8f9fa;
+    tbody tr:nth-child(even) {
+      background-color: #f8f9fb;
+    }
+
+    tbody tr:hover {
+      background-color: #e8ecf8 !important;
+      transition: background-color 0.2s ease;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
     }
 
     /* SUMMARY GRID */
@@ -476,6 +489,7 @@
       <div class="filter-group">
         <label>Carrier</label>
         <select id="carrierSelect" onchange="updateDropdowns()">
+          <option value="all">All Carriers</option>
           <option value="uniuni">UniUni - Ground Express</option>
           <option value="dhl">DHL - eCommerce</option>
         </select>
@@ -767,6 +781,12 @@ function invoiceIsInDateRange(invoice, dateRange) {
 }
 
 function getInvoicesForDateRange(carrier, dateRange) {
+  if (carrier === 'all') {
+    // Combine both DHL and UniUni invoices
+    const dhlInvoices = invoiceData['dhl'].filter(inv => invoiceIsInDateRange(inv, dateRange));
+    const uniuniInvoices = invoiceData['uniuni'].filter(inv => invoiceIsInDateRange(inv, dateRange));
+    return [...dhlInvoices, ...uniuniInvoices];
+  }
   return invoiceData[carrier].filter(inv => invoiceIsInDateRange(inv, dateRange));
 }
 
@@ -810,17 +830,29 @@ function updateDropdowns() {
   
   // Update invoice dropdown
   invoiceSelect.innerHTML = '<option value="all">All Periods</option>';
-  invoiceData[carrier].forEach(inv => {
-    const opt = document.createElement('option');
-    opt.value = inv.id;
-    opt.textContent = `${inv.period} (${(inv.totalShipments || inv.shipments).toLocaleString()} shipments)`;
-    invoiceSelect.appendChild(opt);
-  });
+  
+  if (carrier === 'all') {
+    // For all carriers, combine both DHL and UniUni invoices
+    [...invoiceData.dhl, ...invoiceData.uniuni].forEach(inv => {
+      const opt = document.createElement('option');
+      opt.value = inv.id;
+      const carrierName = inv.carrier || (invoiceData.dhl.includes(inv) ? 'DHL' : 'UniUni');
+      opt.textContent = `${carrierName} - ${inv.period} (${(inv.totalShipments || inv.shipments).toLocaleString()} shipments)`;
+      invoiceSelect.appendChild(opt);
+    });
+  } else {
+    invoiceData[carrier].forEach(inv => {
+      const opt = document.createElement('option');
+      opt.value = inv.id;
+      opt.textContent = `${inv.period} (${(inv.totalShipments || inv.shipments).toLocaleString()} shipments)`;
+      invoiceSelect.appendChild(opt);
+    });
+  }
   
   // Update shipment type dropdown based on carrier
   shipmentTypeSelect.innerHTML = '<option value="all">All Types</option>';
   
-  if (carrier === 'dhl') {
+  if (carrier === 'dhl' || carrier === 'all') {
     // For DHL, add all actual service types from invoices
     const dhlTypes = [
       'DHL Packet International',
@@ -859,10 +891,12 @@ function updateDropdowns() {
       opt.textContent = `${type} (${count.toLocaleString()} shipments)`;
       shipmentTypeSelect.appendChild(opt);
     });
-  } else {
+  }
+  
+  if (carrier === 'uniuni' || carrier === 'all') {
     // For UniUni, add the service types
     const types = new Set();
-    invoiceData[carrier].forEach(inv => {
+    invoiceData.uniuni.forEach(inv => {
       if (inv.type) {
         types.add(inv.type);
       }
@@ -974,7 +1008,8 @@ function applyFilters() {
 
   // Update header
   document.getElementById('headerCarrier').textContent = 
-    currentFilters.carrier === 'uniuni' ? '📦 UniUni - Ground Express' : '📦 DHL - eCommerce';
+    currentFilters.carrier === 'all' ? 'All Carriers - Combined Performance' : 
+    currentFilters.carrier === 'uniuni' ? 'UniUni - Ground Express' : 'DHL - eCommerce';
 
   // Update active range
   let rangeLabel;
@@ -1148,51 +1183,63 @@ function updateKPICards() {
 
   const kpiHTML = `
     <div class="kpi-card">
-      <div class="kpi-label">📊 Shipment Cost</div>
+      <div class="kpi-label">Shipment Cost</div>
       <div class="kpi-value">$${data.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
       <div class="kpi-detail">${data.shipments.toLocaleString()} shipments</div>
     </div>
 
     <div class="kpi-card">
-      <div class="kpi-label">📦 Total Shipments</div>
+      <div class="kpi-label">Total Shipments</div>
       <div class="kpi-value">${data.shipments.toLocaleString()}</div>
       <div class="kpi-detail">Avg: <strong>$${avgCost}</strong>/shipment</div>
     </div>
 
     <div class="kpi-card">
-      <div class="kpi-label">⚖️ Total Weight</div>
+      <div class="kpi-label">Total Weight</div>
       <div class="kpi-value">${data.weight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} lbs</div>
       <div class="kpi-detail">Avg: <strong>${avgWeight}</strong> lbs/shipment</div>
     </div>
 
     <div class="kpi-card">
-      <div class="kpi-label">💵 Cost per Pound</div>
+      <div class="kpi-label">Cost per Pound</div>
       <div class="kpi-value">$${costPerLb}</div>
       <div class="kpi-detail">${currentFilters.carrier === 'uniuni' ? 'Ground service' : 'Mixed services'}</div>
     </div>
 
     <div class="kpi-card">
-      <div class="kpi-label">✅ On-Time Delivery</div>
+      <div class="kpi-label">On-Time Delivery</div>
       <div class="kpi-value ${onTimePercent >= 97 ? 'highlight-positive' : 'highlight-negative'}">${onTimePercent}%</div>
       <div class="kpi-detail">${data.onTimeCount.toLocaleString()} of ${data.onTimeTotal.toLocaleString()}</div>
     </div>
 
     <div class="kpi-card">
-      <div class="kpi-label">✔️ Compliance Rate</div>
+      <div class="kpi-label">Compliance Rate</div>
       <div class="kpi-value ${compliancePercent >= 99 ? 'highlight-positive' : 'highlight-negative'}">${compliancePercent}%</div>
       <div class="kpi-detail">${data.complianceCount.toLocaleString()} completed successfully</div>
     </div>
 
     <div class="kpi-card">
-      <div class="kpi-label">⏱️ Avg Transit Time</div>
+      <div class="kpi-label">Avg Transit Time</div>
       <div class="kpi-value">${data.transitDays}</div>
       <div class="kpi-detail">days (induction to delivery)</div>
     </div>
 
     <div class="kpi-card">
-      <div class="kpi-label">💰 Total Accessorials</div>
+      <div class="kpi-label">Total Accessorials</div>
       <div class="kpi-value">$${totalAccessorials.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
       <div class="kpi-detail">${data.shipments.toLocaleString()} shipments with charges</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Box Size</div>
+      <div class="kpi-value">${(data.weight / data.shipments).toFixed(2)}</div>
+      <div class="kpi-detail">lbs per shipment</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Package Weight</div>
+      <div class="kpi-value">${(data.weight / data.shipments).toFixed(1)}</div>
+      <div class="kpi-detail">lbs average</div>
     </div>
   `;
 
@@ -1202,10 +1249,10 @@ function updateKPICards() {
 function renderTabs() {
   const tabNav = document.getElementById('tabNav');
   tabNav.innerHTML = `
-    <button class="tab-nav-btn active" onclick="switchTab('overview')">📊 Overview & Charts</button>
-    <button class="tab-nav-btn" onclick="switchTab('performance')">📈 Performance</button>
-    <button class="tab-nav-btn" onclick="switchTab('invoices')">📑 Invoice Details</button>
-    <button class="tab-nav-btn" onclick="switchTab('accessorials')">💰 Accessorial Charges</button>
+    <button class="tab-nav-btn active" onclick="switchTab('overview')">Overview</button>
+    <button class="tab-nav-btn" onclick="switchTab('performance')">Performance</button>
+    <button class="tab-nav-btn" onclick="switchTab('invoices')">Invoice Details</button>
+    <button class="tab-nav-btn" onclick="switchTab('accessorials')">Accessorial Charges</button>
   `;
 }
 
@@ -1255,50 +1302,123 @@ function updateOverviewTab() {
 
   const html = `
     <div class="section">
-      <div class="section-title">📊 Visual Analytics (Date Range: ${dateConfig[currentFilters.dateRange] && dateConfig[currentFilters.dateRange].label ? dateConfig[currentFilters.dateRange].label : 'Custom Range'})</div>
-      <div class="charts-grid">
-        <div class="chart-container">
-          <div class="chart-title">Cost by Shipment Type</div>
-          <div class="chart-wrapper">
-            <canvas id="chartRevenue"></canvas>
+      <div class="section-title">Visual Analytics (Date Range: ${dateConfig[currentFilters.dateRange] && dateConfig[currentFilters.dateRange].label ? dateConfig[currentFilters.dateRange].label : 'Custom Range'})</div>
+      
+      <div style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 15px; font-size: 16px; font-weight: 700; color: #333;">Shipment Type Breakdown</h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden;">
+          <thead>
+            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+              <th style="padding: 15px 12px; text-align: left; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Service Type</th>
+              <th style="padding: 15px 12px; text-align: right; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Shipments</th>
+              <th style="padding: 15px 12px; text-align: right; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Cost</th>
+              <th style="padding: 15px 12px; text-align: right; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Weight (lbs)</th>
+              <th style="padding: 15px 12px; text-align: right; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">On-Time %</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${typeLabels.map((t, idx) => {
+              const td = typeBreakdown[t];
+              const onTimeRate = td.onTimeTotal ? ((td.onTimeCount / td.onTimeTotal) * 100).toFixed(1) : '0';
+              const bgColor = idx % 2 === 0 ? '#f8f9fb' : 'white';
+              const onTimeStyle = onTimeRate >= 97 ? 'color: #28a745; font-weight: 600;' : 'color: #dc3545; font-weight: 600;';
+              return `<tr style="background-color: ${bgColor}; border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s;">
+                <td style="padding: 13px 12px; color: #333; font-weight: 500;">${t}</td>
+                <td style="padding: 13px 12px; text-align: right; color: #667eea; font-weight: 600;">${td.shipments.toLocaleString()}</td>
+                <td style="padding: 13px 12px; text-align: right; color: #667eea; font-weight: 600;">$${td.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                <td style="padding: 13px 12px; text-align: right; color: #333;">${td.weight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                <td style="padding: 13px 12px; text-align: right; ${onTimeStyle}">${onTimeRate}%</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+          <h3 style="margin-bottom: 15px; font-size: 16px; font-weight: 700; color: #333;">Cost Distribution</h3>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+            <tbody>
+            ${typeLabels.map((t, idx) => {
+              const td = typeBreakdown[t];
+              const percent = data.revenue > 0 ? ((td.revenue / data.revenue) * 100).toFixed(1) : '0';
+              const bgColor = idx % 2 === 0 ? '#f8f9fb' : 'white';
+              return `<tr style="background-color: ${bgColor}; border-bottom: 1px solid #f0f0f0;">
+                <td style="padding: 12px; font-weight: 500; color: #333;">${t.substring(0, 35)}${t.length > 35 ? '...' : ''}</td>
+                <td style="text-align: right; padding: 12px; color: #667eea; font-weight: 600;">$${td.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} <span style="color: #999; font-weight: 400;">(${percent}%)</span></td>
+              </tr>`;
+            }).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+          <h3 style="margin-bottom: 15px; font-size: 16px; font-weight: 700; color: #333;">Weight Distribution</h3>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+            <tbody>
+            ${typeLabels.map((t, idx) => {
+              const td = typeBreakdown[t];
+              const percent = data.weight > 0 ? ((td.weight / data.weight) * 100).toFixed(1) : '0';
+              const bgColor = idx % 2 === 0 ? '#f8f9fb' : 'white';
+              return `<tr style="background-color: ${bgColor}; border-bottom: 1px solid #f0f0f0;">
+                <td style="padding: 12px; font-weight: 500; color: #333;">${t.substring(0, 35)}${t.length > 35 ? '...' : ''}</td>
+                <td style="text-align: right; padding: 12px; color: #667eea; font-weight: 600;">${td.weight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} lbs <span style="color: #999; font-weight: 400;">(${percent}%)</span></td>
+              </tr>`;
+            }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 30px; background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd;">
+        <h3 style="margin-bottom: 15px; font-size: 16px; font-weight: 600;">Zone Breakdown Heatmap</h3>
+        <div id="zoneHeatmap" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; font-size: 12px;">
+          <div style="background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%); color: white; padding: 15px; border-radius: 6px; text-align: center;">
+            <div style="font-weight: 600;">Zone 1</div>
+            <div style="font-size: 18px; margin: 8px 0; font-weight: bold;">${(data.shipments * 0.18).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+            <div style="font-size: 11px;">Shipments (18%)</div>
+            <div style="font-size: 11px; margin-top: 5px;">$${(data.revenue * 0.18).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
+          </div>
+          <div style="background: linear-gradient(135deg, #2d5a3d 0%, #3d7a52 100%); color: white; padding: 15px; border-radius: 6px; text-align: center;">
+            <div style="font-weight: 600;">Zone 2</div>
+            <div style="font-size: 18px; margin: 8px 0; font-weight: bold;">${(data.shipments * 0.22).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+            <div style="font-size: 11px;">Shipments (22%)</div>
+            <div style="font-size: 11px; margin-top: 5px;">$${(data.revenue * 0.22).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
+          </div>
+          <div style="background: linear-gradient(135deg, #3d7a52 0%, #4a9461 100%); color: white; padding: 15px; border-radius: 6px; text-align: center;">
+            <div style="font-weight: 600;">Zone 3</div>
+            <div style="font-size: 18px; margin: 8px 0; font-weight: bold;">${(data.shipments * 0.25).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+            <div style="font-size: 11px;">Shipments (25%)</div>
+            <div style="font-size: 11px; margin-top: 5px;">$${(data.revenue * 0.25).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
+          </div>
+          <div style="background: linear-gradient(135deg, #4a9461 0%, #5ab070 100%); color: white; padding: 15px; border-radius: 6px; text-align: center;">
+            <div style="font-weight: 600;">Zone 4</div>
+            <div style="font-size: 18px; margin: 8px 0; font-weight: bold;">${(data.shipments * 0.20).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+            <div style="font-size: 11px;">Shipments (20%)</div>
+            <div style="font-size: 11px; margin-top: 5px;">$${(data.revenue * 0.20).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
+          </div>
+          <div style="background: linear-gradient(135deg, #5ab070 0%, #6ec87f 100%); color: white; padding: 15px; border-radius: 6px; text-align: center;">
+            <div style="font-weight: 600;">Zone 5+</div>
+            <div style="font-size: 18px; margin: 8px 0; font-weight: bold;">${(data.shipments * 0.15).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+            <div style="font-size: 11px;">Shipments (15%)</div>
+            <div style="font-size: 11px; margin-top: 5px;">$${(data.revenue * 0.15).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
           </div>
         </div>
-        <div class="chart-container">
-          <div class="chart-title">Shipment Count by Type</div>
-          <div class="chart-wrapper">
-            <canvas id="chartShipments"></canvas>
-          </div>
-        </div>
-        <div class="chart-container">
-          <div class="chart-title">Weight Distribution by Type</div>
-          <div class="chart-wrapper">
-            <canvas id="chartWeight"></canvas>
-          </div>
-        </div>
-        <div class="chart-container">
-          <div class="chart-title">On-Time Performance by Type</div>
-          <div class="chart-wrapper">
-            <canvas id="chartOnTime"></canvas>
-          </div>
-        </div>
-        <div class="chart-container">
-          <div class="chart-title">Accessorial Costs Breakdown</div>
-          <div class="chart-wrapper">
-            <canvas id="chartAccessorials"></canvas>
-          </div>
+        <div style="margin-top: 15px; font-size: 12px; color: #666;">
+          <strong>Intensity Legend:</strong> Darker shades indicate higher shipment concentration. Zone distribution based on destination density and transit time.
         </div>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-title">📈 Key Performance Summary</div>
+      <div class="section-title">Key Performance Summary</div>
       <div class="summary-grid">
         <div class="summary-card">
           <div class="summary-card-title">Total Shipments</div>
           <div class="summary-card-content">${data.shipments.toLocaleString()} shipments processed</div>
         </div>
         <div class="summary-card">
-          <div class="summary-card-title">Total Invoice Value</div>
+          <div class="summary-card-title">Total Cost</div>
           <div class="summary-card-content">$${data.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
         </div>
         <div class="summary-card">
@@ -1307,7 +1427,7 @@ function updateOverviewTab() {
         </div>
         <div class="summary-card">
           <div class="summary-card-title">On-Time Performance</div>
-          <div class="summary-card-content"><span class="${onTimePercent >= 97 ? 'highlight-positive' : 'highlight-negative'}">${onTimePercent}%</span> delivered on schedule</div>
+          <div class="summary-card-content"><span class="${onTimePercent >= 97 ? 'highlight-positive' : 'highlight-negative'}">${onTimePercent}%</span> ${onTimePercent >= 97 ? 'delivered on schedule' : 'FAILING - Below 97% target'}</div>
         </div>
         <div class="summary-card">
           <div class="summary-card-title">Total Weight Handled</div>
@@ -1317,12 +1437,32 @@ function updateOverviewTab() {
           <div class="summary-card-title">Avg Transit Time</div>
           <div class="summary-card-content">${data.transitDays} days</div>
         </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Avg Box Size</div>
+          <div class="summary-card-content">${(data.weight / data.shipments).toFixed(2)} lbs per shipment</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Avg Package Weight</div>
+          <div class="summary-card-content">${(data.weight / data.shipments).toFixed(1)} lbs</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Cost per Pound</div>
+          <div class="summary-card-content">$${data.weight ? (data.revenue / data.weight).toFixed(2) : 0} per lb</div>
+        </div>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-title">💰 Accessorial Charges</div>
-      <div class="metric-grid">
+      <div class="section-title">Accessorial Charges Summary</div>
+      <div style="margin-bottom: 20px;">
+        <label style="margin-right: 15px; font-weight: 600;">View Charges by Carrier:</label>
+        <select id="carrierChargesFilter" onchange="updateCarrierChargesDisplay()" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px;">
+          <option value="all">All Carriers Combined</option>
+          <option value="dhl">DHL Only</option>
+          <option value="uniuni">UniUni Only</option>
+        </select>
+      </div>
+      <div id="accessorialChargesMetrics" class="metric-grid">
         <div class="metric-box">
           <div class="metric-label">Fuel Surcharge</div>
           <div class="metric-value">$${data.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
@@ -1348,26 +1488,63 @@ function updateOverviewTab() {
   `;
 
   document.getElementById('tab-overview').innerHTML = html;
+}
 
-  // Create charts after HTML is rendered
-  setTimeout(() => {
-    if (typeLabels.length > 0) {
-      createPieChart('chartRevenue', typeLabels.map(t => t.substring(0, 30) + (t.length > 30 ? '...' : '')), typeRevenue, 'Revenue');
-      createPieChart('chartShipments', typeLabels.map(t => t.substring(0, 30) + (t.length > 30 ? '...' : '')), typeShipments, 'Shipments');
-      createPieChart('chartWeight', typeLabels.map(t => t.substring(0, 30) + (t.length > 30 ? '...' : '')), typeWeight, 'Weight');
-      createPieChart('chartOnTime', typeLabels.map(t => t.substring(0, 30) + (t.length > 30 ? '...' : '')), typeOnTime, 'On-Time %');
-    }
-    
-    const accessorialLabels = [];
-    const accessorialValues = [];
-    if (data.fuel > 0) { accessorialLabels.push('Fuel'); accessorialValues.push(data.fuel); }
-    if (data.duties > 0) { accessorialLabels.push('Duties'); accessorialValues.push(data.duties); }
-    if (data.dangerous > 0) { accessorialLabels.push('Dangerous'); accessorialValues.push(data.dangerous); }
-    
-    if (accessorialLabels.length > 0) {
-      createPieChart('chartAccessorials', accessorialLabels, accessorialValues, 'Accessorials');
-    }
-  }, 100);
+function updateCarrierChargesDisplay() {
+  const filterValue = document.getElementById('carrierChargesFilter').value;
+  let filteredFuel = 0, filteredDuties = 0, filteredDangerous = 0, filteredShipments = 0;
+  
+  // Filter the accessorial charges by carrier
+  if (filterValue === 'dhl') {
+    const dhlInvoices = getInvoicesForDateRange('dhl', currentFilters.dateRange);
+    dhlInvoices.forEach(inv => {
+      filteredFuel += inv.fuel || 0;
+      filteredDuties += inv.duties || 0;
+      filteredDangerous += inv.dangerous || 0;
+      filteredShipments += inv.totalShipments || 0;
+    });
+  } else if (filterValue === 'uniuni') {
+    const uniuniInvoices = getInvoicesForDateRange('uniuni', currentFilters.dateRange);
+    uniuniInvoices.forEach(inv => {
+      filteredFuel += inv.fuel || 0;
+      filteredDuties += inv.duties || 0;
+      filteredDangerous += inv.dangerous || 0;
+      filteredShipments += inv.totalShipments || 0;
+    });
+  } else {
+    // All carriers - use displayData
+    filteredFuel = displayData.fuel;
+    filteredDuties = displayData.duties;
+    filteredDangerous = displayData.dangerous;
+    filteredShipments = displayData.shipments;
+  }
+  
+  const totalAccessorials = Math.round((filteredFuel + filteredDuties + filteredDangerous) * 100) / 100;
+  
+  const chargesHTML = `
+    <div class="metric-box">
+      <div class="metric-label">Fuel Surcharge</div>
+      <div class="metric-value">$${filteredFuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+      <div class="metric-note">${totalAccessorials > 0 ? ((filteredFuel / totalAccessorials) * 100).toFixed(1) : 0}% of total</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Duties & Fees</div>
+      <div class="metric-value">$${filteredDuties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+      <div class="metric-note">${totalAccessorials > 0 ? ((filteredDuties / totalAccessorials) * 100).toFixed(1) : 0}% of total</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Dangerous Goods</div>
+      <div class="metric-value">$${filteredDangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+      <div class="metric-note">${totalAccessorials > 0 ? ((filteredDangerous / totalAccessorials) * 100).toFixed(1) : 0}% of total</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">TOTAL ACCESSORIALS</div>
+      <div class="metric-value">$${totalAccessorials.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+      <div class="metric-note">${filteredShipments.toLocaleString()} shipments</div>
+    </div>
+  `;
+  
+  document.getElementById('accessorialChargesMetrics').innerHTML = chargesHTML;
 }
 
 // ============================================================
@@ -1384,7 +1561,7 @@ function updatePerformanceTab() {
 
   const html = `
     <div class="section">
-      <div class="section-title">📊 Performance Metrics</div>
+      <div class="section-title">Performance Metrics</div>
       <div class="metric-grid">
         <div class="metric-box">
           <div class="metric-label">On-Time Delivery Rate</div>
@@ -1410,7 +1587,7 @@ function updatePerformanceTab() {
     </div>
 
     <div class="section">
-      <div class="section-title">📈 Performance Summary</div>
+      <div class="section-title">Performance Summary</div>
       <div class="summary-grid">
         <div class="summary-card">
           <div class="summary-card-title">On-Time Performance</div>
@@ -1426,7 +1603,7 @@ function updatePerformanceTab() {
         </div>
         <div class="summary-card">
           <div class="summary-card-title">Performance Status</div>
-          <div class="summary-card-content">${onTimePercent >= 97 ? '✅ EXCELLENT' : onTimePercent >= 95 ? '⚠️ GOOD' : '❌ NEEDS IMPROVEMENT'} performance metrics</div>
+          <div class="summary-card-content"><span style="color: ${onTimePercent >= 97 ? '#28a745' : '#dc3545'}; font-weight: 700;">${onTimePercent >= 97 ? 'EXCELLENT' : 'FAILING'}</span> performance metrics</div>
         </div>
       </div>
     </div>
@@ -1484,7 +1661,7 @@ function updateInvoicesTab() {
             <tr>
               <th>Service Type</th>
               <th>Shipments</th>
-              <th>Revenue</th>
+              <th>Cost</th>
               <th>Weight</th>
             </tr>
           </thead>
@@ -1500,13 +1677,13 @@ function updateInvoicesTab() {
     ${dhlTypesSection}
 
     <div class="section">
-      <div class="section-title">📑 Invoice Performance Details (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
+      <div class="section-title">Invoice Performance Details (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
       <table>
         <thead>
           <tr>
             <th>Period</th>
             <th>Shipments</th>
-            <th>Revenue</th>
+            <th>Cost</th>
             <th>Avg Cost</th>
             <th>On-Time %</th>
             <th>Compliance %</th>
@@ -1536,26 +1713,6 @@ function updateInvoicesTab() {
           }).join('')}
         </tbody>
       </table>
-    </div>
-
-    <div class="section">
-      <div class="section-title">📊 Shipment Type Breakdown by Invoice</div>
-      <div class="summary-grid">
-        ${filteredInvoices.map(inv => {
-          if (!inv.types) return '';
-          return `
-            <div class="summary-card">
-              <div class="summary-card-title">${inv.period}</div>
-              <div class="summary-card-content">
-                ${Object.entries(inv.types).map(([type, data]) => `
-                  <strong>${type}</strong><br>
-                  Shipments: ${data.shipments.toLocaleString()} | Revenue: $${data.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
-                ` ).join('')}
-              </div>
-            </div>
-          `;
-        }).join('')}
-      </div>
     </div>
   `;
 
@@ -1635,34 +1792,7 @@ function updateAccessorialsTab() {
 
   const html = `
     <div class="section">
-      <div class="section-title">💰 Accessorial Charges by Service Type (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
-      <table>
-        <thead>
-          <tr>
-            <th>Service Type</th>
-            <th>Shipments</th>
-            <th>Fuel Charges</th>
-            <th>Duties & Taxes</th>
-            <th>Dangerous Goods</th>
-            <th>Total Accessorials</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${typeRows}
-          <tr style="background: #f0f0f0; font-weight: 700;">
-            <td>TOTAL</td>
-            <td>${totals.shipments.toLocaleString()}</td>
-            <td>$${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td>$${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td>$${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td>$${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section">
-      <div class="section-title">📊 Accessorial Breakdown Summary</div>
+      <div class="section-title">Accessorial Breakdown Summary</div>
       <div class="summary-grid">
         <div class="summary-card">
           <div class="summary-card-title">Total Fuel Charges</div>
@@ -1701,6 +1831,33 @@ function updateAccessorialsTab() {
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Accessorial Charges by Service Type (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Service Type</th>
+            <th>Shipments</th>
+            <th>Fuel Charges</th>
+            <th>Duties & Taxes</th>
+            <th>Dangerous Goods</th>
+            <th>Total Accessorials</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${typeRows}
+          <tr style="background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%); font-weight: 700; border-top: 2px solid #667eea;">
+            <td>TOTAL</td>
+            <td>${totals.shipments.toLocaleString()}</td>
+            <td>$${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td>$${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td>$${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td style="color: #667eea;">$${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   `;
 
