@@ -1320,7 +1320,17 @@ function switchTab(tab) {
   document.getElementById(`tab-${tab}`).classList.add('active');
 }
 
+function destroyCharts() {
+  Object.values(chartInstances).forEach(chart => {
+    if (chart && typeof chart.destroy === 'function') {
+      chart.destroy();
+    }
+  });
+  chartInstances = {};
+}
+
 function updateAllTabContent() {
+  destroyCharts();
   updateOverviewTab();
   updatePerformanceTab();
   updateInvoicesTab();
@@ -1715,33 +1725,31 @@ function updateInvoicesTab() {
       }
     });
 
-    const typeRows = Object.entries(typeAggregates)
-      .sort((a, b) => b[1].shipments - a[1].shipments)
-      .map(([type, data]) => `
-        <tr>
-          <td><strong>${type}</strong></td>
-          <td>${data.shipments.toLocaleString()}</td>
-          <td>$${data.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-          <td>${data.weight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} lbs</td>
-        </tr>
-      `).join('');
+    const sortedTypes = Object.entries(typeAggregates)
+      .sort((a, b) => b[1].shipments - a[1].shipments);
+    
+    const typeLabels = sortedTypes.map(([type]) => type.substring(0, 25) + (type.length > 25 ? '...' : ''));
+    const typeShipments = sortedTypes.map(([, data]) => data.shipments);
+    const typeRevenue = sortedTypes.map(([, data]) => data.revenue);
+    const typeWeight = sortedTypes.map(([, data]) => data.weight);
 
     dhlTypesSection = `
       <div class="section">
         <div class="section-title">📦 DHL Service Type Summary (All 12 Types)</div>
-        <table>
-          <thead>
-            <tr>
-              <th>Service Type</th>
-              <th>Shipments</th>
-              <th>Cost</th>
-              <th>Weight</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${typeRows}
-          </tbody>
-        </table>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <h4 style="margin: 0 0 10px 0; color: #333;">Shipment Count by Type</h4>
+            <canvas id="chartTypeShipments" style="max-height: 300px;"></canvas>
+          </div>
+          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <h4 style="margin: 0 0 10px 0; color: #333;">Revenue by Type</h4>
+            <canvas id="chartTypeRevenue" style="max-height: 300px;"></canvas>
+          </div>
+          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <h4 style="margin: 0 0 10px 0; color: #333;">Weight by Type</h4>
+            <canvas id="chartTypeWeight" style="max-height: 300px;"></canvas>
+          </div>
+        </div>
       </div>
     `;
   }
@@ -1751,31 +1759,233 @@ function updateInvoicesTab() {
 
     <div class="section">
       <div class="section-title">📈 Invoice Performance Details (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
-      <table>
-        <thead>
-          <tr>
-            <th>Period</th>
-            <th>Shipments</th>
-            <th>Trend</th>
-            <th>Cost</th>
-            <th>Cost Trend</th>
-            <th>Avg Cost</th>
-            <th>On-Time %</th>
-            <th>OT Trend</th>
-            <th>Compliance %</th>
-            <th>Transit Days</th>
-          </tr>
-        </thead>
-        <tbody id="invoiceTableBody">
-        </tbody>
-      </table>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">Shipments by Period</h4>
+          <canvas id="chartInvoiceShipments" style="max-height: 300px;"></canvas>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">Revenue by Period</h4>
+          <canvas id="chartInvoiceRevenue" style="max-height: 300px;"></canvas>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">On-Time % by Period</h4>
+          <canvas id="chartInvoiceOnTime" style="max-height: 300px;"></canvas>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">Weight by Period</h4>
+          <canvas id="chartInvoiceWeight" style="max-height: 300px;"></canvas>
+        </div>
+      </div>
     </div>
   `;
 
   document.getElementById('tab-invoices').innerHTML = html;
   
-  // Populate invoice table with trend data
-  populateInvoiceTableWithTrends(filteredInvoices);
+  // Create charts after DOM is rendered
+  setTimeout(() => {
+    if (carrier === 'dhl') {
+      const sortedTypes = Object.entries(typeAggregates)
+        .sort((a, b) => b[1].shipments - a[1].shipments);
+      const typeLabels = sortedTypes.map(([type]) => type.substring(0, 25) + (type.length > 25 ? '...' : ''));
+      const typeShipments = sortedTypes.map(([, data]) => data.shipments);
+      const typeRevenue = sortedTypes.map(([, data]) => data.revenue);
+      const typeWeight = sortedTypes.map(([, data]) => data.weight);
+      
+      createBarChart('chartTypeShipments', typeLabels, typeShipments, 'Shipments');
+      createBarChart('chartTypeRevenue', typeLabels, typeRevenue, 'Revenue ($)');
+      createBarChart('chartTypeWeight', typeLabels, typeWeight, 'Weight (lbs)');
+    }
+    
+    createInvoiceCharts(filteredInvoices);
+  }, 100);
+}
+
+function createBarChart(canvasId, labels, data, label) {
+  if (chartInstances[canvasId]) {
+    chartInstances[canvasId].destroy();
+  }
+  
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label,
+        data: data,
+        backgroundColor: '#667eea',
+        borderColor: '#667eea',
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top'
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            font: { size: 10 }
+          }
+        },
+        y: {
+          ticks: {
+            font: { size: 10 }
+          }
+        }
+      }
+    }
+  });
+}
+
+function createInvoiceCharts(invoices) {
+  const invoiceLabels = invoices.map(inv => inv.period);
+  const invoiceShipments = invoices.map(inv => inv.totalShipments || inv.shipments);
+  const invoiceRevenue = invoices.map(inv => inv.totalRevenue || inv.revenue);
+  const invoiceOnTime = invoices.map(inv => ((inv.onTimeCount / inv.onTimeTotal) * 100).toFixed(1));
+  const invoiceWeight = invoices.map(inv => inv.totalWeight || inv.weight);
+  
+  // Shipments chart
+  if (chartInstances['chartInvoiceShipments']) {
+    chartInstances['chartInvoiceShipments'].destroy();
+  }
+  const ctx1 = document.getElementById('chartInvoiceShipments');
+  if (ctx1) {
+    chartInstances['chartInvoiceShipments'] = new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: invoiceLabels,
+        datasets: [{
+          label: 'Shipments',
+          data: invoiceShipments,
+          backgroundColor: '#667eea',
+          borderColor: '#667eea',
+          borderWidth: 1,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+  
+  // Revenue chart
+  if (chartInstances['chartInvoiceRevenue']) {
+    chartInstances['chartInvoiceRevenue'].destroy();
+  }
+  const ctx2 = document.getElementById('chartInvoiceRevenue');
+  if (ctx2) {
+    chartInstances['chartInvoiceRevenue'] = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: invoiceLabels,
+        datasets: [{
+          label: 'Revenue ($)',
+          data: invoiceRevenue,
+          backgroundColor: '#22c55e',
+          borderColor: '#22c55e',
+          borderWidth: 1,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+  
+  // On-Time % chart
+  if (chartInstances['chartInvoiceOnTime']) {
+    chartInstances['chartInvoiceOnTime'].destroy();
+  }
+  const ctx3 = document.getElementById('chartInvoiceOnTime');
+  if (ctx3) {
+    chartInstances['chartInvoiceOnTime'] = new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: invoiceLabels,
+        datasets: [{
+          label: 'On-Time %',
+          data: invoiceOnTime,
+          backgroundColor: '#f59e0b',
+          borderColor: '#f59e0b',
+          borderWidth: 1,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+  }
+  
+  // Weight chart
+  if (chartInstances['chartInvoiceWeight']) {
+    chartInstances['chartInvoiceWeight'].destroy();
+  }
+  const ctx4 = document.getElementById('chartInvoiceWeight');
+  if (ctx4) {
+    chartInstances['chartInvoiceWeight'] = new Chart(ctx4, {
+      type: 'bar',
+      data: {
+        labels: invoiceLabels,
+        datasets: [{
+          label: 'Weight (lbs)',
+          data: invoiceWeight,
+          backgroundColor: '#8b5cf6',
+          borderColor: '#8b5cf6',
+          borderWidth: 1,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
 }
 
 function populateInvoiceTableWithTrends(invoices) {
@@ -1932,33 +2142,90 @@ function updateAccessorialsTab() {
 
     <div class="section">
       <div class="section-title">Accessorial Charges by Service Type (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
-      <table>
-        <thead>
-          <tr>
-            <th>Service Type</th>
-            <th>Shipments</th>
-            <th>Fuel Charges</th>
-            <th>Duties & Taxes</th>
-            <th>Dangerous Goods</th>
-            <th>Total Accessorials</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${typeRows}
-          <tr style="background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%); font-weight: 700; border-top: 2px solid #667eea;">
-            <td>TOTAL</td>
-            <td>${totals.shipments.toLocaleString()}</td>
-            <td>$${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td>$${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td>$${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td style="color: #667eea;">$${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">Fuel Charges by Service Type</h4>
+          <canvas id="chartAccessorialFuel" style="max-height: 300px;"></canvas>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">Duties & Taxes by Service Type</h4>
+          <canvas id="chartAccessorialDuties" style="max-height: 300px;"></canvas>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">Dangerous Goods Fees by Service Type</h4>
+          <canvas id="chartAccessorialDangerous" style="max-height: 300px;"></canvas>
+        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 style="margin: 0 0 10px 0; color: #333;">Total Accessorials by Service Type</h4>
+          <canvas id="chartAccessorialTotal" style="max-height: 300px;"></canvas>
+        </div>
+      </div>
     </div>
   `;
 
   document.getElementById('tab-accessorials').innerHTML = html;
+  
+  // Create charts after DOM is rendered
+  setTimeout(() => {
+    const typeLabels = sortedTypes.map(([type]) => type.substring(0, 20) + (type.length > 20 ? '...' : ''));
+    const fuelData = sortedTypes.map(([, data]) => data.fuel);
+    const dutiesData = sortedTypes.map(([, data]) => data.duties);
+    const dangerousData = sortedTypes.map(([, data]) => data.dangerous);
+    const totalData = sortedTypes.map(([, data]) => data.total);
+    
+    createAccessorialChart('chartAccessorialFuel', typeLabels, fuelData, 'Fuel ($)', '#667eea');
+    createAccessorialChart('chartAccessorialDuties', typeLabels, dutiesData, 'Duties & Taxes ($)', '#22c55e');
+    createAccessorialChart('chartAccessorialDangerous', typeLabels, dangerousData, 'Dangerous Goods ($)', '#f59e0b');
+    createAccessorialChart('chartAccessorialTotal', typeLabels, totalData, 'Total Accessorials ($)', '#8b5cf6');
+  }, 100);
+}
+
+function createAccessorialChart(canvasId, labels, data, label, color) {
+  if (chartInstances[canvasId]) {
+    chartInstances[canvasId].destroy();
+  }
+  
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label,
+        data: data,
+        backgroundColor: color,
+        borderColor: color,
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top'
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            font: { size: 10 }
+          }
+        },
+        y: {
+          ticks: {
+            font: { size: 10 }
+          }
+        }
+      }
+    }
+  });
 }
 </script>
 
