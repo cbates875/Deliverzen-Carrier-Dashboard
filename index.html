@@ -1765,7 +1765,7 @@ function updateInvoicesTab() {
           <canvas id="chartInvoiceShipments" style="max-height: 300px;"></canvas>
         </div>
         <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <h4 style="margin: 0 0 10px 0; color: #333;">Revenue by Period</h4>
+          <h4 style="margin: 0 0 10px 0; color: #333;">Cost by Period</h4>
           <canvas id="chartInvoiceRevenue" style="max-height: 300px;"></canvas>
         </div>
         <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
@@ -1852,7 +1852,7 @@ function createBarChart(canvasId, labels, data, label) {
 function createInvoiceCharts(invoices) {
   const invoiceLabels = invoices.map(inv => inv.period);
   const invoiceShipments = invoices.map(inv => inv.totalShipments || inv.shipments);
-  const invoiceRevenue = invoices.map(inv => inv.totalRevenue || inv.revenue);
+  const invoiceCost = invoices.map(inv => inv.totalRevenue || inv.revenue);
   const invoiceOnTime = invoices.map(inv => ((inv.onTimeCount / inv.onTimeTotal) * 100).toFixed(1));
   const invoiceWeight = invoices.map(inv => inv.totalWeight || inv.weight);
   
@@ -1888,7 +1888,7 @@ function createInvoiceCharts(invoices) {
     });
   }
   
-  // Revenue chart
+  // Cost chart
   if (chartInstances['chartInvoiceRevenue']) {
     chartInstances['chartInvoiceRevenue'].destroy();
   }
@@ -1899,8 +1899,8 @@ function createInvoiceCharts(invoices) {
       data: {
         labels: invoiceLabels,
         datasets: [{
-          label: 'Revenue ($)',
-          data: invoiceRevenue,
+          label: 'Cost ($)',
+          data: invoiceCost,
           backgroundColor: '#22c55e',
           borderColor: '#22c55e',
           borderWidth: 1,
