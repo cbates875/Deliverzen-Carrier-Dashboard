@@ -1122,7 +1122,7 @@ function aggregateInvoices(invoices, shipmentType) {
       agg.onTimeTotal += inv.onTimeTotal;
       agg.complianceCount += inv.complianceCount;
       agg.complianceTotal += inv.complianceTotal;
-      agg.transitDays += inv.transitDays;
+      agg.transitDays += (inv.transitDays || 0) * (inv.totalShipments || inv.shipments);
       agg.fuel += inv.fuel;
       agg.duties += inv.duties;
       agg.dangerous += inv.dangerous;
@@ -1153,10 +1153,10 @@ function aggregateInvoices(invoices, shipmentType) {
   });
 
   // Calculate weighted average transit days
-  if (shipmentType !== 'all' && agg.shipments > 0) {
+  if (agg.shipments > 0) {
     agg.transitDays = (agg.transitDays / agg.shipments).toFixed(2);
   } else {
-    agg.transitDays = invoices.length > 0 ? (agg.transitDays / invoices.length).toFixed(2) : 0;
+    agg.transitDays = 0;
   }
   
   // Ensure all accessorial values are properly rounded
