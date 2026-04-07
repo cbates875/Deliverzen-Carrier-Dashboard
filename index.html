@@ -1852,7 +1852,7 @@ function createBarChart(canvasId, labels, data, label) {
 function createInvoiceCharts(invoices) {
   const invoiceLabels = invoices.map(inv => inv.period);
   const invoiceShipments = invoices.map(inv => inv.totalShipments || inv.shipments);
-  const invoiceCost = invoices.map(inv => (inv.fuel || 0) + (inv.duties || 0) + (inv.dangerous || 0));
+  const invoiceCost = invoices.map(inv => inv.totalRevenue || inv.revenue);
   const invoiceOnTime = invoices.map(inv => ((inv.onTimeCount / inv.onTimeTotal) * 100).toFixed(1));
   const invoiceWeight = invoices.map(inv => inv.totalWeight || inv.weight);
   
