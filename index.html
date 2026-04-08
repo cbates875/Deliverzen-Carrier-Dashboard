@@ -612,13 +612,13 @@ let chartInstances = {};
 
 // Date ranges for reference (Mar 30, 2026 = today)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 3, 2), label: 'All Data (Feb 15 - Apr 2)' },
-  last7: { start: new Date(2026, 2, 26), end: new Date(2026, 3, 2), label: 'Last 7 Days (Mar 26 - Apr 2)' },
-  last14: { start: new Date(2026, 2, 19), end: new Date(2026, 3, 2), label: 'Last 14 Days (Mar 19 - Apr 2)' },
-  last30: { start: new Date(2026, 2, 3), end: new Date(2026, 3, 2), label: 'Last 30 Days (Mar 3 - Apr 2)' },
-  last60: { start: new Date(2026, 0, 31), end: new Date(2026, 3, 2), label: 'Last 60 Days (Jan 31 - Apr 2)' },
-  last90: { start: new Date(2026, 0, 2), end: new Date(2026, 3, 2), label: 'Last 90 Days (Jan 2 - Apr 2)' },
-  current_month: { start: new Date(2026, 3, 1), end: new Date(2026, 3, 2), label: 'Current Month (Apr 1-2)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 3, 6), label: 'All Data (Feb 15 - Apr 6)' },
+  last7: { start: new Date(2026, 2, 30), end: new Date(2026, 3, 6), label: 'Last 7 Days (Mar 30 - Apr 6)' },
+  last14: { start: new Date(2026, 2, 23), end: new Date(2026, 3, 6), label: 'Last 14 Days (Mar 23 - Apr 6)' },
+  last30: { start: new Date(2026, 2, 7), end: new Date(2026, 3, 6), label: 'Last 30 Days (Mar 7 - Apr 6)' },
+  last60: { start: new Date(2026, 1, 5), end: new Date(2026, 3, 6), label: 'Last 60 Days (Feb 5 - Apr 6)' },
+  last90: { start: new Date(2026, 0, 6), end: new Date(2026, 3, 6), label: 'Last 90 Days (Jan 6 - Apr 6)' },
+  current_month: { start: new Date(2026, 3, 1), end: new Date(2026, 3, 6), label: 'Current Month (Apr 1-6)' },
   last_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 31), label: 'Last Month (Mar)' },
   custom: { start: null, end: null, label: 'Custom Range' }
 };
@@ -665,6 +665,20 @@ const invoiceData = {
       shipments: 1870, revenue: 8387.55, weight: 12870.79,
       onTimeCount: 1776, onTimeTotal: 1870,
       complianceCount: 1855, complianceTotal: 1870,
+      transitDays: 2.1, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'u7', period: 'Mar 30-Apr 2', startDate: new Date(2026, 2, 30), endDate: new Date(2026, 3, 2), type: 'Ground Express',
+      shipments: 1057, revenue: 4450.25, weight: 7570.00,
+      onTimeCount: 1029, onTimeTotal: 1057,
+      complianceCount: 1048, complianceTotal: 1057,
+      transitDays: 2.1, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'u8', period: 'Apr 3-6', startDate: new Date(2026, 3, 3), endDate: new Date(2026, 3, 6), type: 'Ground Express',
+      shipments: 612, revenue: 2532.44, weight: 4667.94,
+      onTimeCount: 595, onTimeTotal: 612,
+      complianceCount: 607, complianceTotal: 612,
       transitDays: 2.1, fuel: 0, duties: 0, dangerous: 0
     }
   ],
