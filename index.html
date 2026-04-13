@@ -612,13 +612,13 @@ let chartInstances = {};
 
 // Date ranges for reference (Mar 30, 2026 = today)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 3, 6), label: 'All Data (Feb 15 - Apr 6)' },
-  last7: { start: new Date(2026, 2, 30), end: new Date(2026, 3, 6), label: 'Last 7 Days (Mar 30 - Apr 6)' },
-  last14: { start: new Date(2026, 2, 23), end: new Date(2026, 3, 6), label: 'Last 14 Days (Mar 23 - Apr 6)' },
-  last30: { start: new Date(2026, 2, 7), end: new Date(2026, 3, 6), label: 'Last 30 Days (Mar 7 - Apr 6)' },
-  last60: { start: new Date(2026, 1, 5), end: new Date(2026, 3, 6), label: 'Last 60 Days (Feb 5 - Apr 6)' },
-  last90: { start: new Date(2026, 0, 6), end: new Date(2026, 3, 6), label: 'Last 90 Days (Jan 6 - Apr 6)' },
-  current_month: { start: new Date(2026, 3, 1), end: new Date(2026, 3, 6), label: 'Current Month (Apr 1-6)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 3, 13), label: 'All Data (Feb 15 - Apr 13)' },
+  last7: { start: new Date(2026, 3, 6), end: new Date(2026, 3, 13), label: 'Last 7 Days (Apr 6 - Apr 13)' },
+  last14: { start: new Date(2026, 2, 30), end: new Date(2026, 3, 13), label: 'Last 14 Days (Mar 30 - Apr 13)' },
+  last30: { start: new Date(2026, 2, 14), end: new Date(2026, 3, 13), label: 'Last 30 Days (Mar 14 - Apr 13)' },
+  last60: { start: new Date(2026, 1, 12), end: new Date(2026, 3, 13), label: 'Last 60 Days (Feb 12 - Apr 13)' },
+  last90: { start: new Date(2026, 0, 13), end: new Date(2026, 3, 13), label: 'Last 90 Days (Jan 13 - Apr 13)' },
+  current_month: { start: new Date(2026, 3, 1), end: new Date(2026, 3, 13), label: 'Current Month (Apr 1-13)' },
   last_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 31), label: 'Last Month (Mar)' },
   custom: { start: null, end: null, label: 'Custom Range' }
 };
@@ -802,6 +802,22 @@ const invoiceData = {
       totalShipments: 7855, totalRevenue: 47225.03, totalWeight: 42519.52,
       onTimeCount: 7855, onTimeTotal: 7855, complianceCount: 7855, complianceTotal: 7855,
       transitDays: 4.70, fuel: 1416.71, duties: 0, dangerous: 0, accessorials: 297
+    },
+    {
+      id: 'inv9', period: 'Apr 3-10', startDate: new Date(2026, 3, 3), endDate: new Date(2026, 3, 10), invoiceNumber: '22180045', types: {
+        'DHL Packet International': {shipments: 1, revenue: 9.58, weight: 1.58, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL Parcel Expedited': {shipments: 462, revenue: 3491.92, weight: 3730.00, transitDays: 2.5, onTimeCount: 450, onTimeTotal: 462, complianceCount: 458, complianceTotal: 462},
+        'DHL Parcel Expedited Max': {shipments: 1516, revenue: 28880.37, weight: 10034.00, transitDays: 1.5, onTimeCount: 1479, onTimeTotal: 1516, complianceCount: 1504, complianceTotal: 1516},
+        'DHL Parcel Ground': {shipments: 1608, revenue: 18072.13, weight: 14131.00, transitDays: 5.5, onTimeCount: 1565, onTimeTotal: 1608, complianceCount: 1598, complianceTotal: 1608},
+        'DHL Parcel International Direct': {shipments: 34, revenue: 417.03, weight: 162.76, transitDays: 2.5, onTimeCount: 33, onTimeTotal: 34, complianceCount: 34, complianceTotal: 34},
+        'DHL Parcel International Standard': {shipments: 12, revenue: 166.44, weight: 49.88, transitDays: 6.0, onTimeCount: 12, onTimeTotal: 12, complianceCount: 12, complianceTotal: 12},
+        'DHL Parcel Plus Expedited': {shipments: 436, revenue: 7015.21, weight: 1748.00, transitDays: 2.5, onTimeCount: 425, onTimeTotal: 436, complianceCount: 433, complianceTotal: 436},
+        'DHL Parcel Plus Ground': {shipments: 1418, revenue: 59219.39, weight: 6738.00, transitDays: 5.5, onTimeCount: 1384, onTimeTotal: 1418, complianceCount: 1408, complianceTotal: 1418},
+        'Priority Mail': {shipments: 1, revenue: 120.30, weight: 30.00, transitDays: 2.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1}
+      },
+      totalShipments: 5488, totalRevenue: 117392.37, totalWeight: 36625.22,
+      onTimeCount: 5350, onTimeTotal: 5488, complianceCount: 5449, complianceTotal: 5488,
+      transitDays: 3.88, fuel: 0, duties: 0, dangerous: 0
     }
   ]
 };
