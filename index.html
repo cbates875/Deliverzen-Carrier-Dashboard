@@ -539,36 +539,34 @@
         <label>Customer</label>
         <select id="customerSelect" onchange="applyFilters()">
           <option value="">All Customers</option>
-          <option value="BetterMan">BetterMan (6)</option>
-          <option value="California Naturals">California Naturals (318)</option>
-          <option value="Core Formulas">Core Formulas (41)</option>
-          <option value="Divi Official">Divi Official (433)</option>
-          <option value="EBrands Motion">EBrands Motion (4)</option>
-          <option value="Ethlete">Ethlete (15)</option>
-          <option value="Islay Brow">Islay Brow (9)</option>
-          <option value="Kavahol">Kavahol (31)</option>
-          <option value="Le Prunier">Le Prunier (88)</option>
-          <option value="Litehouse">Litehouse (3)</option>
-          <option value="Liv Body">Liv Body (9)</option>
-          <option value="Lotus Vita">Lotus Vita (8)</option>
-          <option value="Nano Genesis Labs">Nano Genesis Labs (1)</option>
-          <option value="No Reference">No Reference (77)</option>
-          <option value="Noogs">Noogs (14)</option>
-          <option value="NutriVein">NutriVein (91)</option>
-          <option value="pNeo">pNeo (70)</option>
-          <option value="Promethean">Promethean (5)</option>
-          <option value="RETURNS">RETURNS (3)</option>
-          <option value="Saint Oral Care">Saint Oral Care (27)</option>
-          <option value="Shay Danielle">Shay Danielle (12)</option>
-          <option value="SideDish">SideDish (11)</option>
-          <option value="Sven's Island">Sven's Island (157)</option>
-          <option value="Taste Flavor Co">Taste Flavor Co (980)</option>
-          <option value="Taylor Dukes Wellness">Taylor Dukes Wellness (1658)</option>
-          <option value="The Bar">The Bar (27)</option>
-          <option value="Toga Towel">Toga Towel (11)</option>
-          <option value="Toups and Co">Toups and Co (1118)</option>
-          <option value="Verli">Verli (29)</option>
-          <option value="VivaRays">VivaRays (11)</option>
+          <option value="BetterMan">BetterMan (15)</option>
+          <option value="California Naturals">California Naturals (448)</option>
+          <option value="Core Formulas">Core Formulas (67)</option>
+          <option value="Divi Official">Divi Official (520)</option>
+          <option value="Doctor Farrah">Doctor Farrah (1)</option>
+          <option value="Ethlete">Ethlete (16)</option>
+          <option value="Islay Brow">Islay Brow (20)</option>
+          <option value="Kavahol">Kavahol (36)</option>
+          <option value="Le Prunier">Le Prunier (83)</option>
+          <option value="Litehouse">Litehouse (1)</option>
+          <option value="Liv Body">Liv Body (10)</option>
+          <option value="Lotus Vita">Lotus Vita (4)</option>
+          <option value="Nano Genesis Labs">Nano Genesis Labs (7)</option>
+          <option value="Noogs">Noogs (20)</option>
+          <option value="NutriVein">NutriVein (180)</option>
+          <option value="Promethean">Promethean (15)</option>
+          <option value="RETURNS">RETURNS (1)</option>
+          <option value="Saint Oral Care">Saint Oral Care (28)</option>
+          <option value="Shay Danielle">Shay Danielle (23)</option>
+          <option value="SideDish">SideDish (13)</option>
+          <option value="Sven's Island">Sven's Island (130)</option>
+          <option value="Taste Flavor Co">Taste Flavor Co (907)</option>
+          <option value="Taylor Dukes Wellness">Taylor Dukes Wellness (1441)</option>
+          <option value="The Bar">The Bar (39)</option>
+          <option value="Toga Towel">Toga Towel (8)</option>
+          <option value="Toups and Co">Toups and Co (1278)</option>
+          <option value="Verli">Verli (123)</option>
+          <option value="VivaRays">VivaRays (27)</option>
         </select>
       </div>
       <div id="customDateFields" style="display: none; gap: 10px; align-items: flex-end;">
@@ -2580,16 +2578,32 @@ function updateStatesTab() {
 
 function updateTrackingTab() {
   const customerFilter = document.getElementById('customerSelect').value;
+  const searchTerm = (document.getElementById('trackingSearch')?.value || '').toLowerCase();
   let filtered = uniuniTrackingData;
   
   if (customerFilter) {
     filtered = uniuniTrackingData.filter(s => s.merchant === 'UniUni');
   }
   
+  // Apply search filter
+  if (searchTerm) {
+    filtered = filtered.filter(s => 
+      (s.trackingNumber && s.trackingNumber.toLowerCase().includes(searchTerm)) ||
+      (s.destination && s.destination.toLowerCase().includes(searchTerm)) ||
+      (s.date && s.date.toLowerCase().includes(searchTerm))
+    );
+  }
+  
   const totalCharge = filtered.reduce((sum, s) => sum + (s.charge || 0), 0);
   
   let html = `
     <div style="margin-bottom: 20px;">
+      <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px;">
+        <label style="display: block; font-size: 12px; font-weight: 600; color: #666; margin-bottom: 8px;">Search Tracking Number, Destination, or Date</label>
+        <input type="text" id="trackingSearch" placeholder="e.g., UUS62F4960094159203 or search destination..." 
+               style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; font-family: monospace;"
+               onkeyup="updateTrackingTab()">
+      </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
         <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
           <div style="font-size: 12px; color: #666; margin-bottom: 5px;">Total Shipments</div>
@@ -2615,28 +2629,38 @@ function updateTrackingTab() {
         <tbody>
   `;
   
-  filtered.slice(0, 500).forEach(ship => {
+  if (filtered.length === 0) {
     html += `
-      <tr style="border-bottom: 1px solid #eee;">
-        <td style="padding: 12px;">
-          <a onclick="showTrackingModal('${ship.trackingNumber}', '${ship.date}', '${ship.destination.replace(/'/g, "\\'")}', ${ship.charge}, '${ship.serviceType.replace(/'/g, "\\'")}', '${ship.merchantRef.replace(/'/g, "\\'")}')" 
-             style="color: #667eea; font-weight: 600; font-family: monospace; font-size: 12px; cursor: pointer; text-decoration: none;">
-            ${ship.trackingNumber}
-          </a>
+      <tr>
+        <td colspan="4" style="padding: 30px; text-align: center; color: #999;">
+          No tracking numbers found matching your search
         </td>
-        <td style="padding: 12px; color: #333;">${ship.date}</td>
-        <td style="padding: 12px; color: #666; font-size: 12px; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${ship.destination || '—'}</td>
-        <td style="padding: 12px; text-align: right; color: #667eea; font-weight: 600;">$${ship.charge.toFixed(2)}</td>
       </tr>
     `;
-  });
+  } else {
+    filtered.slice(0, 500).forEach(ship => {
+      html += `
+        <tr style="border-bottom: 1px solid #eee;">
+          <td style="padding: 12px;">
+            <a onclick="showTrackingModal('${ship.trackingNumber}', '${ship.date}', '${ship.destination.replace(/'/g, "\\'")}', ${ship.charge}, '${ship.serviceType.replace(/'/g, "\\'")}', '${ship.merchantRef.replace(/'/g, "\\'")}')" 
+               style="color: #667eea; font-weight: 600; font-family: monospace; font-size: 12px; cursor: pointer; text-decoration: none;">
+              ${ship.trackingNumber}
+            </a>
+          </td>
+          <td style="padding: 12px; color: #333;">${ship.date}</td>
+          <td style="padding: 12px; color: #666; font-size: 12px; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${ship.destination || '—'}</td>
+          <td style="padding: 12px; text-align: right; color: #667eea; font-weight: 600;">$${ship.charge.toFixed(2)}</td>
+        </tr>
+      `;
+    });
+  }
   
   html += `
         </tbody>
       </table>
     </div>
     <div style="margin-top: 15px; padding: 15px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea;">
-      <p style="margin: 0; color: #333; font-size: 13px;"><strong>Note:</strong> Click any tracking number for details. Displaying first 500 of ${filtered.length.toLocaleString()} shipments from Feb 23 - Mar 30, 2026.</p>
+      <p style="margin: 0; color: #333; font-size: 13px;"><strong>Note:</strong> Click any tracking number for details. Displaying ${Math.min(filtered.length, 500)} of ${filtered.length.toLocaleString()} results from Feb 23 - Mar 30, 2026.</p>
     </div>
   `;
   
