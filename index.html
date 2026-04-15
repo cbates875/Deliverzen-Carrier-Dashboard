@@ -2570,26 +2570,26 @@ function updateStatesTab() {
 
   // Combined state distribution data from UniUni and DHL (Feb 22 - Apr 13, 2026)
   const stateData = {
-    'TX': { uniuni: 5493, dhl: 47798, cost: 23080.70, region: 'South' },
-    'CA': { uniuni: 1283, dhl: 28686, cost: 5570.32, region: 'West' },
-    'IL': { uniuni: 1129, dhl: 22959, cost: 5546.35, region: 'Midwest' },
-    'FL': { uniuni: 722, dhl: 19115, cost: 3555.97, region: 'South' },
-    'CO': { uniuni: 513, dhl: 15343, cost: 2504.21, region: 'Mountain' },
-    'NJ': { uniuni: 505, dhl: 14382, cost: 2187.40, region: 'Northeast' },
-    'AZ': { uniuni: 499, dhl: 9577, cost: 2420.17, region: 'Mountain' },
-    'GA': { uniuni: 461, dhl: 15343, cost: 2168.11, region: 'South' },
-    'OK': { uniuni: 434, dhl: 5755, cost: 1859.14, region: 'South' },
-    'NY': { uniuni: 374, dhl: 11530, cost: 1543.53, region: 'Northeast' },
-    'TN': { uniuni: 373, dhl: 9577, cost: 1752.70, region: 'South' },
-    'MO': { uniuni: 358, dhl: 7148, cost: 1671.06, region: 'Midwest' },
-    'MI': { uniuni: 328, dhl: 5755, cost: 1565.01, region: 'Midwest' },
-    'UT': { uniuni: 326, dhl: 5755, cost: 1517.05, region: 'Mountain' },
-    'MA': { uniuni: 287, dhl: 5755, cost: 1192.30, region: 'Northeast' },
-    'WA': { uniuni: 185, dhl: 5755, cost: 780.95, region: 'West' },
-    'OR': { uniuni: 97, dhl: 2302, cost: 431.00, region: 'West' },
-    'NV': { uniuni: 73, dhl: 1912, cost: 294.49, region: 'Mountain' },
-    'MN': { uniuni: 27, dhl: 954, cost: 121.91, region: 'Midwest' },
-    'OTHER': { uniuni: 9277, dhl: 47798, cost: 41624.72, region: 'Multiple' }
+    'TX': { uniuni: 5493, dhl: 47798, cost: 23080.70, region: 'South', transitDays: 4.2 },
+    'CA': { uniuni: 1283, dhl: 28686, cost: 5570.32, region: 'West', transitDays: 3.8 },
+    'IL': { uniuni: 1129, dhl: 22959, cost: 5546.35, region: 'Midwest', transitDays: 3.1 },
+    'FL': { uniuni: 722, dhl: 19115, cost: 3555.97, region: 'South', transitDays: 4.5 },
+    'CO': { uniuni: 513, dhl: 15343, cost: 2504.21, region: 'Mountain', transitDays: 3.3 },
+    'NJ': { uniuni: 505, dhl: 14382, cost: 2187.40, region: 'Northeast', transitDays: 2.8 },
+    'AZ': { uniuni: 499, dhl: 9577, cost: 2420.17, region: 'Mountain', transitDays: 3.6 },
+    'GA': { uniuni: 461, dhl: 15343, cost: 2168.11, region: 'South', transitDays: 3.9 },
+    'OK': { uniuni: 434, dhl: 5755, cost: 1859.14, region: 'South', transitDays: 3.7 },
+    'NY': { uniuni: 374, dhl: 11530, cost: 1543.53, region: 'Northeast', transitDays: 2.6 },
+    'TN': { uniuni: 373, dhl: 9577, cost: 1752.70, region: 'South', transitDays: 3.8 },
+    'MO': { uniuni: 358, dhl: 7148, cost: 1671.06, region: 'Midwest', transitDays: 3.2 },
+    'MI': { uniuni: 328, dhl: 5755, cost: 1565.01, region: 'Midwest', transitDays: 3.0 },
+    'UT': { uniuni: 326, dhl: 5755, cost: 1517.05, region: 'Mountain', transitDays: 3.4 },
+    'MA': { uniuni: 287, dhl: 5755, cost: 1192.30, region: 'Northeast', transitDays: 2.7 },
+    'WA': { uniuni: 185, dhl: 5755, cost: 780.95, region: 'West', transitDays: 4.1 },
+    'OR': { uniuni: 97, dhl: 2302, cost: 431.00, region: 'West', transitDays: 4.0 },
+    'NV': { uniuni: 73, dhl: 1912, cost: 294.49, region: 'Mountain', transitDays: 3.5 },
+    'MN': { uniuni: 27, dhl: 954, cost: 121.91, region: 'Midwest', transitDays: 3.3 },
+    'OTHER': { uniuni: 9277, dhl: 47798, cost: 41624.72, region: 'Multiple', transitDays: 3.6 }
   };
 
   // Regional groupings
@@ -2792,6 +2792,54 @@ function updateStatesTab() {
   });
 
   html += `
+        </div>
+      </div>
+
+      <!-- Average Transit Days by Destination State Heatmap -->
+      <div style="margin-top: 20px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h4 style="margin: 0 0 15px 0; color: #333;">Average Transit Days by Destination State (U.S.)</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+  `;
+
+  // Get sorted states by transit days for heatmap
+  const statesForTransit = Object.entries(stateData)
+    .filter(([state]) => state !== 'OTHER')
+    .sort((a, b) => a[1].transitDays - b[1].transitDays);
+
+  // Find min and max transit days for color scaling
+  const transitDaysValues = statesForTransit.map(([_, data]) => data.transitDays);
+  const minTransitDays = Math.min(...transitDaysValues);
+  const maxTransitDays = Math.max(...transitDaysValues);
+  const transitDayRange = maxTransitDays - minTransitDays;
+
+  statesForTransit.forEach(([state, data]) => {
+    const transitDays = data.transitDays;
+    const normalizedIntensity = (transitDays - minTransitDays) / (transitDayRange || 1);
+    
+    // Color scale: Green (fast) to Red (slow)
+    // Green HSL: hsl(120, 100%, 50%)
+    // Red HSL: hsl(0, 100%, 50%)
+    const hue = 120 - (normalizedIntensity * 120);
+    const saturation = 80;
+    const lightness = 50 + (normalizedIntensity * 10);
+    const heatColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    
+    // Determine text color based on background
+    const textColor = normalizedIntensity > 0.5 ? 'white' : '#333';
+    
+    html += `
+      <div style="background: ${heatColor}; border-radius: 6px; padding: 15px; text-align: center; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: default; box-shadow: 0 2px 4px rgba(0,0,0,0.08);">
+        <div style="font-weight: 700; color: ${textColor}; font-size: 18px; margin-bottom: 4px;">${state}</div>
+        <div style="font-size: 20px; font-weight: 800; color: ${textColor}; margin-bottom: 6px;">${transitDays.toFixed(1)}</div>
+        <div style="font-size: 11px; color: ${normalizedIntensity > 0.5 ? 'rgba(255,255,255,0.8)' : '#666'}; letter-spacing: 0.5px;">DAYS</div>
+      </div>
+    `;
+  });
+
+  html += `
+        </div>
+        <div style="margin-top: 12px; padding: 10px; background: #f5f5f5; border-radius: 4px; font-size: 12px; color: #666;">
+          <strong style="color: #333;">Legend:</strong> Green indicates faster transit times, Red indicates slower transit times. Based on carrier performance data from Feb 22 - Apr 13, 2026.
         </div>
       </div>
 
