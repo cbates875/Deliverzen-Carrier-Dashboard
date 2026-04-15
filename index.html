@@ -2709,7 +2709,7 @@ function updateStatesTab() {
     const regionData = regionStates
       .filter(state => stateData[state])
       .map(state => stateData[state]);
-    const regionTotal = regionData.reduce((sum, d) => sum + d.shipments, 0);
+    const regionTotal = regionData.reduce((sum, d) => sum + d.dhl + d.uniuni, 0);
     const regionCost = regionData.reduce((sum, d) => sum + d.cost, 0);
     const regionPct = (regionTotal / totalShipments) * 100;
     
