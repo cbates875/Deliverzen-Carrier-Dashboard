@@ -580,11 +580,6 @@
           <option value="Verli">Verli (447)</option>
           <option value="VivaRays">VivaRays (110)</option>
           <option value="The Bar">The Bar (1,022)</option>
-          <option value="The Clean Shave Co">The Clean Shave Co (47)</option>
-          <option value="Toga Towel">Toga Towel (19)</option>
-          <option value="Toups and Co">Toups and Co (9,627)</option>
-          <option value="Verli">Verli (447)</option>
-          <option value="VivaRays">VivaRays (110)</option>
         </select>
       </div>
       <div id="customDateFields" style="display: none; gap: 10px; align-items: flex-end;">
@@ -2709,7 +2704,7 @@ function updateStatesTab() {
     const regionData = regionStates
       .filter(state => stateData[state])
       .map(state => stateData[state]);
-    const regionTotal = regionData.reduce((sum, d) => sum + d.shipments, 0);
+    const regionTotal = regionData.reduce((sum, d) => sum + d.dhl + d.uniuni, 0);
     const regionCost = regionData.reduce((sum, d) => sum + d.cost, 0);
     const regionPct = (regionTotal / totalShipments) * 100;
     
