@@ -538,35 +538,53 @@
       <div class="filter-group">
         <label>Customer</label>
         <select id="customerSelect" onchange="applyFilters()">
-          <option value="">All Customers</option>
-          <option value="BetterMan">BetterMan (15)</option>
-          <option value="California Naturals">California Naturals (448)</option>
-          <option value="Core Formulas">Core Formulas (67)</option>
-          <option value="Divi Official">Divi Official (520)</option>
-          <option value="Doctor Farrah">Doctor Farrah (1)</option>
-          <option value="Ethlete">Ethlete (16)</option>
-          <option value="Islay Brow">Islay Brow (20)</option>
-          <option value="Kavahol">Kavahol (36)</option>
-          <option value="Le Prunier">Le Prunier (83)</option>
-          <option value="Litehouse">Litehouse (1)</option>
-          <option value="Liv Body">Liv Body (10)</option>
-          <option value="Lotus Vita">Lotus Vita (4)</option>
-          <option value="Nano Genesis Labs">Nano Genesis Labs (7)</option>
-          <option value="Noogs">Noogs (20)</option>
-          <option value="NutriVein">NutriVein (180)</option>
-          <option value="Promethean">Promethean (15)</option>
-          <option value="RETURNS">RETURNS (1)</option>
-          <option value="Saint Oral Care">Saint Oral Care (28)</option>
-          <option value="Shay Danielle">Shay Danielle (23)</option>
-          <option value="SideDish">SideDish (13)</option>
-          <option value="Sven's Island">Sven's Island (130)</option>
-          <option value="Taste Flavor Co">Taste Flavor Co (907)</option>
-          <option value="Taylor Dukes Wellness">Taylor Dukes Wellness (1441)</option>
-          <option value="The Bar">The Bar (39)</option>
-          <option value="Toga Towel">Toga Towel (8)</option>
-          <option value="Toups and Co">Toups and Co (1278)</option>
-          <option value="Verli">Verli (123)</option>
-          <option value="VivaRays">VivaRays (27)</option>
+          <option value="">All Customers (208,074 shipments)</option>
+          <option value="A'del Natural Cosmetics">A'del Natural Cosmetics (1)</option>
+          <option value="Aire Health">Aire Health (48)</option>
+          <option value="Auybovan">Auybovan (9)</option>
+          <option value="BetterMan">BetterMan (97)</option>
+          <option value="California Naturals">California Naturals (2,325)</option>
+          <option value="Core Formulas">Core Formulas (464)</option>
+          <option value="Divi Official">Divi Official (3,867)</option>
+          <option value="Doctor Farrah">Doctor Farrah (8)</option>
+          <option value="EBrands Motion">EBrands Motion (32)</option>
+          <option value="Ethlete">Ethlete (40)</option>
+          <option value="GodMode">GodMode (2)</option>
+          <option value="Islay Brow">Islay Brow (115)</option>
+          <option value="Kavahol">Kavahol (294)</option>
+          <option value="Le Prunier">Le Prunier (646)</option>
+          <option value="Litehouse">Litehouse (42)</option>
+          <option value="Liv Body">Liv Body (55)</option>
+          <option value="Loco Bebe">Loco Bebe (2)</option>
+          <option value="Lotus Vita">Lotus Vita (38)</option>
+          <option value="MEH">MEH (4)</option>
+          <option value="Nano Genesis Labs">Nano Genesis Labs (19)</option>
+          <option value="no ref">no ref (451)</option>
+          <option value="Noogs">Noogs (143)</option>
+          <option value="NutriVein">NutriVein (515)</option>
+          <option value="pNeo">pNeo (189)</option>
+          <option value="Promethean">Promethean (72)</option>
+          <option value="RETURNS">RETURNS (4)</option>
+          <option value="Saint Oral Care">Saint Oral Care (186)</option>
+          <option value="Shahar Photo">Shahar Photo (6)</option>
+          <option value="Shay Danielle">Shay Danielle (81)</option>
+          <option value="SideDish">SideDish (153)</option>
+          <option value="SkinStasis">SkinStasis (2)</option>
+          <option value="Sven's Island">Sven's Island (1,151)</option>
+          <option value="Taste Flavor Co">Taste Flavor Co (8,729)</option>
+          <option value="Taylor Dukes Wellness">Taylor Dukes Wellness (9,989)</option>
+          <option value="The Clean Shave Co">The Clean Shave Co (47)</option>
+          <option value="Toga Towel">Toga Towel (19)</option>
+          <option value="Toups and Co">Toups and Co (9,627)</option>
+          <option value="Unassigned">Unassigned (168,045)</option>
+          <option value="Verli">Verli (447)</option>
+          <option value="VivaRays">VivaRays (110)</option>
+          <option value="The Bar">The Bar (1,022)</option>
+          <option value="The Clean Shave Co">The Clean Shave Co (47)</option>
+          <option value="Toga Towel">Toga Towel (19)</option>
+          <option value="Toups and Co">Toups and Co (9,627)</option>
+          <option value="Verli">Verli (447)</option>
+          <option value="VivaRays">VivaRays (110)</option>
         </select>
       </div>
       <div id="customDateFields" style="display: none; gap: 10px; align-items: flex-end;">
@@ -776,20 +794,20 @@ const invoiceData = {
     },
     {
       id: 'inv4', period: 'Feb 16 - Feb 28', startDate: new Date(2026, 1, 16), endDate: new Date(2026, 1, 28), invoiceNumber: '22171105', types: {
-        'DHL Packet International': {shipments: 1, revenue: 5.29, weight: 15.00, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
-        'DHL Parcel International Direct': {shipments: 51, revenue: 533.68, weight: 242.85, transitDays: 2.5, onTimeCount: 49, onTimeTotal: 51, complianceCount: 51, complianceTotal: 51},
-        'DHL Parcel International Standard': {shipments: 30, revenue: 431.95, weight: 113.55, transitDays: 6.0, onTimeCount: 29, onTimeTotal: 30, complianceCount: 30, complianceTotal: 30},
-        'DHL Parcel Intl. Returns - Unprocessable': {shipments: 1, revenue: 19.83, weight: 4.30, transitDays: 4.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
-        'DHL SmartMail BPM Expedited': {shipments: 1, revenue: 13.62, weight: 5.00, transitDays: 1.5, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
-        'DHL SmartMail Parcel Expedited': {shipments: 542, revenue: 2776.41, weight: 3242.00, transitDays: 2.5, onTimeCount: 520, onTimeTotal: 542, complianceCount: 537, complianceTotal: 542},
-        'DHL SmartMail Parcel Expedited Max': {shipments: 2982, revenue: 29025.32, weight: 7674.00, transitDays: 1.5, onTimeCount: 2863, onTimeTotal: 2982, complianceCount: 2953, complianceTotal: 2982},
-        'DHL SmartMail Parcel Ground': {shipments: 4183, revenue: 20071.45, weight: 15331.00, transitDays: 5.5, onTimeCount: 4016, onTimeTotal: 4183, complianceCount: 4141, complianceTotal: 4183},
-        'DHL SmartMail Parcel Plus Expedited': {shipments: 1796, revenue: 12623.39, weight: 1808.00, transitDays: 2.5, onTimeCount: 1725, onTimeTotal: 1796, complianceCount: 1779, complianceTotal: 1796},
-        'DHL SmartMail Parcel Plus Ground': {shipments: 12917, revenue: 89984.83, weight: 9058.00, transitDays: 5.5, onTimeCount: 12400, onTimeTotal: 12917, complianceCount: 12788, complianceTotal: 12917}
+        'DHL Packet International': {shipments: 1, revenue: 5.40, weight: 15.00, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL Parcel International Direct': {shipments: 51, revenue: 544.40, weight: 242.85, transitDays: 2.5, onTimeCount: 49, onTimeTotal: 51, complianceCount: 51, complianceTotal: 51},
+        'DHL Parcel International Standard': {shipments: 30, revenue: 440.52, weight: 113.55, transitDays: 6.0, onTimeCount: 29, onTimeTotal: 30, complianceCount: 30, complianceTotal: 30},
+        'DHL Parcel Intl. Returns - Unprocessable': {shipments: 1, revenue: 20.21, weight: 4.30, transitDays: 4.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL SmartMail BPM Expedited': {shipments: 1, revenue: 13.89, weight: 5.00, transitDays: 1.5, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL SmartMail Parcel Expedited': {shipments: 542, revenue: 2833.00, weight: 3242.00, transitDays: 2.5, onTimeCount: 520, onTimeTotal: 542, complianceCount: 537, complianceTotal: 542},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 2982, revenue: 29631.75, weight: 7674.00, transitDays: 1.5, onTimeCount: 2863, onTimeTotal: 2982, complianceCount: 2953, complianceTotal: 2982},
+        'DHL SmartMail Parcel Ground': {shipments: 4183, revenue: 20481.50, weight: 15331.00, transitDays: 5.5, onTimeCount: 4016, onTimeTotal: 4183, complianceCount: 4141, complianceTotal: 4183},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 1796, revenue: 12880.75, weight: 1808.00, transitDays: 2.5, onTimeCount: 1725, onTimeTotal: 1796, complianceCount: 1779, complianceTotal: 1796},
+        'DHL SmartMail Parcel Plus Ground': {shipments: 12917, revenue: 91808.42, weight: 9058.00, transitDays: 5.5, onTimeCount: 12400, onTimeTotal: 12917, complianceCount: 12788, complianceTotal: 12917}
       },
-      totalShipments: 22504, totalRevenue: 155485.77, totalWeight: 37493.70,
+      totalShipments: 22504, totalRevenue: 158104.86, totalWeight: 37493.70,
       onTimeCount: 21605, onTimeTotal: 22504, complianceCount: 22282, complianceTotal: 22504,
-      transitDays: 4.17, fuel: 6219.43, duties: 2332.29, dangerous: 777.43
+      transitDays: 4.17, fuel: 6346.47, duties: 2378.97, dangerous: 793.70
     },
     {
       id: 'inv5', period: 'Mar 26 - Mar 26', startDate: new Date(2026, 2, 26), endDate: new Date(2026, 2, 26), invoiceNumber: '22175349', types: {
@@ -807,39 +825,21 @@ const invoiceData = {
       transitDays: 4.22, fuel: 0, duties: 0, dangerous: 0
     },
     {
-      id: 'inv6', period: 'Mar 23-26', startDate: new Date(2026, 2, 23), endDate: new Date(2026, 2, 26), invoiceNumber: '22173901', types: {
-        'DHL Parcel International Direct': {shipments: 45, revenue: 385.42, weight: 118.94, transitDays: 2.5, onTimeCount: 44, onTimeTotal: 45, complianceCount: 45, complianceTotal: 45},
-        'DHL Parcel International Standard': {shipments: 49, revenue: 279.26, weight: 70.48, transitDays: 6.0, onTimeCount: 49, onTimeTotal: 49, complianceCount: 49, complianceTotal: 49}
-      },
-      totalShipments: 94, totalRevenue: 664.68, totalWeight: 189.42,
-      onTimeCount: 93, onTimeTotal: 94, complianceCount: 94, complianceTotal: 94,
-      transitDays: 4.63, fuel: 0, duties: 0, dangerous: 0
-    },
-    {
-      id: 'inv7', period: 'Mar 27-Apr 3', startDate: new Date(2026, 2, 27), endDate: new Date(2026, 3, 3), invoiceNumber: '22173901', types: {
-        'DHL Parcel International Direct': {shipments: 9847, revenue: 96428.31, weight: 28743.44, transitDays: 2.5, onTimeCount: 9598, onTimeTotal: 9847, complianceCount: 9775, complianceTotal: 9847},
-        'DHL Parcel International Standard': {shipments: 9646, revenue: 39907.18, weight: 31748.07, transitDays: 6.0, onTimeCount: 9366, onTimeTotal: 9646, complianceCount: 9578, complianceTotal: 9646}
-      },
-      totalShipments: 19493, totalRevenue: 136335.49, totalWeight: 60491.51,
-      onTimeCount: 18964, onTimeTotal: 19493, complianceCount: 19353, complianceTotal: 19493,
-      transitDays: 4.24, fuel: 0, duties: 0, dangerous: 0
-    },
-    {
-      id: 'inv8', period: 'Mar 29-Apr 2', startDate: new Date(2026, 2, 29), endDate: new Date(2026, 3, 2), invoiceNumber: '22173901', types: {
-        'DHL Parcel International Direct': {shipments: 27, revenue: 246.44, weight: 95.96, transitDays: 2.5, onTimeCount: 26, onTimeTotal: 27, complianceCount: 27, complianceTotal: 27},
-        'DHL Parcel International Standard': {shipments: 39, revenue: 854.54, weight: 159.18, transitDays: 6.0, onTimeCount: 39, onTimeTotal: 39, complianceCount: 39, complianceTotal: 39},
+      id: 'inv6', period: 'Mar 23 - Apr 3', startDate: new Date(2026, 2, 23), endDate: new Date(2026, 3, 3), invoiceNumber: '22173901', types: {
+        'DHL Parcel International Direct': {shipments: 9919, revenue: 97093.43, weight: 28862.34, transitDays: 2.5, onTimeCount: 9668, onTimeTotal: 9919, complianceCount: 9847, complianceTotal: 9919},
+        'DHL Parcel International Standard': {shipments: 9734, revenue: 41041.36, weight: 31978.06, transitDays: 6.0, onTimeCount: 9454, onTimeTotal: 9734, complianceCount: 9666, complianceTotal: 9734},
         'DHL SmartMail Parcel Expedited': {shipments: 708, revenue: 3414.54, weight: 376.69, transitDays: 2.5, onTimeCount: 691, onTimeTotal: 708, complianceCount: 703, complianceTotal: 708},
         'DHL SmartMail Parcel Expedited Max': {shipments: 2327, revenue: 22546.44, weight: 7449.56, transitDays: 1.5, onTimeCount: 2265, onTimeTotal: 2327, complianceCount: 2306, complianceTotal: 2327},
         'DHL SmartMail Parcel Ground': {shipments: 2602, revenue: 11791.88, weight: 1650.12, transitDays: 5.5, onTimeCount: 2535, onTimeTotal: 2602, complianceCount: 2578, complianceTotal: 2602},
         'DHL SmartMail Parcel Plus Expedited': {shipments: 938, revenue: 5806.54, weight: 2945.00, transitDays: 2.5, onTimeCount: 915, onTimeTotal: 938, complianceCount: 931, complianceTotal: 938},
         'DHL SmartMail Parcel Plus Ground': {shipments: 8003, revenue: 51265.20, weight: 32791.00, transitDays: 5.5, onTimeCount: 7815, onTimeTotal: 8003, complianceCount: 7957, complianceTotal: 8003}
       },
-      totalShipments: 14644, totalRevenue: 95925.58, totalWeight: 45467.51,
-      onTimeCount: 14286, onTimeTotal: 14644, complianceCount: 14541, complianceTotal: 14644,
-      transitDays: 5.00, fuel: 0, duties: 0, dangerous: 0
+      totalShipments: 34231, totalRevenue: 137008.68, totalWeight: 106452.77,
+      onTimeCount: 33343, onTimeTotal: 34231, complianceCount: 33988, complianceTotal: 34231,
+      transitDays: 4.30, fuel: 0, duties: 0, dangerous: 0
     },
     {
-      id: 'inv9', period: 'Apr 5-11', startDate: new Date(2026, 3, 5), endDate: new Date(2026, 3, 11), invoiceNumber: '22180045', types: {
+      id: 'inv7', period: 'Apr 5-11', startDate: new Date(2026, 3, 5), endDate: new Date(2026, 3, 11), invoiceNumber: '22180045', types: {
         'DHL Packet International': {shipments: 1, revenue: 9.58, weight: 1.58, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
         'DHL Parcel Expedited': {shipments: 726, revenue: 3491.92, weight: 374.25, transitDays: 2.5, onTimeCount: 709, onTimeTotal: 726, complianceCount: 722, complianceTotal: 726},
         'DHL Parcel Expedited Max': {shipments: 3340, revenue: 28880.37, weight: 8559.31, transitDays: 1.5, onTimeCount: 3264, onTimeTotal: 3340, complianceCount: 3320, complianceTotal: 3340},
@@ -853,6 +853,54 @@ const invoiceData = {
       totalShipments: 18408, totalRevenue: 117400.89, totalWeight: 52483.26,
       onTimeCount: 17966, onTimeTotal: 18408, complianceCount: 18279, complianceTotal: 18408,
       transitDays: 4.47, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'inv8', period: 'Feb 20-26', startDate: new Date(2026, 1, 20), endDate: new Date(2026, 1, 26), invoiceNumber: '22114838', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 892, revenue: 1811.09, weight: 402.15, transitDays: 5.5, onTimeCount: 856, onTimeTotal: 892, complianceCount: 881, complianceTotal: 892}
+      },
+      totalShipments: 892, totalRevenue: 1811.09, totalWeight: 402.15,
+      onTimeCount: 856, onTimeTotal: 892, complianceCount: 881, complianceTotal: 892,
+      transitDays: 5.5, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'inv9', period: 'Mar 2-8', startDate: new Date(2026, 2, 2), endDate: new Date(2026, 2, 8), invoiceNumber: '22169609', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 1684, revenue: 3440.27, weight: 752.18, transitDays: 5.5, onTimeCount: 1615, onTimeTotal: 1684, complianceCount: 1666, complianceTotal: 1684}
+      },
+      totalShipments: 1684, totalRevenue: 3440.27, totalWeight: 752.18,
+      onTimeCount: 1615, onTimeTotal: 1684, complianceCount: 1666, complianceTotal: 1684,
+      transitDays: 5.5, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'inv10', period: 'Mar 9-15', startDate: new Date(2026, 2, 9), endDate: new Date(2026, 2, 15), invoiceNumber: '22172423', types: {
+        'DHL Parcel International Standard': {shipments: 3, revenue: 67.12, weight: 8.52, transitDays: 6.0, onTimeCount: 3, onTimeTotal: 3, complianceCount: 3, complianceTotal: 3}
+      },
+      totalShipments: 3, totalRevenue: 67.12, totalWeight: 8.52,
+      onTimeCount: 3, onTimeTotal: 3, complianceCount: 3, complianceTotal: 3,
+      transitDays: 6.0, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'inv11', period: 'Mar 16-22', startDate: new Date(2026, 2, 16), endDate: new Date(2026, 2, 22), invoiceNumber: '22179171', types: {
+        'DHL Parcel International Standard': {shipments: 3, revenue: 66.14, weight: 8.28, transitDays: 6.0, onTimeCount: 3, onTimeTotal: 3, complianceCount: 3, complianceTotal: 3}
+      },
+      totalShipments: 3, totalRevenue: 66.14, totalWeight: 8.28,
+      onTimeCount: 3, onTimeTotal: 3, complianceCount: 3, complianceTotal: 3,
+      transitDays: 6.0, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'inv12', period: 'Apr 3-6', startDate: new Date(2026, 3, 3), endDate: new Date(2026, 3, 6), invoiceNumber: '22182470', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 44, revenue: 91.28, weight: 19.36, transitDays: 5.5, onTimeCount: 42, onTimeTotal: 44, complianceCount: 43, complianceTotal: 44}
+      },
+      totalShipments: 44, totalRevenue: 91.28, totalWeight: 19.36,
+      onTimeCount: 42, onTimeTotal: 44, complianceCount: 43, complianceTotal: 44,
+      transitDays: 5.5, fuel: 0, duties: 0, dangerous: 0
+    },
+    {
+      id: 'inv13', period: 'Feb 15-21', startDate: new Date(2026, 1, 15), endDate: new Date(2026, 1, 21), invoiceNumber: '22164750', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 30390, revenue: 105711.52, weight: 13625.00, transitDays: 5.5, onTimeCount: 29104, onTimeTotal: 30390, complianceCount: 30088, complianceTotal: 30390}
+      },
+      totalShipments: 30390, totalRevenue: 105711.52, totalWeight: 13625.00,
+      onTimeCount: 29104, onTimeTotal: 30390, complianceCount: 30088, complianceTotal: 30390,
+      transitDays: 5.5, fuel: 0, duties: 0, dangerous: 0
     }
   ]
 };
