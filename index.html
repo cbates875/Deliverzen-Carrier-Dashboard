@@ -537,7 +537,7 @@
       <div class="filter-group">
         <label>Customer</label>
         <select id="customerSelect" onchange="applyFilters()">
-          <option value="">All Customers (290,019 shipments)</option>
+          <option value="">All Customers (306,794 shipments)</option>
           <option value="A'del Natural Cosmetics">A'del Natural Cosmetics (2)</option>
           <option value="Aire Health">Aire Health (51)</option>
           <option value="Auybovan">Auybovan (11)</option>
@@ -669,13 +669,13 @@ let chartInstances = {};
 
 // Date ranges for reference (updated through Apr 19, 2026)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 4, 10), label: 'All Data (Feb 15 - May 10)' },
-  last7: { start: new Date(2026, 4, 4), end: new Date(2026, 4, 10), label: 'Last 7 Days (May 4 - May 10)' },
-  last14: { start: new Date(2026, 3, 27), end: new Date(2026, 4, 10), label: 'Last 14 Days (Apr 27 - May 10)' },
-  last30: { start: new Date(2026, 3, 11), end: new Date(2026, 4, 10), label: 'Last 30 Days (Apr 11 - May 10)' },
-  last60: { start: new Date(2026, 2, 12), end: new Date(2026, 4, 10), label: 'Last 60 Days (Mar 12 - May 10)' },
-  last90: { start: new Date(2026, 1, 10), end: new Date(2026, 4, 10), label: 'Last 90 Days (Feb 10 - May 10)' },
-  current_month: { start: new Date(2026, 4, 1), end: new Date(2026, 4, 10), label: 'Current Month (May 1-10)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 4, 16), label: 'All Data (Feb 15 - May 16)' },
+  last7: { start: new Date(2026, 4, 10), end: new Date(2026, 4, 16), label: 'Last 7 Days (May 10 - May 16)' },
+  last14: { start: new Date(2026, 4, 3), end: new Date(2026, 4, 16), label: 'Last 14 Days (May 3 - May 16)' },
+  last30: { start: new Date(2026, 3, 17), end: new Date(2026, 4, 16), label: 'Last 30 Days (Apr 17 - May 16)' },
+  last60: { start: new Date(2026, 2, 18), end: new Date(2026, 4, 16), label: 'Last 60 Days (Mar 18 - May 16)' },
+  last90: { start: new Date(2026, 1, 16), end: new Date(2026, 4, 16), label: 'Last 90 Days (Feb 16 - May 16)' },
+  current_month: { start: new Date(2026, 4, 1), end: new Date(2026, 4, 16), label: 'Current Month (May 1-16)' },
   last_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 31), label: 'Last Month (Mar)' },
   custom: { start: null, end: null, label: 'Custom Range' }
 };
@@ -1019,6 +1019,30 @@ const invoiceData = {
       totalShipments: 0, totalRevenue: 65.48, totalWeight: 0.00, shipments: 0, revenue: 65.48, weight: 0.00,
       onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
       transitDays: 0, fuel: 0.00, duties: 65.48, dangerous: 0.00
+    }
+  ,
+    {
+      id: 'inv21', period: '05/10/2026-05/16/2026', startDate: new Date(2026, 4, 10), endDate: new Date(2026, 4, 16), invoiceNumber: '22192602', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 6502, revenue: 39274.75, weight: 5493.00, transitDays: 5.5, onTimeCount: 6242, onTimeTotal: 6502, complianceCount: 6437, complianceTotal: 6502},
+        'DHL SmartMail Parcel Ground': {shipments: 3524, revenue: 16019.61, weight: 13888.00, transitDays: 5.5, onTimeCount: 3383, onTimeTotal: 3524, complianceCount: 3489, complianceTotal: 3524},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 2986, revenue: 18176.87, weight: 2039.00, transitDays: 2.5, onTimeCount: 2867, onTimeTotal: 2986, complianceCount: 2956, complianceTotal: 2986},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 2780, revenue: 24041.28, weight: 8082.00, transitDays: 1.5, onTimeCount: 2669, onTimeTotal: 2780, complianceCount: 2752, complianceTotal: 2780},
+        'DHL SmartMail Parcel Expedited': {shipments: 891, revenue: 4363.44, weight: 5511.00, transitDays: 2.5, onTimeCount: 855, onTimeTotal: 891, complianceCount: 882, complianceTotal: 891},
+        'DHL Parcel International Direct': {shipments: 64, revenue: 729.22, weight: 253.15, transitDays: 2.5, onTimeCount: 61, onTimeTotal: 64, complianceCount: 63, complianceTotal: 64},
+        'DHL Parcel International Standard': {shipments: 27, revenue: 387.69, weight: 64.19, transitDays: 6.0, onTimeCount: 26, onTimeTotal: 27, complianceCount: 27, complianceTotal: 27},
+        'Priority Mail': {shipments: 1, revenue: 58.65, weight: 29.00, transitDays: 5.5, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1}
+      },
+      totalShipments: 16775, totalRevenue: 103051.51, totalWeight: 35359.34, shipments: 16775, revenue: 103051.51, weight: 35359.34,
+      onTimeCount: 16104, onTimeTotal: 16775, complianceCount: 16607, complianceTotal: 16775,
+      transitDays: 4.0, fuel: 5961.25, duties: 0.00, dangerous: 0.00
+    },
+    {
+      id: 'inv22', period: '04/26/2026-05/02/2026', startDate: new Date(2026, 3, 26), endDate: new Date(2026, 4, 2), invoiceNumber: '22193801', types: {
+        'GM Duties and Taxes': {shipments: 0, revenue: 1212.52, weight: 0.00, transitDays: 5.5, onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0}
+      },
+      totalShipments: 0, totalRevenue: 1212.52, totalWeight: 0.00, shipments: 0, revenue: 1212.52, weight: 0.00,
+      onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
+      transitDays: 4.0, fuel: 5.24, duties: 1207.28, dangerous: 0.00
     }
   ]
 };
