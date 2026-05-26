@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -539,7 +537,7 @@
       <div class="filter-group">
         <label>Customer</label>
         <select id="customerSelect" onchange="applyFilters()">
-          <option value="">All Customers (309,140 shipments)</option>
+          <option value="">All Customers (327,636 shipments)</option>
           <option value="A'del Natural Cosmetics">A'del Natural Cosmetics (2)</option>
           <option value="Aire Health">Aire Health (51)</option>
           <option value="Auybovan">Auybovan (11)</option>
@@ -671,13 +669,13 @@ let chartInstances = {};
 
 // Date ranges for reference (updated through Apr 19, 2026)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 4, 17), label: 'All Data (Feb 15 - May 17)' },
-  last7: { start: new Date(2026, 4, 11), end: new Date(2026, 4, 17), label: 'Last 7 Days (May 11 - May 17)' },
-  last14: { start: new Date(2026, 4, 4), end: new Date(2026, 4, 17), label: 'Last 14 Days (May 4 - May 17)' },
-  last30: { start: new Date(2026, 3, 18), end: new Date(2026, 4, 17), label: 'Last 30 Days (Apr 18 - May 17)' },
-  last60: { start: new Date(2026, 2, 19), end: new Date(2026, 4, 17), label: 'Last 60 Days (Mar 19 - May 17)' },
-  last90: { start: new Date(2026, 1, 17), end: new Date(2026, 4, 17), label: 'Last 90 Days (Feb 17 - May 17)' },
-  current_month: { start: new Date(2026, 4, 1), end: new Date(2026, 4, 17), label: 'Current Month (May 1-17)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 4, 23), label: 'All Data (Feb 15 - May 23)' },
+  last7: { start: new Date(2026, 4, 17), end: new Date(2026, 4, 23), label: 'Last 7 Days (May 17 - May 23)' },
+  last14: { start: new Date(2026, 4, 10), end: new Date(2026, 4, 23), label: 'Last 14 Days (May 10 - May 23)' },
+  last30: { start: new Date(2026, 3, 24), end: new Date(2026, 4, 23), label: 'Last 30 Days (Apr 24 - May 23)' },
+  last60: { start: new Date(2026, 2, 25), end: new Date(2026, 4, 23), label: 'Last 60 Days (Mar 25 - May 23)' },
+  last90: { start: new Date(2026, 1, 23), end: new Date(2026, 4, 23), label: 'Last 90 Days (Feb 23 - May 23)' },
+  current_month: { start: new Date(2026, 4, 1), end: new Date(2026, 4, 23), label: 'Current Month (May 1-23)' },
   last_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 31), label: 'Last Month (Mar)' },
   custom: { start: null, end: null, label: 'Custom Range' }
 };
@@ -1053,6 +1051,30 @@ const invoiceData = {
       totalShipments: 0, totalRevenue: 1212.52, totalWeight: 0.00, shipments: 0, revenue: 1212.52, weight: 0.00,
       onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
       transitDays: 4.0, fuel: 5.24, duties: 1207.28, dangerous: 0.00
+    }
+  ,
+    {
+      id: 'inv23', period: '05/17/2026-05/23/2026', startDate: new Date(2026, 4, 17), endDate: new Date(2026, 4, 23), invoiceNumber: '22135010', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 9862, revenue: 60871.88, weight: 7372.00, transitDays: 5.5, onTimeCount: 9468, onTimeTotal: 9862, complianceCount: 9763, complianceTotal: 9862},
+        'DHL SmartMail Parcel Ground': {shipments: 3448, revenue: 15852.63, weight: 12508.00, transitDays: 5.5, onTimeCount: 3310, onTimeTotal: 3448, complianceCount: 3414, complianceTotal: 3448},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 2291, revenue: 13460.32, weight: 1913.00, transitDays: 2.5, onTimeCount: 2199, onTimeTotal: 2291, complianceCount: 2268, complianceTotal: 2291},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 1570, revenue: 13430.95, weight: 4676.00, transitDays: 1.5, onTimeCount: 1507, onTimeTotal: 1570, complianceCount: 1554, complianceTotal: 1570},
+        'DHL SmartMail Parcel Expedited': {shipments: 1255, revenue: 6039.32, weight: 6483.00, transitDays: 2.5, onTimeCount: 1205, onTimeTotal: 1255, complianceCount: 1242, complianceTotal: 1255},
+        'DHL Parcel International Direct': {shipments: 41, revenue: 445.14, weight: 179.66, transitDays: 2.5, onTimeCount: 39, onTimeTotal: 41, complianceCount: 41, complianceTotal: 41},
+        'DHL Parcel International Standard': {shipments: 28, revenue: 343.27, weight: 58.56, transitDays: 6.0, onTimeCount: 27, onTimeTotal: 28, complianceCount: 28, complianceTotal: 28},
+        'DHL Packet International': {shipments: 1, revenue: 10.20, weight: 1.58, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1}
+      },
+      totalShipments: 18496, totalRevenue: 110453.71, totalWeight: 33191.80, shipments: 18496, revenue: 110453.71, weight: 33191.80,
+      onTimeCount: 17756, onTimeTotal: 18496, complianceCount: 18311, complianceTotal: 18496,
+      transitDays: 4.0, fuel: 7303.26, duties: 0.00, dangerous: 0.00
+    },
+    {
+      id: 'inv24', period: '05/10/2026-05/16/2026', startDate: new Date(2026, 4, 10), endDate: new Date(2026, 4, 16), invoiceNumber: '22197271', types: {
+        'GM Duties and Taxes': {shipments: 0, revenue: 176.61, weight: 0.00, transitDays: 5.5, onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0}
+      },
+      totalShipments: 0, totalRevenue: 176.61, totalWeight: 0.00, shipments: 0, revenue: 176.61, weight: 0.00,
+      onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
+      transitDays: 4.0, fuel: 0.00, duties: 176.61, dangerous: 0.00
     }
   ]
 };
