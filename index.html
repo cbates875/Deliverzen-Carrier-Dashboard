@@ -669,7 +669,7 @@ let chartInstances = {};
 
 // Date ranges for reference (updated through Apr 19, 2026)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 4, 31), label: 'All Data (Feb 15 - May 31)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 4, 31), label: 'All Data (Feb 15 - Jun 2 invoice / May 31 service)' },
   last7: { start: new Date(2026, 4, 25), end: new Date(2026, 4, 31), label: 'Last 7 Days (May 25 - May 31)' },
   last14: { start: new Date(2026, 4, 18), end: new Date(2026, 4, 31), label: 'Last 14 Days (May 18 - May 31)' },
   last30: { start: new Date(2026, 4, 2), end: new Date(2026, 4, 31), label: 'Last 30 Days (May 2 - May 31)' },
@@ -2051,63 +2051,109 @@ function updatePerformanceTab() {
 function updateInvoicesTab() {
   const carrier = currentFilters.carrier;
   const dateRange = currentFilters.dateRange;
-  
+  const rangeLabel = dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range';
+
   let filteredInvoices = getInvoicesForDateRange(carrier, dateRange);
   if (currentFilters.invoice !== 'all') {
     filteredInvoices = filteredInvoices.filter(inv => inv.id === currentFilters.invoice);
   }
 
+  const money = (value) => `$${Number(value || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+  const number = (value, digits = 0) => Number(value || 0).toLocaleString('en-US', {minimumFractionDigits: digits, maximumFractionDigits: digits});
+  const invoiceCarrier = (inv) => invoiceData.dhl.includes(inv) ? 'DHL' : 'UniUni';
+  const invoiceShipments = (inv) => Number(inv.totalShipments ?? inv.shipments ?? 0);
+  const invoiceRevenue = (inv) => Number(inv.totalRevenue ?? inv.revenue ?? 0);
+  const invoiceWeight = (inv) => Number(inv.totalWeight ?? inv.weight ?? 0);
+  const invoiceAccessorials = (inv) => Number(inv.fuel || 0) + Number(inv.duties || 0) + Number(inv.dangerous || 0);
+
+  let typeAggregates = {};
   let dhlTypesSection = '';
-  if (carrier === 'dhl') {
-    // Aggregate all DHL shipment types
-    const typeAggregates = {};
+  if (carrier === 'dhl' || carrier === 'all') {
     filteredInvoices.forEach(inv => {
-      if (inv.types) {
+      if (invoiceData.dhl.includes(inv) && inv.types) {
         Object.entries(inv.types).forEach(([type, data]) => {
           if (!typeAggregates[type]) {
             typeAggregates[type] = {shipments: 0, revenue: 0, weight: 0};
           }
-          typeAggregates[type].shipments += data.shipments;
-          typeAggregates[type].revenue += data.revenue;
-          typeAggregates[type].weight += data.weight;
+          typeAggregates[type].shipments += Number(data.shipments || 0);
+          typeAggregates[type].revenue += Number(data.revenue || 0);
+          typeAggregates[type].weight += Number(data.weight || 0);
         });
       }
     });
 
-    const sortedTypes = Object.entries(typeAggregates)
-      .sort((a, b) => b[1].shipments - a[1].shipments);
-    
-    const typeLabels = sortedTypes.map(([type]) => type.substring(0, 25) + (type.length > 25 ? '...' : ''));
-    const typeShipments = sortedTypes.map(([, data]) => data.shipments);
-    const typeRevenue = sortedTypes.map(([, data]) => data.revenue);
-    const typeWeight = sortedTypes.map(([, data]) => data.weight);
-
-    dhlTypesSection = `
-      <div class="section">
-        <div class="section-title">📦 DHL Service Type Summary (All 12 Types)</div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
-          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-            <h4 style="margin: 0 0 10px 0; color: #333;">Shipment Count by Type</h4>
-            <canvas id="chartTypeShipments" style="max-height: 300px;"></canvas>
-          </div>
-          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-            <h4 style="margin: 0 0 10px 0; color: #333;">Revenue by Type</h4>
-            <canvas id="chartTypeRevenue" style="max-height: 300px;"></canvas>
-          </div>
-          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-            <h4 style="margin: 0 0 10px 0; color: #333;">Weight by Type</h4>
-            <canvas id="chartTypeWeight" style="max-height: 300px;"></canvas>
+    const sortedTypes = Object.entries(typeAggregates).sort((a, b) => b[1].shipments - a[1].shipments);
+    if (sortedTypes.length > 0) {
+      dhlTypesSection = `
+        <div class="section">
+          <div class="section-title">📦 DHL Service Type Summary (${rangeLabel})</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+              <h4 style="margin: 0 0 10px 0; color: #333;">Shipment Count by Type</h4>
+              <canvas id="chartTypeShipments" style="max-height: 300px;"></canvas>
+            </div>
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+              <h4 style="margin: 0 0 10px 0; color: #333;">Revenue by Type</h4>
+              <canvas id="chartTypeRevenue" style="max-height: 300px;"></canvas>
+            </div>
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+              <h4 style="margin: 0 0 10px 0; color: #333;">Weight by Type</h4>
+              <canvas id="chartTypeWeight" style="max-height: 300px;"></canvas>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
+    }
   }
+
+  const invoiceRows = filteredInvoices.map(inv => {
+    const accessorials = invoiceAccessorials(inv);
+    const totalBilled = invoiceRevenue(inv) + accessorials;
+    return `
+      <tr>
+        <td>${invoiceCarrier(inv)}</td>
+        <td><strong>${inv.invoiceNumber || inv.id || 'N/A'}</strong></td>
+        <td>${inv.period || 'N/A'}</td>
+        <td>${number(invoiceShipments(inv))}</td>
+        <td>${money(invoiceRevenue(inv))}</td>
+        <td>${number(invoiceWeight(inv), 2)} lbs</td>
+        <td>${money(inv.fuel || 0)}</td>
+        <td>${money(inv.duties || 0)}</td>
+        <td>${money(inv.dangerous || 0)}</td>
+        <td><strong>${money(totalBilled)}</strong></td>
+      </tr>`;
+  }).join('');
 
   const html = `
     ${dhlTypesSection}
 
     <div class="section">
-      <div class="section-title">📈 Invoice Performance Details (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
+      <div class="section-title">📋 Invoice Detail Table (${rangeLabel})</div>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
+          <thead>
+            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+              <th style="padding: 12px; text-align: left;">Carrier</th>
+              <th style="padding: 12px; text-align: left;">Invoice #</th>
+              <th style="padding: 12px; text-align: left;">Period</th>
+              <th style="padding: 12px; text-align: right;">Shipments</th>
+              <th style="padding: 12px; text-align: right;">Shipment Revenue</th>
+              <th style="padding: 12px; text-align: right;">Weight</th>
+              <th style="padding: 12px; text-align: right;">Fuel / Surcharges</th>
+              <th style="padding: 12px; text-align: right;">Duties & Taxes</th>
+              <th style="padding: 12px; text-align: right;">Dangerous Goods</th>
+              <th style="padding: 12px; text-align: right;">Total Billed</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${invoiceRows || '<tr><td colspan="10" style="padding: 20px; text-align: center; color: #999;">No invoices match the selected filters</td></tr>'}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📈 Invoice Performance Details (${rangeLabel})</div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
         <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
           <h4 style="margin: 0 0 10px 0; color: #333;">Shipments by Period</h4>
@@ -2130,25 +2176,19 @@ function updateInvoicesTab() {
   `;
 
   document.getElementById('tab-invoices').innerHTML = html;
-  
-  // Create charts after DOM is rendered
+
   setTimeout(() => {
-    if (carrier === 'dhl') {
-      const sortedTypes = Object.entries(typeAggregates)
-        .sort((a, b) => b[1].shipments - a[1].shipments);
+    const sortedTypes = Object.entries(typeAggregates).sort((a, b) => b[1].shipments - a[1].shipments);
+    if (sortedTypes.length > 0 && document.getElementById('chartTypeShipments')) {
       const typeLabels = sortedTypes.map(([type]) => type.substring(0, 25) + (type.length > 25 ? '...' : ''));
-      const typeShipments = sortedTypes.map(([, data]) => data.shipments);
-      const typeRevenue = sortedTypes.map(([, data]) => data.revenue);
-      const typeWeight = sortedTypes.map(([, data]) => data.weight);
-      
-      createBarChart('chartTypeShipments', typeLabels, typeShipments, 'Shipments');
-      createBarChart('chartTypeRevenue', typeLabels, typeRevenue, 'Revenue ($)');
-      createBarChart('chartTypeWeight', typeLabels, typeWeight, 'Weight (lbs)');
+      createBarChart('chartTypeShipments', typeLabels, sortedTypes.map(([, data]) => data.shipments), 'Shipments');
+      createBarChart('chartTypeRevenue', typeLabels, sortedTypes.map(([, data]) => data.revenue), 'Revenue ($)');
+      createBarChart('chartTypeWeight', typeLabels, sortedTypes.map(([, data]) => data.weight), 'Weight (lbs)');
     }
-    
     createInvoiceCharts(filteredInvoices);
   }, 100);
 }
+
 
 function createBarChart(canvasId, labels, data, label) {
   if (chartInstances[canvasId]) {
@@ -2460,7 +2500,8 @@ function populateInvoiceTableWithTrends(invoices) {
 function updateAccessorialsTab() {
   const carrier = currentFilters.carrier;
   const dateRange = currentFilters.dateRange;
-  
+  const rangeLabel = dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range';
+
   let filteredInvoices = getInvoicesForDateRange(carrier, dateRange);
   if (currentFilters.invoice !== 'all') {
     filteredInvoices = filteredInvoices.filter(inv => inv.id === currentFilters.invoice);
@@ -2471,127 +2512,129 @@ function updateAccessorialsTab() {
     return;
   }
 
-  // Aggregate accessorial charges by service type
+  const money = (value) => `$${Number(value || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+  const safe = (value) => Number.isFinite(Number(value)) ? Number(value) : 0;
+  const addBucket = (bucket, type, shipments, fuel, duties, dangerous) => {
+    if (!bucket[type]) bucket[type] = { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 };
+    bucket[type].shipments += safe(shipments);
+    bucket[type].fuel += safe(fuel);
+    bucket[type].duties += safe(duties);
+    bucket[type].dangerous += safe(dangerous);
+    bucket[type].fuel = Math.round(bucket[type].fuel * 100) / 100;
+    bucket[type].duties = Math.round(bucket[type].duties * 100) / 100;
+    bucket[type].dangerous = Math.round(bucket[type].dangerous * 100) / 100;
+    bucket[type].total = Math.round((bucket[type].fuel + bucket[type].duties + bucket[type].dangerous) * 100) / 100;
+  };
+
   const typeAccessorials = {};
-  
   filteredInvoices.forEach(inv => {
-    if (inv.types) {
-      // Get the invoice-level accessorial amounts
-      const totalShips = inv.totalShipments || inv.shipments;
-      const fuelPerShip = inv.fuel / totalShips;
-      const dutiesPerShip = inv.duties / totalShips;
-      const dangerousPerShip = inv.dangerous / totalShips;
-      
-      // Allocate to each service type
+    const totalShips = safe(inv.totalShipments ?? inv.shipments ?? 0);
+    const invFuel = safe(inv.fuel);
+    const invDuties = safe(inv.duties);
+    const invDangerous = safe(inv.dangerous);
+
+    if (inv.types && Object.keys(inv.types).length > 0 && totalShips > 0) {
       Object.entries(inv.types).forEach(([type, data]) => {
-        if (!typeAccessorials[type]) {
-          typeAccessorials[type] = { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 };
-        }
-        typeAccessorials[type].shipments += data.shipments;
-        typeAccessorials[type].fuel += fuelPerShip * data.shipments;
-        typeAccessorials[type].duties += dutiesPerShip * data.shipments;
-        typeAccessorials[type].dangerous += dangerousPerShip * data.shipments;
-        // Round to 2 decimal places before summing to avoid floating point precision errors
-        typeAccessorials[type].total = Math.round((typeAccessorials[type].fuel + typeAccessorials[type].duties + typeAccessorials[type].dangerous) * 100) / 100;
+        const ship = safe(data.shipments);
+        const ratio = totalShips > 0 ? ship / totalShips : 0;
+        addBucket(typeAccessorials, type, ship, invFuel * ratio, invDuties * ratio, invDangerous * ratio);
       });
+    } else if (inv.types && Object.keys(inv.types).length > 0) {
+      const typeName = Object.keys(inv.types)[0] || 'Duties / Taxes Only';
+      addBucket(typeAccessorials, typeName, 0, invFuel, invDuties, invDangerous);
+    } else {
+      addBucket(typeAccessorials, inv.type || 'UniUni Ground Express', totalShips, invFuel, invDuties, invDangerous);
     }
   });
 
-  // Sort by total accessorials descending
-  const sortedTypes = Object.entries(typeAccessorials)
-    .sort((a, b) => b[1].total - a[1].total);
+  const sortedTypes = Object.entries(typeAccessorials).sort((a, b) => b[1].total - a[1].total);
 
   const typeRows = sortedTypes.map(([type, data]) => `
     <tr>
       <td><strong>${type}</strong></td>
-      <td>${data.shipments.toLocaleString()}</td>
-      <td>$${data.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-      <td>$${data.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-      <td>$${data.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-      <td><strong>$${data.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong></td>
+      <td style="text-align: right;">${safe(data.shipments).toLocaleString()}</td>
+      <td style="text-align: right;">${money(data.fuel)}</td>
+      <td style="text-align: right;">${money(data.duties)}</td>
+      <td style="text-align: right;">${money(data.dangerous)}</td>
+      <td style="text-align: right;"><strong>${money(data.total)}</strong></td>
     </tr>
   `).join('');
 
-  // Calculate totals - round to 2 decimals to avoid floating point precision errors
-  const totals = sortedTypes.reduce((acc, [type, data]) => {
-    const total = acc.total + data.total;
-    return {
-      shipments: acc.shipments + data.shipments,
-      fuel: Math.round((acc.fuel + data.fuel) * 100) / 100,
-      duties: Math.round((acc.duties + data.duties) * 100) / 100,
-      dangerous: Math.round((acc.dangerous + data.dangerous) * 100) / 100,
-      total: Math.round(total * 100) / 100
-    };
-  }, { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 });
+  const totals = sortedTypes.reduce((acc, [, data]) => ({
+    shipments: acc.shipments + safe(data.shipments),
+    fuel: Math.round((acc.fuel + safe(data.fuel)) * 100) / 100,
+    duties: Math.round((acc.duties + safe(data.duties)) * 100) / 100,
+    dangerous: Math.round((acc.dangerous + safe(data.dangerous)) * 100) / 100,
+    total: Math.round((acc.total + safe(data.total)) * 100) / 100
+  }), { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 });
+
+  const perShipment = (value) => totals.shipments > 0 ? `↓ $${(safe(value) / totals.shipments).toFixed(2)} per shipment` : 'Duties/fees only';
 
   const html = `
     <div class="section">
-      <div class="section-title">Accessorial Breakdown Summary</div>
+      <div class="section-title">Accessorial Breakdown Summary (${rangeLabel})</div>
       <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
         <tbody>
           <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
-            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Fuel Charges</td>
-            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.fuel.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${totals.shipments > 0 ? '↓ $' + (totals.fuel / totals.shipments).toFixed(2) + ' per shipment' : 'N/A'}</td>
+            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Fuel / Surcharges</td>
+            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.fuel)}</td>
+            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${perShipment(totals.fuel)}</td>
           </tr>
           <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
             <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Duties & Taxes</td>
-            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.duties.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${totals.shipments > 0 ? '↓ $' + (totals.duties / totals.shipments).toFixed(2) + ' per shipment' : 'N/A'}</td>
+            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.duties)}</td>
+            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${perShipment(totals.duties)}</td>
           </tr>
           <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
             <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Dangerous Goods Fees</td>
-            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.dangerous.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${totals.shipments > 0 ? '↓ $' + (totals.dangerous / totals.shipments).toFixed(2) + ' per shipment' : 'N/A'}</td>
+            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.dangerous)}</td>
+            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${perShipment(totals.dangerous)}</td>
           </tr>
           <tr style="background: linear-gradient(135deg, #d4dff8 0%, #e0ebff 100%); font-weight: 700; border-top: 2px solid #667eea;">
             <td style="padding: 18px 15px; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">TOTAL ACCESSORIAL CHARGES</td>
-            <td style="padding: 18px 15px; color: #667eea; font-size: 24px; border-right: 1px solid #e8ecf1; width: 35%;">$${totals.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-            <td style="padding: 18px 15px; color: #333; font-size: 12px; font-weight: 600; width: 25%;">↓ $${totals.shipments > 0 ? (totals.total / totals.shipments).toFixed(2) : 'N/A'}/ship</td>
+            <td style="padding: 18px 15px; color: #667eea; font-size: 24px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.total)}</td>
+            <td style="padding: 18px 15px; color: #333; font-size: 12px; font-weight: 600; width: 25%;">${perShipment(totals.total)}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="section">
-      <div class="section-title">Accessorial Charges by Service Type (${dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range'})</div>
+      <div class="section-title">Accessorial Charges by Service Type (${rangeLabel})</div>
+      <div style="overflow-x: auto; margin-bottom: 20px;">
+        <table style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #e0e7ff;">
+          <thead>
+            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+              <th style="padding: 12px; text-align: left;">Service Type</th>
+              <th style="padding: 12px; text-align: right;">Shipments</th>
+              <th style="padding: 12px; text-align: right;">Fuel / Surcharges</th>
+              <th style="padding: 12px; text-align: right;">Duties & Taxes</th>
+              <th style="padding: 12px; text-align: right;">Dangerous Goods</th>
+              <th style="padding: 12px; text-align: right;">Total Accessorials</th>
+            </tr>
+          </thead>
+          <tbody>${typeRows || '<tr><td colspan="6" style="padding: 20px; text-align:center; color:#999;">No accessorial charges for the selected filters</td></tr>'}</tbody>
+        </table>
+      </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <h4 style="margin: 0 0 10px 0; color: #333;">Fuel Charges by Service Type</h4>
-          <canvas id="chartAccessorialFuel" style="max-height: 300px;"></canvas>
-        </div>
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <h4 style="margin: 0 0 10px 0; color: #333;">Duties & Taxes by Service Type</h4>
-          <canvas id="chartAccessorialDuties" style="max-height: 300px;"></canvas>
-        </div>
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <h4 style="margin: 0 0 10px 0; color: #333;">Dangerous Goods Fees by Service Type</h4>
-          <canvas id="chartAccessorialDangerous" style="max-height: 300px;"></canvas>
-        </div>
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <h4 style="margin: 0 0 10px 0; color: #333;">Total Accessorials by Service Type</h4>
-          <canvas id="chartAccessorialTotal" style="max-height: 300px;"></canvas>
-        </div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Fuel / Surcharges by Service Type</h4><canvas id="chartAccessorialFuel" style="max-height: 300px;"></canvas></div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Duties & Taxes by Service Type</h4><canvas id="chartAccessorialDuties" style="max-height: 300px;"></canvas></div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Dangerous Goods Fees by Service Type</h4><canvas id="chartAccessorialDangerous" style="max-height: 300px;"></canvas></div>
+        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Total Accessorials by Service Type</h4><canvas id="chartAccessorialTotal" style="max-height: 300px;"></canvas></div>
       </div>
     </div>
   `;
 
   document.getElementById('tab-accessorials').innerHTML = html;
-  
-  // Create charts after DOM is rendered
   setTimeout(() => {
     const typeLabels = sortedTypes.map(([type]) => type.substring(0, 20) + (type.length > 20 ? '...' : ''));
-    const fuelData = sortedTypes.map(([, data]) => data.fuel);
-    const dutiesData = sortedTypes.map(([, data]) => data.duties);
-    const dangerousData = sortedTypes.map(([, data]) => data.dangerous);
-    const totalData = sortedTypes.map(([, data]) => data.total);
-    
-    createAccessorialChart('chartAccessorialFuel', typeLabels, fuelData, 'Fuel ($)', '#667eea');
-    createAccessorialChart('chartAccessorialDuties', typeLabels, dutiesData, 'Duties & Taxes ($)', '#22c55e');
-    createAccessorialChart('chartAccessorialDangerous', typeLabels, dangerousData, 'Dangerous Goods ($)', '#f59e0b');
-    createAccessorialChart('chartAccessorialTotal', typeLabels, totalData, 'Total Accessorials ($)', '#8b5cf6');
+    createAccessorialChart('chartAccessorialFuel', typeLabels, sortedTypes.map(([, data]) => data.fuel), 'Fuel / Surcharges ($)', '#667eea');
+    createAccessorialChart('chartAccessorialDuties', typeLabels, sortedTypes.map(([, data]) => data.duties), 'Duties & Taxes ($)', '#22c55e');
+    createAccessorialChart('chartAccessorialDangerous', typeLabels, sortedTypes.map(([, data]) => data.dangerous), 'Dangerous Goods ($)', '#f59e0b');
+    createAccessorialChart('chartAccessorialTotal', typeLabels, sortedTypes.map(([, data]) => data.total), 'Total Accessorials ($)', '#8b5cf6');
   }, 100);
 }
+
 
 function createAccessorialChart(canvasId, labels, data, label, color) {
   if (chartInstances[canvasId]) {
