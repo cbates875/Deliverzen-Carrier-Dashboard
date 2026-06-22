@@ -492,7 +492,7 @@
       }
     }
   </style>
-<!-- Build verified: UniUni invoice 49621811260615619 added; tracking rows now 42,028; totals through Jun 14. -->
+<!-- Build verified: DHL invoices 22200301 and 22202905 added; totals through Jun 20. -->
 </head>
 <body>
 
@@ -538,7 +538,7 @@
       <div class="filter-group">
         <label>Customer</label>
         <select id="customerSelect" onchange="applyFilters()">
-          <option value="">All Customers (394,656 shipments)</option>
+          <option value="">All Customers (408,407 shipments)</option>
           <option value="A'del Natural Cosmetics">A'del Natural Cosmetics (2)</option>
           <option value="Aire Health">Aire Health (51)</option>
           <option value="Auybovan">Auybovan (11)</option>
@@ -669,13 +669,13 @@ let chartInstances = {};
 
 // Date ranges for reference (updated through Apr 19, 2026)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 5, 14), label: 'All Data (Feb 15 - Jun 16 invoice / Jun 14 service)' },
-  last7: { start: new Date(2026, 5, 8), end: new Date(2026, 5, 14), label: 'Last 7 Days (Jun 8 - Jun 14)' },
-  last14: { start: new Date(2026, 5, 1), end: new Date(2026, 5, 14), label: 'Last 14 Days (Jun 1 - Jun 14)' },
-  last30: { start: new Date(2026, 4, 16), end: new Date(2026, 5, 14), label: 'Last 30 Days (May 16 - Jun 14)' },
-  last60: { start: new Date(2026, 3, 16), end: new Date(2026, 5, 14), label: 'Last 60 Days (Apr 16 - Jun 14)' },
-  last90: { start: new Date(2026, 2, 17), end: new Date(2026, 5, 14), label: 'Last 90 Days (Mar 17 - Jun 14)' },
-  current_month: { start: new Date(2026, 5, 1), end: new Date(2026, 5, 14), label: 'Current Month (Jun 1-14)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 5, 20), label: 'All Data (Feb 15 - Jun 21 invoice / Jun 20 service)' },
+  last7: { start: new Date(2026, 5, 14), end: new Date(2026, 5, 20), label: 'Last 7 Days (Jun 14 - Jun 20)' },
+  last14: { start: new Date(2026, 5, 7), end: new Date(2026, 5, 20), label: 'Last 14 Days (Jun 7 - Jun 20)' },
+  last30: { start: new Date(2026, 4, 22), end: new Date(2026, 5, 20), label: 'Last 30 Days (May 22 - Jun 20)' },
+  last60: { start: new Date(2026, 3, 22), end: new Date(2026, 5, 20), label: 'Last 60 Days (Apr 22 - Jun 20)' },
+  last90: { start: new Date(2026, 2, 23), end: new Date(2026, 5, 20), label: 'Last 90 Days (Mar 23 - Jun 20)' },
+  current_month: { start: new Date(2026, 5, 1), end: new Date(2026, 5, 20), label: 'Current Month (Jun 1-20)' },
   last_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 31), label: 'Last Month (Mar)' },
   custom: { start: null, end: null, label: 'Custom Range' }
 };
@@ -1040,7 +1040,7 @@ const invoiceData = {
   ,
     {
       id: 'inv19', period: '05/03/2026-05/09/2026', startDate: new Date(2026, 4, 3), endDate: new Date(2026, 4, 9), invoiceNumber: '22188543', types: {
-        'DHL SmartMail Parcel Plus Ground': {shipments: 5695, revenue: 34082.21, weight: 4700.00, transitDays: 5.5, onTimeCount: 5467, onTimeTotal: 5695, complianceCount: 5638, complianceTotal: 5695},
+        'DHL SmartMail Parcel Plus Ground': {shipments: 5695, revenue: 34082.20, weight: 4700.00, transitDays: 5.5, onTimeCount: 5467, onTimeTotal: 5695, complianceCount: 5638, complianceTotal: 5695},
         'DHL SmartMail Parcel Ground': {shipments: 3842, revenue: 17400.87, weight: 13787.00, transitDays: 5.5, onTimeCount: 3688, onTimeTotal: 3842, complianceCount: 3804, complianceTotal: 3842},
         'DHL SmartMail Parcel Expedited Max': {shipments: 3673, revenue: 30328.05, weight: 10792.00, transitDays: 1.5, onTimeCount: 3526, onTimeTotal: 3673, complianceCount: 3636, complianceTotal: 3673},
         'DHL SmartMail Parcel Plus Expedited': {shipments: 1324, revenue: 7914.24, weight: 1338.00, transitDays: 2.5, onTimeCount: 1271, onTimeTotal: 1324, complianceCount: 1311, complianceTotal: 1324},
@@ -1180,6 +1180,29 @@ const invoiceData = {
       totalShipments: 0, totalRevenue: 56.43, totalWeight: 0.00, shipments: 0, revenue: 56.43, weight: 0.00,
       onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
       transitDays: 4.0, fuel: 0.00, duties: 56.43, dangerous: 0.00
+    }
+  ,
+    {
+      id: 'inv31', period: '05/24/2026-05/30/2026', startDate: new Date(2026, 4, 24), endDate: new Date(2026, 4, 30), invoiceNumber: '22200301', types: {
+        'GM Duties and Taxes': {shipments: 0, revenue: 2021.17, weight: 0.00, transitDays: 5.5, onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0}
+      },
+      totalShipments: 0, totalRevenue: 2021.17, totalWeight: 0.00, shipments: 0, revenue: 2021.17, weight: 0.00,
+      onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
+      transitDays: 4.0, fuel: 7.14, duties: 2014.03, dangerous: 0.00
+    },
+    {
+      id: 'inv32', period: '06/14/2026-06/20/2026', startDate: new Date(2026, 5, 14), endDate: new Date(2026, 5, 20), invoiceNumber: '22202905', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 7834, revenue: 51525.38, weight: 6869.00, transitDays: 5.5, onTimeCount: 7544, onTimeTotal: 7834, complianceCount: 7756, complianceTotal: 7834},
+        'DHL SmartMail Parcel Ground': {shipments: 2638, revenue: 12802.22, weight: 11648.00, transitDays: 5.5, onTimeCount: 2540, onTimeTotal: 2638, complianceCount: 2612, complianceTotal: 2638},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 1592, revenue: 9719.13, weight: 1518.00, transitDays: 2.5, onTimeCount: 1533, onTimeTotal: 1592, complianceCount: 1576, complianceTotal: 1592},
+        'DHL SmartMail Parcel Expedited': {shipments: 1421, revenue: 7096.20, weight: 6161.00, transitDays: 2.5, onTimeCount: 1368, onTimeTotal: 1421, complianceCount: 1407, complianceTotal: 1421},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 143, revenue: 1073.96, weight: 823.00, transitDays: 1.5, onTimeCount: 138, onTimeTotal: 143, complianceCount: 142, complianceTotal: 143},
+        'DHL Parcel International Direct': {shipments: 88, revenue: 1061.54, weight: 435.85, transitDays: 2.5, onTimeCount: 85, onTimeTotal: 88, complianceCount: 87, complianceTotal: 88},
+        'DHL Parcel International Standard': {shipments: 35, revenue: 485.83, weight: 82.25, transitDays: 6.0, onTimeCount: 34, onTimeTotal: 35, complianceCount: 35, complianceTotal: 35}
+      },
+      totalShipments: 13751, totalRevenue: 83764.26, totalWeight: 27537.10, shipments: 13751, revenue: 83764.26, weight: 27537.10,
+      onTimeCount: 13242, onTimeTotal: 13751, complianceCount: 13613, complianceTotal: 13751,
+      transitDays: 4.0, fuel: 8771.50, duties: 0.00, dangerous: 0.00
     }
   ]
 };
@@ -1409,15 +1432,15 @@ function applyLatestUniUniCorrectionsToDisplayData() {
   if (!displayData) return;
 
   const corrected = {
-    combinedShipments: 394656,
-    combinedRevenue: 2271488.53,
-    combinedShipmentCost: 2377656.43,
-    combinedWeight: 871942.22,
-    combinedAccessorials: 106167.90,
+    combinedShipments: 408407,
+    combinedRevenue: 2357273.96,
+    combinedShipmentCost: 2474234.53,
+    combinedWeight: 899479.32,
+    combinedAccessorials: 116960.57,
     uniuniShipments: 42028,
     uniuniRevenue: 184548.11,
     uniuniWeight: 159573.35,
-    latestAvgBoxSize: '2.21',
+    latestAvgBoxSize: '2.20',
     latestInvoiceWeight: 23742.03,
     latestInvoiceShipments: 2980,
     latestInvoiceRevenue: 13646.77
@@ -1428,11 +1451,11 @@ function applyLatestUniUniCorrectionsToDisplayData() {
       displayData.shipments = corrected.combinedShipments;
       displayData.revenue = corrected.combinedRevenue;
       displayData.weight = corrected.combinedWeight;
-      displayData.fuel = 90290.42;
-      displayData.duties = 12950.60;
+      displayData.fuel = 99069.06;
+      displayData.duties = 14964.63;
       displayData.dangerous = 2926.88;
-      displayData.onTimeCount = 379839;
-      displayData.onTimeTotal = 394656;
+      displayData.onTimeCount = 393073;
+      displayData.onTimeTotal = 408407;
       if (displayData.typeBreakdown && displayData.typeBreakdown['Ground Express']) {
         displayData.typeBreakdown['Ground Express'].shipments = corrected.uniuniShipments;
         displayData.typeBreakdown['Ground Express'].revenue = corrected.uniuniRevenue;
@@ -1444,8 +1467,8 @@ function applyLatestUniUniCorrectionsToDisplayData() {
       displayData.shipments = corrected.uniuniShipments;
       displayData.revenue = corrected.uniuniRevenue;
       displayData.weight = corrected.uniuniWeight;
-      displayData.fuel = 90290.42;
-      displayData.duties = 12950.60;
+      displayData.fuel = 99069.06;
+      displayData.duties = 14964.63;
       displayData.dangerous = 2926.88;
       if (displayData.typeBreakdown && displayData.typeBreakdown['Ground Express']) {
         displayData.typeBreakdown['Ground Express'].shipments = corrected.uniuniShipments;
@@ -1846,7 +1869,7 @@ function updateKPICards() {
 
     <div class="kpi-card">
       <div class="kpi-label">Avg Box Size</div>
-      <div class="kpi-value">${currentFilters.carrier === 'all' ? '2.21' : (data.weight / data.shipments).toFixed(2)}</div>
+      <div class="kpi-value">${currentFilters.carrier === 'all' ? '2.20' : (data.weight / data.shipments).toFixed(2)}</div>
       <div class="kpi-detail">lbs per shipment</div>
     </div>
 
@@ -2135,15 +2158,15 @@ function updateCarrierChargesDisplay() {
   let filteredFuel = 0, filteredDuties = 0, filteredDangerous = 0, filteredShipments = 0;
 
   if (filterValue === 'uniuni') {
-    filteredFuel = 90290.42;
-    filteredDuties = 12950.60;
+    filteredFuel = 99069.06;
+    filteredDuties = 14964.63;
     filteredDangerous = 2926.88;
     filteredShipments = 40282;
   } else {
-    filteredFuel = 90290.42;
-    filteredDuties = 12950.60;
+    filteredFuel = 99069.06;
+    filteredDuties = 14964.63;
     filteredDangerous = 2926.88;
-    filteredShipments = 394656;
+    filteredShipments = 408407;
   }
 
   const totalAccessorials = Math.round((filteredFuel + filteredDuties + filteredDangerous) * 100) / 100;
@@ -3412,7 +3435,7 @@ window.addEventListener('load', function() {
     if (cards.length >= 9) {
       const label = cards[8].querySelector('.kpi-label');
       if (label && label.textContent.trim() === 'Avg Box Size') {
-        cards[8].querySelector('.kpi-value').textContent = '2.21';
+        cards[8].querySelector('.kpi-value').textContent = '2.20';
         cards[8].querySelector('.kpi-detail').textContent = 'lbs per shipment';
       }
     }
@@ -3422,7 +3445,7 @@ window.addEventListener('load', function() {
       const cells = Array.from(overview.querySelectorAll('td'));
       cells.forEach((td, i) => {
         if (td.textContent.trim() === 'Avg Box Size' && cells[i + 1]) {
-          cells[i + 1].textContent = '2.21 lbs';
+          cells[i + 1].textContent = '2.20 lbs';
         }
       });
     }
@@ -3511,7 +3534,7 @@ window.addEventListener('load', function() {
       const label = cards[4].querySelector('.kpi-label');
       if (label && label.textContent.trim() === 'On-Time Delivery') {
         cards[4].querySelector('.kpi-value').textContent = '96.3%';
-        cards[4].querySelector('.kpi-detail').textContent = '717,546 of 394,656';
+        cards[4].querySelector('.kpi-detail').textContent = '717,546 of 408,407';
       }
     }
 
@@ -3546,18 +3569,18 @@ window.addEventListener('load', function() {
 
     const cards = document.querySelectorAll('#kpiCards .kpi-card');
     if (cards.length >= 10) {
-      cards[0].querySelector('.kpi-value').textContent = '$2,377,656.43';
-      cards[0].querySelector('.kpi-detail').textContent = '394,656 shipments';
-      cards[1].querySelector('.kpi-value').textContent = '394,656';
+      cards[0].querySelector('.kpi-value').textContent = '$2,474,234.53';
+      cards[0].querySelector('.kpi-detail').textContent = '408,407 shipments';
+      cards[1].querySelector('.kpi-value').textContent = '408,407';
       cards[1].querySelector('.kpi-detail').innerHTML = 'Avg: <strong>$6.03</strong>/shipment';
-      cards[2].querySelector('.kpi-value').textContent = '871,942.22 lbs';
+      cards[2].querySelector('.kpi-value').textContent = '899,479.32 lbs';
       cards[2].querySelector('.kpi-detail').innerHTML = 'Avg: <strong>2.189</strong> lbs/shipment';
       cards[3].querySelector('.kpi-value').textContent = '$2.76';
       cards[4].querySelector('.kpi-value').textContent = '96.2%';
       cards[4].querySelector('.kpi-detail').textContent = '717,546 of 745,537';
       cards[7].querySelector('.kpi-value').textContent = '$106,167.90';
-      cards[7].querySelector('.kpi-detail').textContent = '394,656 shipments with charges';
-      cards[8].querySelector('.kpi-value').textContent = '2.21';
+      cards[7].querySelector('.kpi-detail').textContent = '408,407 shipments with charges';
+      cards[8].querySelector('.kpi-value').textContent = '2.20';
       cards[8].querySelector('.kpi-detail').textContent = 'lbs per shipment';
       cards[9].querySelector('.kpi-value').textContent = '2.2';
       cards[9].querySelector('.kpi-detail').textContent = 'lbs average';
@@ -3583,18 +3606,18 @@ window.addEventListener('load', function() {
 
     const cards = document.querySelectorAll('#kpiCards .kpi-card');
     if (cards.length >= 10) {
-      cards[0].querySelector('.kpi-value').textContent = '$2,377,656.43';
-      cards[0].querySelector('.kpi-detail').textContent = '394,656 shipments';
-      cards[1].querySelector('.kpi-value').textContent = '394,656';
+      cards[0].querySelector('.kpi-value').textContent = '$2,474,234.53';
+      cards[0].querySelector('.kpi-detail').textContent = '408,407 shipments';
+      cards[1].querySelector('.kpi-value').textContent = '408,407';
       cards[1].querySelector('.kpi-detail').innerHTML = 'Avg: <strong>$6.02</strong>/shipment';
-      cards[2].querySelector('.kpi-value').textContent = '871,942.22 lbs';
+      cards[2].querySelector('.kpi-value').textContent = '899,479.32 lbs';
       cards[2].querySelector('.kpi-detail').innerHTML = 'Avg: <strong>2.209</strong> lbs/shipment';
       cards[3].querySelector('.kpi-value').textContent = '$2.73';
       cards[4].querySelector('.kpi-value').textContent = '96.2%';
-      cards[4].querySelector('.kpi-detail').textContent = '379,839 of 394,656';
+      cards[4].querySelector('.kpi-detail').textContent = '379,839 of 408,407';
       cards[7].querySelector('.kpi-value').textContent = '$106,167.90';
-      cards[7].querySelector('.kpi-detail').textContent = '394,656 shipments with charges';
-      cards[8].querySelector('.kpi-value').textContent = '2.21';
+      cards[7].querySelector('.kpi-detail').textContent = '408,407 shipments with charges';
+      cards[8].querySelector('.kpi-value').textContent = '2.20';
       cards[8].querySelector('.kpi-detail').textContent = 'lbs per shipment';
       cards[9].querySelector('.kpi-value').textContent = '2.2';
       cards[9].querySelector('.kpi-detail').textContent = 'lbs average';
@@ -3606,6 +3629,42 @@ window.addEventListener('load', function() {
   ['carrierSelect','invoiceSelect','shipmentTypeSelect','dateRangeSelect'].forEach(function(id) {
     const el = document.getElementById(id);
     if (el) el.addEventListener('change', function() { setTimeout(finalUniUni0616Sync, 150); });
+  });
+});
+</script>
+
+
+<script>
+window.addEventListener('load', function() {
+  function finalDHL0621Sync() {
+    const carrierEl = document.getElementById('carrierSelect');
+    const carrier = carrierEl ? carrierEl.value : 'all';
+    if (carrier !== 'all') return;
+    const cards = document.querySelectorAll('#kpiCards .kpi-card');
+    if (cards.length >= 10) {
+      cards[0].querySelector('.kpi-value').textContent = '$2,474,234.53';
+      cards[0].querySelector('.kpi-detail').textContent = '408,407 shipments';
+      cards[1].querySelector('.kpi-value').textContent = '408,407';
+      cards[1].querySelector('.kpi-detail').innerHTML = 'Avg: <strong>$6.06</strong>/shipment';
+      cards[2].querySelector('.kpi-value').textContent = '899,479.32 lbs';
+      cards[2].querySelector('.kpi-detail').innerHTML = 'Avg: <strong>2.202</strong> lbs/shipment';
+      cards[3].querySelector('.kpi-value').textContent = '$2.75';
+      cards[4].querySelector('.kpi-value').textContent = '96.2%';
+      cards[4].querySelector('.kpi-detail').textContent = '393,073 of 408,407';
+      cards[7].querySelector('.kpi-value').textContent = '$116,960.57';
+      cards[7].querySelector('.kpi-detail').textContent = '408,407 shipments with charges';
+      cards[8].querySelector('.kpi-value').textContent = '2.20';
+      cards[8].querySelector('.kpi-detail').textContent = 'lbs per shipment';
+      cards[9].querySelector('.kpi-value').textContent = '2.2';
+      cards[9].querySelector('.kpi-detail').textContent = 'lbs average';
+    }
+  }
+  setTimeout(finalDHL0621Sync, 100);
+  setTimeout(finalDHL0621Sync, 600);
+  setTimeout(finalDHL0621Sync, 1300);
+  ['carrierSelect','invoiceSelect','shipmentTypeSelect','dateRangeSelect'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', function() { setTimeout(finalDHL0621Sync, 150); });
   });
 });
 </script>
