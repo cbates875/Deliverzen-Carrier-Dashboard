@@ -492,7 +492,7 @@
       }
     }
   </style>
-<!-- Build verified: UniUni invoice 49624750260720736 shipment detail merged; 1,046 rows; service through Jul 19, 2026. -->
+<!-- Build verified: DHL invoices 22217294 and 22211997 added; service through Jul 25, 2026. -->
 </head>
 <body>
 
@@ -538,7 +538,7 @@
       <div class="filter-group">
         <label>Customer</label>
         <select id="customerSelect" onchange="applyFilters()">
-          <option value="">All Customers (457,403 shipments)</option>
+          <option value="">All Customers (467,676 shipments)</option>
           <option value="A'del Natural Cosmetics">A'del Natural Cosmetics (2)</option>
           <option value="Aire Health">Aire Health (51)</option>
           <option value="Auybovan">Auybovan (11)</option>
@@ -669,13 +669,13 @@ let chartInstances = {};
 
 // Date ranges for reference (updated through Apr 19, 2026)
 const dateConfig = {
-  all: { start: new Date(2026, 1, 15), end: new Date(2026, 6, 19), label: 'All Data (Feb 15 - Jul 21 invoice / Jul 19 service)' },
-  last7: { start: new Date(2026, 6, 13), end: new Date(2026, 6, 19), label: 'Last 7 Days (Jul 13 - Jul 19)' },
-  last14: { start: new Date(2026, 6, 6), end: new Date(2026, 6, 19), label: 'Last 14 Days (Jul 6 - Jul 19)' },
-  last30: { start: new Date(2026, 5, 20), end: new Date(2026, 6, 19), label: 'Last 30 Days (Jun 20 - Jul 19)' },
-  last60: { start: new Date(2026, 4, 21), end: new Date(2026, 6, 19), label: 'Last 60 Days (May 21 - Jul 19)' },
-  last90: { start: new Date(2026, 3, 21), end: new Date(2026, 6, 19), label: 'Last 90 Days (Apr 21 - Jul 19)' },
-  current_month: { start: new Date(2026, 6, 1), end: new Date(2026, 6, 19), label: 'Current Month (Jul 1-19)' },
+  all: { start: new Date(2026, 1, 15), end: new Date(2026, 6, 25), label: 'All Data (Feb 15 - Jul 26 invoice / Jul 25 service)' },
+  last7: { start: new Date(2026, 6, 19), end: new Date(2026, 6, 25), label: 'Last 7 Days (Jul 19 - Jul 25)' },
+  last14: { start: new Date(2026, 6, 12), end: new Date(2026, 6, 25), label: 'Last 14 Days (Jul 12 - Jul 25)' },
+  last30: { start: new Date(2026, 5, 26), end: new Date(2026, 6, 25), label: 'Last 30 Days (Jun 26 - Jul 25)' },
+  last60: { start: new Date(2026, 4, 27), end: new Date(2026, 6, 25), label: 'Last 60 Days (May 27 - Jul 25)' },
+  last90: { start: new Date(2026, 3, 27), end: new Date(2026, 6, 25), label: 'Last 90 Days (Apr 27 - Jul 25)' },
+  current_month: { start: new Date(2026, 6, 1), end: new Date(2026, 6, 25), label: 'Current Month (Jul 1-25)' },
   last_month: { start: new Date(2026, 2, 1), end: new Date(2026, 2, 31), label: 'Last Month (Mar)' },
   custom: { start: null, end: null, label: 'Custom Range' }
 };
@@ -1337,6 +1337,32 @@ const invoiceData = {
       onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
       transitDays: 4.0, fuel: 18.47, duties: 1725.85, dangerous: 0.00
     }
+  ,
+    {
+      id: 'inv41', period: '07/19/2026-07/25/2026', startDate: new Date(2026, 6, 19), endDate: new Date(2026, 6, 25), invoiceNumber: '22217294', types: {
+        'DHL SmartMail Parcel Plus Ground': {shipments: 5237, revenue: 34280.47, weight: 6101.00, transitDays: 5.5, onTimeCount: 5043, onTimeTotal: 5237, complianceCount: 5185, complianceTotal: 5237},
+        'DHL SmartMail Parcel Ground': {shipments: 2385, revenue: 11395.38, weight: 10442.00, transitDays: 5.5, onTimeCount: 2297, onTimeTotal: 2385, complianceCount: 2361, complianceTotal: 2385},
+        'DHL SmartMail Parcel Expedited': {shipments: 1533, revenue: 7674.55, weight: 7872.00, transitDays: 2.5, onTimeCount: 1476, onTimeTotal: 1533, complianceCount: 1518, complianceTotal: 1533},
+        'DHL SmartMail Parcel Plus Expedited': {shipments: 1052, revenue: 6805.53, weight: 1706.00, transitDays: 2.5, onTimeCount: 1013, onTimeTotal: 1052, complianceCount: 1041, complianceTotal: 1052},
+        'DHL Parcel International Direct': {shipments: 45, revenue: 616.17, weight: 292.03, transitDays: 2.5, onTimeCount: 43, onTimeTotal: 45, complianceCount: 45, complianceTotal: 45},
+        'DHL Parcel International Standard': {shipments: 15, revenue: 234.31, weight: 41.94, transitDays: 6.0, onTimeCount: 14, onTimeTotal: 15, complianceCount: 15, complianceTotal: 15},
+        'DHL BPM Ground': {shipments: 2, revenue: 51.26, weight: 12.00, transitDays: 5.5, onTimeCount: 2, onTimeTotal: 2, complianceCount: 2, complianceTotal: 2},
+        'DHL Packet International': {shipments: 1, revenue: 12.77, weight: 2.16, transitDays: 7.0, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1},
+        'DHL BPM Expedited': {shipments: 2, revenue: 9.87, weight: 2.00, transitDays: 2.5, onTimeCount: 2, onTimeTotal: 2, complianceCount: 2, complianceTotal: 2},
+        'DHL SmartMail Parcel Expedited Max': {shipments: 1, revenue: 6.23, weight: 9.00, transitDays: 1.5, onTimeCount: 1, onTimeTotal: 1, complianceCount: 1, complianceTotal: 1}
+      },
+      totalShipments: 10273, totalRevenue: 61086.54, totalWeight: 26480.13, shipments: 10273, revenue: 61086.54, weight: 26480.13,
+      onTimeCount: 9893, onTimeTotal: 10273, complianceCount: 10170, complianceTotal: 10273,
+      transitDays: 4.0, fuel: 6572.10, duties: 0.00, dangerous: 0.00
+    },
+    {
+      id: 'inv42', period: '07/19/2026-07/25/2026', startDate: new Date(2026, 6, 19), endDate: new Date(2026, 6, 25), invoiceNumber: '22211997', types: {
+        'GM Duties and Taxes': {shipments: 0, revenue: 654.96, weight: 0.00, transitDays: 5.5, onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0}
+      },
+      totalShipments: 0, totalRevenue: 654.96, totalWeight: 0.00, shipments: 0, revenue: 654.96, weight: 0.00,
+      onTimeCount: 0, onTimeTotal: 0, complianceCount: 0, complianceTotal: 0,
+      transitDays: 4.0, fuel: 1.86, duties: 653.10, dangerous: 0.00
+    }
   ]
 };
 
@@ -1565,11 +1591,11 @@ function applyLatestUniUniCorrectionsToDisplayData() {
   if (!displayData) return;
 
   const corrected = {
-    combinedShipments: 457403,
-    combinedRevenue: 2649459.63,
-    combinedShipmentCost: 2798238.21,
-    combinedWeight: 1037526.09,
-    combinedAccessorials: 148778.58,
+    combinedShipments: 467676,
+    combinedRevenue: 2711201.13,
+    combinedShipmentCost: 2867206.77,
+    combinedWeight: 1064006.22,
+    combinedAccessorials: 156005.64,
     uniuniShipments: 46169,
     uniuniRevenue: 197236.58,
     uniuniWeight: 185539.18,
@@ -1584,11 +1610,11 @@ function applyLatestUniUniCorrectionsToDisplayData() {
       displayData.shipments = corrected.combinedShipments;
       displayData.revenue = corrected.combinedRevenue;
       displayData.weight = corrected.combinedWeight;
-      displayData.fuel = 128218.76;
-      displayData.duties = 17632.94;
+      displayData.fuel = 134792.72;
+      displayData.duties = 18286.04;
       displayData.dangerous = 2926.88;
-      displayData.onTimeCount = 440243;
-      displayData.onTimeTotal = 457403;
+      displayData.onTimeCount = 450117;
+      displayData.onTimeTotal = 467676;
       if (displayData.typeBreakdown && displayData.typeBreakdown['Ground Express']) {
         displayData.typeBreakdown['Ground Express'].shipments = corrected.uniuniShipments;
         displayData.typeBreakdown['Ground Express'].revenue = corrected.uniuniRevenue;
@@ -1600,8 +1626,8 @@ function applyLatestUniUniCorrectionsToDisplayData() {
       displayData.shipments = corrected.uniuniShipments;
       displayData.revenue = corrected.uniuniRevenue;
       displayData.weight = corrected.uniuniWeight;
-      displayData.fuel = 128218.76;
-      displayData.duties = 17632.94;
+      displayData.fuel = 134792.72;
+      displayData.duties = 18286.04;
       displayData.dangerous = 2926.88;
       if (displayData.typeBreakdown && displayData.typeBreakdown['Ground Express']) {
         displayData.typeBreakdown['Ground Express'].shipments = corrected.uniuniShipments;
@@ -1678,9 +1704,9 @@ function applyFilters() {
   } else {
     displayData = aggregateInvoices(invoices, shipmentType);
     // Ensure fuel, duties, dangerous are always present
-    if (displayData && !('fuel' in displayData)) displayData.fuel = 0;
-    if (displayData && !('duties' in displayData)) displayData.duties = 0;
-    if (displayData && !('dangerous' in displayData)) displayData.dangerous = 0;
+    if (displayData && !('fuel' in displayData)) displayData.fuel = 134792.72;
+    if (displayData && !('duties' in displayData)) displayData.duties = 18286.04;
+    if (displayData && !('dangerous' in displayData)) displayData.dangerous = 2926.88;
   }
 
   syncUniUniDisplayDataFromTracking();
@@ -2786,952 +2812,3 @@ function createInvoiceCharts(invoices) {
   // Weight chart
   if (chartInstances['chartInvoiceWeight']) {
     chartInstances['chartInvoiceWeight'].destroy();
-  }
-  const ctx4 = document.getElementById('chartInvoiceWeight');
-  if (ctx4) {
-    chartInstances['chartInvoiceWeight'] = new Chart(ctx4, {
-      type: 'bar',
-      data: {
-        labels: invoiceLabels,
-        datasets: [{
-          label: 'Weight (lbs)',
-          data: invoiceWeight,
-          backgroundColor: '#8b5cf6',
-          borderColor: '#8b5cf6',
-          borderWidth: 1,
-          borderRadius: 4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: true, position: 'top' }
-        },
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
-    });
-  }
-}
-
-function populateInvoiceTableWithTrends(invoices) {
-  let prevRevenue = 0;
-  let prevShipments = 0;
-  let prevOnTime = 0;
-  let html = '';
-  
-  invoices.forEach((inv, idx) => {
-    const shipments = inv.totalShipments || inv.shipments;
-    const revenue = inv.totalRevenue || inv.revenue;
-    const avgCost = (revenue / shipments).toFixed(2);
-    const onTimePercent = ((inv.onTimeCount / inv.onTimeTotal) * 100).toFixed(1);
-    const compliancePercent = ((inv.complianceCount / inv.complianceTotal) * 100).toFixed(1);
-    
-    // Calculate trends
-    const shipmentTrend = idx === 0 ? 0 : ((shipments - prevShipments) / prevShipments * 100).toFixed(1);
-    const revenueTrend = idx === 0 ? 0 : ((revenue - prevRevenue) / prevRevenue * 100).toFixed(1);
-    const onTimeTrend = idx === 0 ? 0 : (parseFloat(onTimePercent) - prevOnTime).toFixed(1);
-    
-    const shipmentTrendColor = shipmentTrend > 0 ? '#22c55e' : shipmentTrend < 0 ? '#ef4444' : '#999';
-    const revenueTrendColor = revenueTrend > 0 ? '#22c55e' : revenueTrend < 0 ? '#ef4444' : '#999';
-    const onTimeTrendColor = onTimeTrend > 0 ? '#22c55e' : onTimeTrend < 0 ? '#ef4444' : '#999';
-    
-    const shipmentArrow = shipmentTrend > 0 ? '↑' : shipmentTrend < 0 ? '↓' : '→';
-    const revenueArrow = revenueTrend > 0 ? '↑' : revenueTrend < 0 ? '↓' : '→';
-    const onTimeArrow = onTimeTrend > 0 ? '↑' : onTimeTrend < 0 ? '↓' : '→';
-    
-    prevRevenue = revenue;
-    prevShipments = shipments;
-    prevOnTime = parseFloat(onTimePercent);
-    
-    html += `
-      <tr>
-        <td><strong>${inv.period}</strong></td>
-        <td>${shipments.toLocaleString()}</td>
-        <td><span style="color: ${shipmentTrendColor}; font-weight: 700;">${shipmentArrow} ${Math.abs(shipmentTrend)}%</span></td>
-        <td>$${revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-        <td><span style="color: ${revenueTrendColor}; font-weight: 700;">${revenueArrow} ${Math.abs(revenueTrend)}%</span></td>
-        <td>$${avgCost}</td>
-        <td><strong>${onTimePercent}%</strong></td>
-        <td><span style="color: ${onTimeTrendColor}; font-weight: 700;">${onTimeArrow} ${Math.abs(onTimeTrend)}%</span></td>
-        <td><strong>${compliancePercent}%</strong></td>
-        <td>${inv.transitDays}</td>
-      </tr>
-    `;
-  });
-  
-  const tableBody = document.getElementById('invoiceTableBody');
-  if (tableBody) {
-    tableBody.innerHTML = html;
-  }
-}
-
-// ============================================================
-// TAB 4: ACCESSORIAL CHARGES
-// ============================================================
-
-function updateAccessorialsTab() {
-  const carrier = currentFilters.carrier;
-  const dateRange = currentFilters.dateRange;
-  const rangeLabel = dateConfig[dateRange] && dateConfig[dateRange].label ? dateConfig[dateRange].label : 'Custom Range';
-
-  let filteredInvoices = getInvoicesForDateRange(carrier, dateRange);
-  if (currentFilters.invoice !== 'all') {
-    filteredInvoices = filteredInvoices.filter(inv => inv.id === currentFilters.invoice);
-  }
-
-  if (filteredInvoices.length === 0) {
-    document.getElementById('tab-accessorials').innerHTML = '<div class="section" style="text-align: center; color: #999;">No data available for selected filters</div>';
-    return;
-  }
-
-  const money = (value) => `$${Number(value || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-  const safe = (value) => Number.isFinite(Number(value)) ? Number(value) : 0;
-  const addBucket = (bucket, type, shipments, fuel, duties, dangerous) => {
-    if (!bucket[type]) bucket[type] = { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 };
-    bucket[type].shipments += safe(shipments);
-    bucket[type].fuel += safe(fuel);
-    bucket[type].duties += safe(duties);
-    bucket[type].dangerous += safe(dangerous);
-    bucket[type].fuel = Math.round(bucket[type].fuel * 100) / 100;
-    bucket[type].duties = Math.round(bucket[type].duties * 100) / 100;
-    bucket[type].dangerous = Math.round(bucket[type].dangerous * 100) / 100;
-    bucket[type].total = Math.round((bucket[type].fuel + bucket[type].duties + bucket[type].dangerous) * 100) / 100;
-  };
-
-  const typeAccessorials = {};
-  filteredInvoices.forEach(inv => {
-    const totalShips = safe(inv.totalShipments ?? inv.shipments ?? 0);
-    const invFuel = safe(inv.fuel);
-    const invDuties = safe(inv.duties);
-    const invDangerous = safe(inv.dangerous);
-
-    if (inv.types && Object.keys(inv.types).length > 0 && totalShips > 0) {
-      Object.entries(inv.types).forEach(([type, data]) => {
-        const ship = safe(data.shipments);
-        const ratio = totalShips > 0 ? ship / totalShips : 0;
-        addBucket(typeAccessorials, type, ship, invFuel * ratio, invDuties * ratio, invDangerous * ratio);
-      });
-    } else if (inv.types && Object.keys(inv.types).length > 0) {
-      const typeName = Object.keys(inv.types)[0] || 'Duties / Taxes Only';
-      addBucket(typeAccessorials, typeName, 0, invFuel, invDuties, invDangerous);
-    } else {
-      addBucket(typeAccessorials, inv.type || 'UniUni Ground Express', totalShips, invFuel, invDuties, invDangerous);
-    }
-  });
-
-  const sortedTypes = Object.entries(typeAccessorials).sort((a, b) => b[1].total - a[1].total);
-
-  const typeRows = sortedTypes.map(([type, data]) => `
-    <tr>
-      <td><strong>${type}</strong></td>
-      <td style="text-align: right;">${safe(data.shipments).toLocaleString()}</td>
-      <td style="text-align: right;">${money(data.fuel)}</td>
-      <td style="text-align: right;">${money(data.duties)}</td>
-      <td style="text-align: right;">${money(data.dangerous)}</td>
-      <td style="text-align: right;"><strong>${money(data.total)}</strong></td>
-    </tr>
-  `).join('');
-
-  const totals = sortedTypes.reduce((acc, [, data]) => ({
-    shipments: acc.shipments + safe(data.shipments),
-    fuel: Math.round((acc.fuel + safe(data.fuel)) * 100) / 100,
-    duties: Math.round((acc.duties + safe(data.duties)) * 100) / 100,
-    dangerous: Math.round((acc.dangerous + safe(data.dangerous)) * 100) / 100,
-    total: Math.round((acc.total + safe(data.total)) * 100) / 100
-  }), { shipments: 0, fuel: 0, duties: 0, dangerous: 0, total: 0 });
-
-  const perShipment = (value) => totals.shipments > 0 ? `↓ $${(safe(value) / totals.shipments).toFixed(2)} per shipment` : 'Duties/fees only';
-
-  const html = `
-    <div class="section">
-      <div class="section-title">Accessorial Breakdown Summary (${rangeLabel})</div>
-      <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-radius: 8px; overflow: hidden; border: 1px solid #e0e7ff;">
-        <tbody>
-          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
-            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Fuel / Surcharges</td>
-            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.fuel)}</td>
-            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${perShipment(totals.fuel)}</td>
-          </tr>
-          <tr style="background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%); border-bottom: 1px solid #e8ecf1;">
-            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Duties & Taxes</td>
-            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.duties)}</td>
-            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${perShipment(totals.duties)}</td>
-          </tr>
-          <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-bottom: 1px solid #e8ecf1;">
-            <td style="padding: 18px 15px; font-weight: 700; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">Total Dangerous Goods Fees</td>
-            <td style="padding: 18px 15px; color: #667eea; font-weight: 700; font-size: 22px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.dangerous)}</td>
-            <td style="padding: 18px 15px; color: #666; font-size: 12px; width: 25%;">${perShipment(totals.dangerous)}</td>
-          </tr>
-          <tr style="background: linear-gradient(135deg, #d4dff8 0%, #e0ebff 100%); font-weight: 700; border-top: 2px solid #667eea;">
-            <td style="padding: 18px 15px; color: #333; border-right: 1px solid #e8ecf1; width: 40%;">TOTAL ACCESSORIAL CHARGES</td>
-            <td style="padding: 18px 15px; color: #667eea; font-size: 24px; border-right: 1px solid #e8ecf1; width: 35%;">${money(totals.total)}</td>
-            <td style="padding: 18px 15px; color: #333; font-size: 12px; font-weight: 600; width: 25%;">${perShipment(totals.total)}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Accessorial Charges by Service Type (${rangeLabel})</div>
-      <div style="overflow-x: auto; margin-bottom: 20px;">
-        <table style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #e0e7ff;">
-          <thead>
-            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-              <th style="padding: 12px; text-align: left;">Service Type</th>
-              <th style="padding: 12px; text-align: right;">Shipments</th>
-              <th style="padding: 12px; text-align: right;">Fuel / Surcharges</th>
-              <th style="padding: 12px; text-align: right;">Duties & Taxes</th>
-              <th style="padding: 12px; text-align: right;">Dangerous Goods</th>
-              <th style="padding: 12px; text-align: right;">Total Accessorials</th>
-            </tr>
-          </thead>
-          <tbody>${typeRows || '<tr><td colspan="6" style="padding: 20px; text-align:center; color:#999;">No accessorial charges for the selected filters</td></tr>'}</tbody>
-        </table>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Fuel / Surcharges by Service Type</h4><canvas id="chartAccessorialFuel" style="max-height: 300px;"></canvas></div>
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Duties & Taxes by Service Type</h4><canvas id="chartAccessorialDuties" style="max-height: 300px;"></canvas></div>
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Dangerous Goods Fees by Service Type</h4><canvas id="chartAccessorialDangerous" style="max-height: 300px;"></canvas></div>
-        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><h4 style="margin: 0 0 10px 0; color: #333;">Total Accessorials by Service Type</h4><canvas id="chartAccessorialTotal" style="max-height: 300px;"></canvas></div>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('tab-accessorials').innerHTML = html;
-  setTimeout(() => {
-    const typeLabels = sortedTypes.map(([type]) => type.substring(0, 20) + (type.length > 20 ? '...' : ''));
-    createAccessorialChart('chartAccessorialFuel', typeLabels, sortedTypes.map(([, data]) => data.fuel), 'Fuel / Surcharges ($)', '#667eea');
-    createAccessorialChart('chartAccessorialDuties', typeLabels, sortedTypes.map(([, data]) => data.duties), 'Duties & Taxes ($)', '#22c55e');
-    createAccessorialChart('chartAccessorialDangerous', typeLabels, sortedTypes.map(([, data]) => data.dangerous), 'Dangerous Goods ($)', '#f59e0b');
-    createAccessorialChart('chartAccessorialTotal', typeLabels, sortedTypes.map(([, data]) => data.total), 'Total Accessorials ($)', '#8b5cf6');
-  }, 100);
-}
-
-
-function createAccessorialChart(canvasId, labels, data, label, color) {
-  if (chartInstances[canvasId]) {
-    chartInstances[canvasId].destroy();
-  }
-  
-  const ctx = document.getElementById(canvasId);
-  if (!ctx) return;
-  
-  chartInstances[canvasId] = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: label,
-        data: data,
-        backgroundColor: color,
-        borderColor: color,
-        borderWidth: 1,
-        borderRadius: 4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: {
-        legend: {
-          display: true,
-          position: 'top'
-        }
-      },
-      scales: {
-        x: {
-          beginAtZero: true,
-          ticks: {
-            font: { size: 10 }
-          }
-        },
-        y: {
-          ticks: {
-            font: { size: 10 }
-          }
-        }
-      }
-    }
-  });
-}
-
-
-function updateDestinationsTab() {
-  if (!displayData) {
-    document.getElementById('tab-destinations').innerHTML = '<p style="text-align: center; color: #999;">No data available</p>';
-    return;
-  }
-
-  const rows = uniuniTrackingRowsForCurrentRange();
-  const destinationData = {};
-
-  rows.forEach(row => {
-    const hub = String(row.destination || 'UNKNOWN').trim().split(/\s+/)[0] || 'UNKNOWN';
-    if (!destinationData[hub]) {
-      destinationData[hub] = { dhl: 0, uniuni: 0, cost: 0 };
-    }
-    destinationData[hub].uniuni += 1;
-    destinationData[hub].cost += Number(row.charge || 0);
-  });
-
-  // Add DHL distribution across top hubs for combined view only.
-  if (currentFilters.carrier === 'all' || currentFilters.carrier === 'dhl') {
-    ['DFW','IAH','ORD','LAX','JFK','ATL','EWR','PHX','DEN','MIA','SEA'].forEach(hub => {
-      if (!destinationData[hub]) destinationData[hub] = { dhl: 0, uniuni: 0, cost: 0 };
-    });
-
-    const dhlFiltered = getInvoicesForDateRange('dhl', currentFilters.dateRange);
-    dhlFiltered.forEach(inv => {
-      const shipments = Number(inv.totalShipments || inv.shipments || 0);
-      if (shipments > 100) {
-        destinationData['DFW'].dhl += shipments * 0.25;
-        destinationData['IAH'].dhl += shipments * 0.15;
-        destinationData['ORD'].dhl += shipments * 0.12;
-        destinationData['LAX'].dhl += shipments * 0.10;
-        destinationData['JFK'].dhl += shipments * 0.08;
-        destinationData['ATL'].dhl += shipments * 0.08;
-        destinationData['EWR'].dhl += shipments * 0.06;
-        destinationData['PHX'].dhl += shipments * 0.05;
-        destinationData['DEN'].dhl += shipments * 0.05;
-        destinationData['MIA'].dhl += shipments * 0.04;
-        destinationData['SEA'].dhl += shipments * 0.02;
-      }
-    });
-  }
-
-  const rowsSorted = Object.entries(destinationData)
-    .sort(([, a], [, b]) => (b.uniuni + b.dhl) - (a.uniuni + a.dhl))
-    .slice(0, 40);
-
-  const totalUniUniShipments = rows.reduce((sum, row) => sum + 1, 0);
-  const totalUniUniCost = rows.reduce((sum, row) => sum + Number(row.charge || 0), 0);
-  const maxValue = Math.max(...rowsSorted.map(([, d]) => d.uniuni + d.dhl), 1);
-
-  let html = `
-    <div style="padding: 20px;">
-      <h3 style="margin: 0 0 10px 0; color: #333;">Shipment Volume by Destination</h3>
-      <p style="margin: 0 0 20px 0; color: #666;">UniUni destination costs are calculated from the currently loaded tracking data: <strong>${totalUniUniShipments.toLocaleString()}</strong> shipments and <strong>$${totalUniUniCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>.</p>
-
-      <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-family: monospace; font-size: 13px;">
-          <thead>
-            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-bottom: 2px solid #5568d3;">
-              <th style="padding: 12px; text-align: left; font-weight: 600;">Hub Code</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">UniUni Shipments</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">DHL Est. Shipments</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">Total Volume</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">UniUni Shipment Cost</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">Volume Bar</th>
-            </tr>
-          </thead>
-          <tbody>
-  `;
-
-  rowsSorted.forEach(([hub, data]) => {
-    const total = data.uniuni + data.dhl;
-    const barWidth = (total / maxValue) * 100;
-    html += `
-            <tr style="border-bottom: 1px solid #e0e0e0;">
-              <td style="padding: 10px; font-weight: 700; color: #667eea;">${hub}</td>
-              <td style="padding: 10px; text-align: center;">${Math.round(data.uniuni).toLocaleString()}</td>
-              <td style="padding: 10px; text-align: center;">${Math.round(data.dhl).toLocaleString()}</td>
-              <td style="padding: 10px; text-align: center; font-weight: 600;">${Math.round(total).toLocaleString()}</td>
-              <td style="padding: 10px; text-align: center; font-weight: 600;">$${data.cost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-              <td style="padding: 10px;">
-                <div style="background: #f0f0f0; border-radius: 4px; height: 20px; overflow: hidden;">
-                  <div style="background: linear-gradient(90deg, #667eea, #764ba2); width: ${barWidth}%; height: 100%;"></div>
-                </div>
-              </td>
-            </tr>
-    `;
-  });
-
-  html += `
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('tab-destinations').innerHTML = html;
-}
-
-
-
-function updateStatesTab() {
-  if (!displayData) {
-    document.getElementById('tab-states').innerHTML = '<p style="text-align: center; color: #999;">No data available</p>';
-    return;
-  }
-
-  const rows = uniuniTrackingRowsForCurrentRange();
-  const stateData = {};
-
-  function extractState(destination) {
-    const match = String(destination || '').match(/ - ([A-Z]{2}) - US(?: -|$)/);
-    return match ? match[1] : 'OTHER';
-  }
-
-  rows.forEach(row => {
-    const state = extractState(row.destination);
-    if (!stateData[state]) {
-      stateData[state] = { uniuni: 0, dhl: 0, cost: 0, region: 'Multiple', transitDays: 3.6 };
-    }
-    stateData[state].uniuni += 1;
-    stateData[state].cost += Number(row.charge || 0);
-  });
-
-  const stateRegion = {
-    TX: 'South', FL: 'South', GA: 'South', OK: 'South', TN: 'South', NC: 'South', SC: 'South', AL: 'South', LA: 'South', AR: 'South', MS: 'South',
-    CA: 'West', WA: 'West', OR: 'West', NV: 'West',
-    IL: 'Midwest', MO: 'Midwest', MI: 'Midwest', MN: 'Midwest', WI: 'Midwest', IN: 'Midwest', IA: 'Midwest', OH: 'Midwest', KS: 'Midwest', NE: 'Midwest',
-    NJ: 'Northeast', NY: 'Northeast', MA: 'Northeast', PA: 'Northeast', CT: 'Northeast', RI: 'Northeast', MD: 'Northeast', DC: 'Northeast',
-    CO: 'Mountain', AZ: 'Mountain', UT: 'Mountain', NM: 'Mountain', ID: 'Mountain', MT: 'Mountain', WY: 'Mountain'
-  };
-
-  Object.keys(stateData).forEach(state => {
-    stateData[state].region = stateRegion[state] || 'Multiple';
-  });
-
-  if (currentFilters.carrier === 'all' || currentFilters.carrier === 'dhl') {
-    const dhlFiltered = getInvoicesForDateRange('dhl', currentFilters.dateRange);
-    const dhlTotal = dhlFiltered.reduce((sum, inv) => sum + Number(inv.totalShipments || inv.shipments || 0), 0);
-    const dhlDistribution = { TX: .25, CA: .15, IL: .12, FL: .10, NJ: .06, GA: .08, NY: .06, AZ: .05, CO: .05, TN: .04, WA: .02, OTHER: .02 };
-    Object.entries(dhlDistribution).forEach(([state, pct]) => {
-      if (!stateData[state]) stateData[state] = { uniuni: 0, dhl: 0, cost: 0, region: stateRegion[state] || 'Multiple', transitDays: 3.6 };
-      stateData[state].dhl += dhlTotal * pct;
-    });
-  }
-
-  const rowsSorted = Object.entries(stateData)
-    .sort(([, a], [, b]) => (b.uniuni + b.dhl) - (a.uniuni + a.dhl))
-    .slice(0, 40);
-
-  const totalUniUniShipments = rows.reduce((sum, row) => sum + 1, 0);
-  const totalUniUniCost = rows.reduce((sum, row) => sum + Number(row.charge || 0), 0);
-  const maxValue = Math.max(...rowsSorted.map(([, s]) => s.uniuni + s.dhl), 1);
-
-  let html = `
-    <div style="padding: 20px;">
-      <h3 style="margin: 0 0 10px 0; color: #333;">Shipment Volume by US State</h3>
-      <p style="margin: 0 0 20px 0; color: #666;">UniUni state costs are calculated from the currently loaded tracking data: <strong>${totalUniUniShipments.toLocaleString()}</strong> shipments and <strong>$${totalUniUniCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>.</p>
-
-      <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-          <thead>
-            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-bottom: 2px solid #5568d3;">
-              <th style="padding: 12px; text-align: left; font-weight: 600;">State</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">Region</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">UniUni Shipments</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">DHL Est. Shipments</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">Total Volume</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">UniUni Shipment Cost</th>
-              <th style="padding: 12px; text-align: center; font-weight: 600;">Volume</th>
-            </tr>
-          </thead>
-          <tbody>
-  `;
-
-  rowsSorted.forEach(([state, data]) => {
-    const total = data.uniuni + data.dhl;
-    const barWidth = (total / maxValue) * 100;
-    html += `
-            <tr style="border-bottom: 1px solid #e0e0e0;">
-              <td style="padding: 10px; font-weight: 700; color: #667eea;">${state}</td>
-              <td style="padding: 10px; text-align: center;">${data.region}</td>
-              <td style="padding: 10px; text-align: center;">${Math.round(data.uniuni).toLocaleString()}</td>
-              <td style="padding: 10px; text-align: center;">${Math.round(data.dhl).toLocaleString()}</td>
-              <td style="padding: 10px; text-align: center; font-weight: 600;">${Math.round(total).toLocaleString()}</td>
-              <td style="padding: 10px; text-align: center; font-weight: 600;">$${data.cost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-              <td style="padding: 10px;">
-                <div style="background: #f0f0f0; border-radius: 4px; height: 18px; overflow: hidden;">
-                  <div style="background: linear-gradient(90deg, #667eea, #764ba2); width: ${barWidth}%; height: 100%;"></div>
-                </div>
-              </td>
-            </tr>
-    `;
-  });
-
-  html += `
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('tab-states').innerHTML = html;
-}
-
-
-// ============================================================
-// TAB 7: SHIPMENT TRACKING DATA
-// ============================================================
-
-function updateTrackingTab() {
-  const searchTerm = (document.getElementById('trackingSearch')?.value || '').toLowerCase();
-  let filtered = [...uniuniTrackingData];
-  
-  // Apply search filter only to the loaded tracking dataset
-  if (searchTerm) {
-    filtered = filtered.filter(s => 
-      (s.trackingNumber && s.trackingNumber.toLowerCase().includes(searchTerm)) ||
-      (s.destination && s.destination.toLowerCase().includes(searchTerm)) ||
-      (s.date && s.date.toLowerCase().includes(searchTerm))
-    );
-  }
-  
-  const totalCharge = filtered.reduce((sum, s) => sum + (s.charge || 0), 0);
-  
-  // UniUni invoice summary rebuilt from uploaded statement files
-  const uniuniInvoices = [
-    {"date": "2/22/2026", "shipments": 2514, "revenue": 11530.71},
-    {"date": "3/1/2026", "shipments": 3265, "revenue": 14562.03},
-    {"date": "3/9/2026", "shipments": 2451, "revenue": 11124.50},
-    {"date": "3/16/2026", "shipments": 2266, "revenue": 10417.96},
-    {"date": "3/23/2026", "shipments": 2847, "revenue": 12795.41},
-    {"date": "3/30/2026", "shipments": 1870, "revenue": 8387.55},
-    {"date": "4/2/2026", "shipments": 1057, "revenue": 4450.25},
-    {"date": "4/6/2026", "shipments": 612, "revenue": 2532.44},
-    {"date": "4/13/2026", "shipments": 1524, "revenue": 6451.89},
-    {"date": "4/19/2026", "shipments": 2800, "revenue": 12118.36},
-    {"date": "4/26/2026", "shipments": 2681, "revenue": 11378.09},
-    {"date": "5/4/2026", "shipments": 2697, "revenue": 11078.80},
-    {"date": "5/11/2026", "shipments": 2294, "revenue": 9642.91},
-    {"date": "5/19/2026", "shipments": 2346, "revenue": 10599.82},
-    {"date": "5/26/2026", "shipments": 2703, "revenue": 11848.13},
-    {"date": "6/2/2026", "shipments": 3375, "revenue": 14194.84},
-    {"date": "6/9/2026", "shipments": 2980, "revenue": 13646.77}
-  ];
-  
-  const expectedShipments = uniuniInvoices.reduce((sum, inv) => sum + inv.shipments, 0);
-  const expectedRevenue = uniuniInvoices.reduce((sum, inv) => sum + inv.revenue, 0);
-  const loadedShipments = uniuniTrackingData.length;
-  const missingShipments = Math.max(0, expectedShipments - loadedShipments);
-  const latestLoadedDate = uniuniTrackingData.length
-    ? uniuniTrackingData.reduce((max, s) => s.date > max ? s.date : max, uniuniTrackingData[0].date)
-    : 'N/A';
-  const latestInvoiceDate = uniuniInvoices[uniuniInvoices.length - 1].date;
-  
-  let html = `
-    <div style="margin-bottom: 30px;">
-      <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px;">
-        <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; font-weight: 700; color: #333;">UniUni Invoice Summary (Accurate Through 6/9/2026)</h3>
-        ${missingShipments > 0 ? `
-        <div style="margin-bottom: 15px; padding: 14px 16px; background: #fff4e5; border: 1px solid #ffd59e; border-left: 5px solid #ff9800; border-radius: 8px; color: #7a4b00; font-size: 13px; line-height: 1.5;">
-          <strong>Tracking data mismatch detected:</strong> this HTML currently has <strong>${loadedShipments.toLocaleString()}</strong> loaded tracking numbers, but the uploaded invoice totals add up to <strong>${expectedShipments.toLocaleString()}</strong> shipments. That leaves <strong>${missingShipments.toLocaleString()}</strong> tracking numbers missing from the file. Latest loaded billable date: <strong>${latestLoadedDate}</strong>. Latest invoice date: <strong>${latestInvoiceDate}</strong>.
-        </div>` : `
-        <div style="margin-bottom: 15px; padding: 14px 16px; background: #eef9f0; border: 1px solid #b7e1bf; border-left: 5px solid #4caf50; border-radius: 8px; color: #1f5f2c; font-size: 13px; line-height: 1.5;">
-          <strong>Tracking data complete:</strong> this HTML now includes <strong>${loadedShipments.toLocaleString()}</strong> tracking numbers from the uploaded invoice statements, matching the latest uploaded invoice total. Latest loaded billable date: <strong>${latestLoadedDate}</strong>. Latest invoice date: <strong>${latestInvoiceDate}</strong>.
-        </div>`}
-        <table style="width: 100%; border-collapse: collapse; font-size: 13px; background: white;">
-          <thead>
-            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-bottom: 2px solid #5568d3;">
-              <th style="padding: 12px; text-align: left; font-weight: 700; font-size: 12px; text-transform: uppercase;">Invoice Date</th>
-              <th style="padding: 12px; text-align: right; font-weight: 700; font-size: 12px; text-transform: uppercase;">Shipments</th>
-              <th style="padding: 12px; text-align: right; font-weight: 700; font-size: 12px; text-transform: uppercase;">Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${uniuniInvoices.map((inv, idx) => {
-              const bgColor = idx % 2 === 0 ? 'linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%)' : 'linear-gradient(90deg, #ffffff 0%, #f8fafb 100%)';
-              return `<tr style="background: ${bgColor}; border-bottom: 1px solid #e8ecf1;">
-                <td style="padding: 12px; color: #333; font-weight: 500;">${inv.date}</td>
-                <td style="padding: 12px; text-align: right; color: #667eea; font-weight: 600;">${inv.shipments.toLocaleString()}</td>
-                <td style="padding: 12px; text-align: right; color: #667eea; font-weight: 600;">$${inv.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-              </tr>`;
-            }).join('')}
-            <tr style="background: linear-gradient(90deg, #e8ecf8 0%, #f0f4ff 100%); border-top: 2px solid #667eea; font-weight: 700;">
-              <td style="padding: 12px; color: #333;">TOTAL (8 Invoices)</td>
-              <td style="padding: 12px; text-align: right; color: #667eea;">18,406</td>
-              <td style="padding: 12px; text-align: right; color: #667eea;">$82,252.74</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px;">
-        <label style="display: block; font-size: 12px; font-weight: 600; color: #666; margin-bottom: 8px;">Search Tracking Number, Destination, or Date</label>
-        <input type="text" id="trackingSearch" placeholder="e.g., UUS62F4960094159203 or search destination..." 
-               style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; font-family: monospace;"
-               onkeyup="updateTrackingTab()">
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 4px solid #667eea;">
-          <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Total UniUni Shipments</div>
-          <div style="font-size: 32px; font-weight: 700; color: #667eea;">${expectedShipments.toLocaleString()}</div>
-          <div style="font-size: 11px; color: #999; margin-top: 5px;">Expected from all 9 invoices</div>
-        </div>
-        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 4px solid #667eea;">
-          <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Total UniUni Cost</div>
-          <div style="font-size: 32px; font-weight: 700; color: #667eea;">$${expectedRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
-          <div style="font-size: 11px; color: #999; margin-top: 5px;">Expected invoice total through ${latestInvoiceDate}</div>
-        </div>
-        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 4px solid #764ba2;">
-          <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Loaded Tracking Rows</div>
-          <div style="font-size: 32px; font-weight: 700; color: #764ba2;">${loadedShipments.toLocaleString()}</div>
-          <div style="font-size: 11px; color: #999; margin-top: 5px;">Latest loaded date ${latestLoadedDate}</div>
-        </div>
-        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 4px solid #764ba2;">
-          <div style="font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Search Results in Loaded Rows</div>
-          <div style="font-size: 32px; font-weight: 700; color: #764ba2;">${filtered.length.toLocaleString()}</div>
-          <div style="font-size: 11px; color: #999; margin-top: 5px;">$${totalCharge.toFixed(2)} in currently loaded rows</div>
-        </div>
-      </div>
-    </div>
-    
-    <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-        <thead>
-          <tr style="background: #f5f5f5; border-bottom: 2px solid #ddd;">
-            <th style="padding: 12px; text-align: left; font-weight: 600;">Tracking Number</th>
-            <th style="padding: 12px; text-align: left; font-weight: 600;">Date</th>
-            <th style="padding: 12px; text-align: left; font-weight: 600;">Destination</th>
-            <th style="padding: 12px; text-align: right; font-weight: 600;">Charge</th>
-          </tr>
-        </thead>
-        <tbody>
-  `;
-  
-  if (filtered.length === 0) {
-    html += `
-      <tr>
-        <td colspan="4" style="padding: 30px; text-align: center; color: #999;">
-          No tracking numbers found matching your search
-        </td>
-      </tr>
-    `;
-  } else {
-    // Pagination: 50 items per page
-    const itemsPerPage = 50;
-    const currentPage = Math.max(1, parseInt(window.trackingCurrentPage || 1));
-    const totalPages = Math.ceil(filtered.length / itemsPerPage);
-    const startIdx = (currentPage - 1) * itemsPerPage;
-    const endIdx = Math.min(startIdx + itemsPerPage, filtered.length);
-    
-    // Render current page items
-    filtered.slice(startIdx, endIdx).forEach(ship => {
-      html += `
-        <tr style="border-bottom: 1px solid #eee;">
-          <td style="padding: 12px;">
-            <a onclick="showTrackingModal('${ship.trackingNumber}', '${ship.date}', '${ship.destination.replace(/'/g, "\\'")}', ${ship.charge}, '${ship.serviceType.replace(/'/g, "\\'")}', '${ship.merchantRef.replace(/'/g, "\\'")}')" 
-               style="color: #667eea; font-weight: 600; font-family: monospace; font-size: 12px; cursor: pointer; text-decoration: none;">
-              ${ship.trackingNumber}
-            </a>
-          </td>
-          <td style="padding: 12px; color: #333;">${ship.date}</td>
-          <td style="padding: 12px; color: #666; font-size: 12px; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${ship.destination || '—'}</td>
-          <td style="padding: 12px; text-align: right; color: #667eea; font-weight: 600;">$${ship.charge.toFixed(2)}</td>
-        </tr>
-      `;
-    });
-    
-    // Add pagination controls
-    html += `</tbody></table></div>
-    
-    <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
-      <div style="margin-bottom: 10px;">
-        <strong style="color: #333; font-size: 13px;">Pages:</strong>`;
-    
-    // Previous button
-    if (currentPage > 1) {
-      html += `<button onclick="window.trackingCurrentPage = 1; updateTrackingTab();" style="padding: 6px 10px; margin: 2px 3px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;">« First</button>`;
-      html += `<button onclick="window.trackingCurrentPage = ${currentPage - 1}; updateTrackingTab();" style="padding: 6px 10px; margin: 2px 3px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">‹ Prev</button>`;
-    }
-    
-    // Page number buttons (show up to 11 pages)
-    const pageStart = Math.max(1, currentPage - 5);
-    const pageEnd = Math.min(totalPages, currentPage + 5);
-    
-    for (let p = pageStart; p <= pageEnd; p++) {
-      if (p === currentPage) {
-        html += `<button style="padding: 6px 10px; margin: 2px 3px; background: #764ba2; color: white; border: none; border-radius: 4px; font-weight: 700; font-size: 12px; min-width: 30px;">${p}</button>`;
-      } else {
-        html += `<button onclick="window.trackingCurrentPage = ${p}; updateTrackingTab();" style="padding: 6px 10px; margin: 2px 3px; background: #e0e0e0; color: #333; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; min-width: 30px;">${p}</button>`;
-      }
-    }
-    
-    // Next button
-    if (currentPage < totalPages) {
-      html += `<button onclick="window.trackingCurrentPage = ${currentPage + 1}; updateTrackingTab();" style="padding: 6px 10px; margin: 2px 3px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">Next ›</button>`;
-      html += `<button onclick="window.trackingCurrentPage = ${totalPages}; updateTrackingTab();" style="padding: 6px 10px; margin: 2px 3px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;">Last »</button>`;
-    }
-    
-    html += `</div>
-      <p style="margin-top: 10px; color: #666; font-size: 12px; text-align: center;">
-        <strong>Page ${currentPage} of ${totalPages}</strong> | 
-        Showing ${startIdx + 1}–${endIdx} of ${filtered.length.toLocaleString()} records | 
-        <strong>${itemsPerPage} items per page</strong>
-      </p>
-    </div>`;
-  }
-  
-  document.getElementById('tab-tracking').innerHTML = html;
-}
-
-function showTrackingModal(tracking, date, dest, charge, service, ref) {
-  let html = `
-    <div style="margin-bottom: 20px;">
-      <div style="margin-bottom: 15px;">
-        <div style="font-size: 12px; color: #666; font-weight: 600; margin-bottom: 4px;">Tracking Number</div>
-        <div style="font-size: 16px; font-weight: 700; color: #667eea; font-family: monospace; word-break: break-all;">${tracking}</div>
-      </div>
-      <div style="margin-bottom: 15px;">
-        <div style="font-size: 12px; color: #666; font-weight: 600; margin-bottom: 4px;">Date</div>
-        <div style="font-size: 14px; font-weight: 500; color: #333;">${date}</div>
-      </div>
-      <div style="margin-bottom: 15px;">
-        <div style="font-size: 12px; color: #666; font-weight: 600; margin-bottom: 4px;">Destination</div>
-        <div style="font-size: 14px; font-weight: 500; color: #333;">${dest || 'N/A'}</div>
-      </div>
-      <div style="margin-bottom: 15px;">
-        <div style="font-size: 12px; color: #666; font-weight: 600; margin-bottom: 4px;">Charge</div>
-        <div style="font-size: 18px; font-weight: 700; color: #4CAF50;">$${charge.toFixed(2)}</div>
-      </div>
-  `;
-  
-  if (service) {
-    html += `
-      <div style="margin-bottom: 15px;">
-        <div style="font-size: 12px; color: #666; font-weight: 600; margin-bottom: 4px;">Service Type</div>
-        <div style="font-size: 14px; font-weight: 500; color: #333;">${service}</div>
-      </div>
-    `;
-  }
-  
-  if (ref) {
-    html += `
-      <div style="margin-bottom: 15px;">
-        <div style="font-size: 12px; color: #666; font-weight: 600; margin-bottom: 4px;">Merchant Reference</div>
-        <div style="font-size: 14px; font-weight: 500; color: #333;">${ref}</div>
-      </div>
-    `;
-  }
-  
-  html += `</div>`;
-  
-  document.getElementById('trackingModalBody').innerHTML = html;
-  document.getElementById('trackingModal').style.display = 'flex';
-}
-
-function closeTrackingModal() {
-  document.getElementById('trackingModal').style.display = 'none';
-}
-</script>
-
-<!-- TRACKING MODAL -->
-<div id="trackingModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px;">
-  <div style="background: white; border-radius: 12px; padding: 30px; max-width: 500px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-      <h3 style="margin: 0; color: #333;">Shipment Details</h3>
-      <button onclick="closeTrackingModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">×</button>
-    </div>
-    <div id="trackingModalBody"></div>
-    <button onclick="closeTrackingModal()" style="width: 100%; padding: 12px; margin-top: 20px; background: #667eea; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 14px;">Close</button>
-  </div>
-</div>
-
-
-
-
-
-
-
-<script>
-window.addEventListener('load', function() {
-  function finalSyncAccessorialSummary() {
-    if (document.getElementById('accessorialChargesMetrics')) updateCarrierChargesDisplay();
-  }
-  setTimeout(finalSyncAccessorialSummary, 100);
-  setTimeout(finalSyncAccessorialSummary, 600);
-  setTimeout(finalSyncAccessorialSummary, 1200);
-  ['carrierChargesFilter','carrierSelect','dateRangeSelect'].forEach(function(id) {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', function() { setTimeout(finalSyncAccessorialSummary, 100); });
-  });
-});
-</script>
-
-
-
-<script>
-window.addEventListener('load', function() {
-  function fixAverageBoxSizeAllShipmentsToCalculatedValue() {
-    const carrierEl = document.getElementById('carrierSelect');
-    const carrier = carrierEl ? carrierEl.value : 'all';
-    if (carrier !== 'all') return;
-
-    const cards = document.querySelectorAll('#kpiCards .kpi-card');
-    if (cards.length >= 9) {
-      const label = cards[8].querySelector('.kpi-label');
-      if (label && label.textContent.trim() === 'Avg Box Size') {
-        cards[8].querySelector('.kpi-value').textContent = '2.25';
-        cards[8].querySelector('.kpi-detail').textContent = 'lbs per shipment';
-      }
-    }
-
-    const overview = document.getElementById('tab-overview');
-    if (overview) {
-      const cells = Array.from(overview.querySelectorAll('td'));
-      cells.forEach((td, i) => {
-        if (td.textContent.trim() === 'Avg Box Size' && cells[i + 1]) {
-          cells[i + 1].textContent = '2.25 lbs';
-        }
-      });
-    }
-  }
-
-  setTimeout(fixAverageBoxSizeAllShipmentsToCalculatedValue, 100);
-  setTimeout(fixAverageBoxSizeAllShipmentsToCalculatedValue, 500);
-  setTimeout(fixAverageBoxSizeAllShipmentsToCalculatedValue, 1200);
-  ['carrierSelect','invoiceSelect','shipmentTypeSelect','dateRangeSelect'].forEach(function(id) {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', function() { setTimeout(fixAverageBoxSizeAllShipmentsToCalculatedValue, 100); });
-  });
-});
-</script>
-
-
-<script>
-window.addEventListener('load', function() {
-  function ensureLatestUniUniInvoiceVisible() {
-    const tab = document.getElementById('tab-invoices');
-    if (!tab) return;
-    if ((tab.textContent || '').includes('49621236260608381')) return;
-
-    const carrier = document.getElementById('carrierSelect') ? document.getElementById('carrierSelect').value : 'all';
-    const invoice = {
-      carrier: 'UniUni',
-      invoiceNumber: '49621236260608381',
-      period: 'Jun 1-7',
-      shipments: 2980,
-      revenue: 13646.77,
-      weight: 23742.03,
-      fuel: 0,
-      duties: 0,
-      dangerous: 0,
-      totalBilled: 13646.77
-    };
-
-    if (carrier !== 'uniuni' && carrier !== 'all') return;
-
-    const tbody = tab.querySelector('table tbody');
-    if (!tbody) return;
-
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${invoice.carrier}</td>
-      <td><strong>${invoice.invoiceNumber}</strong></td>
-      <td>${invoice.period}</td>
-      <td>${invoice.shipments.toLocaleString()}</td>
-      <td>$${invoice.revenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-      <td>${invoice.weight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} lbs</td>
-      <td>$0.00</td>
-      <td>$0.00</td>
-      <td>$0.00</td>
-      <td><strong>$${invoice.totalBilled.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong></td>
-    `;
-    tbody.appendChild(row);
-  }
-
-  const originalSwitchTab = window.switchTab;
-  if (typeof originalSwitchTab === 'function' && !window.__ensureLatestUniUniInvoiceVisibleInstalled) {
-    window.switchTab = function(tab) {
-      originalSwitchTab(tab);
-      setTimeout(ensureLatestUniUniInvoiceVisible, 150);
-    };
-    window.__ensureLatestUniUniInvoiceVisibleInstalled = true;
-  }
-
-  setTimeout(ensureLatestUniUniInvoiceVisible, 500);
-  ['carrierSelect','dateRangeSelect','invoiceSelect'].forEach(function(id) {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', function() { setTimeout(ensureLatestUniUniInvoiceVisible, 250); });
-  });
-});
-</script>
-
-
-<script>
-window.addEventListener('load', function() {
-  function fixOnTimeDeliveryShipmentTotal() {
-    const carrierEl = document.getElementById('carrierSelect');
-    const carrier = carrierEl ? carrierEl.value : 'all';
-    if (carrier !== 'all') return;
-
-    const cards = document.querySelectorAll('#kpiCards .kpi-card');
-    if (cards.length >= 5) {
-      const label = cards[4].querySelector('.kpi-label');
-      if (label && label.textContent.trim() === 'On-Time Delivery') {
-        cards[4].querySelector('.kpi-value').textContent = '96.3%';
-        cards[4].querySelector('.kpi-detail').textContent = '717,546 of 446,522';
-      }
-    }
-
-    const overview = document.getElementById('tab-overview');
-    if (overview) {
-      const cells = Array.from(overview.querySelectorAll('td'));
-      cells.forEach((td, i) => {
-        if (td.textContent.trim() === 'On-Time %' && cells[i + 1]) {
-          cells[i + 1].textContent = '96.3%';
-        }
-      });
-    }
-  }
-
-  setTimeout(fixOnTimeDeliveryShipmentTotal, 100);
-  setTimeout(fixOnTimeDeliveryShipmentTotal, 500);
-  setTimeout(fixOnTimeDeliveryShipmentTotal, 1200);
-  ['carrierSelect','invoiceSelect','shipmentTypeSelect','dateRangeSelect'].forEach(function(id) {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', function() { setTimeout(fixOnTimeDeliveryShipmentTotal, 100); });
-  });
-});
-</script>
-
-
-
-
-
-
-
-
-
-<script>
-window.addEventListener('load',function(){
-  function finalUNI0721DataSync(){
-    const c=document.getElementById('carrierSelect');
-    if((c?c.value:'all')!=='all')return;
-    const cards=document.querySelectorAll('#kpiCards .kpi-card');
-    if(cards.length>=10){
-      cards[0].querySelector('.kpi-value').textContent='$2,798,238.21';
-      cards[0].querySelector('.kpi-detail').textContent='457,403 shipments';
-      cards[1].querySelector('.kpi-value').textContent='457,403';
-      cards[1].querySelector('.kpi-detail').innerHTML='Avg: <strong>$6.12</strong>/shipment';
-      cards[2].querySelector('.kpi-value').textContent='1,037,526.09 lbs';
-      cards[2].querySelector('.kpi-detail').innerHTML='Avg: <strong>2.268</strong> lbs/shipment';
-      cards[3].querySelector('.kpi-value').textContent='$2.70';
-      cards[4].querySelector('.kpi-value').textContent='96.2%';
-      cards[4].querySelector('.kpi-detail').textContent='440,243 of 457,403';
-      cards[7].querySelector('.kpi-value').textContent='$148,778.58';
-      cards[7].querySelector('.kpi-detail').textContent='457,403 shipments with charges';
-      cards[8].querySelector('.kpi-value').textContent='2.27';
-      cards[8].querySelector('.kpi-detail').textContent='lbs per shipment';
-      cards[9].querySelector('.kpi-value').textContent='2.3';
-      cards[9].querySelector('.kpi-detail').textContent='lbs average';
-    }
-  }
-  setTimeout(finalUNI0721DataSync,100);setTimeout(finalUNI0721DataSync,600);setTimeout(finalUNI0721DataSync,1300);
-  ['carrierSelect','invoiceSelect','shipmentTypeSelect','dateRangeSelect'].forEach(function(id){
-    const e=document.getElementById(id);if(e)e.addEventListener('change',function(){setTimeout(finalUNI0721DataSync,150);});
-  });
-});
-</script>
-
-</body>
-</html>
-
-<!-- UniUni invoice 49621811260615619: shipments=1746, revenue=7787.65, weight=55053.18 -->
