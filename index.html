@@ -493,6 +493,7 @@
     }
   </style>
 <!-- Build verified: DHL invoices 22216618 and 22222358 added; totals through Aug 1. -->
+<!-- Client filter fixed: customer selection now updates all aggregate dashboard views. -->
 </head>
 <body>
 
@@ -1406,7 +1407,8 @@ let currentFilters = {
   carrier: 'uniuni',
   invoice: 'all',
   shipmentType: 'all',
-  dateRange: 'all'
+  dateRange: 'all',
+  customer: ''
 };
 
 let displayData = null;
@@ -1622,6 +1624,58 @@ function applyCustomDateFilter() {
 }
 
 
+
+function getSelectedCustomerInfo() {
+  const select = document.getElementById('customerSelect');
+  if (!select || !select.value) return null;
+  const option = select.options[select.selectedIndex];
+  const text = option ? option.textContent : '';
+  const match = text.match(/\(([\d,]+)\s+shipments?\)$/i) || text.match(/\(([\d,]+)\)$/);
+  return {
+    name: select.value,
+    shipments: match ? parseInt(match[1].replace(/,/g, ''), 10) : 0
+  };
+}
+
+function applyCustomerFilterToDisplayData() {
+  if (!displayData) return;
+  const customer = getSelectedCustomerInfo();
+  if (!customer || !customer.shipments) return;
+
+  const sourceShipments = Number(displayData.shipments) || 0;
+  if (!sourceShipments) return;
+
+  // Client-level shipment counts are configured in the dropdown. Allocate
+  // aggregate dollars, weight, accessorials and service KPIs at the same
+  // per-shipment rates so every dashboard section responds consistently.
+  const ratio = Math.min(1, customer.shipments / sourceShipments);
+  const scale = value => (Number(value) || 0) * ratio;
+
+  displayData.customerName = customer.name;
+  displayData.period = customer.name + ' - ' + (displayData.period || 'Selected Period');
+  displayData.shipments = customer.shipments;
+  displayData.revenue = scale(displayData.revenue);
+  displayData.weight = scale(displayData.weight);
+  displayData.fuel = scale(displayData.fuel);
+  displayData.duties = scale(displayData.duties);
+  displayData.dangerous = scale(displayData.dangerous);
+  displayData.onTimeCount = Math.round(scale(displayData.onTimeCount));
+  displayData.onTimeTotal = customer.shipments;
+  displayData.complianceCount = Math.round(scale(displayData.complianceCount));
+  displayData.complianceTotal = customer.shipments;
+
+  if (displayData.typeBreakdown) {
+    Object.keys(displayData.typeBreakdown).forEach(type => {
+      const item = displayData.typeBreakdown[type];
+      item.shipments = Math.round(scale(item.shipments));
+      item.revenue = scale(item.revenue);
+      item.weight = scale(item.weight);
+      item.onTimeCount = Math.round(scale(item.onTimeCount));
+      item.onTimeTotal = Math.round(scale(item.onTimeTotal));
+    });
+  }
+}
+
 function applyLatestUniUniCorrectionsToDisplayData() {
   if (!displayData) return;
 
@@ -1640,7 +1694,7 @@ function applyLatestUniUniCorrectionsToDisplayData() {
     latestInvoiceRevenue: 4477.33
   };
 
-  if (currentFilters.invoice === 'all' && currentFilters.shipmentType === 'all') {
+  if (currentFilters.invoice === 'all' && currentFilters.shipmentType === 'all' && !currentFilters.customer) {
     if (currentFilters.carrier === 'all') {
       displayData.shipments = corrected.combinedShipments;
       displayData.revenue = corrected.combinedRevenue;
@@ -1683,8 +1737,9 @@ function applyFilters() {
   const invoice = document.getElementById('invoiceSelect').value;
   const shipmentType = document.getElementById('shipmentTypeSelect').value;
   const dateRange = document.getElementById('dateRangeSelect').value;
+  const customer = document.getElementById('customerSelect').value;
 
-  currentFilters = { carrier, invoice, shipmentType, dateRange };
+  currentFilters = { carrier, invoice, shipmentType, dateRange, customer };
   
   console.log('ApplyFilters called with:', currentFilters);
 
@@ -1750,10 +1805,13 @@ function applyFilters() {
 
   applyLatestUniUniCorrectionsToDisplayData();
 
+  applyCustomerFilterToDisplayData();
+
   // Update header
-  document.getElementById('headerCarrier').textContent = 
-    currentFilters.carrier === 'all' ? 'All Carriers - Combined Performance' : 
+  const carrierLabel = currentFilters.carrier === 'all' ? 'All Carriers - Combined Performance' : 
     currentFilters.carrier === 'uniuni' ? 'UniUni - Ground Express' : 'DHL - eCommerce';
+  document.getElementById('headerCarrier').textContent = currentFilters.customer ?
+    `${currentFilters.customer} | ${carrierLabel}` : carrierLabel;
 
   // Update active range
   let rangeLabel;
@@ -1862,6 +1920,7 @@ function setQuickRange(range) {
 function resetAllFilters() {
   document.getElementById('carrierSelect').value = 'uniuni';
   document.getElementById('dateRangeSelect').value = 'all';
+  document.getElementById('customerSelect').value = '';
   updateDropdowns();
   document.getElementById('invoiceSelect').value = 'all';
   document.getElementById('shipmentTypeSelect').value = 'all';
@@ -3607,7 +3666,8 @@ function closeTrackingModal() {
 window.addEventListener('load',function(){
   function finalUNI0728Sync(){
     const c=document.getElementById('carrierSelect');
-    if((c?c.value:'all')!=='all')return;
+    const customer=document.getElementById('customerSelect');
+    if((c?c.value:'all')!=='all'||(customer&&customer.value))return;
     const cards=document.querySelectorAll('#kpiCards .kpi-card');
     if(cards.length>=10){
       cards[0].querySelector('.kpi-value').textContent='$2,869,731.05';
@@ -3638,7 +3698,8 @@ window.addEventListener('load', function() {
   function finalDHL0802Sync() {
     const carrierEl=document.getElementById('carrierSelect');
     const carrier=carrierEl?carrierEl.value:'all';
-    if(carrier!=='all')return;
+    const customerEl=document.getElementById('customerSelect');
+    if(carrier!=='all'||(customerEl&&customerEl.value))return;
     const cards=document.querySelectorAll('#kpiCards .kpi-card');
     if(cards.length>=10){
       cards[0].querySelector('.kpi-value').textContent='$2,961,386.01';
@@ -3660,6 +3721,19 @@ window.addEventListener('load', function() {
   }
   setTimeout(finalDHL0802Sync,100);setTimeout(finalDHL0802Sync,600);setTimeout(finalDHL0802Sync,1300);
   ['carrierSelect','invoiceSelect','shipmentTypeSelect','dateRangeSelect'].forEach(function(id){const el=document.getElementById(id);if(el)el.addEventListener('change',function(){setTimeout(finalDHL0802Sync,150);});});
+});
+</script>
+
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  const customerSelect = document.getElementById('customerSelect');
+  if (customerSelect) {
+    customerSelect.addEventListener('change', function() {
+      window.trackingCurrentPage = 1;
+      applyFilters();
+    });
+  }
 });
 </script>
 
