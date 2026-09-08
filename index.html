@@ -185,6 +185,7 @@ function dzTrackSearch(v){DZ_TRK_Q=String(v||'').trim();renderTracking();
  var el=document.getElementById('trkQ');if(el){el.value=DZ_TRK_Q;el.focus();
   try{el.setSelectionRange(DZ_TRK_Q.length,DZ_TRK_Q.length);}catch(e){}}}
 function dzTrackClear(){DZ_TRK_Q='';renderTracking();var el=document.getElementById('trkQ');if(el)el.focus();}
+window.dzTrackSearch=dzTrackSearch;window.dzTrackClear=dzTrackClear;
 function renderTracking(){let rows=trackingFiltered().sort((a,b)=>b.d.localeCompare(a.d));
  const total=rows.length;const q=DZ_TRK_Q.toLowerCase();
  if(q){rows=rows.filter(r=>(r.tr&&String(r.tr).toLowerCase().indexOf(q)>=0)||(r.or&&String(r.or).toLowerCase().indexOf(q)>=0));}
